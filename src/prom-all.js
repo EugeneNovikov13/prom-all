@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Error, Footer, Header, Modal } from './components';
-import {Authorization, Main, Post} from "./pages";
-import {ERROR} from "./constants";
+import { Authorization, Main, Post } from './pages';
+import { ERROR } from './constants';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
@@ -23,12 +23,12 @@ export const PromAll = () => {
 			<Header />
 			<Page>
 				<Routes>
-					<Route path="/" element={<Main />}></Route>
-					<Route path="/login" element={<Authorization />}></Route>
-					<Route path="/post" element={<Post />}></Route>
-					<Route path="/post/:id" element={<Post />}></Route>
-					<Route path="/post/:id/edit" element={<Post />}></Route>
-					<Route path="*" element={<Error error={ERROR.PAGE_NOT_EXIST} />}></Route>
+					<Route path='/' element={<Main />}></Route>
+					<Route path='/login' element={<Authorization />}></Route>
+					<Route path='/post' element={<Post />}></Route>
+					<Route path='/post/:id' element={<Post />}></Route>
+					<Route path='/post/:id/edit' element={<Post />}></Route>
+					<Route path='*' element={<Error error={ERROR.PAGE_NOT_EXIST} />}></Route>
 				</Routes>
 			</Page>
 			<Footer />
