@@ -1,0 +1,13 @@
+#этот файл создаётся на сервере для управления Docker контейнерами
+
+version: '3.5'
+services:
+    quiz-app:
+        image: quiz
+        container_name: quiz-app
+        environment:
+            - 'DB_CONNECTION_STRING=mongodb+srv://NovikovEugene:gfhjkm13@educationdb.nioilpj.mongodb.net/prom-all?retryWrites=true&w=majority'
+            - 'JWT_SECRET=nikolay-sanych-krasavcheg'
+        ports:
+            - '80:3001'
+        restart: unless-stopped
