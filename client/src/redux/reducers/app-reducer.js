@@ -5,10 +5,8 @@ const initialAppState = {
 	modal: {
 		isOpen: false,
 		text: '',
-		onConfirm: () => {
-		},
-		onCancel: () => {
-		},
+		onConfirm: () => {},
+		onCancel: () => {},
 	},
 };
 
