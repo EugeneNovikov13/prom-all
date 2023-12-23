@@ -17,7 +17,7 @@
 
 Таблицы БД:
 
-1. Администратор - admins: id / login / password (hash)
+1. Администратор - admin: id / login / password (hash)
 2. Акции - promos: id / title / content / background
 3. Товары - products: id / subcategory / types(необязателен) / title / code / images: [ id / link ] / description /
    specifications / models: [ id / title ]
