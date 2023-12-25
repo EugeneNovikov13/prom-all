@@ -22,7 +22,7 @@
 3. Товары - products: id / section / title / images: [ id / link ] / description / specifications /
    kinds: [ id / title ]
 4. Категории товаров - categories: id / title / image / subcategories: [ id / title / image / category ] / types (
-   необязателен): [ id / title / subcategory ]
+   необязателен): [ id / title ]
 5. Бренды - brands: id / title / image / isOfficial
 
 Передаваемые Cookies:
