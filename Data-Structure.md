@@ -23,7 +23,7 @@
    kinds: [ id / title ]
 4. Категории товаров - categories: id / title / image / subcategories: [ id / title / image / category ] / types (
    необязателен): [ id / title / subcategory ]
-5. Бренды - brands: id / title / image / isOfficial
+5. Бренды - brands: id / title / logo / isOfficial
 
 Передаваемые Cookies:
 
