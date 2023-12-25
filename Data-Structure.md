@@ -19,8 +19,8 @@
 
 1. Администратор - admin: id / login / password (hash)
 2. Акции - promos: id / title / content / background
-3. Товары - products: id / subcategory / types(необязателен) / title / code / images: [ id / link ] / description /
-   specifications / models: [ id / title ]
+3. Товары - products: id / section / title / images: [ id / link ] / description / specifications /
+   kinds: [ id / title ]
 4. Категории товаров - categories: id / title / image / subcategories: [ id / title / image / category ] / types (
    необязателен): [ id / title / subcategory ]
 5. Бренды - brands: id / title / image / isOfficial
