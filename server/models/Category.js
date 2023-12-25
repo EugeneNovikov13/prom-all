@@ -8,6 +8,14 @@ const Type = new Schema({
 		required: true,
 		unique: true,
 	},
+	image: {
+		type: String,
+		required: false,
+		validate: {
+			validator: validator.isURL,
+			message: 'Type URL should be a valid',
+		},
+	},
 })
 
 const Subcategory = new Schema({
@@ -21,7 +29,7 @@ const Subcategory = new Schema({
 		required: true,
 		validate: {
 			validator: validator.isURL,
-			message: 'URL should be a valid',
+			message: 'Subcategory URL should be a valid',
 		},
 	},
 	types: {
@@ -43,7 +51,7 @@ const CategorySchema = mongoose.Schema({
 		unique: true,
 		validate: {
 			validator: validator.isURL,
-			message: 'URL should be a valid',
+			message: 'Category URL should be a valid',
 		},
 	},
 	subcategories: {

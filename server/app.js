@@ -4,10 +4,11 @@ const { join } = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const { addCategory, getSections } = require('./controllers/category');
 // const { register, login, updateUser } = require('./controllers/user');
 // const { addTest, editTest, deleteTest, getTests, getTest, getQuestion } = require('./controllers/test');
 // const { addHistory, deleteHistory, getHistories } = require('./controllers/history');
-const authenticated = require('./middlewares/authenticated');
+// const authenticated = require('./middlewares/authenticated');
 // const mapUser = require('./helpers/mapUser');
 // const mapTest = require('./helpers/mapTest');
 // const mapHistory = require('./helpers/mapHistory');
@@ -20,6 +21,32 @@ app.use(express.static('../client/build'));
 
 app.use(cookieParser());
 app.use(express.json());
+
+app.get('/categories', async (req, res) => {
+	try {
+		const categories = await getSections(req.query.section)
+
+		res.send({ data: categories, error: null });
+	} catch (err) {
+		res.send({ data: null, error: `Error! ${err}` });
+		console.log(err);
+	}
+});
+
+app.post('/categories', async (req, res) => {
+	try {
+		const newCategory = await addCategory({
+			title: req.body.title,
+			image: req.body.image,
+			subcategories: req.body.subcategories,
+		});
+
+		res.send({ data: newCategory, error: null });
+	} catch (err) {
+		res.send({ data: null, error: `Error! ${err}` });
+		console.log(err);
+	}
+});
 
 // app.post('/register', async (req, res) => {
 // 	try {
