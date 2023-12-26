@@ -6,11 +6,11 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { register, login } = require('./controllers/admin');
 const { addPromo, editPromo, deletePromo, getPromos } = require('./controllers/promo');
-// const { addHistory, deleteHistory, getHistories } = require('./controllers/history');
+const { addBrand, deleteBrand, getBrands } = require('./controllers/brand');
 const authenticated = require('./middlewares/authenticated');
 const mapAdmin = require('./helpers/mapAdmin');
 const mapPromo = require('./helpers/mapPromo');
-// const mapHistory = require('./helpers/mapHistory');
+const mapBrand = require('./helpers/mapBrand');
 // const mapQuestion = require('./helpers/mapQuestion');
 
 const port = 3001;
@@ -102,45 +102,45 @@ app.get('/promos', async (req, res) => {
 // });
 //
 //
-//
-// app.get('/histories/:id', async (req, res) => {
-// 	try {
-// 		const histories = await getHistories(req.params.id);
-//
-// 		res.send({ data: histories.map(mapHistory), error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Error! Can\'t get histories' });
-// 		console.log(e);
-// 	}
-// });
-//
-// app.post('/histories', async (req, res) => {
-// 	try {
-// 		const newHistory = await addHistory({
-// 			user: req.user.id,
-// 			test: req.body.test,
-// 			results: req.body.results,
-// 		});
-//
-// 		res.send({ data: mapHistory(newHistory), error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Creation of history is impossible' });
-// 		console.log(e);
-// 	}
-// });
-//
-// app.delete('/histories/:id', async (req, res) => {
-// 	try {
-// 		await deleteHistory(req.params.id);
-//
-// 		res.send({ error: null });
-// 	} catch (e) {
-// 		res.send({ error: 'Error. Failed to delete histories' });
-// 		console.log(e);
-// 	}
-// });
+
+app.get('/brands', async (req, res) => {
+	try {
+		const brands = await getBrands();
+
+		res.send({ data: brands.map(mapBrand), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Can\'t get brands' });
+		console.log(e);
+	}
+});
 
 app.use(authenticated);
+
+app.post('/brands', async (req, res) => {
+	try {
+		const newBrand = await addBrand({
+			title: req.body.title,
+			logo: req.body.logo,
+			isOfficial: req.body.isOfficial,
+		});
+
+		res.send({ data: mapBrand(newBrand), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Creation of brand is impossible' });
+		console.log(e);
+	}
+});
+
+app.delete('/brands/:id', async (req, res) => {
+	try {
+		await deleteBrand(req.params.id);
+
+		res.send({ error: null });
+	} catch (e) {
+		res.send({ error: 'Error. Failed to delete brand' });
+		console.log(e);
+	}
+});
 
 app.post('/promos', async (req, res) => {
 	try {
