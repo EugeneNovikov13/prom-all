@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const AdminSchema = mongoose.Schema({
 	login: {
@@ -10,10 +9,6 @@ const AdminSchema = mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
-		validate: {
-			validator: validator.isJWT,
-			message: 'Token should be a valid',
-		}
 	},
 });
 

@@ -4,11 +4,11 @@ const { join } = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-// const { register, login, updateUser } = require('./controllers/user');
+const { register, login } = require('./controllers/admin');
 // const { addTest, editTest, deleteTest, getTests, getTest, getQuestion } = require('./controllers/test');
 // const { addHistory, deleteHistory, getHistories } = require('./controllers/history');
-// const authenticated = require('./middlewares/authenticated');
-// const mapUser = require('./helpers/mapUser');
+const authenticated = require('./middlewares/authenticated');
+const mapAdmin = require('./helpers/mapAdmin');
 // const mapTest = require('./helpers/mapTest');
 // const mapHistory = require('./helpers/mapHistory');
 // const mapQuestion = require('./helpers/mapQuestion');
@@ -21,37 +21,33 @@ app.use(express.static('../client/build'));
 app.use(cookieParser());
 app.use(express.json());
 
-// app.post('/register', async (req, res) => {
-// 	try {
-// 		const { user, token } = await register(req.body);
-//
-// 		res.cookie('token', token, { httpOnly: true })
-// 			.send({ error: null, user: mapUser(user) });
-// 	} catch (e) {
-// 		if (e.code === 11000) {
-// 			res.send({ error: 'Пользователь с такой почтой уже зарегистрирован' });
-// 			return;
-// 		}
-// 		res.send({ error: e || 'Unknown error' });
-// 	}
-// })
-//
-// app.post('/login', async (req, res) => {
-// 	try {
-// 		const { user, token } = await login(req.body.email, req.body.password);
-//
-// 		res.cookie('token', token, { httpOnly: true })
-// 			.send({ error: null, user: mapUser(user) });
-// 	} catch (e) {
-// 		res.send({ error: e.message || 'Unknown error' });
-// 	}
-// });
-//
-// app.post('/logout', (req, res) => {
-// 	res.cookie('token', '', { httpOnly: true })
-// 		.send({})
-// });
-//
+app.post('/register', async (req, res) => {
+	try {
+		const { token, admin } = await register(req.body.login, req.body.password);
+
+		res.cookie('token', token, { httpOnly: true })
+			.send({ error: null, admin: mapAdmin(admin) });
+	} catch (e) {
+		res.send({ error: e });
+	}
+});
+
+app.post('/login', async (req, res) => {
+	try {
+		const { token, admin } = await login(req.body.login, req.body.password);
+
+		res.cookie('token', token, { httpOnly: true })
+			.send({ error: null, admin: mapAdmin(admin) });
+	} catch (e) {
+		res.send({ error: e.message });
+	}
+});
+
+app.post('/logout', (req, res) => {
+	res.cookie('token', '', { httpOnly: true })
+		.send({})
+});
+
 // app.get('/tests', async (req, res) => {
 // 	try {
 // 		const { tests, lastPage } = await getTests(
@@ -66,9 +62,7 @@ app.use(express.json());
 // 		console.log(e);
 // 	}
 // });
-//
-// app.use(authenticated);
-//
+
 // app.patch('/users', async (req, res) => {
 // 	try {
 // 		const updatedUser = await updateUser(req.user.id, {
@@ -192,6 +186,7 @@ app.use(express.json());
 // 		console.log(e);
 // 	}
 // });
+app.use(authenticated);
 
 app.get('/*', (req, res) => {
 	res.sendFile(join(__dirname, '../client/build/index.html'));
