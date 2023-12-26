@@ -5,7 +5,6 @@ module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
 	if (!token) {
-		console.log('Token not found');
 		next();
 		return;
 	}
