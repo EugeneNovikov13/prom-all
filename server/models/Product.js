@@ -17,9 +17,6 @@ const Kind = new Schema({
 	title: {
 		type: String,
 		required: true,
-		// проверить можно ли задать при этой настройке двум разным товарам один и тот же kind.title
-		// удалить, если нельзя
-		unique: true,
 	}
 });
 
@@ -32,13 +29,11 @@ const ProductSchema = mongoose.Schema({
 	images: {
 		type: [Image],
 		default: undefined,
-		//проверить работает ли этот required и поменять на true
-		required: false,
+		required: true,
 	},
-	kind: {
+	kinds: {
 		type: [Kind],
 		default: undefined,
-		//проверить работает ли этот required независимо от required внутри типа Kind и удалить
 		required: false,
 	},
 	description: {
