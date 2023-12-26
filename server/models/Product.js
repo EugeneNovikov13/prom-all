@@ -31,7 +31,7 @@ const ProductSchema = mongoose.Schema({
 		default: undefined,
 		required: true,
 	},
-	kind: {
+	kinds: {
 		type: [Kind],
 		default: undefined,
 		required: false,
