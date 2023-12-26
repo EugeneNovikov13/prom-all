@@ -5,11 +5,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { register, login } = require('./controllers/admin');
-// const { addTest, editTest, deleteTest, getTests, getTest, getQuestion } = require('./controllers/test');
+const { addPromo, editPromo, deletePromo, getPromos } = require('./controllers/promo');
 // const { addHistory, deleteHistory, getHistories } = require('./controllers/history');
 const authenticated = require('./middlewares/authenticated');
 const mapAdmin = require('./helpers/mapAdmin');
-// const mapTest = require('./helpers/mapTest');
+const mapPromo = require('./helpers/mapPromo');
 // const mapHistory = require('./helpers/mapHistory');
 // const mapQuestion = require('./helpers/mapQuestion');
 
@@ -48,20 +48,16 @@ app.post('/logout', (req, res) => {
 		.send({})
 });
 
-// app.get('/tests', async (req, res) => {
-// 	try {
-// 		const { tests, lastPage } = await getTests(
-// 			req.query?.user === 'null' ? null : req.query?.user,
-// 			req.query?.limit,
-// 			req.query?.page,
-// 		);
-//
-// 		res.send({ data: {lastPage, tests: tests.map(mapTest) }, error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Error! Maybe... There isn\'t tests' });
-// 		console.log(e);
-// 	}
-// });
+app.get('/promos', async (req, res) => {
+	try {
+		const promos = await getPromos();
+
+		res.send({ data: promos.map(mapPromo), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Maybe... There isn\'t promos' });
+		console.log(e);
+	}
+});
 
 // app.patch('/users', async (req, res) => {
 // 	try {
@@ -105,50 +101,7 @@ app.post('/logout', (req, res) => {
 // 	}
 // });
 //
-// app.post('/tests', async (req, res) => {
-// 	try {
-// 		const newTest = await addTest({
-// 			title: req.body.title,
-// 			questions: req.body.questions,
-// 			author: req.user.id,
-// 		});
 //
-// 		res.send({ data: mapTest(newTest), error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Error! Maybe... This test\'s title is already exists' });
-// 		console.log(e);
-// 	}
-// });
-//
-// app.patch('/tests/:id', async (req, res) => {
-// 	try {
-// 		const updatedTest = await editTest(req.params.id, {
-// 			title: req.body.title,
-// 			questions: req.body.questions,
-// 		});
-//
-// 		res.send({ data: mapTest(updatedTest), error: null });
-// 	} catch (e) {
-// 		let error = 'Error. Failed to update test';
-// 		if (e.code === 11000) {
-// 			error = 'Тест с таким названием уже существует';
-// 		}
-// 		res.send({ data: null, error });
-// 		console.log(e);
-// 	}
-// });
-// app.delete('/tests/:id', async (req, res) => {
-// 	try {
-// 		await deleteTest(req.params.id);
-// 		//удаляем также истории прохождения теста
-// 		await deleteHistory(req.params.id);
-//
-// 		res.send({ error: null });
-// 	} catch (e) {
-// 		res.send({ error: 'Error. Failed to delete test' });
-// 		console.log(e);
-// 	}
-// });
 //
 // app.get('/histories/:id', async (req, res) => {
 // 	try {
@@ -186,7 +139,48 @@ app.post('/logout', (req, res) => {
 // 		console.log(e);
 // 	}
 // });
+
 app.use(authenticated);
+
+app.post('/promos', async (req, res) => {
+	try {
+		const newPromo = await addPromo({
+			title: req.body.title,
+			content: req.body.content,
+			background: req.body.background,
+		});
+
+		res.send({ data: mapPromo(newPromo), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Maybe... This promo is already exists' });
+		console.log(e);
+	}
+});
+
+app.patch('/promos/:id', async (req, res) => {
+	try {
+		const editedPromo = await editPromo(req.params.id, {
+			title: req.body.title,
+			content: req.body.content,
+			background: req.body.background,
+		});
+
+		res.send({ data: mapPromo(editedPromo), error: null });
+	} catch (e) {
+		res.send({ data: null, error: e });
+		console.log(e);
+	}
+});
+app.delete('/promos/:id', async (req, res) => {
+	try {
+		await deletePromo(req.params.id);
+
+		res.send({ error: null });
+	} catch (e) {
+		res.send({ error: 'Error. Failed to delete test' });
+		console.log(e);
+	}
+});
 
 app.get('/*', (req, res) => {
 	res.sendFile(join(__dirname, '../client/build/index.html'));
