@@ -15,7 +15,7 @@ function editPromo(id, promo) {
 // delete
 
 function deletePromo(id) {
-	Promo.deleteOne({ _id: id });
+	return Promo.deleteOne({ _id: id });
 }
 
 // get list
