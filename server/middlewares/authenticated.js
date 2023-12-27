@@ -5,7 +5,8 @@ module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
 	if (!token) {
-		next();
+		// TODO добавить сюда route
+		next('This page is unavailable');
 		return;
 	}
 

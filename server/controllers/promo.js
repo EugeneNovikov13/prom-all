@@ -2,32 +2,26 @@ const Promo = require('../models/Promo');
 
 // add
 
-async function addPromo(promo) {
-	const newPromo = await Promo.create(promo);
-
-	return newPromo;
+function addPromo(promo) {
+	return Promo.create(promo);
 }
 
 // edit
 
-async function editPromo(id, promo) {
-	const newPromo = await Promo.findByIdAndUpdate(id, promo, { returnDocument: 'after' });
-
-	return newPromo;
+function editPromo(id, promo) {
+	return Promo.findByIdAndUpdate(id, promo, { returnDocument: 'after' });
 }
 
 // delete
 
-async function deletePromo(id) {
-	await Promo.deleteOne({ _id: id });
+function deletePromo(id) {
+	Promo.deleteOne({ _id: id });
 }
 
 // get list
 
-async function getPromos() {
-	const promos = await Promo.find();
-
-	return promos;
+function getPromos() {
+	return Promo.find();
 }
 
 module.exports = {

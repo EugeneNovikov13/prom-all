@@ -3,12 +3,12 @@
 Области хранения данных:
 
 1. База данных на MongoDB
-2. Cookies
+2. SessionStorage
 3. Redux Store
 
 Сущности приложения:
 
-1. Администратор: БД (список администраторов), Cookies (токен текущего администратора), Store (отображение приложения в
+1. Администратор: БД (список администраторов), SessionStorage (данные администратора), Store (отображение приложения в
    режиме администрирования)
 2. Акция: БД (список акций), Store (отображение в браузере)
 3. Товар: БД (список товаров), Store (отображение в браузере)
@@ -21,9 +21,7 @@
 2. Акции - promos: id / title / content / background
 3. Товары - products: id / section / title / images: [ id / link ] / description / specifications /
    kinds: [ id / title ]
-4. Категории товаров - categories: id / title / image / subcategories: [ id / title / image / category ] / types (
-   необязателен): [ id / title ]
-5. Бренды - brands: id / title / logo / isOfficial
+4. Бренды - brands: id / title / logo / isOfficial
 
 Передаваемые Cookies:
 
@@ -35,5 +33,4 @@
 2. promos: массив promo: id / title / content / background
 3. product: title / code / images: массив link / description / specifications / массив models: [ id / title ]
 4. products: массив product: id / title / image: images[0]
-5. catalog: массив categories: [ id / title / image] / массив subcategories: [ id / title / image ] / массив types: [ id / title ]
-6. brands: массив brand: id / title / image / isOfficial
+5. brands: массив brand: id / title / image / isOfficial
