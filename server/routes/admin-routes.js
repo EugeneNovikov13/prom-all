@@ -1,6 +1,7 @@
 const express = require('express');
 const { register, login } = require('../controllers/admin');
 const mapAdmin = require('../helpers/mapAdmin');
+const handleError = require('../helpers/handle-error');
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.post('/register', async (req, res) => {
 		res.cookie('token', token, { httpOnly: true })
 			.send({ error: null, admin: mapAdmin(admin) });
 	} catch (e) {
-		res.send({ error: e });
+		handleError(res, e, 'Registration denied');
 	}
 });
 
@@ -22,7 +23,7 @@ router.post('/login', async (req, res) => {
 		res.cookie('token', token, { httpOnly: true })
 			.send({ error: null, admin: mapAdmin(admin) });
 	} catch (e) {
-		res.send({ error: e.message });
+		handleError(res, e, e.message);
 	}
 });
 

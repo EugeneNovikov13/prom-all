@@ -1,7 +1,9 @@
 const express = require('express');
+
 const { getPromos, addPromo, editPromo, deletePromo } = require('../controllers/promo');
 const mapPromo = require('../helpers/mapPromo');
 const authenticated = require('../middlewares/authenticated');
+const handleError = require('../helpers/handle-error');
 
 const router = express.Router();
 
@@ -11,8 +13,7 @@ router.get('/promos', async (req, res) => {
 
 		res.send({ data: promos.map(mapPromo), error: null });
 	} catch (e) {
-		res.send({ data: null, error: 'Error! Maybe... There isn\'t promos' });
-		console.log(e);
+		handleError(res, e, 'Error! Maybe... There isn\'t promos');
 	}
 });
 
@@ -26,8 +27,7 @@ router.post('/promos', authenticated, async (req, res) => {
 
 		res.send({ data: mapPromo(newPromo), error: null });
 	} catch (e) {
-		res.send({ data: null, error: 'Error! Maybe... This promo is already exists' });
-		console.log(e);
+		handleError(res, e, 'Error! Maybe... This promo is already exists');
 	}
 });
 
@@ -41,8 +41,7 @@ router.patch('/promos/:id', authenticated, async (req, res) => {
 
 		res.send({ data: mapPromo(editedPromo), error: null });
 	} catch (e) {
-		res.send({ data: null, error: e });
-		console.log(e);
+		handleError(res, e, 'Error! Unable to upgrade promo');
 	}
 });
 router.delete('/promos/:id', authenticated, async (req, res) => {
@@ -51,8 +50,7 @@ router.delete('/promos/:id', authenticated, async (req, res) => {
 
 		res.send({ error: null });
 	} catch (e) {
-		res.send({ error: 'Error. Failed to delete test' });
-		console.log(e);
+		handleError(res, e, 'Error! Failed to delete promo');
 	}
 });
 

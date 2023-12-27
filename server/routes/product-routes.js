@@ -4,6 +4,7 @@ const { getProduct, getProducts, getProductsByTitle, addProduct } = require('../
 const mapProduct = require('../helpers/mapProduct');
 const mapProducts = require('../helpers/mapProducts');
 const authenticated = require('../middlewares/authenticated');
+const handleError = require('../helpers/handle-error');
 
 const router = express.Router();
 
@@ -13,8 +14,7 @@ router.get('/products/:id', async (req, res) => {
 
 		res.send({ data: mapProduct(product), error: null });
 	} catch (e) {
-		res.send({ data: null, error: 'Error! Maybe... This product isn\'t exist' });
-		console.log(e);
+		handleError(res, e, 'Error! Maybe... This product isn\'t exist');
 	}
 });
 
@@ -24,8 +24,7 @@ router.get('/products/section/:id', async (req, res) => {
 
 		res.send({ data: products.map(mapProducts), error: null });
 	} catch (e) {
-		res.send({ data: null, error: 'Error! Maybe... This section is empty' });
-		console.log(e);
+		handleError(res, e, 'Error! Maybe... This section is empty');
 	}
 });
 
@@ -35,8 +34,7 @@ router.get('/products/search/:title', async (req, res) => {
 
 		res.send({ data: products.map(mapProducts), error: null });
 	} catch (e) {
-		res.send({ data: null, error: 'Error! Maybe... Product with such title isn\'t exist' });
-		console.log(e);
+		handleError(res, e, 'Error! Maybe... Product with such title isn\'t exist');
 	}
 });
 
@@ -53,8 +51,7 @@ router.post('/products', authenticated, async (req, res) => {
 
 		res.send({ data: mapProduct(newProduct), error: null });
 	} catch (e) {
-		res.send({ data: null, e });
-		console.log(e);
+		handleError(res, e, 'Error! Unable to create product');
 	}
 });
 
