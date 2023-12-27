@@ -7,11 +7,13 @@ const cookieParser = require('cookie-parser');
 const { register, login } = require('./controllers/admin');
 const { addPromo, editPromo, deletePromo, getPromos } = require('./controllers/promo');
 const { addBrand, deleteBrand, getBrands } = require('./controllers/brand');
+const { addProduct, getProduct, getProducts, getProductsByTitle } = require('./controllers/product');
 const authenticated = require('./middlewares/authenticated');
 const mapAdmin = require('./helpers/mapAdmin');
 const mapPromo = require('./helpers/mapPromo');
 const mapBrand = require('./helpers/mapBrand');
-// const mapQuestion = require('./helpers/mapQuestion');
+const mapProduct = require('./helpers/mapProduct');
+const mapProducts = require('./helpers/mapProducts');
 
 const port = 3001;
 const app = express();
@@ -59,50 +61,6 @@ app.get('/promos', async (req, res) => {
 	}
 });
 
-// app.patch('/users', async (req, res) => {
-// 	try {
-// 		const updatedUser = await updateUser(req.user.id, {
-// 			name: req.body.name,
-// 			surname: req.body.surname,
-// 			email: req.body.email,
-// 			image: req.body.image,
-// 		});
-//
-// 		res.send({ data: mapUser(updatedUser), error: null });
-// 	} catch (e) {
-// 		let error = 'Error. Failed to update user';
-// 		if (e.code === 11000) {
-// 			error = 'Пользователь с таким адресом электронной почты уже существует';
-// 		}
-// 		res.send({ data: null, error });
-// 		console.log(e);
-// 	}
-// });
-//
-// app.get('/tests/:id', async (req, res) => {
-// 	try {
-// 		const test = await getTest(req.params.id);
-//
-// 		res.send({ data: mapTest(test), error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Error! Maybe... This test isn\'t exist' });
-// 		console.log(e);
-// 	}
-// });
-//
-// app.get('/tests/:id/questions/:page', async (req, res) => {
-// 	try {
-// 		const { question, lastPage } = await getQuestion(req.params.id, req.params.page);
-//
-// 		res.send({ data: { question: mapQuestion(question), lastPage }, error: null });
-// 	} catch (e) {
-// 		res.send({ data: null, error: 'Error! Maybe... This question isn\'t exist' });
-// 		console.log(e);
-// 	}
-// });
-//
-//
-
 app.get('/brands', async (req, res) => {
 	try {
 		const brands = await getBrands();
@@ -110,6 +68,39 @@ app.get('/brands', async (req, res) => {
 		res.send({ data: brands.map(mapBrand), error: null });
 	} catch (e) {
 		res.send({ data: null, error: 'Error! Can\'t get brands' });
+		console.log(e);
+	}
+});
+
+app.get('/products/:id', async (req, res) => {
+	try {
+		const product = await getProduct(req.params.id);
+
+		res.send({ data: mapProduct(product), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Maybe... This product isn\'t exist' });
+		console.log(e);
+	}
+});
+
+app.get('/products/section/:id', async (req, res) => {
+	try {
+		const products = await getProducts(req.params.id);
+
+		res.send({ data: products.map(mapProducts), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Maybe... This section is empty' });
+		console.log(e);
+	}
+});
+
+app.get('/products/search/:title', async (req, res) => {
+	try {
+		const products = await getProductsByTitle(req.params.title);
+
+		res.send({ data: products.map(mapProducts), error: null });
+	} catch (e) {
+		res.send({ data: null, error: 'Error! Maybe... Product with such title isn\'t exist' });
 		console.log(e);
 	}
 });
@@ -178,6 +169,24 @@ app.delete('/promos/:id', async (req, res) => {
 		res.send({ error: null });
 	} catch (e) {
 		res.send({ error: 'Error. Failed to delete test' });
+		console.log(e);
+	}
+});
+
+app.post('/products', async (req, res) => {
+	try {
+		const newProduct = await addProduct({
+			title: req.body.title,
+			images: req.body.images,
+			kinds: req.body.kinds,
+			description: req.body.description,
+			specification: req.body.specification,
+			section: req.body.section,
+		});
+
+		res.send({ data: mapProduct(newProduct), error: null });
+	} catch (e) {
+		res.send({ data: null, e });
 		console.log(e);
 	}
 });

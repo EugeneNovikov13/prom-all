@@ -2,24 +2,20 @@ const Brand = require('../models/Brand');
 
 // add
 
-async function addBrand(brand) {
-	const newBrand = await Brand.create(brand);
-
-	return newBrand;
+function addBrand(brand) {
+	return Brand.create(brand);
 }
 
 // delete
 
-async function deleteBrand(id) {
-	await Brand.deleteOne({ _id: id });
+function deleteBrand(id) {
+	return Brand.deleteOne({ _id: id });
 }
 
 // get list
 
-async function getBrands() {
-	const brands = await Brand.find();
-
-	return brands;
+function getBrands() {
+	return Brand.find();
 }
 
 module.exports = {
