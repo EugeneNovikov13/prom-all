@@ -1,8 +1,8 @@
 const express = require('express');
 
 const { getBrands, addBrand, deleteBrand } = require('../controllers/brand');
-const mapBrand = require('../helpers/mapBrand');
 const authenticated = require('../middlewares/authenticated');
+const mapBrand = require('../helpers/mapBrand');
 const handleError = require('../helpers/handle-error');
 
 const router = express.Router();

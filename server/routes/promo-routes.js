@@ -1,8 +1,8 @@
 const express = require('express');
 
 const { getPromos, addPromo, editPromo, deletePromo } = require('../controllers/promo');
-const mapPromo = require('../helpers/mapPromo');
 const authenticated = require('../middlewares/authenticated');
+const mapPromo = require('../helpers/mapPromo');
 const handleError = require('../helpers/handle-error');
 
 const router = express.Router();
