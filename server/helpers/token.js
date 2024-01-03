@@ -11,7 +11,6 @@ module.exports = {
 	//проверяем токен
 	verify(token) {
 		try {
-			console.log('Invalid token');
 			return jwt.verify(token, sign);
 		} catch (e) {
 			return e;

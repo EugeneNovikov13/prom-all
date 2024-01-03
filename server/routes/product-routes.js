@@ -1,9 +1,9 @@
 const express = require('express');
 
 const { getProduct, getProducts, getProductsByTitle, addProduct } = require('../controllers/product');
+const authenticated = require('../middlewares/authenticated');
 const mapProduct = require('../helpers/mapProduct');
 const mapProducts = require('../helpers/mapProducts');
-const authenticated = require('../middlewares/authenticated');
 const handleError = require('../helpers/handle-error');
 
 const router = express.Router();
