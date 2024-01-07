@@ -24,7 +24,7 @@ router.get('/products/section/:id', async (req, res) => {
 
 		res.send({ data: products.map(mapProducts), error: null });
 	} catch (e) {
-		handleError(res, e, 'Error! Maybe... This section is empty');
+		handleError(res, e, 'Error! Maybe... This sections is empty');
 	}
 });
 
