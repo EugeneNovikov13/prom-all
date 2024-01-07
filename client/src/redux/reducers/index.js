@@ -1,2 +1,2 @@
-export * from './app-reducer';
-export * from './user-reducer';
+export * from './app-slice';
+export * from './user-slice';

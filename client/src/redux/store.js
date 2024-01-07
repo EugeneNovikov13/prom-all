@@ -1,12 +1,14 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import { appReducer, userReducer } from './reducers';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import appReducer from './reducers/app-slice';
+import userReducer from './reducers/user-slice';
 
-const reducer = combineReducers({
-	app: appReducer,
-	user: userReducer,
+const rootReducer = combineReducers({
+	appReducer,
+	userReducer,
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+export const setupStore = () => {
+	return configureStore({
+		reducer: rootReducer,
+	});
+};

@@ -2,16 +2,26 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+	font-family: 'InterVariableFont';
+	src: local('InterVariableFont'), url('./fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	font-family: -apple-system, BlinkMacSystemFont, 'InterVariableFont',
 	sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-	monospace;
+:root {
+	/*global colors*/
+
+	--brand-orange: #FF7F00;
+	--brand-blue: #6BBCFF;
+	--dark: #111111;
+	--light: #F8FCFF;
+	--beige: #E8E8E8;
+	--white: #FFFFFF;
 }
