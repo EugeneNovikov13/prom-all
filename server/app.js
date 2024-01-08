@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
 const port = 3001;
 const app = express();
 
-app.use(express.static('../client/build'));
+// app.use(express.static('../client/build'));
 
 app.use(cookieParser());
 app.use(express.json());

@@ -1,4 +1,5 @@
-module.exports = (res, log, error) => {
-	console.log(log);
-	res.send({ data: null, error: error || log });
+module.exports = (res, error) => {
+	console.log(error);
+	res.status(400);
+	res.send(error.message);
 }

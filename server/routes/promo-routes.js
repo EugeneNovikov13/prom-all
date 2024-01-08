@@ -11,7 +11,7 @@ router.get('/promos', async (req, res) => {
 	try {
 		const promos = await getPromos();
 
-		res.send({ data: promos.map(mapPromo), error: null });
+		res.send(promos.map(mapPromo));
 	} catch (e) {
 		handleError(res, e, 'Error! Maybe... There isn\'t promos');
 	}
