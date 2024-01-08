@@ -14,8 +14,14 @@ function getProduct(id) {
 
 // get list
 
-function getProducts(section) {
-	return Product.find({ section });
+async function getProducts(section) {
+	const products = await Product.find({ section });
+
+	if (!products.length) {
+		throw new Error('Error! Maybe... This sections is empty or not exist')
+	}
+
+	return products;
 }
 
 // get item by title
