@@ -1,15 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { fetchProducts } from '../../redux/action-creators/fetch-products';
-import { useCreatePromoMutation } from '../../services/promo-service';
-import Promo from './components/promo';
-import Promo2 from './components/promo2';
+import { fetchProducts } from '../../store/action-creators/fetch-products';
 import styled from 'styled-components';
+import { useCreateBrandMutation, useCreateProductMutation } from '../../store/services';
+import { Products } from './components/products';
 
 const MainContainer = ({ className }) => {
 	const [idValue, setIdValue] = useState('');
-	const { products, isLoading, error } = useSelector(state => state.productsReducer);
-	const [createPromo] = useCreatePromoMutation();
+	const [createBrand] = useCreateBrandMutation();
+	const [createProduct] = useCreateProductMutation();
 	const dispatch = useDispatch();
 
 	const onClick = id => {
@@ -17,10 +16,29 @@ const MainContainer = ({ className }) => {
 	};
 
 	const handleCreate = async () => {
-		const title = prompt('Введите название акции');
-		const content = prompt('Введите содержание акции');
-		const background = prompt('Введите URL фона');
-		await createPromo({ title, content, background });
+		const title = prompt('Введите название партнёра');
+		const logo = prompt('Введите URL значка');
+		const isOfficial = window.confirm(
+			'Являетесь ли вы официальным дилером партнёра?',
+		);
+		await createBrand({ title, logo, isOfficial });
+	};
+
+	const handleCreateProduct = async () => {
+		const newProduct = {
+			title: 'ВРПХ115-45 N 5-8',
+			images: [
+				{
+					imageURL:
+						'http://prom-all.com/wp-content/uploads/2015/08/image023.jpg',
+				},
+			],
+			kinds: [{ title: '5.1' }, { title: '6.3' }, { title: '8.1' }],
+			description: 'ОБЩИЕ СВЕДЕНИЯ:',
+			specification: '<p><strong>ВЕНТИЛЯТОРЫ ПЫЛЕВЫЕ ВРП115-45</strong></p>',
+			section: '6589b0067d4f83f1dfcaa234',
+		};
+		await createProduct(newProduct);
 	};
 
 	return (
@@ -31,17 +49,12 @@ const MainContainer = ({ className }) => {
 				onChange={({ target }) => setIdValue(target.value)}
 			/>
 			<button onClick={() => onClick(idValue)}>Get products</button>
-			{isLoading && <h2>Идёт загрузка...</h2>}
-			{error && <h2>{error}</h2>}
-			{products.map(({ id, imageURL, title }) => (
-				<img key={id} src={imageURL} alt={title} />
-			))}
 			<br />
-			<button onClick={handleCreate}>Добавить акцию</button>
+			<button onClick={handleCreate}>Добавить партнёра</button>
+			<button onClick={handleCreateProduct}>Добавить товар</button>
 
 			<div style={{ display: 'flex' }}>
-				<Promo />
-				<Promo2 />
+				<Products />
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const promoAPI = createApi({
+export const adminAPI = createApi({
 	reducerPath: 'promoAPI',
 	baseQuery: fetchBaseQuery({
 		baseUrl: 'promos',
@@ -14,22 +14,21 @@ export const promoAPI = createApi({
 			providesTags: () => ['Promo'],
 		}),
 		createPromo: builder.mutation({
-			query: (promo) => ({
+			query: promo => ({
 				url: '',
 				method: 'POST',
 				body: promo,
 			}),
 			invalidatesTags: ['Promo'],
-
 		}),
 		removePromo: builder.mutation({
-			query: (id) => ({
+			query: id => ({
 				url: `${id}`,
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['Promo'],
-		})
+		}),
 	}),
 });
 
-export const { useFetchAllPromoQuery, useCreatePromoMutation, useRemovePromoMutation } = promoAPI;
+export const {} = adminAPI;

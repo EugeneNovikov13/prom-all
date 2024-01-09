@@ -9,7 +9,7 @@ function addPromo(promo) {
 // edit
 
 function editPromo(id, promo) {
-	return Promo.findByIdAndUpdate(id, promo, { returnDocument: 'after' });
+	return Promo.findByIdAndUpdate(id, promo, { returnDocument: 'after', runValidators: true });
 }
 
 // delete
