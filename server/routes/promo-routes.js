@@ -13,7 +13,7 @@ router.get('/promos', async (req, res) => {
 
 		res.send(promos.map(mapPromo));
 	} catch (e) {
-		handleError(res, e, 'Error! Maybe... There isn\'t promos');
+		handleError(res, e);
 	}
 });
 
@@ -25,9 +25,12 @@ router.post('/promos', authenticated, async (req, res) => {
 			background: req.body.background,
 		});
 
-		res.send({ data: mapPromo(newPromo), error: null });
+		res.send(mapPromo(newPromo));
 	} catch (e) {
-		handleError(res, e, 'Error! Maybe... This promo is already exists');
+		if (e.name === "ValidationError") {
+			e.message = 'Не удалось добавить промо-акцию. Отправлены некорректные или неполные данные';
+		}
+		handleError(res, e);
 	}
 });
 
@@ -39,18 +42,20 @@ router.patch('/promos/:id', authenticated, async (req, res) => {
 			background: req.body.background,
 		});
 
-		res.send({ data: mapPromo(editedPromo), error: null });
+		res.send(mapPromo(editedPromo));
 	} catch (e) {
-		handleError(res, e, 'Error! Unable to upgrade promo');
+		e.message = 'Ошибка! Не удалось изменить параметры промо-акции';
+		handleError(res, e);
 	}
 });
 router.delete('/promos/:id', authenticated, async (req, res) => {
 	try {
 		await deletePromo(req.params.id);
 
-		res.send({ error: null });
+		res.send('Удаление успешно выполнено');
 	} catch (e) {
-		handleError(res, e, 'Error! Failed to delete promo');
+		e.message = 'Ошибка! Не удалось удалить промо-акцию';
+		handleError(res, e);
 	}
 });
 

@@ -8,14 +8,20 @@ function addBrand(brand) {
 
 // delete
 
-function deleteBrand(id) {
-	return Brand.deleteOne({ _id: id });
+async function deleteBrand(id) {
+	await Brand.deleteOne({ _id: id });
 }
 
 // get list
 
-function getBrands() {
-	return Brand.find();
+async function getBrands() {
+	const brands = await Brand.find();
+
+	if (!brands.length) {
+		throw new Error('Ошибка! Бренды не найдены')
+	}
+
+	return brands;
 }
 
 module.exports = {

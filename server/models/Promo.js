@@ -16,7 +16,7 @@ const PromoSchema = new Schema({
 		required: true,
 		validate: {
 			validator: validator.isURL,
-			message: 'URL should be a valid',
+			message: 'Некорректная ссылка на фоновое изображение',
 		},
 	},
 });

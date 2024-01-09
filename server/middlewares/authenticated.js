@@ -6,7 +6,7 @@ module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
 	if (!token) {
-		handleError(res, 'Попытка несанкционированного доступа', 'Error! You must log in first');
+		handleError(res, {message: 'Вы должны сначала авторизоваться'}, 401);
 		next('route');
 		return;
 	}
@@ -16,7 +16,7 @@ module.exports = async function(req, res, next) {
 	const user = await Admin.findOne({ _id: tokenData.id });
 
 	if (!user) {
-		handleError(res, 'Попытка несанкционированного доступа', 'Error! Authenticated user not found');
+		handleError(res, {message: 'Ваш токен недействителен. Авторизуйтесь'}, 401);
 		next('route');
 		return;
 	}

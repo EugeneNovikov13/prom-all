@@ -11,9 +11,9 @@ router.get('/brands', async (req, res) => {
 	try {
 		const brands = await getBrands();
 
-		res.send({ data: brands.map(mapBrand), error: null });
+		res.send(brands.map(mapBrand));
 	} catch (e) {
-		handleError(res, e, 'Error! Can\'t get brands');
+		handleError(res, e);
 	}
 });
 
@@ -25,9 +25,15 @@ router.post('/brands', authenticated, async (req, res) => {
 			isOfficial: req.body.isOfficial,
 		});
 
-		res.send({ data: mapBrand(newBrand), error: null });
+		res.send(mapBrand(newBrand));
 	} catch (e) {
-		handleError(res, e, 'Error! Creation of brand is impossible');
+		if (e.code === 11000) {
+			e.message = 'Партнёр с таким названием уже существует';
+		}
+		if (e.name === "ValidationError") {
+			e.message = 'Ошибка! Не удалось добавить партнёра. Отправлены некорректные или неполные данные';
+		}
+		handleError(res, e);
 	}
 });
 
@@ -35,9 +41,13 @@ router.delete('/brands/:id', authenticated, async (req, res) => {
 	try {
 		await deleteBrand(req.params.id);
 
-		res.send({ error: null });
+		res.send('Удаление партнёра успешно произведено');
 	} catch (e) {
-		handleError(res, e, 'Error! Failed to delete brand');
+		e.message = 'Ошибка! Не удалось удалить партнёра';
+		if (e.name === 'CastError') {
+			e.message = 'Ошибка! Возможно... Данных о партнёре нет в базе данных';
+		}
+		handleError(res, e);
 	}
 });
 

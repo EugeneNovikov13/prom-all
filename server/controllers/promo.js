@@ -20,8 +20,14 @@ function deletePromo(id) {
 
 // get list
 
-function getPromos() {
-	return Promo.find();
+async function getPromos() {
+	const promos = await Promo.find();
+
+	if (!promos.length) {
+		throw new Error('Ошибка! Возможно... Промо-акций не существует')
+	}
+
+	return promos;
 }
 
 module.exports = {
