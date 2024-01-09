@@ -12,9 +12,12 @@ router.get('/products/:id', async (req, res) => {
 	try {
 		const product = await getProduct(req.params.id);
 
-		res.send({ data: mapProduct(product), error: null });
+		res.send(mapProduct(product));
 	} catch (e) {
-		handleError(res, e, 'Error! Maybe... This product isn\'t exist');
+		if (e.name === 'CastError') {
+			e.message = 'Ошибка! Возможно... Данных о товаре нет в базе данных';
+		}
+		handleError(res, e);
 	}
 });
 
@@ -22,7 +25,7 @@ router.get('/products/section/:id', async (req, res) => {
 	try {
 		const products = await getProducts(req.params.id);
 
-		res.send({ data: products.map(mapProducts), error: null });
+		res.send(products.map(mapProducts));
 	} catch (e) {
 		handleError(res, e);
 	}
@@ -32,9 +35,9 @@ router.get('/products/search/:title', async (req, res) => {
 	try {
 		const products = await getProductsByTitle(req.params.title);
 
-		res.send({ data: products.map(mapProducts), error: null });
+		res.send(products.map(mapProducts));
 	} catch (e) {
-		handleError(res, e, 'Error! Maybe... Product with such title isn\'t exist');
+		handleError(res, e);
 	}
 });
 
@@ -49,9 +52,15 @@ router.post('/products', authenticated, async (req, res) => {
 			section: req.body.section,
 		});
 
-		res.send({ data: mapProduct(newProduct), error: null });
+		res.send(mapProduct(newProduct));
 	} catch (e) {
-		handleError(res, e, 'Error! Unable to create product');
+		if (e.code === 11000) {
+			e.message = 'Товар с таким названием уже существует';
+		}
+		if (e.name === "ValidationError") {
+			e.message = 'Ошибка! Не удалось добавить промо-акцию. Отправлены некорректные или неполные данные';
+		}
+		handleError(res, e);
 	}
 });
 

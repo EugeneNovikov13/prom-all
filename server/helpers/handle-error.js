@@ -1,5 +1,6 @@
-module.exports = (res, error) => {
+module.exports = (res, error, statusCode = 400) => {
 	console.log(error);
-	res.status(400);
-	res.send(error.message);
+
+	res.status(statusCode)
+		.send(error.message);
 }

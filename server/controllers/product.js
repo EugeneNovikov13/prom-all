@@ -18,7 +18,7 @@ async function getProducts(section) {
 	const products = await Product.find({ section });
 
 	if (!products.length) {
-		throw new Error('Error! Maybe... This sections is empty or not exist')
+		throw new Error('Ошибка! В этом разделе нет товаров или он не существует')
 	}
 
 	return products;
@@ -26,8 +26,14 @@ async function getProducts(section) {
 
 // get item by title
 
-function getProductsByTitle(search) {
-	return Product.find({ title: { $regex: search, $options: 'i' } });
+async function getProductsByTitle(search) {
+	const products = await Product.find({ title: { $regex: search, $options: 'i' } });
+
+	if (!products.length) {
+		throw new Error('Ошибка! В каталоге нет товаров с таким названием')
+	}
+
+	return products;
 }
 
 module.exports = {

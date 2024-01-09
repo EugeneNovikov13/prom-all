@@ -10,10 +10,10 @@ router.post('/register', async (req, res) => {
 	try {
 		const { token, admin } = await register(req.body.login, req.body.password);
 
-		res.cookie('token', token, { httpOnly: true })
-			.send({ error: null, admin: mapAdmin(admin) });
+		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+			.send(mapAdmin(admin));
 	} catch (e) {
-		handleError(res, e, 'Registration denied');
+		handleError(res, e);
 	}
 });
 
@@ -21,16 +21,20 @@ router.post('/login', async (req, res) => {
 	try {
 		const { token, admin } = await login(req.body.login, req.body.password);
 
-		res.cookie('token', token, { httpOnly: true })
-			.send({ error: null, admin: mapAdmin(admin) });
+		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+			.send(mapAdmin(admin));
 	} catch (e) {
-		handleError(res, e, e.message);
+		handleError(res, e);
 	}
 });
 
 router.post('/logout', (req, res) => {
-	res.cookie('token', '', { httpOnly: true })
-		.send({});
+	try {
+		res.cookie('token', '', { httpOnly: true })
+			.send('Выход успешно выполнен');
+	} catch (e) {
+		handleError(res, e);
+	}
 });
 
 module.exports = router;

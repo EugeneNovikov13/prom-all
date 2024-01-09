@@ -6,9 +6,15 @@ const Admin = require('../models/Admin');
 
 async function register( login, password ) {
 	if (!password) {
-		throw new Error('Password is empty');
+		throw new Error('Заполните пароль');
 	}
 	const passwordHash = await bcrypt.hash(password, 10);
+
+	const existingAdmin = await Admin.findOne({login});
+
+	if (existingAdmin) {
+		throw new Error('Данный администратор уже существует')
+	}
 
 	const admin = await Admin.create({ login, password: passwordHash });
 
@@ -23,13 +29,13 @@ async function login(login, password) {
 	const admin = await Admin.findOne({ login });
 
 	if (!admin) {
-		throw new Error('Login not found');
+		throw new Error('Пользователь не найден');
 	}
 
 	const isPasswordMatch = await bcrypt.compare(password, admin.password);
 
 	if (!isPasswordMatch) {
-		throw new Error('Wrong password');
+		throw new Error('Неверный пароль');
 	}
 
 	const token = generate({ id: admin.id });
