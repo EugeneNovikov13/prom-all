@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { appSlice } from './redux/reducers';
+import { appSlice } from './store/reducers';
 import {
 	About,
 	Administration,
@@ -52,8 +52,9 @@ export const PromAll = () => {
 					<Route path="/" element={<Main />}></Route>
 					<Route path="/catalog" element={<Catalog />}>
 						<Route path="section/:id" element={<Sections />}></Route>
-						<Route path="product/:id" element={<Product />}></Route>
+						{/*<Route path="product/:id" element={<Product />}></Route>*/}
 					</Route>
+					<Route path="/product/:id" element={<Product />}></Route>
 					<Route path="/documents" element={<Documents />}></Route>
 					<Route path="/about" element={<About />}></Route>
 					<Route path="/contacts" element={<Contacts />}></Route>
