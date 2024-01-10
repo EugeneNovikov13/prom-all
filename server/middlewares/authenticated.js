@@ -5,6 +5,12 @@ const handleError = require('../helpers/handle-error');
 module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
+	if (req.url === '/users' && !token) {
+		res.send({ error: 'Авторизуйтесь для входа в роли администратора' });
+		next('route');
+		return;
+	}
+
 	if (!token) {
 		handleError(res, {message: 'Вы должны сначала авторизоваться'}, 401);
 		next('route');

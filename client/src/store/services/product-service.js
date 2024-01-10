@@ -9,7 +9,7 @@ export const productAPI = createApi({
 	endpoints: builder => ({
 		fetchProduct: builder.query({
 			query: id => ({
-				url: `${id}`,
+				url: `/${id}`,
 			}),
 			providesTags: ['Product'],
 		}),
