@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
 const port = 3001;
 const app = express();
 
-// app.use(express.static('../client/build'));
+app.use(express.static('../client/build'));
 
 app.use(cookieParser());
 app.use(express.json());
@@ -23,7 +23,7 @@ app.use(adminRoutes);
 app.use(promoRoutes);
 app.use(brandRoutes);
 app.use(productRoutes);
-// app.use(htmlRoutes);
+app.use(htmlRoutes);
 
 mongoose.connect(
 	//получаем строку подключения к БД из поля environment (файл docker-compose)

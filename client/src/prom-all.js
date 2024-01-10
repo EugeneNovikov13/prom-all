@@ -35,13 +35,13 @@ const Page = styled.div``;
 export const PromAll = () => {
 	const dispatch = useDispatch();
 
-	// const admin = useSelector(selectUserData);
-	// console.log(admin);
+	const admin = useSelector(selectUserData);
+	console.log(admin);
 
 	useLayoutEffect(() => {
 		const getAdmin = async () => {
 			try {
-				const response = await axios.get(`users`);
+				const response = await axios.get(`/users`);
 
 				if (response.data.error) {
 					dispatch(userSlice.actions.userFetchingError(response.data.error));

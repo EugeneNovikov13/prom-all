@@ -30,5 +30,3 @@ export const adminAPI = createApi({
 });
 
 export const {useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = adminAPI;
-
-console.log(adminAPI);
