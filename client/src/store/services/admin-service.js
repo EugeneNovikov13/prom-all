@@ -5,13 +5,21 @@ export const adminAPI = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: '/',
 	}),
+	tagTypes: ['User'],
 	endpoints: builder => ({
+		fetchUser: builder.query({
+			query: () => ({
+				url: 'users',
+			})
+		}),
+		providesTags: () => ['User'],
 		fetchRegister: builder.mutation({
 			query: (userData) => ({
 				url: 'register',
 				method: 'POST',
 				body: userData,
 			}),
+			invalidatesTags: ['User'],
 		}),
 		fetchAuth: builder.mutation({
 			query: userData => ({
@@ -19,14 +27,16 @@ export const adminAPI = createApi({
 				method: 'POST',
 				body: userData,
 			}),
+			invalidatesTags: ['User'],
 		}),
 		fetchLogout: builder.mutation({
 			query: () => ({
 				url: `logout`,
 				method: 'POST',
 			}),
+			invalidatesTags: ['User'],
 		}),
 	}),
 });
 
-export const {useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = adminAPI;
+export const {useFetchUserQuery, useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = adminAPI;

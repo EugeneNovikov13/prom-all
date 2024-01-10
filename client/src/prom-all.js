@@ -1,7 +1,4 @@
-import { useLayoutEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { userSlice } from './store/reducers';
 import {
 	About,
 	Administration,
@@ -17,8 +14,7 @@ import {
 import { Error, Footer, Header, Modal } from './components';
 import { ERROR } from './constants';
 import styled from 'styled-components';
-import axios from 'axios';
-import { selectUserData } from './store/selectors';
+import { useFetchUserQuery } from './store/services';
 
 const AppColumn = styled.div`
 	display: flex;
@@ -33,27 +29,10 @@ const AppColumn = styled.div`
 const Page = styled.div``;
 
 export const PromAll = () => {
-	const dispatch = useDispatch();
-
-	const admin = useSelector(selectUserData);
-	console.log(admin);
-
-	useLayoutEffect(() => {
-		const getAdmin = async () => {
-			try {
-				const response = await axios.get(`/users`);
-
-				if (response.data.error) {
-					dispatch(userSlice.actions.userFetchingError(response.data.error));
-					return;
-				}
-				dispatch(userSlice.actions.userFetchingSuccess(response.data));
-			} catch (e) {
-				dispatch(userSlice.actions.userFetchingError(e.response.data));
-			}
-		};
-		getAdmin();
-	}, [dispatch]);
+	//так получаем данные авторизации администратора после перезагрузки приложения
+	//проверяется наличие и проверка токена
+	const {data} = useFetchUserQuery();
+	console.log(data);
 
 	return (
 		<AppColumn>

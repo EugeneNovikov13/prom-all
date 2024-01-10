@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProducts } from '../action-creators/fetch-products';
+import { fetchProducts } from './fetch-products';
 
 const initialState = {
 	products: [],
 	isLoading: false,
 	error: '',
 };
+
+// ОСТАВЛЕН ДЛЯ ПРИМЕРА РАБОТЫ СО СЛАЙСАМИ
 
 export const productsSlice = createSlice({
 	name: 'products',

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+// ОСТАВЛЕН ДЛЯ ПРИМЕРА РАБОТЫ СО СЛАЙСАМИ и createAsyncThunk
+
 // export const fetchProducts = id => async dispatch => {
 // 	try {
 // 		dispatch(productsSlice.actions.productsFetching());
