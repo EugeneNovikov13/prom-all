@@ -4,7 +4,7 @@ export const Product = ({ product }) => {
 	const navigate = useNavigate();
 
 	const onClick = () => {
-		navigate(`/product/${product.id}`);
+		navigate(`/catalog/product/${product.id}`);
 	};
 
 	return (

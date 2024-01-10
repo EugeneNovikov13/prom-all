@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import appReducer from './reducers/app-slice';
 import userReducer from './reducers/user-slice';
-import { brandAPI, productAPI, promoAPI } from './services';
+import { adminAPI, brandAPI, productAPI, promoAPI } from './services';
 
 const rootReducer = combineReducers({
 	appReducer,
@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
 	[promoAPI.reducerPath]: promoAPI.reducer,
 	[brandAPI.reducerPath]: brandAPI.reducer,
 	[productAPI.reducerPath]: productAPI.reducer,
+	[adminAPI.reducerPath]: adminAPI.reducer,
 });
 
 export const setupStore = () => {
@@ -19,6 +20,7 @@ export const setupStore = () => {
 				promoAPI.middleware,
 				brandAPI.middleware,
 				productAPI.middleware,
+				adminAPI.middleware,
 			),
 	});
 };

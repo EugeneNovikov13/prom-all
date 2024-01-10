@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { appSlice } from './store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSlice } from './store/reducers';
 import {
 	About,
 	Administration,
@@ -17,6 +17,8 @@ import {
 import { Error, Footer, Header, Modal } from './components';
 import { ERROR } from './constants';
 import styled from 'styled-components';
+import axios from 'axios';
+import { selectUserData } from './store/selectors';
 
 const AppColumn = styled.div`
 	display: flex;
@@ -31,18 +33,27 @@ const AppColumn = styled.div`
 const Page = styled.div``;
 
 export const PromAll = () => {
-	const { setUser } = appSlice.actions;
 	const dispatch = useDispatch();
 
+	// const admin = useSelector(selectUserData);
+	// console.log(admin);
+
 	useLayoutEffect(() => {
-		const currentUserDataJSON = sessionStorage.getItem('userData');
+		const getAdmin = async () => {
+			try {
+				const response = await axios.get(`users`);
 
-		if (!currentUserDataJSON) {
-			return;
-		}
-
-		dispatch(setUser());
-	}, [dispatch, setUser]);
+				if (response.data.error) {
+					dispatch(userSlice.actions.userFetchingError(response.data.error));
+					return;
+				}
+				dispatch(userSlice.actions.userFetchingSuccess(response.data));
+			} catch (e) {
+				dispatch(userSlice.actions.userFetchingError(e.response.data));
+			}
+		};
+		getAdmin();
+	}, [dispatch]);
 
 	return (
 		<AppColumn>
@@ -52,9 +63,8 @@ export const PromAll = () => {
 					<Route path="/" element={<Main />}></Route>
 					<Route path="/catalog" element={<Catalog />}>
 						<Route path="section/:id" element={<Sections />}></Route>
-						{/*<Route path="product/:id" element={<Product />}></Route>*/}
+						<Route path="product/:id" element={<Product />}></Route>
 					</Route>
-					<Route path="/product/:id" element={<Product />}></Route>
 					<Route path="/documents" element={<Documents />}></Route>
 					<Route path="/about" element={<About />}></Route>
 					<Route path="/contacts" element={<Contacts />}></Route>

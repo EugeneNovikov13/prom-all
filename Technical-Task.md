@@ -28,11 +28,11 @@
 - Формы с валидацией: React Hook Form и Yup;
 - Сетевые запросы: Axios;
 - Роутинг: React Router;
-- Менеджер состояния: React Redux, Redux Toolkit;
+- Менеджер состояния: Redux Toolkit, RTK Query;
 - Бек-энд - Express на базе Node.js;
 - База данных MongoDB, взаимодействие через mongoose;
 - Аутентификация пользователя с помощью JsonWebToken;
-- Шифрование с помощью bcrypt;
+- Шифрование пароля с помощью bcrypt;
 - Контейнеризация на сервере: Docker и Docker-compose;
 - Допускается обоснованное использование npm-пакетов.
 
