@@ -20,13 +20,15 @@ const AppColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	width: 1920px;
+	width: 100%;
 	min-height: 100%;
-	margin: 0 auto;
+	//margin: 0 auto;
 	background-color: #fff;
 `;
 
-const Page = styled.div``;
+const Page = styled.div`
+	padding: 112px 0 16px;
+`;
 
 export const PromAll = () => {
 	//так получаем данные авторизации администратора после перезагрузки приложения
