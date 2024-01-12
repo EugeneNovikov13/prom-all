@@ -22,14 +22,16 @@ const CatalogContainer = ({ className }) => {
 		await createProduct(newProduct);
 	};
 
-	return (<div className={className}>
-		<h2>Товары:</h2>
-		<button onClick={handleCreateProduct}>Добавить товар</button>
-		<div style={{ display: 'flex' }}>
-			<Products />
+	return (
+		<div className={className}>
+			<h2>Товары:</h2>
+			<button onClick={handleCreateProduct}>Добавить товар</button>
+			<div style={{ display: 'flex' }}>
+				<Products />
+			</div>
+			<Outlet />
 		</div>
-		<Outlet />
-	</div>);
+	);
 };
 
 export const Catalog = styled(CatalogContainer)``;

@@ -7,8 +7,8 @@ const NavigationFooterMenuContainer = ({ className }) => {
 	return (
 		<nav className={className}>
 			<ul>
-				{navigationMenu.map(({ title, link, iconURL }) => (
-					<li className={className}>
+				{navigationMenu.map(({ title, link, iconURL }, ind) => (
+					<li className={className} key={ind}>
 						<Link to={link}>
 							<Icon width="18px" iconSrc={iconURL} isActive={true} />
 							{title}

@@ -64,4 +64,8 @@ export const Authorization = styled(AuthorizationContainer)`
 		flex-direction: column;
 		gap: 10px;
 	}
+
+	h2 {
+		color: white;
+	}
 `;
