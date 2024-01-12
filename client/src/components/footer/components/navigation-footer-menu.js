@@ -36,7 +36,7 @@ export const NavigationFooterMenu = styled(NavigationFooterMenuContainer)`
 				align-items: center;
 				gap: 8px;
 				padding: 10px 16px 10px 12px;
-				color: var(--white, #fff);
+				color: var(--white);
 				font-family: Inter, sans-serif;
 				font-size: 20px;
 				font-style: normal;

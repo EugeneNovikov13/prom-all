@@ -1,3 +1,4 @@
+export * from './button/button';
 export * from './error/error';
 export * from './footer/footer';
 export * from './header/header';
@@ -5,4 +6,6 @@ export * from './icon/icon';
 export * from './loader/loader';
 export * from './logo/logo';
 export * from './modal/modal';
+export * from './p/p';
+export * from './quick-application/quick-application';
 export * from './search/search';

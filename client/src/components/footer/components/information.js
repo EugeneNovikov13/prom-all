@@ -41,7 +41,7 @@ export const Information = styled(InformationContainer)`
 		gap: 8px;
 
 		& span {
-			color: var(--white, #fff);
+			color: var(--white);
 			font-family: Inter, sans-serif;
 			font-size: 14px;
 			font-style: normal;
