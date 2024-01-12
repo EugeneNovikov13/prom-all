@@ -19,14 +19,17 @@ import { useFetchUserQuery } from './store/services';
 const AppColumn = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	position: relative;
 	width: 100%;
 	min-height: 100%;
-	//margin: 0 auto;
-	background-color: #fff;
+	margin: 0 auto;
+	padding-bottom: 16px;
+	background-color: #1a1d22;
 `;
 
 const Page = styled.div`
+	min-height: 453px;
 	padding: 112px 0 16px;
 `;
 

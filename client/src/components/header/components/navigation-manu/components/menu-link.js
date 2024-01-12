@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MenuLinkContainer = ({ className, title, link, onClick }) => {
+const MenuLinkContainer = ({ className, title, link }) => {
 	return (
-		<li className={className} onClick={() => onClick(link)}>
+		<li className={className}>
 			<Link to={link}>{title}</Link>
 		</li>
 	);

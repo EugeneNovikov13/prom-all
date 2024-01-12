@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MenuLink } from '../../../search/components/menu-link';
+import { MenuLink } from './components/menu-link';
 import { navigationMenu } from '../../../../constants';
 import { getRouteFromFullLocation } from '../../../../utils';
 import styled from 'styled-components';
@@ -10,21 +10,20 @@ const NavigationMenuContainer = ({ className }) => {
 	const currentLocation = getRouteFromFullLocation(location.pathname);
 	const [currentRoute, setCurrentRoute] = useState(currentLocation);
 
-	const onChangeCurrentRoute = link => {
-		setCurrentRoute(link);
-	};
+	if (currentLocation !== currentRoute) {
+		setCurrentRoute(currentLocation);
+	}
 
 	return (
 		<nav className={className}>
 			<ul>
 				{navigationMenu.map(({ title, link }) => (
-						<MenuLink
-							key={title}
-							title={title}
-							link={link}
-							isActive={link === currentRoute}
-							onClick={onChangeCurrentRoute}
-						/>
+					<MenuLink
+						key={title}
+						title={title}
+						link={link}
+						isActive={link === currentRoute}
+					/>
 				))}
 			</ul>
 		</nav>
