@@ -30,7 +30,7 @@ const AppColumn = styled.div`
 
 const Page = styled.div`
 	min-height: 453px;
-	padding: 112px 0 16px;
+	padding: 112px 0 0;
 `;
 
 export const PromAll = () => {

@@ -1,5 +1,6 @@
 import banner from '../../assets/banner.svg'
 import styled from 'styled-components';
+import { QuickApplication } from '../../components';
 
 const MainContainer = ({ className }) => {
 
@@ -87,6 +88,7 @@ const MainContainer = ({ className }) => {
 				<div>Aliquid aut blanditiis consectetur dicta ea eum ex fuga fugiat hic iste labore magnam, minima,
 					nihil non nostrum placeat quia quibusdam quo repudiandae sed sequi sint, totam ut vel vero.
 				</div>
+				<QuickApplication/>
 			</div>
 		</div>
 	);
