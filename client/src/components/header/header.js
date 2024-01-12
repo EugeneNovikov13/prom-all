@@ -38,8 +38,8 @@ export const Header = styled(HeaderContainer)`
 	color: var(--white);
 
 	& div.first-line {
-		display: flex;
 		height: 64px;
+		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-self: stretch;

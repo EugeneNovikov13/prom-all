@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Icon } from '../icon/icon';
-import searchLoup from '../../assets/icons/search-loup.svg';
+import searchLoup from './assets/search-loup.svg';
 
 const SearchContainer = ({ className }) => {
 	return (
 		<search className={className}>
-			<Icon width='24px' iconSrc={searchLoup}></Icon>
+			<Icon width="24px" iconSrc={searchLoup}></Icon>
 			<span>Поиск</span>
 		</search>
 	);
