@@ -1,44 +1,69 @@
-import { forwardRef } from 'react';
-import styled from 'styled-components';
+import { forwardRef, useState } from 'react';
 import { Icon } from '../icon/icon';
+import { Tooltip } from '../tooltip/tooltip';
+import errorIcon from '../../assets/error.svg';
+import styled from 'styled-components';
 
 const InputContainer = forwardRef(({ className, error, ...props }, ref) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
-		<>
-			<input className={className} {...props} ref={ref} />
+		<div className={className}>
+			<input {...props} ref={ref} />
 			{/*ошибка ввода отображается иконкой справа в инпуте*/}
-			{/*<Icon />*/}
-		</>
+			{error && isOpen && (
+				<Tooltip top="-15" right="0">
+					{error}
+				</Tooltip>
+			)}
+			{error && (
+				<Icon
+					width="25px"
+					iconSrc={errorIcon}
+					setIsOpen={setIsOpen}
+				/>
+			)}
+		</div>
 	);
 });
 
 export const Input = styled(InputContainer)`
-	width: 552px;
-	height: 72px;
-	padding: 24px 40px;
-	border-radius: 10px;
-	border: none;
-	outline: none;
-	background: rgba(255, 255, 255, 0.08);
+	position: relative;
 
-	color: #E6E0E9;
-	font-family: Inter, sans-serif;
-	font-size: 20px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 24px;
-	letter-spacing: 0.5px;
+	& input {
+		width: 552px;
+		height: 72px;
+		padding: 24px 40px;
+		border-radius: 10px;
+		border: none;
+		outline: none;
+		background: rgba(255, 255, 255, 0.08);
 
-	@media (max-width: 600px) {
-		width: 360px;
+		color: #e6e0e9;
+		font-family: Inter, sans-serif;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 24px;
+		letter-spacing: 0.5px;
+
+		@media (max-width: 600px) {
+			width: 360px;
+		}
+
+		&:hover {
+			background: rgb(50, 50, 51);
+		}
+
+		&:focus {
+			background: rgb(50, 50, 51);
+			color: var(--light);
+		}
 	}
 
-	&:hover {
-		background: rgb(50, 50, 51);
-	}
-
-	&:focus {
-		background: rgb(50, 50, 51);
-		color: var(--light);
+	& img {
+		position: absolute;
+		right: 20px;
+		top: 24px;
 	}
 `;

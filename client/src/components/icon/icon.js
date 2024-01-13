@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 
-const IconContainer = ({ className, iconSrc, onClick, onMouseEnter, onMouseLeave }) => {
+const IconContainer = ({ className, iconSrc, onClick, setIsOpen }) => {
+	const onTooltipOpen = () => {
+		setIsOpen && setIsOpen(true);
+	};
+
+	const onTooltipClose = () => {
+		setIsOpen && setIsOpen(false);
+	};
+
 	return (
 		<img
 			className={className}
 			onClick={onClick}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
+			onMouseEnter={onTooltipOpen}
+			onMouseLeave={onTooltipClose}
+			onTouchStart={onTooltipOpen}
+			onTouchEnd={onTooltipClose}
 			src={iconSrc}
 			alt="icon"
 		/>
