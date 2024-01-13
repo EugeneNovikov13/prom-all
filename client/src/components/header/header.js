@@ -28,17 +28,16 @@ const HeaderContainer = ({ className }) => {
 export const Header = styled(HeaderContainer)`
 	position: fixed;
 	top: 0;
-	display: flex;
 	width: 100vw;
-	height: 112px;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background: var(--dark);
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 	color: var(--white);
+	z-index: 1000;
 
 	& div.first-line {
-		height: 64px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -47,9 +46,9 @@ export const Header = styled(HeaderContainer)`
 		background: #171717;
 
 		& div.header-top-wrapper {
-			display: flex;
 			max-width: 1200px;
 			padding: 0 36px;
+			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			flex: 1 0 0;
@@ -57,7 +56,6 @@ export const Header = styled(HeaderContainer)`
 	}
 
 	& div.second-line {
-		height: 48px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -66,10 +64,20 @@ export const Header = styled(HeaderContainer)`
 		background: #171717;
 
 		& div.header-bottom-wrapper {
-			display: flex;
 			max-width: 1200px;
 			padding: 0 36px;
+			display: flex;
+			justify-content: center;
+			gap: 5px;
 			flex: 1 0 0;
+
+			@media screen and (max-width: 600px) {
+				padding: 0 10px;
+			}
+
+			@media screen and (max-width: 450px) {
+				flex-wrap: wrap;
+			}
 		}
 	}
 `;

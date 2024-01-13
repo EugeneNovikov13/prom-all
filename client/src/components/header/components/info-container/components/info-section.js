@@ -20,10 +20,10 @@ const InfoSectionContainer = ({ className, text, title, iconURL }) => {
 };
 
 export const InfoSection = styled(InfoSectionContainer)`
-	height: 40px;
+	height: 52px;
 	display: flex;
 	padding: 10px 16px 10px 12px;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	gap: 8px;
 	align-self: stretch;

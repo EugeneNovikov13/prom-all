@@ -17,20 +17,30 @@ import styled from 'styled-components';
 import { useFetchUserQuery } from './store/services';
 
 const AppColumn = styled.div`
+	width: 100%;
+	min-height: 100%;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	position: relative;
-	width: 100%;
-	min-height: 100%;
 	margin: 0 auto;
 	padding-bottom: 16px;
 	background-color: #1a1d22;
+	overflow: hidden;
 `;
 
 const Page = styled.div`
+	max-width: 100vw;
 	min-height: 453px;
 	padding: 112px 0 0;
+
+	@media screen and (max-width: 1020px) {
+		padding: 209px 0 0;
+	}
+
+	@media screen and (max-width: 450px) {
+		padding: 261px 0 0;
+	}
 `;
 
 export const PromAll = () => {

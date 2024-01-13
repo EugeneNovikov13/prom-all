@@ -36,6 +36,7 @@ export const NavigationMenu = styled(NavigationMenuContainer)`
 	& ul {
 		display: flex;
 		justify-content: space-around;
+		gap: 5px;
 		margin: 0;
 		padding: 0;
 	}

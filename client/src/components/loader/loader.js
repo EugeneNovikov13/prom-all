@@ -29,7 +29,7 @@ export const Loader = styled(LoaderContainer)`
 		max-width: 200px;
 		border-radius: 3px;
 		fill: none;
-		stroke: var(--brand-blue);
+		stroke: var(--light);
 		stroke-linecap: round;
 		stroke-width: 12%
 	}
