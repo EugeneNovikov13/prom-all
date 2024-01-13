@@ -35,6 +35,7 @@ export const MenuLink = styled(MenuLinkContainer)`
 		height: 100%;
 		align-items: center;
 		justify-content: center;
+		white-space: nowrap;
 		color: ${({ isActive }) => (isActive ? '#FF7F00' : '#cac4d0')};
 	}
 

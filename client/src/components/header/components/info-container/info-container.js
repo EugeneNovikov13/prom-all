@@ -16,4 +16,9 @@ export const InfoContainer = styled(InfoContainerContainer)`
 	display: flex;
 	align-items: center;
 	gap: 16px;
+
+	@media screen and (max-width: 1020px) {
+		flex-direction: column;
+		gap: 2px;
+	}
 `;
