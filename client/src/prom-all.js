@@ -41,6 +41,10 @@ const Page = styled.div`
 	@media screen and (max-width: 450px) {
 		padding: 261px 0 0;
 	}
+
+	@media screen and (max-device-height: 1000px) {
+		padding: 0;
+	}
 `;
 
 export const PromAll = () => {

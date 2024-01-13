@@ -7,7 +7,7 @@ const MainContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<h1 style={{textAlign: 'center'}}>ГЛАВНАЯ</h1>
-			<img src={banner} alt='-' />
+			<img className='banner' src={banner} alt='-' />
 			<div>
 				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut beatae delectus dolor doloribus
 					dolorum hic labore laboriosam libero omnis perferendis quo, quod saepe sequi tempora tempore tenetur
@@ -99,7 +99,7 @@ export const Main = styled(MainContainer)`
 	flex-direction: column;
 	width: 100%;
 
-	& img {
+	& img.banner {
 		width: 100%;
 		height: 100%;
 	}

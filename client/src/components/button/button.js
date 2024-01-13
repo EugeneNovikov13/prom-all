@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ButtonContainer = ({ className, children, ...props }) => {
+const ButtonContainer = ({ className, children, type, isDisable, onClick }) => {
 	return (
-		<button className={className} {...props}>
+		<button className={className} type={type} disabled={isDisable} onClick={onClick}>
 			{children}
 		</button>
 	);
@@ -28,7 +28,7 @@ export const Button = styled(ButtonContainer)`
 	background-color: ${({ backgroundColor }) =>
 		backgroundColor ? backgroundColor : '#F8FCFF'};
 
-	filter: ${({ isDisable }) => (isDisable ? 'brightness(0.9)' : '')};
+	filter: ${({ isDisable }) => (isDisable ? 'brightness(0.5)' : '')};
 
 	&:hover {
 		cursor: ${({ isDisable }) => (isDisable ? '' : 'pointer')};

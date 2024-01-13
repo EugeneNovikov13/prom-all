@@ -32,10 +32,13 @@ export const Header = styled(HeaderContainer)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: var(--dark);
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 	color: var(--white);
-	z-index: 1000;
+	z-index: 100;
+
+	@media screen and (max-device-height: 1000px)  {
+		position: relative;
+	}
 
 	& div.first-line {
 		display: flex;
@@ -43,7 +46,7 @@ export const Header = styled(HeaderContainer)`
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
-		background: #171717;
+		background: rgba(23, 23, 23, 0.8);
 
 		& div.header-top-wrapper {
 			max-width: 1200px;
@@ -61,7 +64,7 @@ export const Header = styled(HeaderContainer)`
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
-		background: #171717;
+		background: rgba(23, 23, 23, 0.8);
 
 		& div.header-bottom-wrapper {
 			max-width: 1200px;
