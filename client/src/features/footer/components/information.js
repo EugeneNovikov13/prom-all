@@ -1,4 +1,4 @@
-import { Icon } from '../../icon/icon';
+import { Icon } from '../../../components';
 import cell from '../assets/cell.svg';
 import email from '../assets/email.svg';
 import location from '../assets/location.svg';

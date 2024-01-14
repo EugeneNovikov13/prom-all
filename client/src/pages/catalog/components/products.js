@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Product } from './product';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { SearchedProducts } from './searched-products';
-import { Loader } from '../../../components';
+import { Loader } from '../../../widgets';
 
 export const Products = () => {
 	const [inputValue, setInputValue] = useState('');

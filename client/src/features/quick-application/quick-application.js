@@ -2,23 +2,22 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useResetForm } from '../../hooks';
-import { H1 } from '../h1/h1';
-import { Input } from '../input/input';
-import { Textarea } from '../textarea/textarea';
-import { P } from '../p/p';
-import { Button } from '../button/button';
-import { ServerError } from '../server-error/server-error';
 import { quickApplicationFormSchema } from '../../settings';
 import styled from 'styled-components';
+import { Button, Captcha, H1, Input, P, ServerMessage, Textarea } from '../../components';
+import { sendQuickApplication } from '../../utils/send-quick-application';
 
 const QuickApplicationContainer = ({ className }) => {
 	const [serverError, setServerError] = useState(null);
-	const [isSuccess, setIsSuccess] = useState(false);
+	const [serverResponse, setServerResponse] = useState(null);
+	const [isCaptcha, setIsCaptcha] = useState(false);
 
 	const {
 		register,
 		reset,
 		handleSubmit,
+		getValues,
+		setError,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -31,28 +30,42 @@ const QuickApplicationContainer = ({ className }) => {
 		resolver: yupResolver(quickApplicationFormSchema),
 	});
 
-	useResetForm(reset, isSuccess);
+	const isSubmitted = serverError || serverResponse;
 
-	const onSubmit = ({ name, organization, email, phone, application }) => {
-		console.log({ name, organization, email, phone, application });
-		// setIsSuccess(true);
-		setServerError(`Не удалось отправить заявку`);
-		// request('/register', 'POST', { name, surname, email, password, image }).then(
-		// 	({ error, user }) => {
-		// 		if (error) {
-		// 			setServerError(`Не удалось отправить заявку: ${error}`);
-		// 			return;
-		// 		}
-		//
-		// 		dispatch(SET_USER);
-		// 		sessionStorage.setItem('userData', JSON.stringify(user));
-		// 	},
-		// );
+	useResetForm(reset, isSubmitted);
+
+	const onSubmit = () => {
+		setIsCaptcha(true);
+	};
+
+	const onCaptchaChange = (...args) => {
+		setIsCaptcha(false);
+
+		sendQuickApplication(...args).then(res => {
+			console.log(res);
+			setServerError(res.error);
+			setServerResponse(res.data);
+		});
+	};
+
+	const onCaptchaErrored = () => {
+		setIsCaptcha(false);
+		setError('captchaError', { message: 'Не пройдена проверка Captcha' });
+		setServerError(errors.captchaError.message);
+	};
+
+	const onCaptchaExpired = () => {
+		setIsCaptcha(false);
+		setError('captchaError', { message: 'Время проверки Captcha истекло' });
+		setServerError(errors.captchaError.message);
 	};
 
 	const onInputChange = () => {
 		setServerError(null);
+		setServerResponse(null);
 	};
+
+	const formData = getValues();
 
 	const formError =
 		errors?.name?.message ||
@@ -62,10 +75,10 @@ const QuickApplicationContainer = ({ className }) => {
 		errors?.application?.message;
 
 	return (
-		<div className={className}>
+		<section className={className}>
 			<form method="post" onSubmit={handleSubmit(onSubmit)}>
 				<div className="form-header">
-					<H1 color="#FFFFFF">Быстрая заявка</H1>
+					<H1 color="var(--white)">Быстрая заявка</H1>
 					<P>Заполните форму, ответим на все вопросы</P>
 				</div>
 				<div className="form-wrapper">
@@ -117,7 +130,10 @@ const QuickApplicationContainer = ({ className }) => {
 						})}
 					/>
 				</div>
-				{serverError && <ServerError>! {serverError}</ServerError>}
+				{serverError && (
+					<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
+				)}
+				{serverResponse && <ServerMessage>{serverResponse}</ServerMessage>}
 				<div className="form-footer">
 					<Button
 						width="1128px"
@@ -134,7 +150,13 @@ const QuickApplicationContainer = ({ className }) => {
 					</span>
 				</div>
 			</form>
-		</div>
+			<Captcha
+				onChange={(value) => onCaptchaChange(value, formData)}
+				// onErrored={onCaptchaErrored}
+				// onExpired={onCaptchaExpired}
+				isVisible={isCaptcha}
+			/>
+		</section>
 	);
 };
 

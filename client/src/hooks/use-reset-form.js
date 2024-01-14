@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
-export const useResetForm = (reset, isSuccess) => {
+export const useResetForm = (reset, isReadyToReset) => {
 	useEffect(() => {
-		if (isSuccess) {
+		if (isReadyToReset) {
 			reset();
 		}
-	}, [reset, isSuccess]);
+		console.log('useResetForm');
+	}, [reset, isReadyToReset]);
 };

@@ -1,6 +1,6 @@
-import accessTime from '../components/header/assets/access_time.svg';
-import email from '../components/header/assets/email.svg';
-import cell from '../components/header/assets/cell.svg';
+import accessTime from '../assets/access_time.svg';
+import email from '../assets/email.svg';
+import cell from '../assets/cell.svg';
 
 export const informationMenu = [
 	{ text: 'Пн-Пт 8:00-18:00', title: 'Время работы (Москва). ', iconURL: accessTime },

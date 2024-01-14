@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const adminRoutes = require('./routes/admin-routes');
+const applicationRoutes = require('./routes/application-routes');
 const promoRoutes = require('./routes/promo-routes');
 const brandRoutes = require('./routes/brand-routes');
 const productRoutes = require('./routes/product-routes');
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(adminRoutes);
+app.use(applicationRoutes);
 app.use(promoRoutes);
 app.use(brandRoutes);
 app.use(productRoutes);
