@@ -1,5 +1,4 @@
 export * from './button/button';
-export * from './captcha/captcha';
 export * from './error/error';
 export * from './h1/h1';
 export * from './icon/icon';

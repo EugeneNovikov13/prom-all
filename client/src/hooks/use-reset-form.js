@@ -5,6 +5,5 @@ export const useResetForm = (reset, isReadyToReset) => {
 		if (isReadyToReset) {
 			reset();
 		}
-		console.log('useResetForm');
 	}, [reset, isReadyToReset]);
 };
