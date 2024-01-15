@@ -1,6 +1,7 @@
 export * from './button/button';
 export * from './error/error';
 export * from './h1/h1';
+export * from './h2/h2';
 export * from './icon/icon';
 export * from './input/input';
 export * from './modal/modal';

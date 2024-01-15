@@ -33,9 +33,10 @@ export const Header = styled(HeaderContainer)`
 	align-items: center;
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 	color: var(--white);
+	backdrop-filter: blur(2px);
 	z-index: 100;
 
-	@media screen and (max-device-height: 1000px)  {
+	@media screen and (max-device-height: 1000px) {
 		position: relative;
 	}
 
