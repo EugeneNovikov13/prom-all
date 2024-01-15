@@ -64,7 +64,7 @@ const QuickApplicationContainer = ({ className }) => {
 		errors?.application?.message;
 
 	return (
-		<section className={className}>
+		<section className={className} id="quick_application_section">
 			<form method="post" onSubmit={handleSubmit(onSubmit)}>
 				<FormHeader />
 				<FormInputs
@@ -92,7 +92,7 @@ const QuickApplicationContainer = ({ className }) => {
 
 export const QuickApplication = styled(QuickApplicationContainer)`
 	display: flex;
-	max-width: 1920px;
+	max-width: 100%;
 	padding: 160px 0;
 	flex-direction: column;
 	align-items: center;

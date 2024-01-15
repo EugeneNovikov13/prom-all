@@ -18,7 +18,7 @@ export const Search = styled(SearchContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-bottom: 2px solid rgba(23, 23, 23, 1);
+	border-bottom: 2px solid rgba(23, 23, 23, 0);
 	border-radius: 23px;
 	color: #cac4d0;
 	transition: flex 0.5s ease-out;

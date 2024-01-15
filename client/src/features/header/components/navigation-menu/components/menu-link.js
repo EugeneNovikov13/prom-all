@@ -16,7 +16,7 @@ export const MenuLink = styled(MenuLinkContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-bottom: 2px solid rgba(23, 23, 23, 1);
+	border-bottom: 2px solid rgba(23, 23, 23, 0);
 	border-radius: 23px;
 
 	${({ isActive }) => (isActive ? '&::after' : '')} {

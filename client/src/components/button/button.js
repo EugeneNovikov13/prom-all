@@ -1,19 +1,42 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ButtonContainer = ({ className, children, type, isDisable, onClick }) => {
+const ButtonContainer = ({ className, children, link, type, isDisable, onClick }) => {
 	return (
-		<button className={className} type={type} disabled={isDisable} onClick={onClick}>
-			{children}
-		</button>
+		<>
+			{link ? (
+				//кнопка обёрнута ссылкой, принимающей адрес через пропсы
+				<Link to={link}>
+					<button
+						className={className}
+						type={type}
+						disabled={isDisable}
+						onClick={onClick}
+					>
+						{children}
+					</button>
+				</Link>
+			) : (
+				<button
+					className={className}
+					type={type}
+					disabled={isDisable}
+					onClick={onClick}
+				>
+					{children}
+				</button>
+			)}
+		</>
 	);
 };
 
 export const Button = styled(ButtonContainer)`
 	align-self: stretch;
 	border-radius: 140px;
-	font-family: Inter,sans-serif;
+	font-family: Inter, sans-serif;
 	font-style: normal;
 	font-weight: 500;
+	min-width: 300px;
 
 	border: ${({ border }) => (border ? border : 'none')};
 
@@ -32,9 +55,5 @@ export const Button = styled(ButtonContainer)`
 
 	&:hover {
 		cursor: ${({ isDisable }) => (isDisable ? '' : 'pointer')};
-	}
-
-	@media (max-width: 480px) {
-		max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : '')};
 	}
 `;
