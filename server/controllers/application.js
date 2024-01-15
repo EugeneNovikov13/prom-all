@@ -1,18 +1,17 @@
 const reCaptchaTest = require('../helpers/recaptcha-test');
+const mailService = require('../services/mail-service');
 
-async function sendApplication({ formData, captchaToken }) {
+async function handleQuickApplication({ formData, captchaToken }) {
 	const captchaTestResult = await reCaptchaTest(captchaToken, process.env.RECAPTCHA_SECRET_KEY);
 
 	if (!captchaTestResult) {
 		throw new Error('Проверка reCaptcha не пройдена');
 	}
 
-	console.log('FORM-DATA: ', formData);
-	//здесь запускать отправку письма на почту
-
-	return captchaTestResult;
+	//здесь отправляем письмо на почту
+	await mailService.sendQuickApplication(formData);
 }
 
 module.exports = {
-	sendApplication,
+	sendApplication: handleQuickApplication,
 };
