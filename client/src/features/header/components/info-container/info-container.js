@@ -1,5 +1,5 @@
 import { InfoSection } from './components/info-section';
-import { informationMenu } from '../../../../constants/information-menu';
+import { informationMenu } from '../../constants/information-menu';
 import styled from 'styled-components';
 
 const InfoContainerContainer = ({ className }) => {

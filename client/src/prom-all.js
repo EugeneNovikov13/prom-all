@@ -11,7 +11,8 @@ import {
 	Registration,
 	Sections,
 } from './pages';
-import { Error, Footer, Header, Modal } from './components';
+import { Error, Modal } from './components';
+import { Footer, Header } from './features';
 import { ERROR } from './constants';
 import styled from 'styled-components';
 import { useFetchUserQuery } from './store/services';

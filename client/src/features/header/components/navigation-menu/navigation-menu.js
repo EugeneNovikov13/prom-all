@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MenuLink } from './components/menu-link';
-import { navigationMenu } from '../../../../constants';
 import { getRouteFromFullLocation } from '../../../../utils';
 import styled from 'styled-components';
+import { menuList } from '../../constants/menu-list';
 
 const NavigationMenuContainer = ({ className }) => {
 	const location = useLocation();
@@ -17,7 +17,7 @@ const NavigationMenuContainer = ({ className }) => {
 	return (
 		<nav className={className}>
 			<ul>
-				{navigationMenu.map(({ title, link }) => (
+				{menuList.map(({ title, link }) => (
 					<MenuLink
 						key={title}
 						title={title}

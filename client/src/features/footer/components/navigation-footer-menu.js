@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { navigationMenu } from '../../../constants';
-import { Icon } from '../../icon/icon';
+import { Icon } from '../../../components';
+import { menuList } from '../constants/menu-list';
 import styled from 'styled-components';
 
 const NavigationFooterMenuContainer = ({ className }) => {
 	return (
 		<nav className={className}>
 			<ul>
-				{navigationMenu.map(({ title, link, iconURL }, ind) => (
+				{menuList.map(({ title, link, iconURL }, ind) => (
 					<li className={className} key={ind}>
 						<Link to={link}>
 							<Icon width="18px" iconSrc={iconURL} isActive={true} />

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Logo } from '../logo/logo';
+import { InfoContainer, NavigationMenu, Search } from './components';
+import { Logo } from '../../widgets';
 import styled from 'styled-components';
-import { InfoContainer, NavigationMenu } from './components';
-import { Search } from '../search/search';
 
 const HeaderContainer = ({ className }) => {
 	return (

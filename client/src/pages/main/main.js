@@ -1,6 +1,6 @@
+import { QuickApplication } from '../../features';
 import banner from '../../assets/banner.svg'
 import styled from 'styled-components';
-import { QuickApplication } from '../../components';
 
 const MainContainer = ({ className }) => {
 

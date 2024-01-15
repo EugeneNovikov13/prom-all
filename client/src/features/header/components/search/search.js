@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Icon } from '../icon/icon';
+import { Icon } from '../../../../components';
 import searchLoup from './assets/search-loup.svg';
+import styled from 'styled-components';
 
 const SearchContainer = ({ className }) => {
 	return (

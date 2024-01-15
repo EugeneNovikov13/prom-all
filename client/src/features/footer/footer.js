@@ -1,8 +1,8 @@
-import { Logo } from '../logo/logo';
+import { Link } from 'react-router-dom';
 import { NavigationFooterMenu } from './components/navigation-footer-menu';
 import { Information } from './components/information';
+import { Logo } from '../../widgets';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const FooterContainer = ({ className }) => {
 	return (

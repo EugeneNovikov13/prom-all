@@ -1,5 +1,5 @@
 import { copyTextToClipboard } from '../../../../../utils';
-import { Icon } from '../../../../icon/icon';
+import { Icon } from '../../../../../components';
 import styled from 'styled-components';
 
 const InfoSectionContainer = ({ className, text, title, iconURL }) => {
