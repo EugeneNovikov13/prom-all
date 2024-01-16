@@ -5,11 +5,12 @@ const FormFooterContainer = ({ className, formError, captchaToken }) => {
 	return (
 		<div className={className}>
 			<Button
-				width="1128px"
+				width="100%"
 				height="60px"
-				backgroundColor="#FF7F00"
+				background="#FF7F00"
 				type="submit"
 				isDisable={!!formError || !captchaToken}
+				hoverBoxShadow={true}
 			>
 				Отправить сообщение<sup>*</sup>
 			</Button>
