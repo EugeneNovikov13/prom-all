@@ -12,7 +12,7 @@ import {
 	Sections,
 } from './pages';
 import { Error, Modal } from './components';
-import { Footer, Header } from './features';
+import { Footer, Header } from './widgets';
 import { ERROR } from './constants';
 import styled from 'styled-components';
 
