@@ -1,4 +1,4 @@
-import { Categories, Promotions, QuickApplication } from '../../features';
+import { Categories, Promotions, QuickApplication } from '../../widgets';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
