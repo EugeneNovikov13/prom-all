@@ -18,7 +18,7 @@ export const Logo = styled(LogoContainer)`
 	gap: 6px;
 	padding: 2px 0;
 
-	& :hover {
+	&:hover {
 		cursor: pointer;
 	}
 `;

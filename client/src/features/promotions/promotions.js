@@ -9,14 +9,15 @@ import styled from 'styled-components';
 const PromotionsContainer = ({ className }) => {
 	const { data: promos, isLoading } = useFetchAllPromoQuery();
 
+
+
 	return (
-		<div className={className}>
+		<section className={className}>
 			{isLoading ? (
 				<Loader />
 			) : (
 				<Splide
 					aria-label="Промо-акции"
-					tag="section"
 					options={promoSliderConfig}
 				>
 					{promos.map(({ id, title, content, background }) => (
@@ -30,8 +31,14 @@ const PromotionsContainer = ({ className }) => {
 					))}
 				</Splide>
 			)}
-		</div>
+		</section>
 	);
 };
 
-export const Promotions = styled(PromotionsContainer)``;
+export const Promotions = styled(PromotionsContainer)`
+	ul.splide__pagination {
+		display: flex;
+		gap: 5px;
+		padding-bottom: 10px;
+	}
+`;

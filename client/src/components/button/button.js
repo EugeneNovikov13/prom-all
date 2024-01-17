@@ -39,24 +39,26 @@ export const Button = styled(ButtonContainer)`
 	white-space: nowrap;
 	outline: none;
 
-	border: ${({ border }) => (border ? border : 'none')};
-
 	width: ${({ width }) => width};
 
 	height: ${({ height }) => (height ? height : '56px')};
+
+	border: ${({ border }) => (border ? border : 'none')};
 
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : '18px')};
 
 	color: ${({ color }) => (color ? color : '#111')};
 
-	background: ${({ background }) =>
-		background ? background : '#F8FCFF'};
+	background: ${({ background }) => background};
 
 	filter: ${({ isDisable }) => (isDisable ? 'brightness(0.5)' : '')};
 
 	&:hover {
 		cursor: ${({ isDisable }) => (isDisable ? '' : 'pointer')};
-		box-shadow: ${({ isDisable, hoverBoxShadow }) => (isDisable || !hoverBoxShadow ? '' : '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset')};
+		box-shadow: ${({
+						   isDisable,
+						   hoverBoxShadow
+					   }) => (isDisable || !hoverBoxShadow ? '' : '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset')};
 	}
 
 	&:active {

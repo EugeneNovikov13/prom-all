@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { useFetchUserQuery } from './store/services';
 import {
 	About,
 	Administration,
@@ -31,7 +30,7 @@ const AppColumn = styled.div`
 `;
 
 const Page = styled.div`
-	max-width: 100vw;
+	max-width: 100%;
 	min-height: 60vh;
 	padding: 112px 0 0;
 
@@ -49,10 +48,6 @@ const Page = styled.div`
 `;
 
 export const PromAll = () => {
-	//так получаем данные авторизации администратора после перезагрузки приложения
-	//проверяется наличие и проверка токена
-	useFetchUserQuery();
-
 	return (
 		<AppColumn>
 			<Header />
