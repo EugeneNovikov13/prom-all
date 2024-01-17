@@ -3,6 +3,7 @@ export * from './h1/h1';
 export * from './h2/h2';
 export * from './h4/h4';
 export * from './icon/icon';
+export * from './image/image';
 export * from './loader/loader';
 export * from './logo/logo';
 export * from './modal/modal';

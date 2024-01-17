@@ -22,7 +22,7 @@ const CategoriesContainer = ({ className }) => {
 		}
 	};
 
-	const onMouseLeave = title => {
+	const onMouseLeave = () => {
 		setOpenCardTitle('');
 	};
 
@@ -42,6 +42,7 @@ const CategoriesContainer = ({ className }) => {
 					{catalog.map(({ id, title, image, subcategories }) => (
 						<ProductCard
 							key={id}
+							id={id}
 							title={title}
 							SvgIconComponent={image}
 							subcategories={subcategories}

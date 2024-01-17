@@ -2,20 +2,18 @@ import { ReactComponent as Arrow } from '../assets/north_east.svg';
 import { Button } from '../../../features';
 import styled from 'styled-components';
 
-const SubcategoriesCardContainer = ({ className, SvgIconComponent, subcategories }) => {
+const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 	const firstFiveSubcategories = subcategories.slice(0, 5);
 
 	const isMoreThenFiveSubcategories = subcategories.length > 5;
 
 	return (
 		<div className={className}>
-			<div className="image">
-				<SvgIconComponent className="icon" />
-			</div>
 			<ul className="sections-list">
 				{firstFiveSubcategories.map(({ id, title, shortTitle }) => (
 					<li key={id} className="section-button">
 						<Button
+							link={`/catalog/section/${id}`}
 							width="calc(100% + 24px)"
 							height="48px"
 							fontSize="20px"
@@ -29,20 +27,27 @@ const SubcategoriesCardContainer = ({ className, SvgIconComponent, subcategories
 				))}
 			</ul>
 			{isMoreThenFiveSubcategories && (
-				<Button
-					width="277px"
-					height="48px"
-					border="1px solid #938F99"
-					fontSize="20px"
-					color="#FFD4BC"
-					background="transparent"
-					activeBackground=""
-				>
-					<Arrow
-						style={{ position: 'relative', top: '2px', marginRight: '8px' }}
-					/>
-					Все товары
-				</Button>
+				<div className="category-link">
+					<Button
+						link={`/catalog/section/${id}`}
+						width="210px"
+						height="48px"
+						border="1px solid #938F99"
+						fontSize="20px"
+						color="#FFD4BC"
+						background="transparent"
+						activeBackground="rgba(208, 188, 255, 0.08)"
+					>
+						<Arrow
+							style={{
+								position: 'relative',
+								top: '2px',
+								marginRight: '8px',
+							}}
+						/>
+						Все товары
+					</Button>
+				</div>
 			)}
 		</div>
 	);
@@ -60,23 +65,6 @@ export const SubcategoriesCard = styled(SubcategoriesCardContainer)`
 	flex-shrink: 0;
 	border-radius: 8px;
 	background: var(--brand-blue);
-
-	& div.image {
-		position: absolute;
-		top: -80px;
-		left: 50px;
-		display: flex;
-		max-width: 219px;
-		max-height: 150px;
-		flex-direction: column;
-		justify-content: flex-end;
-		align-items: center;
-		flex-shrink: 0;
-
-		& svg.icon * {
-			stroke: var(--brand-orange);
-		}
-	}
 
 	& ul.sections-list {
 		display: flex;
@@ -104,6 +92,18 @@ export const SubcategoriesCard = styled(SubcategoriesCardContainer)`
 			&:active {
 				background-color: rgba(208, 188, 255, 0.12);
 			}
+		}
+	}
+
+	& div.category-link {
+		border-radius: 100px;
+
+		&:hover {
+			background-color: rgba(208, 188, 255, 0.08);
+		}
+
+		&:active {
+			background-color: rgba(208, 188, 255, 0.12);
 		}
 	}
 `;
