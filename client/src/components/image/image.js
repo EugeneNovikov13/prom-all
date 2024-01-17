@@ -29,7 +29,7 @@ export const Image = styled(ImageContainer)`
 
 	& svg.product-card-icon * {
 		stroke: ${({ strokeColor }) => strokeColor};
-		transition: 0.3s;
+		transition: ${({ transition }) => (transition ? transition : '0.3s')};
 	}
 
 	& svg.product-card-icon:hover * {

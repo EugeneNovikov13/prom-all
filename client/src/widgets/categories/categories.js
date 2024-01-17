@@ -46,7 +46,7 @@ const CategoriesContainer = ({ className }) => {
 							title={title}
 							SvgIconComponent={image}
 							subcategories={subcategories}
-							isOpen={openCardTitle === title}
+							openCardTitle={openCardTitle}
 							onClick={() => onClick(refDebounceTimeout, title)}
 							onMouseEnter={() => onMouseEnter(refDebounceTimeout, title)}
 							onMouseLeave={() => debouncedOnMouseLeave(title)}
