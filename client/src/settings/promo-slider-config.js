@@ -9,4 +9,12 @@ export const promoSliderConfig = {
 	interval: 5000,
 	pauseOnHover: true,
 	pauseOnFocus: true,
+	classes: {
+		arrows: 'splide__arrows',
+		arrow : 'splide__arrow',
+		prev  : 'splide__arrow--prev',
+		next  : 'splide__arrow--next',
+		pagination: 'splide__pagination', // container
+		page      : 'splide__pagination__page', // each button
+	},
 };

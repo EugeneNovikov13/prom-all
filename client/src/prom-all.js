@@ -15,7 +15,6 @@ import { Error, Modal } from './components';
 import { Footer, Header } from './features';
 import { ERROR } from './constants';
 import styled from 'styled-components';
-import { useFetchUserQuery } from './store/services';
 
 const AppColumn = styled.div`
 	width: 100%;
@@ -31,8 +30,8 @@ const AppColumn = styled.div`
 `;
 
 const Page = styled.div`
-	max-width: 100vw;
-	min-height: 453px;
+	max-width: 100%;
+	min-height: 60vh;
 	padding: 112px 0 0;
 
 	@media screen and (max-width: 1020px) {
@@ -49,11 +48,6 @@ const Page = styled.div`
 `;
 
 export const PromAll = () => {
-	//так получаем данные авторизации администратора после перезагрузки приложения
-	//проверяется наличие и проверка токена
-	const {data} = useFetchUserQuery();
-	console.log(data);
-
 	return (
 		<AppColumn>
 			<Header />

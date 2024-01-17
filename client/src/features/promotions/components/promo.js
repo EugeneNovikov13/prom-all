@@ -1,6 +1,6 @@
+import { HashLink } from 'react-router-hash-link';
 import { Button, H2 } from '../../../components';
 import styled from 'styled-components';
-import { HashLink } from 'react-router-hash-link';
 
 const PromoContainer = ({ className, title, content }) => {
 	return (
@@ -19,7 +19,8 @@ const PromoContainer = ({ className, title, content }) => {
 							width="300px"
 							height="48px"
 							fontSize="20px"
-							backgroundColor="var(--brand-orange)"
+							background="var(--brand-orange)"
+							hoverBoxShadow={true}
 						>
 							Купить
 						</Button>

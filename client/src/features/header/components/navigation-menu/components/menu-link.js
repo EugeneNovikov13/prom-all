@@ -1,10 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Button } from '../../../../../components';
 import styled from 'styled-components';
 
-const MenuLinkContainer = ({ className, title, link }) => {
+const MenuLinkContainer = ({ className, title, link, isActive }) => {
 	return (
 		<li className={className}>
-			<Link to={link}>{title}</Link>
+			<Button
+				link={link}
+				width="100%"
+				height="100%"
+				color={isActive ? '#FF7F00' : '#cac4d0'}
+				background={'inherit'}
+				hoverBoxShadow={false}
+				activeBackground='#3C3A3FFF'
+			>
+				{title}
+			</Button>
 		</li>
 	);
 };
@@ -30,13 +40,8 @@ export const MenuLink = styled(MenuLinkContainer)`
 	}
 
 	& a {
-		display: flex;
 		width: 100%;
 		height: 100%;
-		align-items: center;
-		justify-content: center;
-		white-space: nowrap;
-		color: ${({ isActive }) => (isActive ? '#FF7F00' : '#cac4d0')};
 	}
 
 	&:hover {

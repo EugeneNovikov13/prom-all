@@ -1,12 +1,24 @@
+import { ReactComponent as Heaters } from '../assets/calorifer.svg';
+import {ReactComponent as Crane } from '../assets/crane-equipment.svg';
+import {ReactComponent as Motors } from '../assets/electro-motors.svg';
+import {ReactComponent as Fittings } from '../assets/fittings.svg';
+import {ReactComponent as Gpo } from '../assets/gpo.svg';
+import {ReactComponent as High } from '../assets/high-voltage.svg';
+import {ReactComponent as Nva } from '../assets/nva.svg';
+import {ReactComponent as Pumps } from '../assets/pumps.svg';
+import {ReactComponent as Gears } from '../assets/reductors.svg';
+import {ReactComponent as Fans } from '../assets/ventilators.svg';
+
 export const catalog = [
 	{
 		"id": "658aa910cd634ef7ce80f1c6",
 		"title": "Электрощитовое оборудование",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog1.png",
+		"image": High,
 		"subcategories": [
 			{
 				"id": "658aa910cd634ef7ce80f1c7",
 				"title": "Вводно-распределительные устройства ВРУ",
+				"shortTitle": "ВРУ",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/electrika1.jpg"
 			},
 			{
@@ -39,7 +51,7 @@ export const catalog = [
 	{
 		"id": "658aac81cd634ef7ce80f1ce",
 		"title": "Низковольтная аппаратура",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog2.png",
+		"image": Nva,
 		"subcategories": [
 			{
 				"id": "658aac81cd634ef7ce80f1cf",
@@ -49,11 +61,13 @@ export const catalog = [
 			{
 				"id": "658aac81cd634ef7ce80f1d0",
 				"title": "Автоматические выключатели",
+				"shortTitle": "Авт. выключатели",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/avtomat8.jpg"
 			},
 			{
 				"id": "658aac81cd634ef7ce80f1d1",
 				"title": "Выключатели конечные (путевые)",
+				"shortTitle": "Выключатели конечные",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/VK200.jpg"
 			},
 			{
@@ -133,7 +147,7 @@ export const catalog = [
 	{
 		"id": "658aad8ecd634ef7ce80f1e1",
 		"title": "Редукторы",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog3.png",
+		"image": Gears,
 		"subcategories": [
 			{
 				"id": "658aad8ecd634ef7ce80f1e2",
@@ -147,7 +161,7 @@ export const catalog = [
 			},
 			{
 				"id": "658aad8ecd634ef7ce80f1e4",
-				"title": "Редукторы циллиндрические",
+				"title": "Редукторы цилиндрические",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/reduct2.jpg"
 			},
 			{
@@ -160,7 +174,7 @@ export const catalog = [
 	{
 		"id": "658aaf54cd634ef7ce80f1e7",
 		"title": "Запорная арматура",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog4.png",
+		"image": Fittings,
 		"subcategories": [
 			{
 				"id": "658aaf54cd634ef7ce80f1e8",
@@ -170,6 +184,7 @@ export const catalog = [
 			{
 				"id": "658aaf54cd634ef7ce80f1e9",
 				"title": "Запорные устройства указателей уровня",
+				"shortTitle": "Запорные устройства",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/zaporn.jpg"
 			},
 			{
@@ -192,7 +207,7 @@ export const catalog = [
 	{
 		"id": "658ab0abcd634ef7ce80f1ee",
 		"title": "Насосы",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog5.png",
+		"image": Pumps,
 		"subcategories": [
 			{
 				"id": "658ab0abcd634ef7ce80f1ef",
@@ -200,9 +215,9 @@ export const catalog = [
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos7.jpg"
 			},
 			{
-				"id": "658ab0abcd634ef7ce80f1f0",
-				"title": "Насосы консольно-моноблочные",
-				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos6.jpg"
+				"id": "658ab0abcd634ef7ce80f1f5",
+				"title": "Насосы сточно-массовые",
+				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos11.jpg"
 			},
 			{
 				"id": "658ab0abcd634ef7ce80f1f1",
@@ -225,16 +240,16 @@ export const catalog = [
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos2.jpg"
 			},
 			{
-				"id": "658ab0abcd634ef7ce80f1f5",
-				"title": "Насосы сточно-массовые",
-				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos11.jpg"
-			}
+				"id": "658ab0abcd634ef7ce80f1f0",
+				"title": "Насосы консольно-моноблочные",
+				"image": "http://prom-all.com/wp-content/uploads/2015/08/nasos6.jpg"
+			},
 		]
 	},
 	{
 		"id": "658ab118cd634ef7ce80f1f7",
 		"title": "Электродвигатели",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog6.png",
+		"image": Motors,
 		"subcategories": [
 			{
 				"id": "658ab118cd634ef7ce80f1f8",
@@ -244,11 +259,12 @@ export const catalog = [
 			{
 				"id": "658ab118cd634ef7ce80f1f9",
 				"title": "Электродвигатели крановые серии МTF, MTH",
+				"shortTitle": "Крановые серии МTF, MTH",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/102_pic.jpg"
 			},
 			{
 				"id": "658ab118cd634ef7ce80f1fa",
-				"title": "Электродвигатель АИМ",
+				"title": "Взрывозащищённые АИМ",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/aim.jpg"
 			}
 		]
@@ -256,7 +272,7 @@ export const catalog = [
 	{
 		"id": "658ab195411e16f5136ee8bd",
 		"title": "Вентиляционное оборудование",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog7.png",
+		"image": Fans,
 		"subcategories": [
 			{
 				"id": "6589b0067d4f83f1dfcaa231",
@@ -283,11 +299,11 @@ export const catalog = [
 	{
 		"id": "658ab1e8cd634ef7ce80f1fc",
 		"title": "Калориферы и воздухонагреватели",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog8.png",
+		"image": Heaters,
 		"subcategories": [
 			{
 				"id": "658ab1e8cd634ef7ce80f1fd",
-				"title": "Калориферы КСк",
+				"title": "Калориферы КСК",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/kalor.jpg"
 			}
 		]
@@ -295,7 +311,7 @@ export const catalog = [
 	{
 		"id": "658ab25ccd634ef7ce80f1ff",
 		"title": "Грузоподьемное оборудование",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog9.png",
+		"image": Gpo,
 		"subcategories": [
 			{
 				"id": "658ab25ccd634ef7ce80f200",
@@ -312,11 +328,12 @@ export const catalog = [
 	{
 		"id": "658ab3b3cd634ef7ce80f203",
 		"title": "Крановое оборудование",
-		"image": "http://prom-all.com/wp-content/uploads/2015/08/catalog10.png",
+		"image": Crane,
 		"subcategories": [
 			{
 				"id": "658ab3b3cd634ef7ce80f204",
 				"title": "Толкатели электрогидравлические",
+				"shortTitle": "Электрогидротолкатели",
 				"image": "http://prom-all.com/wp-content/uploads/2015/08/tolkatel.jpg"
 			},
 			{
