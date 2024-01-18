@@ -10,11 +10,13 @@ const ProductCardContainer = ({
 	SvgIconComponent,
 	image,
 	subcategories,
-	isOpen,
+	openCardTitle,
 	onClick,
 	onMouseEnter,
 	onMouseLeave,
 }) => {
+	const isOpen = openCardTitle === title;
+
 	const CategoryCard = isOpen ? (
 		<SubcategoriesCard subcategories={subcategories} id={id} />
 	) : (
@@ -46,18 +48,25 @@ const ProductCardContainer = ({
 export const ProductCard = styled(ProductCardContainer)`
 	position: relative;
 	display: flex;
-	width: ${({ isOpen }) => (isOpen ? '316px' : '210px')};
+	width: ${({ openCardTitle, title }) =>
+		openCardTitle === title ? 316 : openCardTitle ? 210 : 217}px;
 	height: 340px;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
 	border-radius: 8px;
 	background: var(--white);
-	transition: box-shadow 1.3s;
+	transition:
+		width 0.3s,
+		box-shadow 0.3s;
 
-	padding-top: ${({ isOpen }) => (isOpen ? 0 : 208)}px;
+	padding-top: ${({ openCardTitle, title }) => (openCardTitle === title ? 0 : 208)}px;
 
 	&:hover {
 		box-shadow: 0 8px 14px 0 #16306b;
+
+		& svg.product-card-icon * {
+			stroke: var(--brand-orange);
+		}
 	}
 `;

@@ -19,7 +19,7 @@ export const Image = styled(ImageContainer)`
 	transition: top 0.3s;
 
 	position: ${({ position }) => position};
-	top: ${({ top }) => top}px;
+	${({ top }) => 'top: ' + top + 'px'};
 	max-width: ${({ maxWidth }) => maxWidth}px;
 	max-height: ${({ maxHeight }) => maxHeight}px;
 
@@ -29,7 +29,7 @@ export const Image = styled(ImageContainer)`
 
 	& svg.product-card-icon * {
 		stroke: ${({ strokeColor }) => strokeColor};
-		transition: 0.3s;
+		transition: ${({ transition }) => (transition ? transition : '0.3s')};
 	}
 
 	& svg.product-card-icon:hover * {

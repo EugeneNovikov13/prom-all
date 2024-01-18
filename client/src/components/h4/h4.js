@@ -7,7 +7,7 @@ const H4Container = ({ className, children }) => (
 export const H4 = styled(H4Container)`
 	margin: 0;
 	font-family: Inter, sans-serif;
-	font-size: 20px;
+	font-size: ${({ fontSize }) => (fontSize ? fontSize : '20')}px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 24px;
