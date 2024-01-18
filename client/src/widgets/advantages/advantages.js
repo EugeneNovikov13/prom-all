@@ -30,7 +30,8 @@ const AdvantagesContainer = ({ className }) => {
 export const Advantages = styled(AdvantagesContainer)`
 	display: flex;
 	width: 100%;
-	padding: 160px 0;
+	min-height: 786px;
+	padding: 130px 0;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -39,7 +40,7 @@ export const Advantages = styled(AdvantagesContainer)`
 	& div.advantages-container {
 		display: flex;
 		max-width: 1200px;
-		padding: 0 36px 114px 36px;
+		padding: 0 36px 88px 36px;
 		flex-direction: column;
 		align-items: center;
 		gap: 40px;
@@ -53,7 +54,6 @@ export const Advantages = styled(AdvantagesContainer)`
 
 		& div.advantages-body {
 			display: flex;
-			height: 350px;
 			justify-content: center;
 			align-items: flex-start;
 			align-content: flex-start;

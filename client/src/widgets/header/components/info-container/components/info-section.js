@@ -28,7 +28,6 @@ export const InfoSection = styled(InfoSectionContainer)`
 	gap: 8px;
 	align-self: stretch;
 	border-radius: 50px;
-	background: rgba(23, 23, 23, 1);
 	transition: 0.5s;
 
 	& div.icon-container {

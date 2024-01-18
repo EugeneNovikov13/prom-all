@@ -64,5 +64,9 @@ export const ProductCard = styled(ProductCardContainer)`
 
 	&:hover {
 		box-shadow: 0 8px 14px 0 #16306b;
+
+		& svg.product-card-icon * {
+			stroke: var(--brand-orange);
+		}
 	}
 `;

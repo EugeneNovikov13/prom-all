@@ -39,8 +39,16 @@ export const ClosedCard = styled(ClosedCardContainer)`
 		justify-content: center;
 		align-items: center;
 
+		& svg {
+			overflow: visible;
+		}
+
 		& svg > path {
 			fill: ${({ isHovered }) => (isHovered ? 'var(--white)' : '')};
+		}
+
+		& svg > g {
+			filter: ${({ isHovered }) => (isHovered ? 'blur(20px)' : '')};
 		}
 	}
 

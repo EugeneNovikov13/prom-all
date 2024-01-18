@@ -55,10 +55,11 @@ const CategoriesContainer = ({ className }) => {
 				</div>
 				<div className="categories-footer">
 					<Button
-						link="/catalog"
+						// link="/catalog"
 						width="360px"
 						height="56px"
 						border="2px solid var(--dark, #111)"
+						background='inherit'
 						activeBackground="#79747E"
 					>
 						Подробнее
@@ -109,6 +110,11 @@ export const Categories = styled(CategoriesContainer)`
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			border-radius: 100px;
+
+			&:hover {
+				background-color: rgba(103, 80, 164, 0.08);
+			}
 		}
 	}
 `;
