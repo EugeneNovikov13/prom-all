@@ -1,11 +1,12 @@
-import { H4, Image, P } from '../../../components';
+import { H4, Img, P } from '../../../components';
 import styled from 'styled-components';
 
-const OpenedCardContainer = ({ className, title, image, text }) => {
+const OpenedCardContainer = ({ className, title, image, text, onTouchEnd }) => {
 	return (
-		<div className={className}>
+		<div className={className} onTouchEnd={onTouchEnd}>
 			<div className="opened-card-image">
-				<Image
+				<Img
+					iconClassName="opened-card-icon"
 					SvgIconComponent={image}
 					maxWidth={150}
 					maxHeight={150}
@@ -15,7 +16,9 @@ const OpenedCardContainer = ({ className, title, image, text }) => {
 				<H4 fontSize={24} color="var(--white)">
 					{title}
 				</H4>
-				<P color={'#FFFFFFB3'} fontSize={'16px'}>{text}</P>
+				<P color={'#FFFFFFB3'} fontSize={'16px'}>
+					{text}
+				</P>
 			</div>
 		</div>
 	);
@@ -36,12 +39,12 @@ export const OpenedCard = styled(OpenedCardContainer)`
 		justify-content: center;
 		align-items: center;
 
-		& svg {
+		& svg.opened-card-icon {
 			overflow: visible;
 			transform: scale(1.4);
 		}
 
-		& svg > path {
+		& svg.opened-card-icon > path {
 			fill: var(--white);
 		}
 	}

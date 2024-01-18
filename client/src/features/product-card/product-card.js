@@ -1,4 +1,4 @@
-import { Image } from '../../components';
+import { Img } from '../../components';
 import { SubcategoriesCard } from './components/subcategories-card';
 import { ProductCardContent } from './components/product-card-content';
 import styled from 'styled-components';
@@ -30,15 +30,16 @@ const ProductCardContainer = ({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 		>
-			<Image
+			<Img
+				iconClassName="product-card-icon"
 				SvgIconComponent={SvgIconComponent}
 				image={image}
 				maxWidth={217}
 				maxHeight={150}
+				position={'absolute'}
+				top={isOpen ? '-80px' : '63px'}
 				strokeColor={isOpen ? 'var(--brand-orange)' : ''}
 				hoverStrokeColor={'var(--brand-orange)'}
-				position={'absolute'}
-				top={isOpen ? -80 : 63}
 			/>
 			{CategoryCard}
 		</div>
@@ -68,5 +69,18 @@ export const ProductCard = styled(ProductCardContainer)`
 		& svg.product-card-icon * {
 			stroke: var(--brand-orange);
 		}
+	}
+
+	& svg.product-card-icon {
+		z-index: 1;
+	}
+
+	& svg.product-card-icon * {
+		stroke: ${({ strokeColor }) => strokeColor};
+		transition: ${({ transition }) => (transition ? transition : '0.3s')};
+	}
+
+	& svg.product-card-icon:hover * {
+		stroke: ${({ hoverStrokeColor }) => hoverStrokeColor};
 	}
 `;

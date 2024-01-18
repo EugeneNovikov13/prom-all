@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const H4Container = ({ className, children }) => (
-	<h2 className={className}>{children}</h2>
+	<h4 className={className}>{children}</h4>
 );
 
 export const H4 = styled(H4Container)`

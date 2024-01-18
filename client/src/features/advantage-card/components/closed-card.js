@@ -1,12 +1,24 @@
 import { ReactComponent as Arrow } from '../assets/east.svg';
-import { H4, Image } from '../../../components';
+import { H4, Img } from '../../../components';
 import styled from 'styled-components';
 
-const ClosedCardContainer = ({ className, title, image, isHovered }) => {
+const ClosedCardContainer = ({
+	className,
+	title,
+	image,
+	isHovered,
+	onMouseEnter,
+	onMouseLeave,
+}) => {
 	return (
-		<div className={className}>
+		<div
+			className={className}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+		>
 			<div className="closed-card-image">
-				<Image
+				<Img
+					iconClassName="closed-card-icon"
 					SvgIconComponent={image}
 					maxWidth={100}
 					maxHeight={100}
@@ -39,15 +51,15 @@ export const ClosedCard = styled(ClosedCardContainer)`
 		justify-content: center;
 		align-items: center;
 
-		& svg {
+		& svg.closed-card-icon {
 			overflow: visible;
 		}
 
-		& svg > path {
+		& svg.closed-card-icon > path {
 			fill: ${({ isHovered }) => (isHovered ? 'var(--white)' : '')};
 		}
 
-		& svg > g {
+		& svg.closed-card-icon > g {
 			filter: ${({ isHovered }) => (isHovered ? 'blur(20px)' : '')};
 		}
 	}
