@@ -1,4 +1,5 @@
 export * from './advantages/advantages';
+export * from './brands/brands';
 export * from './categories/categories';
 export * from './footer/footer';
 export * from './header/header';

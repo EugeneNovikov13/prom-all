@@ -1,38 +1,39 @@
 import styled from 'styled-components';
 
-const ImageContainer = ({ className, SvgIconComponent, image }) => {
+const ImgContainer = ({ className, iconClassName, SvgIconComponent, image }) => {
 	return (
 		<div className={className}>
 			{SvgIconComponent ? (
-				<SvgIconComponent className="product-card-icon" />
+				<SvgIconComponent className={iconClassName} />
 			) : (
-				<img src={image} alt="Ошибка загрузки картинки" />
+				<img
+					src={image}
+					width="100%"
+					height="100%"
+					alt="Ошибка загрузки картинки"
+				/>
 			)}
 		</div>
 	);
 };
 
-export const Image = styled(ImageContainer)`
+export const Img = styled(ImgContainer)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	transition: top 0.3s;
 
 	position: ${({ position }) => position};
-	${({ top }) => 'top: ' + top + 'px'};
+	top: ${({ top }) => top};
 	max-width: ${({ maxWidth }) => maxWidth}px;
 	max-height: ${({ maxHeight }) => maxHeight}px;
 
-	& svg {
-		z-index: 1;
-	}
-
-	& svg.product-card-icon * {
+	& svg * {
 		stroke: ${({ strokeColor }) => strokeColor};
 		transition: ${({ transition }) => (transition ? transition : '0.3s')};
 	}
 
-	& svg.product-card-icon:hover * {
+	& svg:hover * {
 		stroke: ${({ hoverStrokeColor }) => hoverStrokeColor};
 	}
 `;

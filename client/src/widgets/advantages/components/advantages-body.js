@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { advantagesList } from '../constants/advantages-list';
 import { AdvantageCard } from '../../../features';
+import styled from 'styled-components';
 
 const AdvantagesBodyContainer = ({ className, openedCardId, setOpenedCardId }) => {
-	const onClick = (id) => {
+	const onClick = (e, id) => {
 		if (id === openedCardId) {
 			setOpenedCardId('');
 			return;
@@ -18,7 +18,7 @@ const AdvantagesBodyContainer = ({ className, openedCardId, setOpenedCardId }) =
 					key={advantage.id}
 					advantage={advantage}
 					isOpen={openedCardId === advantage.id}
-					onClick={() => onClick(advantage.id)}
+					onClick={e => onClick(e, advantage.id)}
 				/>
 			))}
 		</div>
@@ -33,5 +33,13 @@ export const AdvantagesBody = styled(AdvantagesBodyContainer)`
 	gap: 8px;
 	flex-wrap: wrap;
 	transition: 0.1s;
-	padding: ${({openedCardId}) => openedCardId? '0' : '0 68px'};
+	padding: ${({ openedCardId }) => (openedCardId ? '0' : '0 68px')};
+
+	@media (max-width: 530px) {
+		padding: ${({ openedCardId }) => (openedCardId ? '0' : '0 10px')};
+	}
+
+	@media (max-width: 430px) {
+		max-width: 320px;
+	}
 `;

@@ -55,11 +55,10 @@ const CategoriesContainer = ({ className }) => {
 				</div>
 				<div className="categories-footer">
 					<Button
-						// link="/catalog"
+						link="/catalog"
 						width="360px"
-						height="56px"
 						border="2px solid var(--dark, #111)"
-						background='inherit'
+						background="inherit"
 						activeBackground="#79747E"
 					>
 						Подробнее

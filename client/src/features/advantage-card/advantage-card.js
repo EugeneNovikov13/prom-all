@@ -5,23 +5,33 @@ import styled from 'styled-components';
 
 const AdvantageCardContainer = ({
 	className,
-	advantage: { title, image, text },
+	advantage: { id, title, image, text },
 	isOpen,
 	onClick,
 }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
+	const onMouseEnter = () => setIsHovered(true);
+	const onMouseLeave = () => setIsHovered(false);
+
 	return (
-		<div
-			className={className}
-			onClick={onClick}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
-		>
+		<div className={className} onClick={onClick}>
 			{isOpen ? (
-				<OpenedCard title={title} image={image} text={text} />
+				<OpenedCard
+					title={title}
+					image={image}
+					text={text}
+					onTouchEnd={() => setIsHovered(false)}
+				/>
 			) : (
-				<ClosedCard title={title} image={image} isHovered={isHovered} />
+				<ClosedCard
+					id={id}
+					title={title}
+					image={image}
+					isHovered={isHovered}
+					onMouseEnter={onMouseEnter}
+					onMouseLeave={onMouseLeave}
+				/>
 			)}
 		</div>
 	);

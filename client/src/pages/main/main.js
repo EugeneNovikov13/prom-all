@@ -1,4 +1,10 @@
-import { Advantages, Categories, Promotions, QuickApplication } from '../../widgets';
+import {
+	Advantages,
+	Brands,
+	Categories,
+	Promotions,
+	QuickApplication,
+} from '../../widgets';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
@@ -7,6 +13,7 @@ const MainContainer = ({ className }) => {
 			<Promotions />
 			<Categories />
 			<Advantages />
+			<Brands />
 			<QuickApplication />
 		</main>
 	);
