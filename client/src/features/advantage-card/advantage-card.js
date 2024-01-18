@@ -6,15 +6,15 @@ import styled from 'styled-components';
 const AdvantageCardContainer = ({
 	className,
 	advantage: { title, image, text },
-	openedCardTitle,
+	isOpen,
+	onClick,
 }) => {
 	const [isHovered, setIsHovered] = useState(false);
-
-	const isOpen = openedCardTitle === title;
 
 	return (
 		<div
 			className={className}
+			onClick={onClick}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
@@ -29,7 +29,7 @@ const AdvantageCardContainer = ({
 
 export const AdvantageCard = styled(AdvantageCardContainer)`
 	display: flex;
-	width: 181px;
+	width: ${({ isOpen }) => isOpen ? 318 : 181}px;
 	height: 350px;
 	padding: 16px;
 	flex-direction: column;
@@ -37,7 +37,7 @@ export const AdvantageCard = styled(AdvantageCardContainer)`
 	align-items: center;
 	border-radius: 8px;
 	border: 2px solid #071123;
-	background: var(--white);
+	background: ${({ isOpen }) => isOpen ? 'inherit' : 'var(--white)'};
 	box-shadow: 0 0 20px 0 rgba(255, 122, 0, 0.1) inset;
 	transition: 0.1s;
 

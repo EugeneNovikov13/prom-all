@@ -5,7 +5,7 @@ const PContainer = ({ className, children }) => <p className={className}>{childr
 export const P = styled(PContainer)`
 	margin: 0;
 	align-self: stretch;
-	color: var(--white);
+	color: ${({color}) => color ? color : 'var(--white)'};
 	font-family: Inter, sans-serif;
 	font-size: ${({fontSize}) => fontSize ? fontSize : '24px'};
 	font-style: normal;

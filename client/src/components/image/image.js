@@ -19,7 +19,7 @@ export const Image = styled(ImageContainer)`
 	transition: top 0.3s;
 
 	position: ${({ position }) => position};
-	top: ${({ top }) => top}px;
+	${({ top }) => 'top: ' + top + 'px'};
 	max-width: ${({ maxWidth }) => maxWidth}px;
 	max-height: ${({ maxHeight }) => maxHeight}px;
 
