@@ -13,7 +13,7 @@ const SearchContainer = ({ className }) => {
 
 export const Search = styled(SearchContainer)`
 	max-width: 300px;
-	height: 47px;
+	min-height: 47px;
 	flex: 1 0 0;
 	display: flex;
 	align-items: center;

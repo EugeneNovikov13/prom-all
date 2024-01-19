@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Page } from './page-component/page';
 import {
 	About,
 	Administration,
@@ -17,9 +18,9 @@ import { ERROR } from './constants';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
+	position: relative;
 	width: 100%;
 	min-height: 100%;
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,24 +28,6 @@ const AppColumn = styled.div`
 	padding-bottom: 16px;
 	background-color: #1a1d22;
 	overflow: hidden;
-`;
-
-const Page = styled.div`
-	width: 100%;
-	min-height: 60vh;
-	padding: 112px 0 0;
-
-	@media screen and (max-width: 1020px) {
-		padding: 209px 0 0;
-	}
-
-	@media screen and (max-width: 450px) {
-		padding: 261px 0 0;
-	}
-
-	@media screen and (max-device-height: 1000px) {
-		padding: 0;
-	}
 `;
 
 export const PromAll = () => {

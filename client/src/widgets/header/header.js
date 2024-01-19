@@ -1,11 +1,34 @@
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { appSlice } from '../../store/reducers';
 import { InfoContainer, NavigationMenu, Search } from './components';
 import { Logo } from '../../components';
 import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
+	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
+	const containerRef = useRef(null);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY >= containerRef.current.offsetTop) {
+				dispatch(appSlice.actions.setFixedHeader(true));
+				return;
+			}
+			dispatch(appSlice.actions.setFixedHeader(false));
+		};
+
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, [dispatch]);
+
 	return (
-		<header className={className}>
+		<header className={isFixed ? `${className} header__fixed` : className}>
 			<div className="first-line">
 				<div className="header-top-wrapper">
 					<Link to="/">
@@ -16,7 +39,7 @@ const HeaderContainer = ({ className }) => {
 			</div>
 			<div className="second-line">
 				<div className="header-bottom-wrapper">
-					<NavigationMenu />
+					<NavigationMenu ref={containerRef}/>
 					<Search />
 				</div>
 			</div>
@@ -38,6 +61,13 @@ export const Header = styled(HeaderContainer)`
 
 	@media screen and (max-device-height: 1000px) {
 		position: relative;
+	}
+
+	&.header__fixed {
+		@media screen and (max-device-height: 1000px) {
+			position: fixed;
+			top: -213px;
+		}
 	}
 
 	& div.first-line {
@@ -79,7 +109,8 @@ export const Header = styled(HeaderContainer)`
 			}
 
 			@media screen and (max-width: 450px) {
-				flex-wrap: wrap;
+				display: flex;
+				flex-direction: column-reverse;
 			}
 		}
 	}

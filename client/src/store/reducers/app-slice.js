@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	fixedHeader: false,
 	wasLogin: false,
 	modal: {
 		isOpen: false,
@@ -14,8 +15,8 @@ export const appSlice = createSlice({
 	name: 'app',
 	initialState,
 	reducers: {
-		setUser(state) {
-			state.wasLogin = true;
+		setFixedHeader(state, action) {
+			state.fixedHeader = action.payload;
 		},
 	},
 });

@@ -31,11 +31,9 @@ const FooterContainer = ({ className }) => {
 
 export const Footer = styled(FooterContainer)`
 	width: 100%;
-	padding-top: 80px;
+	padding: 80px 10px 0;
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
-	align-content: center;
 	gap: 40px;
 	background: var(--dark);
 
@@ -49,22 +47,29 @@ export const Footer = styled(FooterContainer)`
 		gap: 24px;
 		align-self: stretch;
 
+		@media (max-width: 450px) {
+			padding: 0 10px;
+		}
+
 		& div.logo {
-			min-width: 360px;
 			flex: 1;
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
 			gap: 10px;
+			padding-top: 12px;
+
+			@media (max-width: 450px) {
+				align-items: center;
+			}
 		}
 
 		& div.navigation {
-			min-width: 360px;
 			flex: 1;
 		}
 
 		& div.info {
-			min-width: 360px;
+			min-width: 185px;
 			flex: 1;
 		}
 	}
