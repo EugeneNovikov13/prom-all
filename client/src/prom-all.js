@@ -30,7 +30,7 @@ const AppColumn = styled.div`
 `;
 
 const Page = styled.div`
-	max-width: 100%;
+	width: 100%;
 	min-height: 60vh;
 	padding: 112px 0 0;
 

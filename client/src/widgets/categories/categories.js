@@ -73,7 +73,7 @@ export const Categories = styled(CategoriesContainer)`
 	display: flex;
 	max-width: 100%;
 	min-height: 1198px;
-	padding: 140px 0;
+	padding: 140px 10px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;

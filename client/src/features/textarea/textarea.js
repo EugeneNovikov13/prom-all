@@ -23,9 +23,11 @@ const TextareaContainer = forwardRef(({ className, error, ...props }, ref) => {
 
 export const Textarea = styled(TextareaContainer)`
 	position: relative;
+	flex: 1 0 0;
 
 	& textarea {
-		width: 552px;
+		width: 100%;
+		min-width: 340px;
 		height: 336px;
 		border-radius: 10px;
 		border: none;
@@ -41,10 +43,6 @@ export const Textarea = styled(TextareaContainer)`
 		font-weight: 500;
 		line-height: 24px;
 		letter-spacing: 0.5px;
-
-		@media (max-width: 600px) {
-			width: 360px;
-		}
 
 		&:hover {
 			background: rgb(50, 50, 51);

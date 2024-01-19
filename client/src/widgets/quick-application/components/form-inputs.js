@@ -62,6 +62,7 @@ export const FormInputs = styled(FormInputsContainer)`
 
 	& div.input-wrapper {
 		display: flex;
+		flex: 1 0 0;
 		flex-direction: column;
 		gap: 16px;
 	}

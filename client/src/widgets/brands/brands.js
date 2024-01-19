@@ -54,7 +54,7 @@ export const Brands = styled(BrandsContainer)`
 	display: flex;
 	width: 100%;
 	height: 800px;
-	padding: 140px 0;
+	padding: 140px 10px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;

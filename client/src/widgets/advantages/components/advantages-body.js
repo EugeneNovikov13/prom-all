@@ -1,10 +1,14 @@
 import { advantagesList } from '../constants/advantages-list';
 import { AdvantageCard } from '../../../features';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const AdvantagesBodyContainer = ({ className, openedCardId, setOpenedCardId }) => {
-	const onClick = (e, id) => {
+	const [hoverCardId, setHoverCardId] = useState('');
+
+	const onClick = id => {
 		if (id === openedCardId) {
+			setHoverCardId('');
 			setOpenedCardId('');
 			return;
 		}
@@ -18,7 +22,9 @@ const AdvantagesBodyContainer = ({ className, openedCardId, setOpenedCardId }) =
 					key={advantage.id}
 					advantage={advantage}
 					isOpen={openedCardId === advantage.id}
-					onClick={e => onClick(e, advantage.id)}
+					onClick={onClick}
+					hoverCardId={hoverCardId}
+					setHoverCardId={setHoverCardId}
 				/>
 			))}
 		</div>
