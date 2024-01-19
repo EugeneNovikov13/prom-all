@@ -21,8 +21,9 @@ const MenuLinkContainer = ({ className, title, link, isActive }) => {
 
 export const MenuLink = styled(MenuLinkContainer)`
 	position: relative;
+	min-width: 100px;
 	height: 47px;
-	flex: 1;
+	flex: 1 0 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;

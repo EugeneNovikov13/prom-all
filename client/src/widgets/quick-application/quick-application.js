@@ -91,15 +91,17 @@ const QuickApplicationContainer = ({ className }) => {
 };
 
 export const QuickApplication = styled(QuickApplicationContainer)`
-	display: flex;
 	max-width: 100%;
-	padding: 160px 0;
-	flex-direction: column;
+	display: flex;
+	justify-content: center;
 	align-items: center;
+	padding: 160px 10px;
 	background: var(--dark);
 
 	& form {
+		max-width: 1200px;
 		display: flex;
+		flex: 1 0 0;
 		flex-direction: column;
 		gap: 60px;
 		padding: 0 36px;

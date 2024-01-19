@@ -20,7 +20,7 @@ const MainContainer = ({ className }) => {
 };
 
 export const Main = styled(MainContainer)`
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 `;

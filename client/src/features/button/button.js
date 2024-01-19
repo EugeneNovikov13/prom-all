@@ -55,13 +55,20 @@ export const Button = styled(ButtonContainer)`
 
 	&:hover {
 		cursor: ${({ isDisable }) => (isDisable ? '' : 'pointer')};
-		box-shadow: ${({
-						   isDisable,
-						   hoverBoxShadow
-					   }) => (isDisable || !hoverBoxShadow ? '' : '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset')};
+		box-shadow: ${({ isDisable, hoverBoxShadow }) =>
+			isDisable || !hoverBoxShadow
+				? ''
+				: '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset'};
 	}
 
 	&:active {
-		background: ${({ activeBackground }) => (activeBackground ? activeBackground : 'linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), #FF7F00')};
+		background: ${({ activeBackground }) =>
+			activeBackground
+				? activeBackground
+				: 'linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), #FF7F00'};
+	}
+
+	@media (max-width: 380px) {
+		width: ${({ width }) => (width === '100%' ? '100%' : '300px')};
 	}
 `;

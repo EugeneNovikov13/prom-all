@@ -6,16 +6,6 @@ import styled from 'styled-components';
 const AdvantagesContainer = ({ className }) => {
 	const [openedCardId, setOpenedCardId] = useState('');
 
-	const onClick = (e, id) => {
-		e.stopPropagation();
-		console.log(e, openedCardId, id);
-		if (id === openedCardId) {
-			setOpenedCardId('');
-			return;
-		}
-		setOpenedCardId(id);
-	};
-
 	return (
 		<section className={className}>
 			<div className="advantages-container">
@@ -25,7 +15,6 @@ const AdvantagesContainer = ({ className }) => {
 				<AdvantagesBody
 					openedCardId={openedCardId}
 					setOpenedCardId={setOpenedCardId}
-					onClick={onClick}
 				/>
 			</div>
 		</section>
@@ -36,7 +25,7 @@ export const Advantages = styled(AdvantagesContainer)`
 	display: flex;
 	width: 100%;
 	min-height: 786px;
-	padding: 130px 0;
+	padding: 130px 10px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
