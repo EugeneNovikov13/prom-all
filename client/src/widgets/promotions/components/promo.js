@@ -20,8 +20,9 @@ const PromoContainer = ({ className, title, content }) => {
 							width="300px"
 							height="48px"
 							fontSize="20px"
-							background="var(--brand-orange)"
+							background={'var(--brand-orange)'}
 							hoverBoxShadow={true}
+							activeBackground={'var(--active-orange)'}
 						>
 							Купить
 						</Button>

@@ -1,20 +1,15 @@
-import {
-	Advantages,
-	Brands,
-	Categories,
-	Promotions,
-	QuickApplication,
-} from '../../widgets';
+import { Advantages, Brands, Promotions } from '../../widgets';
+import { CategoriesLayout, QuickApplicationLayout } from './layouts';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
 	return (
 		<main className={className}>
 			<Promotions />
-			<Categories />
+			<CategoriesLayout />
 			<Advantages />
 			<Brands />
-			<QuickApplication />
+			<QuickApplicationLayout />
 		</main>
 	);
 };

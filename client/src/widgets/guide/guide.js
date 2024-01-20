@@ -4,7 +4,7 @@ import { ReactComponent as Step3 } from './assets/step3.svg';
 import { H1, P } from '../../components';
 import styled from 'styled-components';
 
-const HelpSectionContainer = ({ className }) => {
+const GuideContainer = ({ className }) => {
 	return (
 		<section className={className}>
 			<div className="help-container">
@@ -42,13 +42,13 @@ const HelpSectionContainer = ({ className }) => {
 	);
 };
 
-export const HelpSection = styled(HelpSectionContainer)`
+export const Guide = styled(GuideContainer)`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 120px 0;
+	padding: 120px 10px;
 	background: #e8e8e8;
 
 	& div.help-container {

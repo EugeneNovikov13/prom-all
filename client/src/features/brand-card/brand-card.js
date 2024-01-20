@@ -5,7 +5,7 @@ const BrandCardContainer = ({ className, title, logo, isOfficial }) => {
 	return (
 		<div className={className}>
 			<div className="brand-card-logo">
-				<Img image={logo} maxWidth={153} maxHeight={120}></Img>
+				<Img image={logo} maxWidth="153px" maxHeight="120px"></Img>
 			</div>
 			<div className="brand-card-title">
 				<H4 fontSize={16}>{title}</H4>

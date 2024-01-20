@@ -8,8 +8,8 @@ const OpenedCardContainer = ({ className, title, image, text, onTouchEnd }) => {
 				<Img
 					iconClassName="opened-card-icon"
 					SvgIconComponent={image}
-					maxWidth={150}
-					maxHeight={150}
+					maxWidth="150px"
+					maxHeight="150px"
 				/>
 			</div>
 			<div className="opened-card-content">

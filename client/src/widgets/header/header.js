@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { appSlice } from '../../store/reducers';
+import { setFixedHeader } from '../../store/reducers';
 import { InfoContainer, NavigationMenu, Search } from './components';
 import { Logo } from '../../components';
 import styled from 'styled-components';
@@ -14,10 +14,10 @@ const HeaderContainer = ({ className }) => {
 	useEffect(() => {
 		const handleScroll = () => {
 			if (window.scrollY >= containerRef.current.offsetTop) {
-				dispatch(appSlice.actions.setFixedHeader(true));
+				dispatch(setFixedHeader(true));
 				return;
 			}
-			dispatch(appSlice.actions.setFixedHeader(false));
+			dispatch(setFixedHeader(false));
 		};
 
 		window.addEventListener('scroll', handleScroll);
