@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { Img } from '../../../components';
-import { ReactComponent as Select } from '../assets/down-arrow.svg';
-import { Button, Popup } from '../../../features';
 import { useEffect, useState } from 'react';
-import { capitalizeString, getSubsectionsBySectionTitle } from '../../../utils';
 import { useDispatch, useSelector } from 'react-redux';
+import { capitalizeString, getSubsectionsBySectionTitle } from '../../../utils';
 import { catalogSlice } from '../../../store/reducers';
+import { ReactComponent as Select } from '../assets/down-arrow.svg';
+import { Img } from '../../../components';
+import { Button, Popup } from '../../../features';
+import styled from 'styled-components';
 
 const CrumbContainer = ({
 	className,
@@ -19,6 +19,7 @@ const CrumbContainer = ({
 	const [sectionItems, setSectionItems] = useState([]);
 	const dispatch = useDispatch();
 	const { breadcrumbs } = useSelector(state => state.catalogReducer);
+	const isProductSection = section === 'product';
 
 	useEffect(() => {
 		if (isOpen) {
@@ -38,6 +39,7 @@ const CrumbContainer = ({
 	};
 
 	const onCrumbClick = sectionTitle => {
+		//собираем название action "вручную"
 		const action = `returnTo${capitalizeString(sectionTitle)}`;
 		dispatch(catalogSlice.actions[action]());
 		setOpenedCrumb('');
@@ -63,27 +65,12 @@ const CrumbContainer = ({
 					{selectedTitle}
 				</Button>
 				{isOpen && (
-					<Popup>
-						{sectionItems.map(({ id, title }) => (
-							<div key={id} className="popup-item-container">
-								<Button
-									link={`/catalog/section/${id}`}
-									justifyContent="flex-start"
-									width="100%"
-									height="40px"
-									borderRadius="0"
-									fontSize="14px"
-									color={'#E6E0E9'}
-									background={'transparent'}
-									onClick={() =>
-										onPopupSectionClick(id, title, section)
-									}
-								>
-									<span>{title}</span>
-								</Button>
-							</div>
-						))}
-					</Popup>
+					<Popup
+						isProductSection={isProductSection}
+						sectionItems={sectionItems}
+						onPopupSectionClick={onPopupSectionClick}
+						section={section}
+					/>
 				)}
 			</div>
 		</div>
@@ -117,41 +104,6 @@ export const Crumb = styled(CrumbContainer)`
 
 			&:hover {
 				cursor: pointer;
-			}
-		}
-
-		& div.popup-item-container {
-			width: 100%;
-			height: 40px;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			padding: 0;
-
-			&:not(:last-of-type) {
-				border-bottom: 1px solid #f8eede;
-			}
-
-			&:last-of-type {
-				border-radius: 0 0 20px 20px;
-			}
-
-			&:hover {
-				background: rgba(232, 222, 248, 0.08);
-			}
-
-			&:active {
-				background: rgba(232, 222, 248, 0.12);
-			}
-
-			& a {
-				width: 100%;
-			}
-
-			& span {
-				padding: 0 10px;
-				text-align: left;
 			}
 		}
 	}

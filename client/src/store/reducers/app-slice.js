@@ -21,4 +21,6 @@ export const appSlice = createSlice({
 	},
 });
 
+export const {setFixedHeader} = appSlice.actions;
+
 export default appSlice.reducer;

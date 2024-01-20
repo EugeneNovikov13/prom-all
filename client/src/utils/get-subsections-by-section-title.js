@@ -3,7 +3,6 @@ import { catalogList } from '../widgets/categories/constants/catalog-list';
 export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 	const currentCategoryId = breadcrumbs.category.selectedId;
 	const currentSubcategoryId = breadcrumbs.subcategory.selectedId;
-	const currentTypeId = breadcrumbs.type.selectedId;
 
 	switch (section) {
 		case 'category': {
@@ -28,27 +27,6 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			const currentSubcategory = currentCategory.subcategories.find(
 				item => item.id === currentSubcategoryId,
 			);
-			return currentSubcategory.types.map(item => ({
-				id: item.id,
-				title: item.title,
-			}));
-		}
-		case 'product': {
-			const currentCategory = catalogList.find(
-				item => item.id === currentCategoryId,
-			);
-			const currentSubcategory = currentCategory.subcategories.find(
-				item => item.id === currentSubcategoryId,
-			);
-			if (currentSubcategory.types) {
-				// const currentType = currentSubcategory.find(item => item.id === currentTypeId);
-				//TODO запрос
-				// return currentType.types.map(item => ({
-				// 	id: item.id,
-				// 	title: item.title,
-				// }))
-			}
-			//TODO запрос
 			return currentSubcategory.types.map(item => ({
 				id: item.id,
 				title: item.title,

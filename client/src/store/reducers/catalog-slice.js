@@ -62,10 +62,21 @@ export const catalogSlice = createSlice({
 			state.breadcrumbs.product = initialState.breadcrumbs.product;
 			state.countSections = 4;
 		},
-		resetBreadcrumbs(state) {
-			state = initialState;
+		resetBreadcrumbs() {
+			return initialState;
 		},
 	},
 });
+
+export const {
+	setCategory,
+	setSubcategory,
+	setType,
+	setProduct,
+	returnToCategory,
+	returnToSubcategory,
+	returnToType,
+	resetBreadcrumbs,
+} = catalogSlice.actions;
 
 export default catalogSlice.reducer;

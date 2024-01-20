@@ -1,16 +1,15 @@
-import styled from 'styled-components';
-import { Button } from '../../features';
-import { ReactComponent as Selected } from './assets/selected.svg';
-import { Img } from '../../components';
-import { useDispatch, useSelector } from 'react-redux';
-import { Crumb } from './components/crumb';
 import { useState } from 'react';
-import { catalogSlice } from '../../store/reducers';
+import { useSelector } from 'react-redux';
 import { getCurrentBreadcrumbs } from '../../utils';
+import { ReactComponent as Selected } from './assets/selected.svg';
+import { Button } from '../../features';
+import { Img } from '../../components';
+import { Crumb } from './components/crumb';
+import styled from 'styled-components';
 
 const BreadcrumbsContainer = ({ className }) => {
+	//TODO попробовать изменить на одно состояние для всех crumbs
 	const [openedCrumb, setOpenedCrumb] = useState('');
-	const dispatch = useDispatch();
 
 	const onPopupToggle = section => {
 		if (section === openedCrumb) {
@@ -23,12 +22,6 @@ const BreadcrumbsContainer = ({ className }) => {
 	const { countSections, breadcrumbs } = useSelector(state => state.catalogReducer);
 
 	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs, openedCrumb);
-
-	const onCatalogButtonClick = () => {
-		//TODO почему не сбрасывается?
-		dispatch(catalogSlice.actions.resetBreadcrumbs());
-		setOpenedCrumb('');
-	};
 
 	return (
 		<ol className={className}>
@@ -45,7 +38,6 @@ const BreadcrumbsContainer = ({ className }) => {
 						background={'#584E44'}
 						hoverBackground={'rgba(232, 222, 248, 0.08)'}
 						activeBackground={'rgba(232, 222, 248, 0.12)'}
-						onClick={onCatalogButtonClick}
 					>
 						<Img
 							maxWidth="28px"
