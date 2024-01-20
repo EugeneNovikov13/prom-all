@@ -6,18 +6,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Crumb } from './components/crumb';
 import { useState } from 'react';
 import { catalogSlice } from '../../store/reducers';
+import { getCurrentBreadcrumbs } from '../../utils';
 
 const BreadcrumbsContainer = ({ className }) => {
 	const [openedCrumb, setOpenedCrumb] = useState('');
 	const dispatch = useDispatch();
 
-	const onPopupToggle = openedSection => {
-		setOpenedCrumb(openedSection);
+	const onPopupToggle = section => {
+		if (section === openedCrumb) {
+			setOpenedCrumb('');
+			return;
+		}
+		setOpenedCrumb(section);
 	};
 
 	const { countSections, breadcrumbs } = useSelector(state => state.catalogReducer);
 
-	const currentBreadcrumbs = Object.entries(breadcrumbs).slice(0, countSections);
+	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs, openedCrumb);
 
 	const onCatalogButtonClick = () => {
 		//TODO почему не сбрасывается?

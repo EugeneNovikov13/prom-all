@@ -1,6 +1,6 @@
 import { catalogList } from '../widgets/categories/constants/catalog-list';
 
-export const getSectionsByTitle = (section, breadcrumbs) => {
+export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 	const currentCategoryId = breadcrumbs.category.selectedId;
 	const currentSubcategoryId = breadcrumbs.subcategory.selectedId;
 	const currentTypeId = breadcrumbs.type.selectedId;

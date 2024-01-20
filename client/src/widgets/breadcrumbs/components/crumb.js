@@ -3,7 +3,7 @@ import { Img } from '../../../components';
 import { ReactComponent as Select } from '../assets/down-arrow.svg';
 import { Button, Popup } from '../../../features';
 import { useEffect, useState } from 'react';
-import { capitalizeString, getSectionsByTitle } from '../../../utils';
+import { capitalizeString, getSubsectionsBySectionTitle } from '../../../utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { catalogSlice } from '../../../store/reducers';
 
@@ -22,7 +22,7 @@ const CrumbContainer = ({
 
 	useEffect(() => {
 		if (isOpen) {
-			setSectionItems(getSectionsByTitle(section, breadcrumbs));
+			setSectionItems(getSubsectionsBySectionTitle(section, breadcrumbs));
 		}
 	}, [breadcrumbs, isOpen, section]);
 
@@ -31,6 +31,7 @@ const CrumbContainer = ({
 			selectedId: itemId,
 			selectedTitle: itemTitle,
 		};
+		//собираем название action "вручную"
 		const action = `set${capitalizeString(sectionTitle)}`;
 		dispatch(catalogSlice.actions[action](payload));
 		setOpenedCrumb('');
