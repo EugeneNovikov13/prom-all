@@ -20,8 +20,8 @@ const ClosedCardContainer = ({
 				<Img
 					iconClassName="closed-card-icon"
 					SvgIconComponent={image}
-					maxWidth={100}
-					maxHeight={100}
+					maxWidth="100px"
+					maxHeight="100px"
 					transition={'0.1s'}
 				/>
 			</div>

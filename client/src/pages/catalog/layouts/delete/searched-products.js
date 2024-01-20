@@ -1,5 +1,5 @@
 import { Product } from './product';
-import { useFetchProductByTitleQuery } from '../../../store/services';
+import { useFetchProductByTitleQuery } from '../../../../store/services';
 
 export const SearchedProducts = ({ text }) => {
 	const { data: products } = useFetchProductByTitleQuery(text);

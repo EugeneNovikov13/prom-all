@@ -31,13 +31,19 @@ const ButtonContainer = ({ className, children, link, type, isDisable, onClick }
 };
 
 export const Button = styled(ButtonContainer)`
+	display: flex;
+	align-items: center;
 	padding: 0;
-	border-radius: 140px;
 	font-family: Inter, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	white-space: nowrap;
 	outline: none;
+
+	justify-content: ${({ justifyContent }) =>
+		justifyContent ? justifyContent : 'center'};
+
+	border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '140px')};
 
 	width: ${({ width }) => width};
 
@@ -59,13 +65,13 @@ export const Button = styled(ButtonContainer)`
 			isDisable || !hoverBoxShadow
 				? ''
 				: '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset'};
+		background: ${({ isDisable, hoverBackground }) =>
+			!isDisable && hoverBackground ? hoverBackground : ''};
 	}
 
 	&:active {
-		background: ${({ activeBackground }) =>
-			activeBackground
-				? activeBackground
-				: 'linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), #FF7F00'};
+		background: ${({ isDisable, activeBackground }) =>
+			!isDisable && activeBackground ? activeBackground : ''};
 	}
 
 	@media (max-width: 380px) {

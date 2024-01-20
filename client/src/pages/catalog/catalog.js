@@ -1,10 +1,12 @@
-import { HelpSection } from '../../widgets/help-section/help-section';
+import { Guide } from '../../widgets/guide/guide';
+import { CatalogLayout } from './layouts';
 import styled from 'styled-components';
 
 const CatalogContainer = ({ className }) => {
 	return (
 		<div className={className}>
-			<HelpSection />
+			<CatalogLayout />
+			<Guide />
 		</div>
 	);
 };

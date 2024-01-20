@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useResetForm } from '../../hooks';
-import { sendQuickApplication } from '../../utils/send-quick-application';
+import { sendQuickApplication } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
 import { FormFooter, FormHeader, FormInputs } from './components';
@@ -64,46 +64,35 @@ const QuickApplicationContainer = ({ className }) => {
 		errors?.application?.message;
 
 	return (
-		<section className={className} id="quick_application_section">
-			<form method="post" onSubmit={handleSubmit(onSubmit)}>
-				<FormHeader />
-				<FormInputs
-					register={register}
-					errors={errors}
-					onInputChange={onInputChange}
+		<form className={className} method="post" onSubmit={handleSubmit(onSubmit)}>
+			<FormHeader />
+			<FormInputs
+				register={register}
+				errors={errors}
+				onInputChange={onInputChange}
+			/>
+			{isValid && (
+				<ReCAPTCHA
+					ref={recaptchaRef}
+					sitekey={RECAPTCHA_SECRET_KEY}
+					onChange={onCaptchaChange}
+					hl="ru"
 				/>
-				{isValid && (
-					<ReCAPTCHA
-						ref={recaptchaRef}
-						sitekey={RECAPTCHA_SECRET_KEY}
-						onChange={onCaptchaChange}
-						hl="ru"
-					/>
-				)}
-				{serverError && (
-					<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
-				)}
-				{serverResponse && <ServerMessage>{serverResponse}</ServerMessage>}
-				<FormFooter formError={formError} captchaToken={captchaToken} />
-			</form>
-		</section>
+			)}
+			{serverError && (
+				<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
+			)}
+			{serverResponse && <ServerMessage>{serverResponse}</ServerMessage>}
+			<FormFooter formError={formError} captchaToken={captchaToken} />
+		</form>
 	);
 };
 
 export const QuickApplication = styled(QuickApplicationContainer)`
-	max-width: 100%;
+	max-width: 1200px;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 160px 10px;
-	background: var(--dark);
-
-	& form {
-		max-width: 1200px;
-		display: flex;
-		flex: 1 0 0;
-		flex-direction: column;
-		gap: 60px;
-		padding: 0 36px;
-	}
+	flex: 1 0 0;
+	flex-direction: column;
+	gap: 60px;
+	padding: 0 36px;
 `;

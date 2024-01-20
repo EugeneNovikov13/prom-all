@@ -9,7 +9,7 @@ import { ReactComponent as Pumps } from '../assets/pumps.svg';
 import { ReactComponent as Gears } from '../assets/reductors.svg';
 import { ReactComponent as Fans } from '../assets/ventilators.svg';
 
-export const catalog = [
+export const catalogList = [
 	{
 		id: '658aa910cd634ef7ce80f1c6',
 		title: 'Электрощитовое оборудование',
