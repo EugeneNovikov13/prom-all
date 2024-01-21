@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { Button } from '../../button/button';
 import { Loader } from '../../../components';
 import styled from 'styled-components';
 
-const PopupItemProductsContainer = ({ className, onPopupSectionClick }) => {
+const PopupItemProductsContainer = ({ className, onPopupSectionClick, listVariants }) => {
 	const selectedSubcategoryId = useSelector(
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedId,
 	);
@@ -23,8 +24,15 @@ const PopupItemProductsContainer = ({ className, onPopupSectionClick }) => {
 			) : (
 				<>
 					{products &&
-						products.map(({ id, title }) => (
-							<div className={className} key={id}>
+						products.map(({ id, title }, index) => (
+							<motion.div
+								className={className}
+								key={id}
+								variants={listVariants}
+								initial="hidden"
+								animate="visible"
+								custom={index}
+							>
 								<Button
 									link={`/catalog/product/${id}`}
 									justifyContent="flex-start"
@@ -40,7 +48,7 @@ const PopupItemProductsContainer = ({ className, onPopupSectionClick }) => {
 								>
 									<span>{title}</span>
 								</Button>
-							</div>
+							</motion.div>
 						))}
 				</>
 			)}

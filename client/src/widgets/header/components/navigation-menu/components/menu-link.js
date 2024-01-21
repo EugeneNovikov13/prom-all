@@ -1,5 +1,23 @@
 import { Button } from '../../../../../features';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+const ActiveLine = ({ className }) => {
+	return (
+		<motion.div
+			className={className}
+			style={{
+				position: 'absolute',
+				bottom: '-1px',
+				left: 0,
+				width: '100%',
+				height: '2px',
+				backgroundColor: 'var(--brand-orange)',
+			}}
+			layoutId="activeItem"
+		></motion.div>
+	);
+};
 
 const MenuLinkContainer = ({ className, title, link, isActive }) => {
 	return (
@@ -15,6 +33,7 @@ const MenuLinkContainer = ({ className, title, link, isActive }) => {
 			>
 				{title}
 			</Button>
+			{isActive && <ActiveLine />}
 		</li>
 	);
 };
@@ -29,16 +48,6 @@ export const MenuLink = styled(MenuLinkContainer)`
 	justify-content: center;
 	border-bottom: 2px solid rgba(23, 23, 23, 0);
 	border-radius: 23px;
-
-	${({ isActive }) => (isActive ? '&::after' : '')} {
-		content: '';
-		position: absolute;
-		bottom: -1px;
-		left: 0;
-		width: 100%;
-		height: 2px;
-		background-color: var(--brand-orange);
-	}
 
 	& a {
 		width: 100%;
