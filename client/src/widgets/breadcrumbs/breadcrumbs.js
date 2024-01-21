@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMatch } from 'react-router-dom';
 import { getCurrentBreadcrumbs } from '../../utils';
+import { resetBreadcrumbs } from '../../store/reducers';
 import { ReactComponent as Selected } from './assets/selected.svg';
 import { Button } from '../../features';
 import { Img } from '../../components';
@@ -10,6 +12,18 @@ import styled from 'styled-components';
 const BreadcrumbsContainer = ({ className }) => {
 	//TODO попробовать изменить на одно состояние для всех crumbs
 	const [openedCrumb, setOpenedCrumb] = useState('');
+
+	//сбрасываем Breadcrumbs после монтирования компонента
+	const needToResetBreadcrumbs = useMatch('/catalog');
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (needToResetBreadcrumbs) {
+			dispatch(resetBreadcrumbs());
+			setOpenedCrumb('');
+		}
+	}, [dispatch, needToResetBreadcrumbs]);
+	////
 
 	const onPopupToggle = section => {
 		if (section === openedCrumb) {
@@ -21,7 +35,11 @@ const BreadcrumbsContainer = ({ className }) => {
 
 	const { countSections, breadcrumbs } = useSelector(state => state.catalogReducer);
 
-	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs, openedCrumb);
+	const currentBreadcrumbs = getCurrentBreadcrumbs(
+		countSections,
+		breadcrumbs,
+		openedCrumb,
+	);
 
 	return (
 		<ol className={className}>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Button } from '../../button/button';
 import styled from 'styled-components';
 
@@ -5,11 +6,19 @@ const PopupItemSectionsContainer = ({
 	className,
 	id,
 	title,
+	index,
 	section,
 	onPopupSectionClick,
+	listVariants,
 }) => {
 	return (
-		<div className={className}>
+		<motion.div
+			className={className}
+			variants={listVariants}
+			initial="hidden"
+			animate="visible"
+			custom={index}
+		>
 			<Button
 				link={`/catalog/section/${id}`}
 				justifyContent="flex-start"
@@ -23,7 +32,7 @@ const PopupItemSectionsContainer = ({
 			>
 				<span>{title}</span>
 			</Button>
-		</div>
+		</motion.div>
 	);
 };
 
