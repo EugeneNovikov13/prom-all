@@ -12,7 +12,7 @@ const SearchContainer = ({ className }) => {
 };
 
 export const Search = styled(SearchContainer)`
-	max-width: 300px;
+	max-width: 340px;
 	min-height: 47px;
 	flex: 1 0 0;
 	display: flex;
@@ -21,12 +21,22 @@ export const Search = styled(SearchContainer)`
 	border-bottom: 2px solid rgba(23, 23, 23, 0);
 	border-radius: 23px;
 	color: #cac4d0;
-	transition: flex 0.5s ease-out;
+	transition: width 0.5s ease-out, flex 0.5s ease-out;
 
 	&:hover {
 		background: #2b2930;
-		flex: 2 0 0;
+		flex: 2.5 0 0;
 		cursor: pointer;
-		transition: flex 0.5s ease-out;
+		transition: width 0.5s ease-out, flex 0.5s ease-out;
+	}
+
+	@media screen and (max-width: 880px) {
+		width: 190px;
+		margin: auto;
+
+		&:hover {
+			flex: 1 0 0;
+			width: 340px;
+		}
 	}
 `;

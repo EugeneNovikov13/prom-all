@@ -15,6 +15,7 @@ const ActiveLine = ({ className }) => {
 				backgroundColor: 'var(--brand-orange)',
 			}}
 			layoutId="activeItem"
+			transition={{ duration: 0.25}}
 		></motion.div>
 	);
 };
