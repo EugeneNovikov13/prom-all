@@ -7,6 +7,7 @@ const ImgContainer = ({ className, iconClassName, SvgIconComponent, image, onCli
 				<SvgIconComponent className={iconClassName} onClick={onClick} />
 			) : (
 				<img
+					className={iconClassName}
 					src={image}
 					width="100%"
 					height="100%"
