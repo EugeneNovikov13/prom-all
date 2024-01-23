@@ -1,13 +1,7 @@
 import { PopupItemProducts, PopupItemSections } from './components';
 import styled from 'styled-components';
 
-const PopupContainer = ({
-	className,
-	isProductSection,
-	sectionItems,
-	onPopupSectionClick,
-	section,
-}) => {
+const PopupContainer = ({ className, isProductSection, sectionItems }) => {
 	const listVariants = {
 		visible: i => ({
 			height: '40px',
@@ -26,7 +20,7 @@ const PopupContainer = ({
 	return (
 		<div className={className}>
 			{isProductSection ? (
-				<PopupItemProducts onPopupSectionClick={onPopupSectionClick} listVariants={listVariants}/>
+				<PopupItemProducts listVariants={listVariants} />
 			) : (
 				sectionItems.map(({ id, title }, index) => (
 					<PopupItemSections
@@ -34,8 +28,6 @@ const PopupContainer = ({
 						id={id}
 						title={title}
 						index={index}
-						section={section}
-						onPopupSectionClick={onPopupSectionClick}
 						listVariants={listVariants}
 					/>
 				))
@@ -47,7 +39,7 @@ const PopupContainer = ({
 export const Popup = styled(PopupContainer)`
 	min-width: 250px;
 	position: absolute;
-	top: 40px;
+	top: 39px;
 	left: 0;
 	display: flex;
 	flex-direction: column;

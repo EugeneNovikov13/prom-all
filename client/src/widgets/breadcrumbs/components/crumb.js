@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { capitalizeString, getSubsectionsBySectionTitle } from '../../../utils';
-import { catalogSlice } from '../../../store/reducers';
+import { useSelector } from 'react-redux';
+import { getSubsectionsBySectionTitle } from '../../../utils';
 import { ReactComponent as Select } from '../assets/down-arrow.svg';
 import { Img } from '../../../components';
 import { Button, Popup } from '../../../features';
@@ -13,63 +12,56 @@ const CrumbContainer = ({
 	selectedId,
 	selectedTitle,
 	isOpen,
-	setOpenedCrumb,
 	onPopupToggle,
+	onMouseEnter,
+	onMouseLeave,
 }) => {
+	//получаем перечень подразделов открытого раздела каталога
 	const [sectionItems, setSectionItems] = useState([]);
-	const dispatch = useDispatch();
 	const { breadcrumbs } = useSelector(state => state.catalogReducer);
-	const isProductSection = section === 'product';
 
 	useEffect(() => {
 		if (isOpen) {
 			setSectionItems(getSubsectionsBySectionTitle(section, breadcrumbs));
 		}
 	}, [breadcrumbs, isOpen, section]);
+	////
 
-	const onPopupSectionClick = (itemId, itemTitle, sectionTitle) => {
-		const payload = {
-			selectedId: itemId,
-			selectedTitle: itemTitle,
-		};
-		//собираем название action "вручную"
-		const action = `set${capitalizeString(sectionTitle)}`;
-		dispatch(catalogSlice.actions[action](payload));
-		setOpenedCrumb('');
-	};
+	//проверяем, является ли подраздел подразделом продуктов
+	const isProductSection = section === 'product';
 
-	const onCrumbClick = sectionTitle => {
-		//собираем название action "вручную"
-		const action = `returnTo${capitalizeString(sectionTitle)}`;
-		dispatch(catalogSlice.actions[action]());
-		setOpenedCrumb('');
+	const crumbButtonStyleProps = {
+		isDisable: !selectedId,
+		width: 'calc(100% + 30px)',
+		height: '32px',
+		borderRadius: '100px',
+		fontSize: '14px',
+		color: '#E6E0E9',
+		background: 'transparent',
+		hoverBackground: 'rgba(232, 222, 248, 0.08)',
+		activeBackground: 'rgba(232, 222, 248, 0.12)',
 	};
 
 	return (
-		<div className={className}>
+		<div
+			className={className}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+		>
 			<div className="crumb-container">
 				<Img SvgIconComponent={Select} onClick={() => onPopupToggle(section)} />
+
 				<Button
+					{...crumbButtonStyleProps}
 					link={selectedId ? `/catalog/section/${selectedId}` : ''}
-					width="calc(100% + 30px)"
-					height="32px"
-					borderRadius="100px"
-					fontSize="14px"
-					color={'#E6E0E9'}
-					background={'transparent'}
-					hoverBackground={'rgba(232, 222, 248, 0.08)'}
-					activeBackground={'rgba(232, 222, 248, 0.12)'}
-					isDisable={!selectedId}
-					onClick={() => onCrumbClick(section)}
 				>
 					{selectedTitle}
 				</Button>
+
 				{isOpen && (
 					<Popup
 						isProductSection={isProductSection}
 						sectionItems={sectionItems}
-						onPopupSectionClick={onPopupSectionClick}
-						section={section}
 					/>
 				)}
 			</div>

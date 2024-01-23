@@ -1,6 +1,6 @@
-import { catalogList } from '../widgets/categories/constants/catalog-list';
+import { catalogList } from '../constants';
 
-export const getCurrentBreadcrumbs = (countSections, breadcrumbs, openedCrumb) => {
+export const getCurrentBreadcrumbs = (countSections, breadcrumbs) => {
 	const currentCategoryId = breadcrumbs.category.selectedId;
 	const currentSubcategoryId = breadcrumbs.subcategory.selectedId;
 	let types;

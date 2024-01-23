@@ -47,36 +47,12 @@ export const catalogSlice = createSlice({
 		setProduct(state, action) {
 			state.breadcrumbs.product = action.payload;
 		},
-		returnToCategory(state) {
-			state.breadcrumbs.subcategory = initialState.breadcrumbs.subcategory;
-			state.breadcrumbs.type = initialState.breadcrumbs.type;
-			state.breadcrumbs.product = initialState.breadcrumbs.product;
-			state.countSections = 2;
-		},
-		returnToSubcategory(state) {
-			state.breadcrumbs.type = initialState.breadcrumbs.type;
-			state.breadcrumbs.product = initialState.breadcrumbs.product;
-			state.countSections = 3;
-		},
-		returnToType(state) {
-			state.breadcrumbs.product = initialState.breadcrumbs.product;
-			state.countSections = 4;
-		},
 		resetBreadcrumbs() {
 			return initialState;
 		},
 	},
 });
 
-export const {
-	setCategory,
-	setSubcategory,
-	setType,
-	setProduct,
-	returnToCategory,
-	returnToSubcategory,
-	returnToType,
-	resetBreadcrumbs,
-} = catalogSlice.actions;
+export const { resetBreadcrumbs, setProduct } = catalogSlice.actions;
 
 export default catalogSlice.reducer;
