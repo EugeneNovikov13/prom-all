@@ -1,13 +1,13 @@
-import { ReactComponent as Heaters } from '../assets/calorifer.svg';
-import { ReactComponent as Crane } from '../assets/crane-equipment.svg';
-import { ReactComponent as Motors } from '../assets/electro-motors.svg';
-import { ReactComponent as Fittings } from '../assets/fittings.svg';
-import { ReactComponent as Gpo } from '../assets/gpo.svg';
-import { ReactComponent as High } from '../assets/high-voltage.svg';
-import { ReactComponent as Nva } from '../assets/nva.svg';
-import { ReactComponent as Pumps } from '../assets/pumps.svg';
-import { ReactComponent as Gears } from '../assets/reductors.svg';
-import { ReactComponent as Fans } from '../assets/ventilators.svg';
+import { ReactComponent as Heaters } from './assets/calorifer.svg';
+import { ReactComponent as Crane } from './assets/crane-equipment.svg';
+import { ReactComponent as Motors } from './assets/electro-motors.svg';
+import { ReactComponent as Fittings } from './assets/fittings.svg';
+import { ReactComponent as Gpo } from './assets/gpo.svg';
+import { ReactComponent as High } from './assets/high-voltage.svg';
+import { ReactComponent as Nva } from './assets/nva.svg';
+import { ReactComponent as Pumps } from './assets/pumps.svg';
+import { ReactComponent as Gears } from './assets/reductors.svg';
+import { ReactComponent as Fans } from './assets/ventilators.svg';
 
 export const catalogList = [
 	{

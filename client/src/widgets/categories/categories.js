@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useDebounce } from '../../hooks';
 import { ProductCard } from '../../features';
 import { SETTINGS } from '../../settings';
-import { catalogList } from './constants/catalog-list';
+import { catalogList } from '../../constants';
 import styled from 'styled-components';
 
 const CategoriesContainer = ({ className }) => {

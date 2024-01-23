@@ -40,5 +40,6 @@ export const NavigationMenu = styled(NavigationMenuContainer)`
 		gap: 5px;
 		margin: 0;
 		padding: 0;
+		overflow: hidden;
 	}
 `;

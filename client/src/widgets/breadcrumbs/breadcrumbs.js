@@ -1,72 +1,82 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMatch } from 'react-router-dom';
-import { getCurrentBreadcrumbs } from '../../utils';
-import { resetBreadcrumbs } from '../../store/reducers';
-import { ReactComponent as Selected } from './assets/selected.svg';
-import { Button } from '../../features';
-import { Img } from '../../components';
+import { useMatch, useParams } from 'react-router-dom';
+import { useDebounce } from '../../hooks';
+import { getCurrentBreadcrumbs, setBreadcrumbsById } from '../../utils';
 import { Crumb } from './components/crumb';
+import { BreadcrumbsFirstItem } from './components/breadcrumbs-first-item';
+import { SETTINGS } from '../../settings';
 import styled from 'styled-components';
 
 const BreadcrumbsContainer = ({ className }) => {
-	//TODO попробовать изменить на одно состояние для всех crumbs
+	//устанавливаем Breadcrumbs в соответствии с id в адресной строке
 	const [openedCrumb, setOpenedCrumb] = useState('');
 
-	//сбрасываем Breadcrumbs после монтирования компонента
-	const needToResetBreadcrumbs = useMatch('/catalog');
 	const dispatch = useDispatch();
 
+	const params = useParams();
+	const id = params.id;
+
+	const isOtherSectionSelected = useMatch('catalog/section/:id');
+	const isProductSectionSelected = useMatch('catalog/product/:id');
+	const needToResetBreadcrumbs = useMatch('/catalog');
+
 	useEffect(() => {
-		if (needToResetBreadcrumbs) {
-			dispatch(resetBreadcrumbs());
-			setOpenedCrumb('');
-		}
-	}, [dispatch, needToResetBreadcrumbs]);
+		setBreadcrumbsById(
+			dispatch,
+			id,
+			isOtherSectionSelected,
+			isProductSectionSelected,
+			needToResetBreadcrumbs,
+		);
+		setOpenedCrumb('');
+	}, [
+		dispatch,
+		id,
+		isOtherSectionSelected,
+		isProductSectionSelected,
+		needToResetBreadcrumbs,
+	]);
 	////
 
+	//обработчики открытия-закрытия меню breadcrumbs
+	let refCrumbsLeaveDebounceTimeout = useRef(null);
+
+	const onMouseEnter = isOpenedCrumb => {
+		if (isOpenedCrumb) {
+			clearTimeout(refCrumbsLeaveDebounceTimeout.current);
+		}
+	};
+
+	const onCrumbMouseLeave = () => {
+		setOpenedCrumb('');
+	};
+
+	const debouncedOnMouseLeave = useDebounce(
+		refCrumbsLeaveDebounceTimeout,
+		onCrumbMouseLeave,
+		SETTINGS.BREADCRUMBS_MENU_CLOSE_DELAY,
+	);
+
 	const onPopupToggle = section => {
+		clearTimeout(refCrumbsLeaveDebounceTimeout.current);
 		if (section === openedCrumb) {
 			setOpenedCrumb('');
 			return;
 		}
 		setOpenedCrumb(section);
 	};
+	//
 
+	//получаем массив  выбранных breadcrumbs из объекта breadcrumbs в store
 	const { countSections, breadcrumbs } = useSelector(state => state.catalogReducer);
 
-	const currentBreadcrumbs = getCurrentBreadcrumbs(
-		countSections,
-		breadcrumbs,
-		openedCrumb,
-	);
+	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs);
+	//
 
 	return (
 		<ol className={className}>
-			<li className="breadcrumbs-item">
-				<div className="breadcrumbs-first-item-container">
-					<Button
-						link="/catalog"
-						width="128px"
-						height="40px"
-						borderRadius="100px 0px 0px 100px"
-						border="1px solid #938F99"
-						fontSize="14px"
-						color={'#E8DEF8'}
-						background={'#584E44'}
-						hoverBackground={'rgba(232, 222, 248, 0.08)'}
-						activeBackground={'rgba(232, 222, 248, 0.12)'}
-					>
-						<Img
-							maxWidth="28px"
-							maxHeight="28px"
-							SvgIconComponent={Selected}
-							iconClassName="breadcrumbs-first-item-icon"
-						/>
-						Каталог
-					</Button>
-				</div>
-			</li>
+			<BreadcrumbsFirstItem />
 			<li className="breadcrumbs-item">
 				{currentBreadcrumbs.map(
 					([section, { selectedId, selectedTitle }], index) => (
@@ -76,8 +86,9 @@ const BreadcrumbsContainer = ({ className }) => {
 							selectedId={selectedId}
 							selectedTitle={selectedTitle}
 							isOpen={openedCrumb === section}
-							setOpenedCrumb={setOpenedCrumb}
 							onPopupToggle={onPopupToggle}
+							onMouseEnter={onMouseEnter}
+							onMouseLeave={debouncedOnMouseLeave}
 						/>
 					),
 				)}
@@ -102,17 +113,5 @@ export const Breadcrumbs = styled(BreadcrumbsContainer)`
 		justify-content: center;
 		align-items: center;
 		padding: 0;
-
-		& div.breadcrumbs-first-item-container {
-			width: 128px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex: 1 0 0;
-
-			& svg.breadcrumbs-first-item-icon {
-				margin-right: 8px;
-			}
-		}
 	}
 `;

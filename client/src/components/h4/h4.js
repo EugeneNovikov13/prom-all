@@ -10,7 +10,7 @@ export const H4 = styled(H4Container)`
 	font-size: ${({ fontSize }) => (fontSize ? fontSize : '20')}px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 24px;
+	line-height: ${({lineHeight}) => lineHeight ? lineHeight : '24px'};
 	letter-spacing: -1px;
-	color: ${({ color }) => (color ? color : '#111111')};
+	color: ${({ color }) => (color ? color : 'var(--dark)')};
 `;

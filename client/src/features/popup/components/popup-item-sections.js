@@ -2,15 +2,17 @@ import { motion } from 'framer-motion';
 import { Button } from '../../button/button';
 import styled from 'styled-components';
 
-const PopupItemSectionsContainer = ({
-	className,
-	id,
-	title,
-	index,
-	section,
-	onPopupSectionClick,
-	listVariants,
-}) => {
+const PopupItemSectionsContainer = ({ className, id, title, index, listVariants }) => {
+	const buttonStyleProps = {
+		justifyContent: 'flex-start',
+		width: '100%',
+		height: '40px',
+		borderRadius: '0',
+		fontSize: '14px',
+		color: '#E6E0E9',
+		background: 'transparent',
+	};
+
 	return (
 		<motion.div
 			className={className}
@@ -19,17 +21,7 @@ const PopupItemSectionsContainer = ({
 			animate="visible"
 			custom={index}
 		>
-			<Button
-				link={`/catalog/section/${id}`}
-				justifyContent="flex-start"
-				width="100%"
-				height="40px"
-				borderRadius="0"
-				fontSize="14px"
-				color={'#E6E0E9'}
-				background={'transparent'}
-				onClick={() => onPopupSectionClick(id, title, section)}
-			>
+			<Button {...buttonStyleProps} link={`/catalog/section/${id}`}>
 				<span>{title}</span>
 			</Button>
 		</motion.div>

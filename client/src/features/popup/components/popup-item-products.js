@@ -5,7 +5,8 @@ import { Button } from '../../button/button';
 import { Loader } from '../../../components';
 import styled from 'styled-components';
 
-const PopupItemProductsContainer = ({ className, onPopupSectionClick, listVariants }) => {
+const PopupItemProductsContainer = ({ className, listVariants }) => {
+	//ищем id последнего открытого раздела (подкатегория или тип), чтобы запустить поиск товаров по этому id
 	const selectedSubcategoryId = useSelector(
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedId,
 	);
@@ -16,6 +17,17 @@ const PopupItemProductsContainer = ({ className, onPopupSectionClick, listVarian
 
 	const { data: products, isLoading } =
 		useFetchProductBySectionQuery(selectedSectionId);
+	////
+
+	const buttonStyleProps = {
+		justifyContent: 'flex-start',
+		width: '100%',
+		height: '40px',
+		borderRadius: '0',
+		fontSize: '14px',
+		color: '#E6E0E9',
+		background: 'transparent',
+	};
 
 	return (
 		<>
@@ -34,17 +46,8 @@ const PopupItemProductsContainer = ({ className, onPopupSectionClick, listVarian
 								custom={index}
 							>
 								<Button
+									{...buttonStyleProps}
 									link={`/catalog/product/${id}`}
-									justifyContent="flex-start"
-									width="100%"
-									height="40px"
-									borderRadius="0"
-									fontSize="14px"
-									color={'#E6E0E9'}
-									background={'transparent'}
-									onClick={() =>
-										onPopupSectionClick(id, title, 'product')
-									}
 								>
 									<span>{title}</span>
 								</Button>
