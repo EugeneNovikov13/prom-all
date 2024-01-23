@@ -34,17 +34,16 @@ const BreadcrumbsFieldContainer = ({ className }) => {
 
 export const BreadcrumbsFirstItem = styled(BreadcrumbsFieldContainer)`
 	height: 40px;
+	flex: 1 0 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 0;
 
 	& div.breadcrumbs-first-item-container {
-		width: 128px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex: 1 0 0;
 
 		& svg.breadcrumbs-first-item-icon {
 			margin-right: 8px;

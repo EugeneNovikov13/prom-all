@@ -6,12 +6,12 @@ module.exports = function(product) {
 			id: img.id,
 			imageURL: img.imageURL,
 		})),
-		kinds: product.kinds.map(kind => ({
+		kinds: product.kinds ? product.kinds.map(kind => ({
 			id: kind.id,
 			title: kind.title,
-		})),
+		})) : [],
 		description: product.description,
-		specification: product.specification,
+		specification: product.specification ? product.specification : '',
 		section: product.section,
 	};
 };
