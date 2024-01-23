@@ -39,11 +39,12 @@ const PopupContainer = ({ className, isProductSection, sectionItems }) => {
 export const Popup = styled(PopupContainer)`
 	min-width: 250px;
 	position: absolute;
-	top: 39px;
+	top: 35px;
 	left: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	border: 1px solid #f8eede;
 	border-radius: 0 0 20px 20px;
 	background: var(--dark);
 	z-index: 100;
