@@ -14,7 +14,6 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 					<li key={id} className="section-button">
 						<Button
 							link={`/catalog/section/${id}`}
-							width="calc(100% + 24px)"
 							height="48px"
 							fontSize="20px"
 							color="var(--white)"

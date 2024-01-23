@@ -3,6 +3,6 @@ module.exports = function (brand) {
 		id: brand.id,
 		title: brand.title,
 		logo: brand.logo,
-		isOfficial: brand.isOfficial,
+		isOfficial: brand.isOfficial ? brand.isOfficial : false,
 	}
 }

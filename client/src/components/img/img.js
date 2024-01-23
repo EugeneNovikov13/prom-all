@@ -32,6 +32,7 @@ export const Img = styled(ImgContainer)`
 
 	& svg * {
 		stroke: ${({ strokeColor }) => strokeColor};
+		fill: ${({ fill }) => fill};
 		transition: ${({ transition }) => (transition ? transition : '0.3s')};
 	}
 

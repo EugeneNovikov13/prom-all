@@ -32,8 +32,9 @@ const CrumbContainer = ({
 
 	const crumbButtonStyleProps = {
 		isDisable: !selectedId,
-		width: 'calc(100% + 30px)',
+		width: '100%',
 		height: '32px',
+		padding: '0 10px',
 		borderRadius: '100px',
 		fontSize: '14px',
 		color: '#E6E0E9',
@@ -43,7 +44,7 @@ const CrumbContainer = ({
 	};
 
 	return (
-		<div
+		<li
 			className={className}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
@@ -65,16 +66,17 @@ const CrumbContainer = ({
 					/>
 				)}
 			</div>
-		</div>
+		</li>
 	);
 };
 
 export const Crumb = styled(CrumbContainer)`
+	height: 40px;
+	flex: 1 1 0;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	align-self: stretch;
+	padding: 0;
 	border: 1px solid #938f99;
 
 	&:last-of-type {
@@ -84,11 +86,10 @@ export const Crumb = styled(CrumbContainer)`
 	& div.crumb-container {
 		position: relative;
 		display: flex;
-		flex: 1 0 0;
 		justify-content: center;
 		align-items: center;
 		gap: 8px;
-		padding: ${({ selectedId }) => (selectedId ? '0 54px 0 24px' : '0 24px')};
+		padding: ${({ selectedId }) => (selectedId ? '0 24px 0 12px' : '0 12px')};
 
 		& svg {
 			width: 18px;
@@ -96,6 +97,10 @@ export const Crumb = styled(CrumbContainer)`
 
 			&:hover {
 				cursor: pointer;
+			}
+
+			@media screen and (max-device-height: 1000px) {
+				display: none;
 			}
 		}
 	}

@@ -135,6 +135,7 @@ export const catalogList = [
 			{
 				id: '658aac81cd634ef7ce80f1de',
 				title: 'Датчики, выключатели бесконтактные',
+				shortTitle: 'Датчики',
 				image: 'http://prom-all.com/wp-content/uploads/2015/08/13.jpg',
 			},
 			{
@@ -236,12 +237,12 @@ export const catalogList = [
 			},
 			{
 				id: '658ab0abcd634ef7ce80f1f4',
-				title: 'Насосы центробежно-вихревые',
+				title: 'Центробежно-вихревые',
 				image: 'http://prom-all.com/wp-content/uploads/2015/08/nasos2.jpg',
 			},
 			{
 				id: '658ab0abcd634ef7ce80f1f0',
-				title: 'Насосы консольно-моноблочные',
+				title: 'Консольно-моноблочные',
 				image: 'http://prom-all.com/wp-content/uploads/2015/08/nasos6.jpg',
 			},
 		],

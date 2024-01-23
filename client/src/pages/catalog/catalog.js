@@ -1,13 +1,14 @@
 import { Guide } from '../../widgets/guide/guide';
-import { CatalogLayout } from './layouts';
+import { CatalogBody, CatalogHeader } from './components';
 import styled from 'styled-components';
 
 const CatalogContainer = ({ className }) => {
 	return (
-		<div className={className}>
-			<CatalogLayout />
+		<main className={className}>
+			<CatalogHeader />
+			<CatalogBody />
 			<Guide />
-		</div>
+		</main>
 	);
 };
 

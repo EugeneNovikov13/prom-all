@@ -33,12 +33,13 @@ const ButtonContainer = ({ className, children, link, type, isDisable, onClick }
 export const Button = styled(ButtonContainer)`
 	display: flex;
 	align-items: center;
-	padding: 0;
 	font-family: Inter, sans-serif;
 	font-style: normal;
 	font-weight: 500;
 	white-space: nowrap;
 	outline: none;
+
+	padding: ${({ padding }) => (padding ? padding : '0')};
 
 	justify-content: ${({ justifyContent }) =>
 		justifyContent ? justifyContent : 'center'};
@@ -75,6 +76,6 @@ export const Button = styled(ButtonContainer)`
 	}
 
 	@media (max-width: 380px) {
-		width: ${({ width }) => (width === '100%' ? '100%' : '300px')};
+		width: ${({ width }) => (parseInt(width, 10) > 300 ? '300px' : '')};
 	}
 `;

@@ -77,41 +77,58 @@ const BreadcrumbsContainer = ({ className }) => {
 	return (
 		<ol className={className}>
 			<BreadcrumbsFirstItem />
-			<li className="breadcrumbs-item">
-				{currentBreadcrumbs.map(
-					([section, { selectedId, selectedTitle }], index) => (
-						<Crumb
-							key={index}
-							section={section}
-							selectedId={selectedId}
-							selectedTitle={selectedTitle}
-							isOpen={openedCrumb === section}
-							onPopupToggle={onPopupToggle}
-							onMouseEnter={onMouseEnter}
-							onMouseLeave={debouncedOnMouseLeave}
-						/>
-					),
-				)}
-			</li>
+			{currentBreadcrumbs.map(([section, { selectedId, selectedTitle }], index) => (
+				<Crumb
+					key={index}
+					section={section}
+					selectedId={selectedId}
+					selectedTitle={selectedTitle}
+					isOpen={openedCrumb === section}
+					onPopupToggle={onPopupToggle}
+					onMouseEnter={onMouseEnter}
+					onMouseLeave={debouncedOnMouseLeave}
+				/>
+			))}
 		</ol>
 	);
 };
 
 export const Breadcrumbs = styled(BreadcrumbsContainer)`
 	max-width: 1128px;
-	height: 40px;
+	height: 60px;
 	display: flex;
 	align-items: center;
-	align-self: stretch;
 	margin: 0;
 	padding: 0;
 	user-select: none;
 
-	& li.breadcrumbs-item {
-		height: 40px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0;
+	@media screen and (max-device-height: 1000px) {
+		max-width: 340px;
+		overflow-x: scroll;
+	}
+
+	@media screen and (max-width: 1200px) and (min-device-height: 1000px) {
+		max-width: 86vw;
+		overflow-x: scroll;
+
+		&::-webkit-scrollbar {
+			height: 7px; /* высота полосы прокрутки */
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1; /* Цвет фона трека */
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #888; /* Цвет полосы прокрутки */
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: #555; /* Цвет полосы прокрутки при наведении */
+		}
+
+		& svg {
+			display: none;
+		}
 	}
 `;
