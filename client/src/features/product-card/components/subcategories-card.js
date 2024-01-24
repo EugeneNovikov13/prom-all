@@ -10,14 +10,14 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 	return (
 		<div className={className}>
 			<ul className="sections-list">
-				{firstFiveSubcategories.map(({ id, title, shortTitle }) => (
-					<li key={id} className="section-button">
+				{firstFiveSubcategories.map(({ id: subId, title, shortTitle }) => (
+					<li key={subId} className="section-button">
 						<Button
-							link={`/catalog/section/${id}`}
+							link={`/catalog/section/${subId}`}
 							height="48px"
 							fontSize="20px"
 							color="var(--white)"
-							background="transparent"
+							background={'transparent'}
 							activeBackground="rgba(208, 188, 255, 0.08)"
 						>
 							{shortTitle ? shortTitle : title}

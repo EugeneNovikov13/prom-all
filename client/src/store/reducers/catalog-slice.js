@@ -20,6 +20,7 @@ const initialState = {
 			selectedTitle: 'Товар',
 		},
 	},
+	isProductCards: false,
 	cards: [],
 };
 
@@ -49,7 +50,12 @@ export const catalogSlice = createSlice({
 			state.breadcrumbs.product = action.payload;
 		},
 		setCards(state, action) {
-			state.cards = action.payload;
+			state.cards = action.payload.data;
+			state.isProductCards = action.payload.isProductCards;
+		},
+		resetCards(state) {
+			state.cards = initialState.cards;
+			state.isProductCards = initialState.isProductCards;
 		},
 		resetBreadcrumbs() {
 			return initialState;
@@ -57,6 +63,7 @@ export const catalogSlice = createSlice({
 	},
 });
 
-export const { resetBreadcrumbs, setProduct, setCards } = catalogSlice.actions;
+export const { resetBreadcrumbs, resetCards, setProduct, setCards } =
+	catalogSlice.actions;
 
 export default catalogSlice.reducer;

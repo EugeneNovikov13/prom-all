@@ -1,60 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCards } from '../../../store/reducers';
-import { fetchProductsBySectionId } from '../../../utils';
-import { Img, Loader } from '../../../components';
+import { getProducts } from '../utils/get-products';
+import { motion } from 'framer-motion';
+import { changeLoading } from '../../../store/reducers';
+import { Img } from '../../../components';
 import { Button } from '../../../features';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
+import { animationVariants } from '../constants/animation-variants';
 import styled from 'styled-components';
+import { buttonStyleProps } from '../constants/button-style-props';
 
-const TypeSectionContainer = ({ className, id, title, isOpen, buttonStyleProps }) => {
-	const [isLoading, setIsLoading] = useState(false);
+const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (isOpen) {
-			dispatch(setCards([]));
-			setIsLoading(true);
-			fetchProductsBySectionId(id)
-				.then(({ data }) => {
-					dispatch(setCards(data));
-					setIsLoading(false);
-				})
-				.catch(e => {
-					//TODO обработать ошибку
-					console.log(e.response.data);
-					setIsLoading(false);
-				});
+			getProducts(id, dispatch, changeLoading);
 		}
 	}, [dispatch, id, isOpen]);
 
 	return (
-		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<li className={className}>
-					<Button
-						{...buttonStyleProps}
-						background={isOpen ? '#FFD4BC' : 'transparent'}
-						padding={'6px 16px 6px 24px'}
-						link={`/catalog/section/${id}`}
-					>
-						<div className="type-button-content">
-							<Img
-								SvgIconComponent={BigCircle}
-								maxWidth="16px"
-								maxHeight="16px"
-								fill={'#FF7F00'}
-							/>
-							<span className="type-title">{title}</span>
-							{/*TODO доделать получение количества товаров в категории*/}
-							<span>100+</span>
-						</div>
-					</Button>
-				</li>
-			)}
-		</>
+		<motion.li
+			className={className}
+			variants={animationVariants}
+			initial={'hidden'}
+			animate="visible"
+			exit="hidden"
+			custom={index}
+		>
+			<Button
+				{...buttonStyleProps}
+				background={isOpen ? '#FFD4BC' : 'transparent'}
+				padding={'6px 16px 6px 24px'}
+				link={`/catalog/section/${id}`}
+			>
+				<div className="type-button-content">
+					<Img
+						SvgIconComponent={BigCircle}
+						maxWidth="16px"
+						maxHeight="16px"
+						fill={'#FF7F00'}
+					/>
+					<span className="type-title">{title}</span>
+					{/*TODO доделать получение количества товаров в категории*/}
+					<span>100+</span>
+				</div>
+			</Button>
+		</motion.li>
 	);
 };
 
