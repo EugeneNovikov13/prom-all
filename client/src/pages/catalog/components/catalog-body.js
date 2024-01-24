@@ -1,8 +1,10 @@
 import { useMatch } from 'react-router-dom';
 import { Cards, Categories, SideMenu } from '../../../widgets';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const CatalogBodyContainer = ({ className }) => {
+	const [isOpen, setIsOpen] = useState(true);
 	const isCatalogRoot = useMatch('/catalog');
 
 	return (
@@ -11,8 +13,14 @@ const CatalogBodyContainer = ({ className }) => {
 				{isCatalogRoot ? (
 					<Categories />
 				) : (
-					<div className="catalog-body-subcategories">
-						<SideMenu />
+					<div
+						className={
+							isOpen
+								? 'catalog-body-subcategories'
+								: 'side-menu__closed catalog-body-subcategories'
+						}
+					>
+						<SideMenu isOpen={isOpen} setIsOpen={setIsOpen} />
 						<Cards />
 					</div>
 				)}
@@ -39,13 +47,22 @@ export const CatalogBody = styled(CatalogBodyContainer)`
 		gap: 24px;
 
 		& div.catalog-body-subcategories {
+			position: relative;
 			max-width: 1200px;
 			display: flex;
 			justify-content: center;
-			align-items: center;
+			align-items: flex-start;
 			gap: 24px;
 			padding: 0 36px;
 			align-self: stretch;
+
+			@media screen and (max-device-height: 1000px) {
+				padding: 0;
+			}
+
+			&.side-menu__closed {
+				flex-direction: column;
+			}
 		}
 	}
 `;

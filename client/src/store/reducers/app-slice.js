@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	fixedHeader: false,
+	isLoading: false,
 	wasLogin: false,
 	modal: {
 		isOpen: false,
@@ -18,9 +19,12 @@ export const appSlice = createSlice({
 		setFixedHeader(state, action) {
 			state.fixedHeader = action.payload;
 		},
+		changeLoading(state, action) {
+			state.isLoading = action.payload;
+		},
 	},
 });
 
-export const {setFixedHeader} = appSlice.actions;
+export const { changeLoading, setFixedHeader } = appSlice.actions;
 
 export default appSlice.reducer;

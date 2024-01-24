@@ -12,10 +12,11 @@ import {
 	Registration,
 	Sections,
 } from './pages';
-import { Error, Modal } from './components';
+import { Error, Loader, Modal } from './components';
 import { Footer, Header } from './widgets';
 import { ERROR } from './constants';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const AppColumn = styled.div`
 	position: relative;
@@ -31,6 +32,8 @@ const AppColumn = styled.div`
 `;
 
 export const PromAll = () => {
+	const isLoading = useSelector(state => state.appReducer.isLoading);
+
 	return (
 		<AppColumn>
 			<Header />
@@ -55,6 +58,7 @@ export const PromAll = () => {
 			</Page>
 			<Footer />
 			<Modal />
+			{isLoading && <Loader />}
 		</AppColumn>
 	);
 };

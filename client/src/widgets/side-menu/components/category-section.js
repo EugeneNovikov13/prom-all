@@ -1,25 +1,34 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
+import { setCards } from '../../../store/reducers';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { SubcategorySection } from './subcategory-section';
 import { ReactComponent as Closed } from '../assets/closed.svg';
 import { ReactComponent as Opened } from '../assets/opened.svg';
+import { buttonStyleProps } from '../constants/button-style-props';
 import styled from 'styled-components';
 
-const CategoryButtonContainer = ({
-	className,
-	id,
-	title,
-	subcategories,
-	isOpen,
-	buttonStyleProps,
-}) => {
+const CategoryButtonContainer = ({ className, id, title, subcategories, isOpen }) => {
 	const [openedSubcategory, setOpenedSubcategory] = useState('');
 
 	const currentSubcategoryTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedTitle,
 	);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		debugger;
+		if (isOpen) {
+			const payload = {
+				isProductCards: false,
+				data: subcategories,
+			};
+			dispatch(setCards(payload));
+		}
+	}, [currentSubcategoryTitle, dispatch, isOpen, subcategories]);
 
 	useEffect(() => {
 		setOpenedSubcategory(currentSubcategoryTitle);
@@ -27,12 +36,7 @@ const CategoryButtonContainer = ({
 
 	return (
 		<div className={className}>
-			<Button
-				{...buttonStyleProps}
-				// background={'transparent'}
-				isDisable={isOpen}
-				link={`/catalog/section/${id}`}
-			>
+			<Button {...buttonStyleProps} link={`/catalog/section/${id}`}>
 				<div className="category-button-content">
 					<span>{title}</span>
 					<Img
@@ -42,21 +46,23 @@ const CategoryButtonContainer = ({
 					/>
 				</div>
 			</Button>
-			{isOpen && (
-				<ul className="subcategories-container">
-					{subcategories.map(({ id, shortTitle, title, types }) => (
-						<SubcategorySection
-							key={id}
-							id={id}
-							shortTitle={shortTitle}
-							title={title}
-							types={types}
-							isOpen={title === openedSubcategory}
-							buttonStyleProps={buttonStyleProps}
-						/>
-					))}
-				</ul>
-			)}
+			<AnimatePresence>
+				{isOpen && (
+					<ul className="subcategories-container">
+						{subcategories.map(({ id, shortTitle, title, types }, index) => (
+							<SubcategorySection
+								key={id}
+								id={id}
+								shortTitle={shortTitle}
+								title={title}
+								types={types}
+								isOpen={title === openedSubcategory}
+								index={index}
+							/>
+						))}
+					</ul>
+				)}
+			</AnimatePresence>
 			<div className="divider"></div>
 		</div>
 	);
@@ -67,6 +73,7 @@ export const CategorySection = styled(CategoryButtonContainer)`
 	flex-direction: column;
 	align-items: flex-start;
 	align-self: stretch;
+	overflow: hidden;
 
 	& div.category-button-content {
 		display: flex;

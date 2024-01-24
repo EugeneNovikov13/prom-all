@@ -9,8 +9,6 @@ const ImgContainer = ({ className, iconClassName, SvgIconComponent, image, onCli
 				<img
 					className={iconClassName}
 					src={image}
-					width="100%"
-					height="100%"
 					alt="Ошибка загрузки картинки"
 					onClick={onClick}
 				/>

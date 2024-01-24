@@ -1,16 +1,37 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getProducts } from '../utils/get-products';
+import { motion } from 'framer-motion';
+import { changeLoading } from '../../../store/reducers';
 import { Img } from '../../../components';
 import { Button } from '../../../features';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
+import { animationVariants } from '../constants/animation-variants';
 import styled from 'styled-components';
+import { buttonStyleProps } from '../constants/button-style-props';
 
-const TypeSectionContainer = ({ className, id, title, isOpen, buttonStyleProps }) => {
+const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (isOpen) {
+			getProducts(id, dispatch, changeLoading);
+		}
+	}, [dispatch, id, isOpen]);
+
 	return (
-		<li className={className}>
+		<motion.li
+			className={className}
+			variants={animationVariants}
+			initial={'hidden'}
+			animate="visible"
+			exit="hidden"
+			custom={index}
+		>
 			<Button
 				{...buttonStyleProps}
 				background={isOpen ? '#FFD4BC' : 'transparent'}
 				padding={'6px 16px 6px 24px'}
-				isDisable={isOpen}
 				link={`/catalog/section/${id}`}
 			>
 				<div className="type-button-content">
@@ -25,7 +46,7 @@ const TypeSectionContainer = ({ className, id, title, isOpen, buttonStyleProps }
 					<span>100+</span>
 				</div>
 			</Button>
-		</li>
+		</motion.li>
 	);
 };
 
@@ -48,9 +69,5 @@ export const TypeSection = styled(TypeSectionContainer)`
 			flex: 1 0 0;
 			text-align: left;
 		}
-	}
-
-	& button {
-		filter: none;
 	}
 `;

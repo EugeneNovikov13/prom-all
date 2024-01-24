@@ -9,6 +9,7 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			return catalogList.map(item => ({
 				id: item.id,
 				title: item.title,
+				image: item.image,
 			}));
 		}
 		case 'subcategory': {
@@ -18,6 +19,7 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			return currentCategory.subcategories.map(item => ({
 				id: item.id,
 				title: item.title,
+				image: item.image,
 			}));
 		}
 		case 'type': {
@@ -30,6 +32,7 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			return currentSubcategory.types.map(item => ({
 				id: item.id,
 				title: item.title,
+				image: item.image,
 			}));
 		}
 		default: {

@@ -18,7 +18,7 @@ const CatalogHeaderContainer = ({ className }) => {
 export const CatalogHeader = styled(CatalogHeaderContainer)`
 	max-width: 100%;
 	display: flex;
-	padding: 80px 10px;
+	padding: 80px 10px 40px;
 	flex-direction: column;
 	align-items: center;
 	align-self: stretch;

@@ -13,7 +13,7 @@ const ProductCardContentContainer = ({ className, title }) => {
 
 export const ProductCardContent = styled(ProductCardContentContainer)`
 	display: flex;
-	max-height: 68px;
+	max-height: 88px;
 	flex-direction: column;
 	justify-content: flex-end;
 	align-items: center;

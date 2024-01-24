@@ -4,7 +4,7 @@ module.exports = function(product) {
 		title: product.title,
 		images: product.images.map(img => ({
 			id: img.id,
-			imageURL: img.imageURL,
+			image: img.imageURL,
 		})),
 		kinds: product.kinds ? product.kinds.map(kind => ({
 			id: kind.id,

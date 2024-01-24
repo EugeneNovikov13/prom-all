@@ -1,16 +1,9 @@
 import { H4, Img } from '../../components';
 import styled from 'styled-components';
 
-const BrandCardContainer = ({
-	className,
-	title,
-	logo,
-	isOfficial,
-}) => {
+const BrandCardContainer = ({ className, title, logo, isOfficial }) => {
 	return (
-		<div
-			className={className}
-		>
+		<div className={className}>
 			<div className="brand-card-logo">
 				<Img
 					iconClassName="brand-card-icon"
@@ -40,6 +33,11 @@ export const BrandCard = styled(BrandCardContainer)`
 	overflow: hidden;
 	transition: 0.5s;
 
+	& img.brand-card-icon {
+		width: 100%;
+		height: 100%;
+	}
+
 	&:hover {
 		border: none;
 		box-shadow: 0 8px 14px 0 rgba(52, 57, 65, 0.4);
@@ -57,7 +55,7 @@ export const BrandCard = styled(BrandCardContainer)`
 		}
 
 		& div.brand-card-logo::after {
-			background-color: #FF7F00;
+			background-color: #ff7f00;
 			opacity: 1;
 		}
 	}
@@ -81,9 +79,11 @@ export const BrandCard = styled(BrandCardContainer)`
 			width: 168px;
 			height: 96px;
 			mix-blend-mode: multiply;
-			background-color: #FFFFFF;
+			background-color: #ffffff;
 			opacity: 0;
-			transition: opacity 0.5s, background-color 0.5s;
+			transition:
+				opacity 0.5s,
+				background-color 0.5s;
 		}
 	}
 
