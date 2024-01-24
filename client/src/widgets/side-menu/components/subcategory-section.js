@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCards } from '../../../store/reducers';
+import { fetchProductsBySectionId } from '../../../utils';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { TypeSection } from './type-section';
@@ -21,16 +23,32 @@ const SubcategorySectionContainer = ({
 		state => state.catalogReducer.breadcrumbs.type.selectedTitle,
 	);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		setOpenedType(currentTypeTitle);
-	}, [currentTypeTitle]);
+		if (isOpen && types) {
+			dispatch(setCards(types));
+			return;
+		}
+		if (isOpen) {
+			dispatch(setCards([]));
+			fetchProductsBySectionId(id)
+				.then(({ data }) => {
+					dispatch(setCards(data));
+				})
+				.catch(e => {
+					//TODO обработать ошибку
+					console.log(e.response.data);
+				});
+		}
+	}, [currentTypeTitle, dispatch, id, isOpen, types]);
 
 	return (
 		<li className={className}>
 			<Button
 				{...buttonStyleProps}
 				background={isOpen ? '#FFD4BC' : 'transparent'}
-				isDisable={isOpen}
 				link={`/catalog/section/${id}`}
 			>
 				<div className="subcategory-button-content">
@@ -78,10 +96,6 @@ export const SubcategorySection = styled(SubcategorySectionContainer)`
 			flex: 1 0 0;
 			text-align: left;
 		}
-	}
-
-	& button {
-		filter: none;
 	}
 
 	& ul.types-container {

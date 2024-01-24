@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCards } from '../../../store/reducers';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { SubcategorySection } from './subcategory-section';
@@ -21,18 +22,18 @@ const CategoryButtonContainer = ({
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedTitle,
 	);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		setOpenedSubcategory(currentSubcategoryTitle);
-	}, [currentSubcategoryTitle]);
+		if (isOpen) {
+			dispatch(setCards(subcategories));
+		}
+	}, [currentSubcategoryTitle, dispatch, isOpen, subcategories]);
 
 	return (
 		<div className={className}>
-			<Button
-				{...buttonStyleProps}
-				// background={'transparent'}
-				isDisable={isOpen}
-				link={`/catalog/section/${id}`}
-			>
+			<Button {...buttonStyleProps} link={`/catalog/section/${id}`}>
 				<div className="category-button-content">
 					<span>{title}</span>
 					<Img
