@@ -7,30 +7,30 @@ import styled from 'styled-components';
 const GuideContainer = ({ className }) => {
 	return (
 		<section className={className}>
-			<div className="help-container">
-				<div className="help-header">
+			<div className="guide-container">
+				<div className="guide-header">
 					<H1>Как сделать заказ</H1>
 				</div>
-				<div className="help-body">
-					<div className="help-item">
-						<div className="help-content">
-							<Step1 className="help-icon" style={{ left: '-10px' }} />
+				<div className="guide-body">
+					<div className="guide-item">
+						<div className="guide-content">
+							<Step1 className="guide-icon" style={{ left: '-10px' }} />
 							<P lineHeight="28px">
 								Выберите товар, его параметры и количество
 							</P>
 						</div>
 					</div>
-					<div className="help-item">
-						<div className="help-content">
-							<Step2 className="help-icon" />
+					<div className="guide-item">
+						<div className="guide-content">
+							<Step2 className="guide-icon" />
 							<P lineHeight="28px">
 								Нажмите кнопку «Оформить заказ», появится форма заказа
 							</P>
 						</div>
 					</div>
-					<div className="help-item">
-						<div className="help-content">
-							<Step3 className="help-icon" />
+					<div className="guide-item">
+						<div className="guide-content">
+							<Step3 className="guide-icon" />
 							<P lineHeight="28px">
 								Оставьте контактные данные и менеджер с вами свяжется
 							</P>
@@ -51,7 +51,7 @@ export const Guide = styled(GuideContainer)`
 	padding: 120px 10px;
 	background: #e8e8e8;
 
-	& div.help-container {
+	& div.guide-container {
 		max-width: 1200px;
 		display: flex;
 		flex-direction: column;
@@ -60,21 +60,21 @@ export const Guide = styled(GuideContainer)`
 		gap: 40px;
 		padding: 0 36px 114px 36px;
 
-		& div.help-header {
+		& div.guide-header {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			align-self: stretch;
 		}
 
-		& div.help-body {
+		& div.guide-body {
 			display: flex;
 			flex-wrap: wrap;
 			align-items: flex-start;
 			gap: 20px;
 			align-self: stretch;
 
-			& div.help-item {
+			& div.guide-item {
 				min-width: 300px;
 				height: 282px;
 				display: flex;
@@ -86,7 +86,7 @@ export const Guide = styled(GuideContainer)`
 				border-radius: 8px;
 				background: #071123;
 
-				& div.help-content {
+				& div.guide-content {
 					position: relative;
 					display: flex;
 					flex-direction: column;
@@ -95,7 +95,7 @@ export const Guide = styled(GuideContainer)`
 					flex: 1 0 0;
 					align-self: stretch;
 
-					& svg.help-icon {
+					& svg.guide-icon {
 						position: absolute;
 						top: -30px;
 						left: -20px;

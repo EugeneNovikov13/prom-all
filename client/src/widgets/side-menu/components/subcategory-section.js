@@ -26,10 +26,6 @@ const SubcategorySectionContainer = ({
 		state => state.catalogReducer.breadcrumbs.type.selectedTitle,
 	);
 
-	const cardsLog = useSelector(state => state.catalogReducer.cards);
-
-	console.log(cardsLog);
-
 	const dispatch = useDispatch();
 
 	//TODO разкомментировать, когда появятся товары во всех категориях
@@ -40,7 +36,6 @@ const SubcategorySectionContainer = ({
 	// const {data} = useFetchProductBySectionQuery(id);
 
 	useEffect(() => {
-		debugger;
 		if (isOpen && types) {
 			const payload = {
 				isProductCards: false,

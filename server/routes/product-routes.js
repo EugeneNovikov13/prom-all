@@ -11,7 +11,6 @@ const router = express.Router();
 router.get('/products/:id', async (req, res) => {
 	try {
 		const product = await getProduct(req.params.id);
-		console.log(product);
 
 		res.send(mapProduct(product));
 	} catch (e) {

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { Button } from '../../features';
 import { CategorySection } from './components/category-section';
+import { Img } from '../../components';
 import { ReactComponent as Burger } from './assets/burger.svg';
 import { catalogList } from '../../constants';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Img } from '../../components';
 import { buttonStyleProps } from './constants/button-style-props';
+import styled from 'styled-components';
 
 const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 	const [openedCategory, setOpenedCategory] = useState('');
@@ -15,8 +15,6 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 	const currentCategoryTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.category.selectedTitle,
 	);
-
-	const dispatch = useDispatch();
 
 	const categories = catalogList.map(cat => ({
 		id: cat.id,
@@ -27,7 +25,7 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 
 	useEffect(() => {
 		setOpenedCategory(currentCategoryTitle);
-	}, [categories, currentCategoryTitle, dispatch, isOpen]);
+	}, [currentCategoryTitle]);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
@@ -50,6 +48,7 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 					title={title}
 					subcategories={subcategories}
 					isOpen={title === openedCategory}
+					setOpenedCategory={setOpenedCategory}
 				/>
 			))}
 		</motion.aside>
@@ -58,20 +57,18 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 
 export const SideMenu = styled(SideMenuContainer)`
 	position: relative;
-	flex: ${({ isOpen }) => (isOpen ? '1 1 270px' : '1 0 0')};
-	height: ${({ isOpen }) => (isOpen ? '' : '80px')};
 	min-width: 270px;
+	height: ${({ isOpen }) => (isOpen ? '' : '80px')};
 	display: flex;
+	flex: ${({ isOpen }) => (isOpen ? '1 1 270px' : '1 0 0')};
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 12px;
 	border-radius: 16px;
 	background: var(--white);
 
-	@media screen and (max-device-height: 1000px) {
-		position: absolute;
-		top: 0;
-		left: -400px;
+	@media (max-width: 600px) {
+		width: 100%;
 	}
 
 	& button {

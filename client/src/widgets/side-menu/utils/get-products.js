@@ -2,7 +2,6 @@ import { resetCards, setCards } from '../../../store/reducers';
 import { fetchProductsBySectionId } from '../../../utils';
 
 export const getProducts = (id, dispatch, setLoadingFunc) => {
-	debugger;
 	dispatch(resetCards());
 	dispatch(setLoadingFunc(true));
 	fetchProductsBySectionId(id)

@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ProductCard } from '../../features';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Img } from '../../components';
 import { ProductCardContent } from '../../features/product-card/components/product-card-content';
+import styled from 'styled-components';
 
 const CardsContainer = ({ className }) => {
 	const cards = useSelector(state => state.catalogReducer.cards) || [];
@@ -61,7 +61,11 @@ export const Cards = styled(CardsContainer)`
 		flex-wrap: wrap;
 
 		@media screen and (max-device-height: 1000px) {
-			justify-content: center;
+			justify-content: space-evenly;
+		}
+
+		@media (max-width: 600px) {
+			justify-content: space-evenly;
 		}
 
 		& a {
