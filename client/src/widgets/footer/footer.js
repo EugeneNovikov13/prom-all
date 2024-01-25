@@ -8,16 +8,18 @@ const FooterContainer = ({ className }) => {
 	return (
 		<footer className={className}>
 			<div className="footer-body">
-				<div className="logo">
-					<Link to="/">
-						<Logo />
-					</Link>
-				</div>
-				<div className="navigation">
-					<NavigationFooterMenu />
-				</div>
-				<div className="info">
-					<Information />
+				<div className='footer-body-container'>
+					<div className='logo'>
+						<Link to='/'>
+							<Logo />
+						</Link>
+					</div>
+					<div className='navigation'>
+						<NavigationFooterMenu />
+					</div>
+					<div className='info'>
+						<Information />
+					</div>
 				</div>
 			</div>
 			<div className="footer-label">
@@ -39,60 +41,56 @@ export const Footer = styled(FooterContainer)`
 
 	& div.footer-body {
 		min-height: 240px;
-		max-width: 1200px;
-		padding: 0 36px;
 		display: flex;
-		flex-wrap: wrap;
 		align-items: flex-start;
+		justify-content: center;
 		gap: 24px;
-		align-self: stretch;
 
 		@media (max-width: 450px) {
 			padding: 0 10px;
 		}
 
-		& div.logo {
-			flex: 1;
+		& div.footer-body-container {
+			max-width: 1200px;
 			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 10px;
-			padding-top: 12px;
+			flex-wrap: wrap;
+			flex: 1 0 0;
+			justify-content: center;
+			padding: 0 36px;
 
-			@media (max-width: 450px) {
-				align-items: center;
+			& div.logo {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 10px;
+				padding-top: 12px;
+
+				@media (max-width: 450px) {
+					align-items: center;
+				}
 			}
-		}
 
-		& div.navigation {
-			flex: 1;
-		}
+			& div.navigation {
+				flex: 1;
+			}
 
-		& div.info {
-			min-width: 185px;
-			flex: 1;
+			& div.info {
+				min-width: 250px;
+				flex: 1;
+			}
 		}
 	}
 
 	& div.footer-label {
 		display: flex;
-		max-width: 1200px;
-		padding: 0 36px;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 10px;
-		align-self: stretch;
 
 		& div.label-wrapper {
-			display: flex;
 			max-width: 1200px;
-			padding: 16px 0;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 16px;
-			align-self: stretch;
+			flex: 1 0 0;
+			padding: 16px 36px;
 			border-top: 1px solid var(--white);
 
 			& p {
