@@ -10,33 +10,55 @@ import { ReactComponent as Opened } from '../assets/opened.svg';
 import { buttonStyleProps } from '../constants/button-style-props';
 import styled from 'styled-components';
 
-const CategoryButtonContainer = ({ className, id, title, subcategories, isOpen }) => {
+const CategoryButtonContainer = ({
+	className,
+	id,
+	title,
+	subcategories,
+	isOpen,
+	setOpenedCategory,
+}) => {
 	const [openedSubcategory, setOpenedSubcategory] = useState('');
 
 	const currentSubcategoryTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedTitle,
 	);
 
+	const countSections = useSelector(
+		state => state.catalogReducer.countSections,
+	);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		debugger;
-		if (isOpen) {
+		if (isOpen && countSections === 2) {
 			const payload = {
 				isProductCards: false,
 				data: subcategories,
 			};
 			dispatch(setCards(payload));
 		}
-	}, [currentSubcategoryTitle, dispatch, isOpen, subcategories]);
+	}, [currentSubcategoryTitle, dispatch, isOpen, subcategories, countSections]);
 
 	useEffect(() => {
 		setOpenedSubcategory(currentSubcategoryTitle);
 	}, [currentSubcategoryTitle]);
 
+	const onClick = categoryTitle => {
+		if (isOpen) {
+			setOpenedCategory('');
+			return;
+		}
+		setOpenedCategory(categoryTitle);
+	};
+
 	return (
 		<div className={className}>
-			<Button {...buttonStyleProps} link={`/catalog/section/${id}`}>
+			<Button
+				{...buttonStyleProps}
+				link={`/catalog/section/${id}`}
+				onClick={() => onClick(title)}
+			>
 				<div className="category-button-content">
 					<span>{title}</span>
 					<Img

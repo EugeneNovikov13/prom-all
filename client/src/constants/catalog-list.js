@@ -65,15 +65,14 @@ export const catalogList = [
 				image: 'http://prom-all.com/wp-content/uploads/2015/08/avtomat8.jpg',
 			},
 			{
-				id: '658aac81cd634ef7ce80f1d1',
-				title: 'Выключатели конечные (путевые)',
-				shortTitle: 'Выключатели конечные',
-				image: 'http://prom-all.com/wp-content/uploads/2015/08/VK200.jpg',
-			},
-			{
 				id: '658aac81cd634ef7ce80f1d2',
 				title: 'Посты кнопочные, кнопки',
 				image: 'http://prom-all.com/wp-content/uploads/2015/08/30.jpg',
+			},
+			{
+				id: '658aac81cd634ef7ce80f1dc',
+				title: 'Пускатели электромагнитные',
+				image: 'http://prom-all.com/wp-content/uploads/2015/08/puskatel5.jpg',
 			},
 			{
 				id: '658aac81cd634ef7ce80f1d3',
@@ -123,9 +122,10 @@ export const catalogList = [
 				],
 			},
 			{
-				id: '658aac81cd634ef7ce80f1dc',
-				title: 'Пускатели электромагнитные',
-				image: 'http://prom-all.com/wp-content/uploads/2015/08/puskatel5.jpg',
+				id: '658aac81cd634ef7ce80f1d1',
+				title: 'Выключатели конечные (путевые)',
+				shortTitle: 'Выключатели конечные',
+				image: 'http://prom-all.com/wp-content/uploads/2015/08/VK200.jpg',
 			},
 			{
 				id: '658aac81cd634ef7ce80f1dd',

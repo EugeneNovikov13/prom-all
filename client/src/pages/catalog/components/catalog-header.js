@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { H1 } from '../../../components';
 import { Breadcrumbs } from '../../../widgets';
+import styled from 'styled-components';
 
 const CatalogHeaderContainer = ({ className }) => {
 	return (
@@ -32,6 +32,10 @@ export const CatalogHeader = styled(CatalogHeaderContainer)`
 		align-items: flex-start;
 		gap: 40px;
 		padding: 0 36px;
+
+		@media (max-width: 600px) {
+			padding: 0;
+		}
 
 		& div.catalog-header-title {
 			display: flex;
