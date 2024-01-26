@@ -1,3 +1,4 @@
+export * from './counter/counter';
 export * from './error/error';
 export * from './h1/h1';
 export * from './h2/h2';
@@ -8,5 +9,6 @@ export * from './loader/loader';
 export * from './logo/logo';
 export * from './modal/modal';
 export * from './p/p';
+export * from './select/select';
 export * from './server-message/server-message';
 export * from './tooltip/tooltip';
