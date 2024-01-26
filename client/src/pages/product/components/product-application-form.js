@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { openModal, setOrderData } from '../../../store/reducers';
 import { Counter, H1, Select } from '../../../components';
 import { Button } from '../../../features';
 import styled from 'styled-components';
 
 const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 	const [counter, setCounter] = useState(1);
+	const [selectValue, setSelectValue] = useState('');
+
+	const dispatch = useDispatch();
 
 	const onCounterChange = dif => {
 		if (counter + dif < 1) {
@@ -15,6 +20,19 @@ const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 	};
 
 	const options = kinds && kinds.map(kind => ({ value: kind.id, label: kind.title }));
+
+	const onClick = () => {
+		console.log(title, selectValue, counter);
+		const orderData = `Требуется: ${title} \nМодель исполнения: ${selectValue} \nКоличество: ${counter}шт.`;
+
+		dispatch(setOrderData(orderData));
+		dispatch(
+			openModal({
+				backgroundColor: 'var(--dark)',
+				component: 'application',
+			}),
+		);
+	};
 
 	return (
 		<div className={className}>
@@ -31,7 +49,7 @@ const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 						<span className="product-application-span">
 							Модель исполнения
 						</span>
-						<Select options={options} />
+						<Select options={options} setSelectValue={setSelectValue} />
 					</div>
 				)}
 			</div>
@@ -43,6 +61,7 @@ const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 				background={'var(--brand-orange)'}
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
+				onClick={onClick}
 			>
 				Оформить заказ
 			</Button>

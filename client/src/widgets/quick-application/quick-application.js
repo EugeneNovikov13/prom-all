@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useResetForm } from '../../hooks';
+import { closeModal } from '../../store/reducers';
 import { sendQuickApplication } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
@@ -10,8 +12,12 @@ import { SETTINGS } from '../../settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import styled from 'styled-components';
 
-const QuickApplicationContainer = ({ className }) => {
+const QuickApplicationContainer = ({ className, orderData = '' }) => {
+	console.log(orderData);
 	const recaptchaRef = React.createRef();
+
+	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
+	const dispatch = useDispatch();
 
 	const [serverError, setServerError] = useState(null);
 	const [serverResponse, setServerResponse] = useState(null);
@@ -28,7 +34,7 @@ const QuickApplicationContainer = ({ className }) => {
 			organization: '',
 			email: '',
 			phone: '',
-			application: '',
+			application: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_APPLICATION_FROM_SCHEMA),
 	});
@@ -41,6 +47,12 @@ const QuickApplicationContainer = ({ className }) => {
 		sendQuickApplication(captchaToken, formData).then(res => {
 			setServerError(res.error);
 			setServerResponse(res.data);
+
+			setTimeout(() => {
+				if (isOpen) {
+					dispatch(closeModal());
+				}
+			}, 2000);
 		});
 
 		setCaptchaToken(null);

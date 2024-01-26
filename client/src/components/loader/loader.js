@@ -29,7 +29,7 @@ export const Loader = styled(LoaderContainer)`
 	align-items: center;
 	justify-content: center;
 	background: rgba(0, 0, 0, 0.5);
-	transition: all 0.5s;
+	transition: all 0.2s;
 	opacity: 1;
 
 	& svg {
@@ -38,15 +38,15 @@ export const Loader = styled(LoaderContainer)`
 		fill: none;
 		stroke: var(--light);
 		stroke-linecap: round;
-		stroke-width: 12%
+		stroke-width: 12%;
 	}
 	& use {
 		stroke: var(--brand-orange);
-		animation: preloader-3-a 2s linear infinite
+		animation: preloader-3-a 2s linear infinite;
 	}
 	@keyframes preloader-3-a {
 		to {
-			stroke-dashoffset: 0
+			stroke-dashoffset: 0;
 		}
 	}
 `;

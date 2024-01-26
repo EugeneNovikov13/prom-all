@@ -6,9 +6,8 @@ const initialState = {
 	wasLogin: false,
 	modal: {
 		isOpen: false,
-		text: '',
-		onConfirm: null,
-		onCancel: null,
+		backgroundColor: '',
+		component: '',
 	},
 };
 
@@ -22,9 +21,16 @@ export const appSlice = createSlice({
 		changeLoading(state, action) {
 			state.isLoading = action.payload;
 		},
+		openModal(state, action) {
+			state.modal = { ...state.modal, ...action.payload };
+			state.modal.isOpen = true;
+		},
+		closeModal(state) {
+			state.modal = initialState.modal;
+		},
 	},
 });
 
-export const { changeLoading, setFixedHeader } = appSlice.actions;
+export const { changeLoading, closeModal, openModal, setFixedHeader } = appSlice.actions;
 
 export default appSlice.reducer;
