@@ -36,6 +36,14 @@ export const ProductPhotoSlider = styled(ProductPhotoSliderContainer)`
 		& img {
 			width: 352px;
 			height: auto;
+
+			@media (max-width: 610px) {
+				width: 288px;
+			}
+
+			@media (max-width: 500px) {
+				width: 225px;
+			}
 		}
 	}
 `;

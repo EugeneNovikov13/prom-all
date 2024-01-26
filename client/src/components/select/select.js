@@ -39,7 +39,15 @@ export const Select = styled(SelectContainer)`
 	border-radius: 100px;
 	border: 2px solid var(--dark);
 
+	@media (max-width: 450px) {
+		align-self: end;
+	}
+
 	&:hover {
+		border: 2px solid var(--brand-orange);
+	}
+
+	&:active {
 		border: 2px solid var(--brand-orange);
 	}
 

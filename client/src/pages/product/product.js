@@ -15,7 +15,7 @@ const ProductContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="product-top-container">
-				<ProductPhotoSlider images={product.images}/>
+				<ProductPhotoSlider images={product.images} />
 				<ProductApplicationForm title={product.title} kinds={product.kinds} />
 			</div>
 			<ProductBottomContainer />
@@ -39,5 +39,14 @@ export const Product = styled(ProductContainer)`
 		gap: 24px;
 		align-self: stretch;
 		padding: 0 36px;
+
+		@media (max-width: 1200px) {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		@media (max-width: 600px) {
+			padding: 0;
+		}
 	}
 `;

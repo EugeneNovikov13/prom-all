@@ -3,10 +3,14 @@ import styled from 'styled-components';
 const CounterContainer = ({ className, counter, onCounterChange }) => {
 	return (
 		<div className={className}>
-			<div className='counter-container'>
-				<span className='counter-signs' onClick={() => onCounterChange(-1)}>&minus;</span>
-				<span className='counter-value'>{counter}</span>
-				<span className='counter-signs' onClick={() => onCounterChange(1)}>+</span>
+			<div className="counter-container">
+				<span className="counter-signs" onClick={() => onCounterChange(-1)}>
+					&minus;
+				</span>
+				<span className="counter-value">{counter}</span>
+				<span className="counter-signs" onClick={() => onCounterChange(1)}>
+					+
+				</span>
 			</div>
 		</div>
 	);
@@ -22,6 +26,10 @@ export const Counter = styled(CounterContainer)`
 	gap: 8px;
 	border-radius: 100px;
 	border: 2px solid var(--dark);
+
+	@media (max-width: 450px) {
+		align-self: end;
+	}
 
 	&:hover {
 		border: 2px solid var(--brand-orange);

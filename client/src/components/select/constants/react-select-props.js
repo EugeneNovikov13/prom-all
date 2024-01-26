@@ -24,6 +24,7 @@ export const reactSelectProps = {
 			lineHeight: '20px',
 			letterSpacing: '0.1px',
 			userSelect: 'none',
+			textOverflow: 'unset',
 		}),
 		clearIndicator: baseStyles => ({
 			...baseStyles,
@@ -47,6 +48,7 @@ export const reactSelectProps = {
 			...baseStyles,
 			minWidth: '144px',
 			border: 'none',
+			borderRadius: '8px',
 			background: '#f4f6fa',
 			left: '-20px',
 		}),
