@@ -5,8 +5,6 @@ import styled from 'styled-components';
 const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 	const firstFiveSubcategories = subcategories.slice(0, 5);
 
-	const isMoreThenFiveSubcategories = subcategories.length > 5;
-
 	return (
 		<div className={className}>
 			<ul className="sections-list">
@@ -25,29 +23,27 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 					</li>
 				))}
 			</ul>
-			{isMoreThenFiveSubcategories && (
-				<div className="category-link">
-					<Button
-						link={`/catalog/section/${id}`}
-						width="210px"
-						height="48px"
-						border="1px solid #938F99"
-						fontSize="20px"
-						color="#FFD4BC"
-						background="transparent"
-						activeBackground="rgba(208, 188, 255, 0.08)"
-					>
-						<Arrow
-							style={{
-								position: 'relative',
-								top: '2px',
-								marginRight: '8px',
-							}}
-						/>
-						Все товары
-					</Button>
-				</div>
-			)}
+			<div className="category-link">
+				<Button
+					link={`/catalog/section/${id}`}
+					width="210px"
+					height="48px"
+					border="1px solid #938F99"
+					fontSize="20px"
+					color="#FFD4BC"
+					background={'transparent'}
+					activeBackground="rgba(208, 188, 255, 0.08)"
+				>
+					<Arrow
+						style={{
+							position: 'relative',
+							top: '2px',
+							marginRight: '8px',
+						}}
+					/>
+					Все товары
+				</Button>
+			</div>
 		</div>
 	);
 };
