@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const CatalogHeaderContainer = ({ className }) => {
 	return (
-		<section className={className}>
+		<section className={className} id="catalog-header">
 			<div className="catalog-header-container">
 				<div className="catalog-header-title">
 					<H1 color={'var(--white)'}>Каталог</H1>

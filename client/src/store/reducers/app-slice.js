@@ -8,6 +8,8 @@ const initialState = {
 		isOpen: false,
 		backgroundColor: '',
 		component: '',
+		title: '',
+		content: '',
 	},
 };
 
@@ -26,7 +28,7 @@ export const appSlice = createSlice({
 			state.modal.isOpen = true;
 		},
 		closeModal(state) {
-			state.modal = initialState.modal;
+			state.modal.isOpen = false;
 		},
 	},
 });

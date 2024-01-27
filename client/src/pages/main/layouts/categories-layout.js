@@ -1,5 +1,4 @@
 import { H1 } from '../../../components';
-import { Button } from '../../../features';
 import { Categories } from '../../../widgets';
 import styled from 'styled-components';
 
@@ -11,17 +10,6 @@ const CategoriesLayoutContainer = ({ className }) => {
 					<H1>Каталог товаров</H1>
 				</div>
 				<Categories />
-				<div className="categories-footer">
-					<Button
-						link="/catalog"
-						width="360px"
-						border="2px solid var(--dark, #111)"
-						background={'inherit'}
-						activeBackground="#79747E"
-					>
-						Подробнее
-					</Button>
-				</div>
 			</div>
 		</section>
 	);
@@ -30,7 +18,7 @@ const CategoriesLayoutContainer = ({ className }) => {
 export const CategoriesLayout = styled(CategoriesLayoutContainer)`
 	display: flex;
 	max-width: 100%;
-	min-height: 1198px;
+	min-height: 1092px;
 	padding: 140px 10px;
 	flex-direction: column;
 	justify-content: center;
@@ -51,18 +39,6 @@ export const CategoriesLayout = styled(CategoriesLayoutContainer)`
 			align-items: center;
 			align-self: stretch;
 			margin: 0 36px;
-		}
-
-		& div.categories-footer {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			border-radius: 100px;
-
-			&:hover {
-				background-color: rgba(103, 80, 164, 0.08);
-			}
 		}
 	}
 `;

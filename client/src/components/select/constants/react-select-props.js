@@ -32,6 +32,7 @@ export const reactSelectProps = {
 			left: '-32px',
 			'&:hover': {
 				color: '#FF7F00',
+				cursor: 'pointer',
 			},
 		}),
 		indicatorSeparator: baseStyles => ({
@@ -42,6 +43,7 @@ export const reactSelectProps = {
 			...baseStyles,
 			'&:hover': {
 				color: '#FF7F00',
+				cursor: 'pointer',
 			},
 		}),
 		menu: baseStyles => ({
@@ -57,6 +59,7 @@ export const reactSelectProps = {
 			backgroundColor: state.isSelected ? '#FF7F00' : '',
 			'&:hover': {
 				backgroundColor: state.isSelected ? '#FF7F00' : '#FF7F0080',
+				cursor: 'pointer',
 			},
 		}),
 		placeholder: baseStyles => ({

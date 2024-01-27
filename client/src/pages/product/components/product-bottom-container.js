@@ -3,15 +3,50 @@ import { Button } from '../../../features';
 import { bottomButtonStyle } from '../constants/bottom-button-style';
 import { ReactComponent as ExpandMore } from '../assets/expand_more.svg';
 import { Img } from '../../../components';
+import { openModal } from '../../../store/reducers';
+import { useDispatch } from 'react-redux';
 
-const ProductBottomContainerContainer = ({ className }) => {
+const ProductBottomContainerContainer = ({
+	className,
+	title,
+	description,
+	specification,
+}) => {
+	const dispatch = useDispatch();
+
+	const onDescriptionClick = () => {
+		const modalOptions = {
+			backgroundColor: 'var(--white)',
+			component: 'product-data',
+			title: title,
+			content: description,
+		};
+
+		dispatch(openModal(modalOptions));
+	};
+
+	const onSpecificationClick = () => {
+		const modalOptions = {
+			backgroundColor: 'var(--white)',
+			component: 'product-data',
+			title: title,
+			content: specification,
+		};
+
+		dispatch(openModal(modalOptions));
+	};
+
 	return (
 		<div className={className}>
-			<Button {...bottomButtonStyle}>
+			<Button {...bottomButtonStyle} onClick={onDescriptionClick}>
 				<span>Описание</span>
 				<Img SvgIconComponent={ExpandMore} maxWidth="32px"></Img>
 			</Button>
-			<Button {...bottomButtonStyle}>
+			<Button
+				{...bottomButtonStyle}
+				onClick={onSpecificationClick}
+				isDisable={!specification}
+			>
 				<span>Технические характеристики</span>
 				<Img SvgIconComponent={ExpandMore} maxWidth="32px"></Img>
 			</Button>

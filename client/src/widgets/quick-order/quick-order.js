@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +12,9 @@ import { SETTINGS } from '../../settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import styled from 'styled-components';
 
-const QuickOrderContainer = ({ className, orderData = '' }) => {
+const QuickOrderContainer = ({ className }) => {
+	const orderData = useSelector(state => state.orderReducer.orderData);
+
 	const recaptchaRef = React.createRef();
 
 	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
@@ -26,7 +28,6 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 		register,
 		reset,
 		handleSubmit,
-		setValue,
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
@@ -34,16 +35,10 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 			organization: '',
 			email: '',
 			phone: '',
-			order: '',
+			order: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FROM_SCHEMA),
 	});
-
-	useEffect(() => {
-		if (orderData) {
-			setValue('order', orderData);
-		}
-	}, [orderData, setValue]);
 
 	const isSubmitted = serverError || serverResponse;
 
@@ -60,7 +55,6 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 			setTimeout(() => {
 				if (isOpen) {
 					dispatch(closeModal());
-					document.body.style.overflow = '';
 				}
 			}, 2000);
 		});

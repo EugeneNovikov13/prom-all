@@ -5,6 +5,7 @@ export * from './cards/cards';
 export * from './categories/categories';
 export * from './footer/footer';
 export * from './header/header';
+export * from './product-data/product-data';
 export * from './promotions/promotions';
 export * from './quick-order/quick-order';
 export * from './side-menu/side-menu';
