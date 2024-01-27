@@ -1,5 +1,5 @@
 import { Advantages, Brands, Promotions } from '../../widgets';
-import { CategoriesLayout, QuickApplicationLayout } from './layouts';
+import { CategoriesLayout, QuickOrderLayout } from './layouts';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
@@ -9,7 +9,7 @@ const MainContainer = ({ className }) => {
 			<CategoriesLayout />
 			<Advantages />
 			<Brands />
-			<QuickApplicationLayout />
+			<QuickOrderLayout />
 		</main>
 	);
 };

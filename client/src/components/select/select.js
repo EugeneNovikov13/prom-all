@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import ReactSelect from 'react-select';
 import { reactSelectProps } from './constants/react-select-props';
 import styled from 'styled-components';
 
-const SelectContainer = ({ className, options }) => {
-	const [selectValue, setSelectValue] = useState('');
-
+const SelectContainer = ({ className, options, setSelectValue }) => {
 	const onChange = value => {
 		if (value) {
 			setSelectValue(value.label);

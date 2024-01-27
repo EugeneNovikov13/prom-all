@@ -1,5 +1,5 @@
 import { promoSliderConfig } from './promo-slider-config';
-import { quickApplicationFormSchema } from './quick-application-form-schema';
+import { quickOrderFormSchema } from './quick-order-form-schema';
 import { brandSliderConfig } from './brand-slider-config';
 import { productSliderConfig } from './product-slider-config';
 
@@ -9,5 +9,5 @@ export const SETTINGS = {
 	BRAND_SLIDER_CONFIG: brandSliderConfig,
 	PROMO_SLIDER_CONFIG: promoSliderConfig,
 	PRODUCT_SLIDER_CONFIG: productSliderConfig,
-	QUICK_APPLICATION_FROM_SCHEMA: quickApplicationFormSchema,
+	QUICK_ORDER_FROM_SCHEMA: quickOrderFormSchema,
 };

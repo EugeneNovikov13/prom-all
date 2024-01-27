@@ -1,13 +1,13 @@
 const express = require('express');
 
 const handleError = require('../helpers/handle-error');
-const { sendApplication } = require('../controllers/application');
+const { sendOrder } = require('../controllers/order');
 
 const router = express.Router();
 
-router.post('/quick-application', async (req, res) => {
+router.post('/quick-order', async (req, res) => {
 	try {
-		await sendApplication(req.body);
+		await sendOrder(req.body);
 
 		res.send('Заявка успешно отправлена. Ожидайте ответа.');
 	} catch (e) {

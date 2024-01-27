@@ -56,16 +56,12 @@ export const Counter = styled(CounterContainer)`
 		}
 
 		& span.counter-signs {
-			transform: scale(1.5);
+			transform: scale(1.5) translateY(-2px);
 			cursor: pointer;
 
 			&:hover {
 				color: var(--brand-orange);
 			}
-		}
-
-		& span.counter-value {
-			transform: translateY(1px);
 		}
 	}
 `;

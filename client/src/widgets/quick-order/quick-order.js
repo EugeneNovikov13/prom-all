@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useResetForm } from '../../hooks';
-import { sendQuickApplication } from '../../utils';
+import { changeLoading, closeModal } from '../../store/reducers';
+import { sendQuickOrder } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
 import { FormFooter, FormHeader, FormInputs } from './components';
@@ -10,8 +12,11 @@ import { SETTINGS } from '../../settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import styled from 'styled-components';
 
-const QuickApplicationContainer = ({ className }) => {
+const QuickOrderContainer = ({ className, orderData = '' }) => {
 	const recaptchaRef = React.createRef();
+
+	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
+	const dispatch = useDispatch();
 
 	const [serverError, setServerError] = useState(null);
 	const [serverResponse, setServerResponse] = useState(null);
@@ -21,6 +26,7 @@ const QuickApplicationContainer = ({ className }) => {
 		register,
 		reset,
 		handleSubmit,
+		setValue,
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
@@ -28,19 +34,35 @@ const QuickApplicationContainer = ({ className }) => {
 			organization: '',
 			email: '',
 			phone: '',
-			application: '',
+			order: '',
 		},
-		resolver: yupResolver(SETTINGS.QUICK_APPLICATION_FROM_SCHEMA),
+		resolver: yupResolver(SETTINGS.QUICK_ORDER_FROM_SCHEMA),
 	});
+
+	useEffect(() => {
+		if (orderData) {
+			setValue('order', orderData);
+		}
+	}, [orderData, setValue]);
 
 	const isSubmitted = serverError || serverResponse;
 
 	useResetForm(reset, isSubmitted);
 
 	const onSubmit = formData => {
-		sendQuickApplication(captchaToken, formData).then(res => {
+		dispatch(changeLoading(true));
+
+		sendQuickOrder(captchaToken, formData).then(res => {
 			setServerError(res.error);
 			setServerResponse(res.data);
+			dispatch(changeLoading(false));
+
+			setTimeout(() => {
+				if (isOpen) {
+					dispatch(closeModal());
+					document.body.style.overflow = '';
+				}
+			}, 2000);
 		});
 
 		setCaptchaToken(null);
@@ -61,7 +83,7 @@ const QuickApplicationContainer = ({ className }) => {
 		errors?.organization?.message ||
 		errors?.email?.message ||
 		errors?.phone?.message ||
-		errors?.application?.message;
+		errors?.order?.message;
 
 	return (
 		<form className={className} method="post" onSubmit={handleSubmit(onSubmit)}>
@@ -88,7 +110,7 @@ const QuickApplicationContainer = ({ className }) => {
 	);
 };
 
-export const QuickApplication = styled(QuickApplicationContainer)`
+export const QuickOrder = styled(QuickOrderContainer)`
 	max-width: 1200px;
 	display: flex;
 	flex: 1 0 0;

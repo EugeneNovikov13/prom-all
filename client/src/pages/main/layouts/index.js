@@ -1,2 +1,2 @@
 export * from './categories-layout';
-export * from './quick-application-layout';
+export * from './quick-order-layout';

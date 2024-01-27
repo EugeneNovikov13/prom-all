@@ -24,6 +24,7 @@ export const Sections = styled(SectionsContainer)`
 	align-self: stretch;
 
 	@media (max-width: 600px) {
+		flex: 1 0 0;
 		flex-direction: column;
 		align-items: center;
 		padding: 0;

@@ -1,7 +1,7 @@
 const reCaptchaTest = require('../helpers/recaptcha-test');
 const mailService = require('../services/mail-service');
 
-async function handleQuickApplication({ formData, captchaToken }) {
+async function handleQuickOrder({ formData, captchaToken }) {
 	const captchaTestResult = await reCaptchaTest(captchaToken, process.env.RECAPTCHA_SECRET_KEY);
 
 	if (!captchaTestResult) {
@@ -9,9 +9,9 @@ async function handleQuickApplication({ formData, captchaToken }) {
 	}
 
 	//здесь отправляем письмо на почту
-	await mailService.sendQuickApplication(formData);
+	await mailService.sendQuickOrder(formData);
 }
 
 module.exports = {
-	sendApplication: handleQuickApplication,
+	sendOrder: handleQuickOrder,
 };

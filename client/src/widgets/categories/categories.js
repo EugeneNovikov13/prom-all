@@ -52,8 +52,8 @@ const CategoriesContainer = ({ className }) => {
 						image={image}
 						maxWidth="217px"
 						maxHeight="150px"
-						position={'absolute'}
-						top={openCardTitle === title ? '-80px' : '63px'}
+						position={openCardTitle === title ? 'absolute' : 'relative'}
+						top={openCardTitle === title ? '-80px' : '0'}
 						strokeColor={openCardTitle === title ? 'var(--brand-orange)' : ''}
 						hoverStrokeColor={'var(--brand-orange)'}
 					/>
