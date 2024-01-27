@@ -1,3 +1,4 @@
+import { HashLink } from 'react-router-hash-link';
 import { ReactComponent as Arrow } from '../assets/north_east.svg';
 import { Button } from '../../../features';
 import styled from 'styled-components';
@@ -24,25 +25,26 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 				))}
 			</ul>
 			<div className="category-link">
-				<Button
-					link={`/catalog/section/${id}`}
-					width="210px"
-					height="48px"
-					border="1px solid #938F99"
-					fontSize="20px"
-					color="#FFD4BC"
-					background={'transparent'}
-					activeBackground="rgba(208, 188, 255, 0.08)"
-				>
-					<Arrow
-						style={{
-							position: 'relative',
-							top: '2px',
-							marginRight: '8px',
-						}}
-					/>
-					Все товары
-				</Button>
+				<HashLink to={`/catalog/section/${id}#catalog-header`}>
+					<Button
+						width="210px"
+						height="48px"
+						border="1px solid #938F99"
+						fontSize="20px"
+						color="#FFD4BC"
+						background={'transparent'}
+						activeBackground="rgba(208, 188, 255, 0.08)"
+					>
+						<Arrow
+							style={{
+								position: 'relative',
+								top: '2px',
+								marginRight: '8px',
+							}}
+						/>
+						Все товары
+					</Button>
+				</HashLink>
 			</div>
 		</div>
 	);

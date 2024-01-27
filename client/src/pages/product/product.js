@@ -1,5 +1,9 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useFetchProductQuery } from '../../store/services';
+import { changeLoading } from '../../store/reducers';
+import { Loader } from '../../components';
 import {
 	ProductBottomContainer,
 	ProductOrderForm,
@@ -9,19 +13,38 @@ import styled from 'styled-components';
 
 const ProductContainer = ({ className }) => {
 	const params = useParams();
+	const dispatch = useDispatch();
 
-	const { data: product } = useFetchProductQuery(params.id);
+	const { data: product, isLoading } = useFetchProductQuery(params.id);
+
+	useEffect(() => {
+		if (isLoading) {
+			dispatch(changeLoading(true));
+			return;
+		}
+		dispatch(changeLoading(false));
+	}, [isLoading, dispatch]);
 
 	if (!product) return null;
 
 	return (
-		<div className={className}>
-			<div className="product-top-container">
-				<ProductPhotoSlider images={product.images} />
-				<ProductOrderForm title={product.title} kinds={product.kinds} />
-			</div>
-			<ProductBottomContainer />
-		</div>
+		<>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div className={className}>
+					<div className="product-top-container">
+						<ProductPhotoSlider images={product.images} />
+						<ProductOrderForm title={product.title} kinds={product.kinds} />
+					</div>
+					<ProductBottomContainer
+						title={product.title}
+						description={product.description}
+						specification={product.specification}
+					/>
+				</div>
+			)}
+		</>
 	);
 };
 

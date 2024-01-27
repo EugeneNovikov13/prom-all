@@ -1,59 +1,69 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import { closeModal } from '../../store/reducers';
 import { Button } from '../../features';
-import { QuickOrder } from '../../widgets';
+import { ProductData, QuickOrder } from '../../widgets';
 import { Img } from '../img/img';
 import { ReactComponent as Close } from './assets/close.svg';
+import { animationVariants } from './constants/animation-variants';
 import styled from 'styled-components';
 
 const ModalContainer = ({ className }) => {
 	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
 	const backgroundColor = useSelector(state => state.appReducer.modal.backgroundColor);
 	const component = useSelector(state => state.appReducer.modal.component);
-	const orderData = useSelector(state => state.orderReducer.orderData);
 
-	const [children, setChildren] = useState(null);
+	const [children, setChildren] = useState(<></>);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (component === 'order') {
-			setChildren(<QuickOrder orderData={orderData} />);
+			setChildren(<QuickOrder />);
 		}
-		if (isOpen) {
-			document.body.style.overflow = 'hidden';
+		if (component === 'product-data') {
+			setChildren(<ProductData />);
 		}
-	}, [component, isOpen, orderData]);
-
-	if (!isOpen) {
-		return null;
-	}
+	}, [component, isOpen]);
 
 	const onClose = () => {
-		document.body.style.overflow = '';
 		dispatch(closeModal());
 	};
 
 	return (
-		<div className={className}>
-			<div className="modal-overlay" onClick={onClose}></div>
-			<div className="modal-container" style={{ backgroundColor: backgroundColor }}>
-				{children}
-				<div className="close-button-container">
-					<Button
-						width="48px"
-						height="48px"
-						background={'var(--brand-orange)'}
-						hoverBoxShadow={true}
-						activeBackground={'var(--active-orange)'}
-						onClick={onClose}
-					>
-						<Img SvgIconComponent={Close} />
-					</Button>
-				</div>
-			</div>
-		</div>
+		<>
+			<AnimatePresence>
+				{isOpen && (
+					<div className={className}>
+						<div className="modal-overlay" onClick={onClose}></div>
+						<motion.div
+							className="modal-container"
+							style={{ backgroundColor: backgroundColor }}
+							variants={animationVariants}
+							initial="hidden"
+							animate="visible"
+							exit="hidden"
+							transition={{ duration: 0.15, easy: 'easyOut' }}
+						>
+							{children}
+							<div className="close-button-container">
+								<Button
+									width="48px"
+									height="48px"
+									background={'var(--brand-orange)'}
+									hoverBoxShadow={true}
+									activeBackground={'var(--active-orange)'}
+									onClick={onClose}
+								>
+									<Img SvgIconComponent={Close} />
+								</Button>
+							</div>
+						</motion.div>
+					</div>
+				)}
+			</AnimatePresence>
+		</>
 	);
 };
 
@@ -66,9 +76,13 @@ export const Modal = styled(ModalContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: all 0.2s; //???????
+	transition: all 0.2s;
 	opacity: 1;
 	z-index: 10000;
+
+	@media screen and (max-device-height: 1000px) {
+		position: absolute;
+	}
 
 	& div.modal-overlay {
 		position: absolute;
@@ -78,12 +92,19 @@ export const Modal = styled(ModalContainer)`
 	}
 
 	& div.modal-container {
+		width: 100%;
+		max-width: 1128px;
 		position: relative;
 		background-color: ${({ backgroundColor }) =>
 			backgroundColor ? backgroundColor : 'var(--white)'};
 		border-radius: 20px;
+		margin: 0 36px;
 		padding: 20px;
 		z-index: 10001;
+
+		@media screen and (max-device-height: 1000px) {
+			padding: 20px 0;
+		}
 	}
 
 	& div.close-button-container {
@@ -93,25 +114,6 @@ export const Modal = styled(ModalContainer)`
 
 		& svg:active {
 			transform: scale(0.8);
-		}
-	}
-
-	& .simple-modal {
-		position: relative;
-		top: 50%;
-		transform: translate(0, -50%);
-		width: 400px;
-		margin: 0 auto;
-		padding: 0 20px 20px;
-		text-align: center;
-		background-color: #fff;
-		border: 2px solid #000;
-		z-index: 10001;
-
-		& .simple-modal-buttons {
-			display: flex;
-			justify-content: center;
-			gap: 10px;
 		}
 	}
 `;
