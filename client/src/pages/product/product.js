@@ -1,14 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { useFetchProductQuery } from '../../store/services';
-import { ProductApplicationForm, ProductBottomContainer } from './components';
-import { ProductPhotoSlider } from './components/product-photo-slider';
+import {
+	ProductBottomContainer,
+	ProductOrderForm,
+	ProductPhotoSlider,
+} from './components';
 import styled from 'styled-components';
 
 const ProductContainer = ({ className }) => {
 	const params = useParams();
 
 	const { data: product } = useFetchProductQuery(params.id);
-	console.log(product);
 
 	if (!product) return null;
 
@@ -16,7 +18,7 @@ const ProductContainer = ({ className }) => {
 		<div className={className}>
 			<div className="product-top-container">
 				<ProductPhotoSlider images={product.images} />
-				<ProductApplicationForm title={product.title} kinds={product.kinds} />
+				<ProductOrderForm title={product.title} kinds={product.kinds} />
 			</div>
 			<ProductBottomContainer />
 		</div>

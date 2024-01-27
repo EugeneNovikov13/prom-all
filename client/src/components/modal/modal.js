@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../store/reducers';
 import { Button } from '../../features';
-import { QuickApplication } from '../../widgets';
+import { QuickOrder } from '../../widgets';
 import { Img } from '../img/img';
 import { ReactComponent as Close } from './assets/close.svg';
 import styled from 'styled-components';
@@ -18,8 +18,8 @@ const ModalContainer = ({ className }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (component === 'application') {
-			setChildren(<QuickApplication orderData={orderData} />);
+		if (component === 'order') {
+			setChildren(<QuickOrder orderData={orderData} />);
 		}
 		if (isOpen) {
 			document.body.style.overflow = 'hidden';

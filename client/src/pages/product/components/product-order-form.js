@@ -5,7 +5,7 @@ import { Counter, H1, Select } from '../../../components';
 import { Button } from '../../../features';
 import styled from 'styled-components';
 
-const ProductApplicationFormContainer = ({ className, title, kinds }) => {
+const ProductOrderFormContainer = ({ className, title, kinds }) => {
 	const [counter, setCounter] = useState(1);
 	const [selectValue, setSelectValue] = useState('');
 
@@ -22,33 +22,30 @@ const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 	const options = kinds && kinds.map(kind => ({ value: kind.id, label: kind.title }));
 
 	const onClick = () => {
-		console.log(title, selectValue, counter);
 		const orderData = `Требуется: ${title} \nМодель исполнения: ${selectValue} \nКоличество: ${counter}шт.`;
 
 		dispatch(setOrderData(orderData));
 		dispatch(
 			openModal({
 				backgroundColor: 'var(--dark)',
-				component: 'application',
+				component: 'order',
 			}),
 		);
 	};
 
 	return (
 		<div className={className}>
-			<div className="product-application-title">
+			<div className="product-order-title">
 				<H1>{title}</H1>
 			</div>
-			<div className="product-application-inputs">
-				<div className="product-application-counter">
-					<span className="product-application-span">Количество</span>
+			<div className="product-order-inputs">
+				<div className="product-order-counter">
+					<span className="product-order-span">Количество</span>
 					<Counter counter={counter} onCounterChange={onCounterChange} />
 				</div>
 				{!!kinds.length && (
-					<div className="product-application-kind">
-						<span className="product-application-span">
-							Модель исполнения
-						</span>
+					<div className="product-order-kind">
+						<span className="product-order-span">Модель исполнения</span>
 						<Select options={options} setSelectValue={setSelectValue} />
 					</div>
 				)}
@@ -69,7 +66,7 @@ const ProductApplicationFormContainer = ({ className, title, kinds }) => {
 	);
 };
 
-export const ProductApplicationForm = styled(ProductApplicationFormContainer)`
+export const ProductOrderForm = styled(ProductOrderFormContainer)`
 	flex: 1 0 0;
 	display: flex;
 	flex-direction: column;
@@ -78,7 +75,7 @@ export const ProductApplicationForm = styled(ProductApplicationFormContainer)`
 	align-self: stretch;
 	gap: 18px;
 
-	& div.product-application-title {
+	& div.product-order-title {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -90,13 +87,13 @@ export const ProductApplicationForm = styled(ProductApplicationFormContainer)`
 		}
 	}
 
-	& div.product-application-inputs {
+	& div.product-order-inputs {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		align-self: stretch;
 
-		& div.product-application-counter {
+		& div.product-order-counter {
 			height: 86px;
 			flex: 1 0 0;
 			display: flex;
@@ -113,7 +110,7 @@ export const ProductApplicationForm = styled(ProductApplicationFormContainer)`
 			}
 		}
 
-		& div.product-application-kind {
+		& div.product-order-kind {
 			height: 86px;
 			flex: 1 0 0;
 			display: flex;
@@ -145,7 +142,7 @@ export const ProductApplicationForm = styled(ProductApplicationFormContainer)`
 			text-align: left;
 		}
 
-		& span.product-application-span {
+		& span.product-order-span {
 			@media (max-width: 450px) {
 				align-self: start;
 			}

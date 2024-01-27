@@ -13,7 +13,7 @@ class MailService {
 		});
 	}
 
-	async sendQuickApplication(data) {
+	async sendQuickOrder(data) {
 		return await this.transporter.sendMail({
 			from: process.env.SMTP_EMAIL_USER,
 			to: process.env.API_EMAIL,
@@ -24,7 +24,7 @@ class MailService {
 					<fieldset style='padding: 0 30px; border-radius: 4px; border: 1px dashed grey; background: #fafafa;'>
 						<legend>Заявка с сайта</legend>
 						<p style='text-decoration: underline'>Текст запроса:</p>
-						<pre style='padding-left: 10px'>${data.application}</pre>
+						<pre style='padding-left: 10px'>${data.order}</pre>
 
 						<ul style='padding: 0'><p style='text-decoration: underline'>Контактные данные:</p>
 							<li style='list-style: none; padding-left: 10px'><span>Имя отправителя: ${data.name}</span></li>

@@ -43,11 +43,11 @@ const FormInputsContainer = ({ className, register, errors, onInputChange }) => 
 				/>
 			</div>
 			<Textarea
-				name="application"
+				name="order"
 				placeholder="Здесь вы можете более подробно описать цель вашего обращения"
 				type="text"
-				error={errors?.application?.message}
-				{...register('application', {
+				error={errors?.order?.message}
+				{...register('order', {
 					onChange: onInputChange,
 				})}
 			/>

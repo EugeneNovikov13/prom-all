@@ -21,13 +21,13 @@ const ProductCardContainer = ({
 
 export const ProductCard = styled(ProductCardContainer)`
 	position: relative;
-	display: flex;
-	flex: 1 1 210px;
 	max-width: ${({ openCardTitle, title }) =>
 		openCardTitle === title ? 316 : openCardTitle ? 210 : 217}px;
 	height: 340px;
+	flex: 1 1 210px;
+	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: center;
 	align-items: center;
 	border-radius: 8px;
 	background: var(--white);
@@ -35,7 +35,12 @@ export const ProductCard = styled(ProductCardContainer)`
 		max-width 0.3s,
 		box-shadow 0.3s;
 
-	padding-top: ${({ openCardTitle, title }) => (openCardTitle === title ? 0 : 208)}px;
+	@media (max-width: 500px) {
+		max-width: none;
+		height: ${({ openCardTitle, title }) => (openCardTitle === title ? 340 : 240)}px;
+		flex: 1 1 150px;
+		margin-top: ${({ openCardTitle, title }) => (openCardTitle === title ? 70 : 0)}px;
+	}
 
 	&:hover {
 		box-shadow: 0 8px 14px 0 #16306b;

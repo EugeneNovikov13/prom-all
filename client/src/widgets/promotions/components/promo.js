@@ -15,7 +15,7 @@ const PromoContainer = ({ className, title, content }) => {
 					dangerouslySetInnerHTML={{ __html: content }}
 				></div>
 				<div className="promo-button">
-					<HashLink smooth to={'/#quick_application_section'}>
+					<HashLink smooth to={'/#quick_order_section'}>
 						<Button
 							width="300px"
 							height="48px"

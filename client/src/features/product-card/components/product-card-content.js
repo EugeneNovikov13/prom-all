@@ -28,5 +28,11 @@ export const ProductCardContent = styled(ProductCardContentContainer)`
 		align-items: center;
 		padding: 20px 16px 0 12px;
 		text-align: center;
+
+		& h4 {
+			@media (max-width: 500px) {
+				font-size: 4vw;
+			}
+		}
 	}
 `;
