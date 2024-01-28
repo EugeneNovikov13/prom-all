@@ -28,6 +28,10 @@ export const Img = styled(ImgContainer)`
 	max-width: ${({ maxWidth }) => maxWidth};
 	max-height: ${({ maxHeight }) => maxHeight};
 
+	&:hover {
+		cursor: ${({ hoverStrokeColor }) => (hoverStrokeColor ? 'pointer' : '')};
+	}
+
 	& svg * {
 		stroke: ${({ strokeColor }) => strokeColor};
 		fill: ${({ fill }) => fill};

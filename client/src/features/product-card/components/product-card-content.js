@@ -20,6 +20,10 @@ export const ProductCardContent = styled(ProductCardContentContainer)`
 	flex-shrink: 0;
 	align-self: stretch;
 
+	&:hover {
+		cursor: pointer;
+	}
+
 	& div.product-card-title {
 		display: flex;
 		height: 68px;
