@@ -2,29 +2,33 @@ import { Link } from 'react-router-dom';
 import { NavigationFooterMenu } from './components/navigation-footer-menu';
 import { Information } from './components/information';
 import { Logo } from '../../components';
+import { SETTINGS } from '../../settings';
 import styled from 'styled-components';
 
 const FooterContainer = ({ className }) => {
 	return (
 		<footer className={className}>
 			<div className="footer-body">
-				<div className='footer-body-container'>
-					<div className='logo'>
-						<Link to='/'>
+				<div className="footer-body-container">
+					<div className="logo">
+						<Link to="/">
 							<Logo />
 						</Link>
 					</div>
-					<div className='navigation'>
+					<div className="navigation">
 						<NavigationFooterMenu />
 					</div>
-					<div className='info'>
+					<div className="info">
 						<Information />
 					</div>
 				</div>
 			</div>
 			<div className="footer-label">
 				<div className="label-wrapper">
-					<p>© 2008 - {new Date().getFullYear()} «Промышленный Альянс»</p>
+					<p>
+						© {SETTINGS.ORGANIZATION_DATA.foundationYear} -{' '}
+						{new Date().getFullYear()} «Промышленный Альянс»
+					</p>
 				</div>
 			</div>
 		</footer>

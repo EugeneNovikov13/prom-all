@@ -106,8 +106,8 @@ const QuickOrderContainer = ({ className }) => {
 
 export const QuickOrder = styled(QuickOrderContainer)`
 	max-width: 1200px;
-	display: flex;
 	flex: 1 0 0;
+	display: flex;
 	flex-direction: column;
 	gap: 60px;
 	padding: 0 36px;

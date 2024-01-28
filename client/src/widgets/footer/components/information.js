@@ -2,6 +2,7 @@ import { Icon } from '../../../components';
 import cell from '../assets/cell.svg';
 import email from '../assets/email.svg';
 import location from '../assets/location.svg';
+import { SETTINGS } from '../../../settings';
 import styled from 'styled-components';
 
 const InformationContainer = ({ className }) => {
@@ -9,19 +10,19 @@ const InformationContainer = ({ className }) => {
 		<div className={className}>
 			<div className="phone wrapper">
 				<Icon width="18px" iconSrc={cell} />
-				<span>+7 (473) 247-00-80</span>
+				<span>{SETTINGS.ORGANIZATION_DATA.phone}</span>
 			</div>
 			<div className="emails wrapper">
 				<Icon width="18px" iconSrc={email} />
 				<div className="emails-list">
-					<span>office@prom-all.ru</span>
-					<span>info@prom-all.com</span>
-					<span>info@prom-all.ru</span>
+					{SETTINGS.ORGANIZATION_DATA.email.map(item => (
+						<span key={item}>{item}</span>
+					))}
 				</div>
 			</div>
 			<div className="address wrapper">
 				<Icon width="18px" iconSrc={location} />
-				<span>Россия, г. Воронеж, ул. Красных Зорь, 38</span>
+				<span>{SETTINGS.ORGANIZATION_DATA.address}</span>
 			</div>
 		</div>
 	);
