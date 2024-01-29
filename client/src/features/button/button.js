@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
 
 const ButtonContainer = ({ className, children, link, type, isDisable, onClick }) => {
@@ -6,7 +6,7 @@ const ButtonContainer = ({ className, children, link, type, isDisable, onClick }
 		<>
 			{link ? (
 				//кнопка обёрнута ссылкой, принимающей адрес через пропсы
-				<Link to={link}>
+				<HashLink  to={link}>
 					<button
 						className={className}
 						type={type}
@@ -15,7 +15,7 @@ const ButtonContainer = ({ className, children, link, type, isDisable, onClick }
 					>
 						{children}
 					</button>
-				</Link>
+				</HashLink>
 			) : (
 				<button
 					className={className}

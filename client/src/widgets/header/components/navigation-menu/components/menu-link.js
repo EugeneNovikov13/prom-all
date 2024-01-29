@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import { Button } from '../../../../../features';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const ActiveLine = ({ className }) => {
 	return (
@@ -24,7 +24,7 @@ const MenuLinkContainer = ({ className, title, link, isActive }) => {
 	return (
 		<li className={className}>
 			<Button
-				link={link}
+				link={`${link}#top`}
 				width="100%"
 				height="100%"
 				color={isActive ? '#FF7F00' : '#cac4d0'}

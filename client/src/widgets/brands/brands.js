@@ -35,10 +35,10 @@ const BrandsContainer = ({ className }) => {
 					</div>
 					<div className="brands-footer">
 						<Button
-							link="/about"
+							link="/about#top"
 							width="360px"
 							border="2px solid var(--dark)"
-							background="inherit"
+							background={'inherit'}
 							activeBackground="#79747E"
 						>
 							Подробнее
