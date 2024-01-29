@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../utils/get-products';
+import { useFetchProductBySectionQuery } from '../../../store/services';
 import { AnimatePresence, motion } from 'framer-motion';
 import { changeLoading, setCards } from '../../../store/reducers';
 import { Button } from '../../../features';
@@ -28,12 +29,7 @@ const SubcategorySectionContainer = ({
 
 	const dispatch = useDispatch();
 
-	//TODO разкомментировать, когда появятся товары во всех категориях
-
-	//Для предотвращения ошибки можно на бек-энде создать массив допустимых id разделов, содержащих типы
-	//и возвращать data с полем counter, значение которого выводить в span с количеством.
-	//Туда же можно общее количество товаров в типе выводить.
-	// const {data} = useFetchProductBySectionQuery(id);
+	const { data } = useFetchProductBySectionQuery(id);
 
 	useEffect(() => {
 		if (isOpen && types) {
@@ -70,9 +66,12 @@ const SubcategorySectionContainer = ({
 				<div className="subcategory-button-content">
 					<Img SvgIconComponent={BigCircle} maxWidth="24px" maxHeight="24px" />
 					<span className="subcategory-title">{shortTitle || title}</span>
-					{/*TODO доделать получение количества товаров в категории*/}
-					{/*<span className="subcategory-product-counter">{data?.counter || data.length}</span>*/}
-					<span className="subcategory-product-counter">100+</span>
+					{/*бек-энд возвращает data.counter, если эта подкатегория содержит типы, а не товары*/}
+					{data && (
+						<span className="subcategory-product-counter">
+							{data.counter ? data.counter : data.length}
+						</span>
+					)}
 				</div>
 			</Button>
 			<AnimatePresence>

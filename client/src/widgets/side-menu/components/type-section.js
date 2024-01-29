@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProducts } from '../utils/get-products';
+import { useFetchProductBySectionQuery } from '../../../store/services';
 import { motion } from 'framer-motion';
 import { changeLoading } from '../../../store/reducers';
 import { Img } from '../../../components';
@@ -18,6 +19,8 @@ const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
 			getProducts(id, dispatch, changeLoading);
 		}
 	}, [dispatch, id, isOpen]);
+
+	const { data } = useFetchProductBySectionQuery(id);
 
 	return (
 		<motion.li
@@ -42,8 +45,9 @@ const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
 						fill={'#FF7F00'}
 					/>
 					<span className="type-title">{title}</span>
-					{/*TODO доделать получение количества товаров в категории*/}
-					<span>100+</span>
+					<span className="subcategory-product-counter">
+						{data && data.length}
+					</span>
 				</div>
 			</Button>
 		</motion.li>

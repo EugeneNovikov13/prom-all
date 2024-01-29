@@ -23,9 +23,14 @@ router.get('/products/:id', async (req, res) => {
 
 router.get('/products/section/:id', async (req, res) => {
 	try {
-		const products = await getProducts(req.params.id);
+		const result = await getProducts(req.params.id);
 
-		res.send(products.map(mapProducts));
+		if (result.counter) {
+			res.send({counter: result.counter});
+			return;
+		}
+
+		res.send(result.products.map(mapProducts));
 	} catch (e) {
 		handleError(res, e);
 	}
