@@ -1,6 +1,5 @@
 import { forwardRef, useState } from 'react';
-import { Icon } from '../../components/icon/icon';
-import { Tooltip } from '../../components/tooltip/tooltip';
+import { Icon, Tooltip } from '../../components';
 import errorIcon from '../../assets/error.svg';
 import styled from 'styled-components';
 

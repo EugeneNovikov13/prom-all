@@ -108,7 +108,7 @@ export const Header = styled(HeaderContainer)`
 				padding: 0 10px;
 			}
 
-			@media screen and (max-width: 880px) {
+			@media screen and (max-width: 950px) {
 				display: flex;
 				flex-direction: column-reverse;
 			}
