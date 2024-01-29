@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { Icon } from '../../../components';
 import { menuList } from '../constants/menu-list';
 import styled from 'styled-components';
@@ -9,10 +9,10 @@ const NavigationFooterMenuContainer = ({ className }) => {
 			<ul>
 				{menuList.map(({ title, link, iconURL }, ind) => (
 					<li className={className} key={ind}>
-						<Link to={link}>
+						<HashLink smooth to={`${link}#top`}>
 							<Icon width="18px" iconSrc={iconURL} isActive={true} />
 							{title}
-						</Link>
+						</HashLink>
 					</li>
 				))}
 			</ul>

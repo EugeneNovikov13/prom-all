@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { NavigationFooterMenu } from './components/navigation-footer-menu';
 import { Information } from './components/information';
 import { Logo } from '../../components';
@@ -11,9 +11,9 @@ const FooterContainer = ({ className }) => {
 			<div className="footer-body">
 				<div className="footer-body-container">
 					<div className="logo">
-						<Link to="/">
+						<HashLink smooth to="/#top">
 							<Logo />
-						</Link>
+						</HashLink>
 					</div>
 					<div className="navigation">
 						<NavigationFooterMenu />

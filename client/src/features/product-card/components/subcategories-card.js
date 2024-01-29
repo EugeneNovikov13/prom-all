@@ -12,7 +12,7 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 				{firstFiveSubcategories.map(({ id: subId, title, shortTitle }) => (
 					<li key={subId} className="section-button">
 						<Button
-							link={`/catalog/section/${subId}`}
+							link={`/catalog/section/${subId}#catalog-header`}
 							height="48px"
 							fontSize="20px"
 							color="var(--white)"
