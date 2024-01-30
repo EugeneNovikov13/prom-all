@@ -35,7 +35,8 @@ const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
 				{...buttonStyleProps}
 				background={isOpen ? '#FFD4BC' : 'transparent'}
 				padding={'6px 16px 6px 24px'}
-				link={`/catalog/section/${id}`}
+				link={`/catalog/section/${id}#catalog-header`}
+				smooth={true}
 			>
 				<div className="type-button-content">
 					<Img

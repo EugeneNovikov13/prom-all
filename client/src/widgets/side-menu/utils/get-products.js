@@ -14,7 +14,7 @@ export const getProducts = (id, dispatch, setLoadingFunc) => {
 			dispatch(setLoadingFunc(false));
 		})
 		.catch(e => {
-			//TODO обработать ошибку (в setFunc можно передать и ошибку)
+			//TODO обработать ошибку (с помощью setLoadingFunc можно передать и ошибку)
 			console.log(e.response.data);
 			dispatch(setLoadingFunc(false));
 		});

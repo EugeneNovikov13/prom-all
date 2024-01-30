@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../utils/get-products';
 import { useFetchProductBySectionQuery } from '../../../store/services';
@@ -21,8 +21,6 @@ const SubcategorySectionContainer = ({
 	isOpen,
 	index,
 }) => {
-	const [openedType, setOpenedType] = useState('');
-
 	const currentTypeTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.type.selectedTitle,
 	);
@@ -45,10 +43,6 @@ const SubcategorySectionContainer = ({
 		}
 	}, [currentTypeTitle, dispatch, id, isOpen, types]);
 
-	useEffect(() => {
-		setOpenedType(currentTypeTitle);
-	}, [currentTypeTitle]);
-
 	return (
 		<motion.li
 			className={className}
@@ -61,7 +55,8 @@ const SubcategorySectionContainer = ({
 			<Button
 				{...buttonStyleProps}
 				background={isOpen ? '#FFD4BC' : 'transparent'}
-				link={`/catalog/section/${id}`}
+				link={`/catalog/section/${id}#catalog-header`}
+				smooth={true}
 			>
 				<div className="subcategory-button-content">
 					<Img SvgIconComponent={BigCircle} maxWidth="24px" maxHeight="24px" />
@@ -82,7 +77,7 @@ const SubcategorySectionContainer = ({
 								key={typeId}
 								id={typeId}
 								title={typeTitle}
-								isOpen={typeTitle === openedType}
+								isOpen={typeTitle === currentTypeTitle}
 								index={typeIndex}
 							/>
 						))}

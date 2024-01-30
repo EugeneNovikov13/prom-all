@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import { setCards } from '../../../store/reducers';
@@ -18,8 +18,6 @@ const CategoryButtonContainer = ({
 	isOpen,
 	setOpenedCategory,
 }) => {
-	const [openedSubcategory, setOpenedSubcategory] = useState('');
-
 	const currentSubcategoryTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.subcategory.selectedTitle,
 	);
@@ -39,10 +37,6 @@ const CategoryButtonContainer = ({
 			dispatch(setCards(payload));
 		}
 	}, [currentSubcategoryTitle, dispatch, isOpen, subcategories, countSections]);
-
-	useEffect(() => {
-		setOpenedSubcategory(currentSubcategoryTitle);
-	}, [currentSubcategoryTitle]);
 
 	const onClick = categoryTitle => {
 		if (isOpen) {
@@ -71,14 +65,14 @@ const CategoryButtonContainer = ({
 			<AnimatePresence>
 				{isOpen && (
 					<ul className="subcategories-container">
-						{subcategories.map(({ id, shortTitle, title, types }, index) => (
+						{subcategories.map(({ id: subcategoryId, shortTitle, title: subcategoryTitle, types }, index) => (
 							<SubcategorySection
-								key={id}
-								id={id}
+								key={subcategoryId}
+								id={subcategoryId}
 								shortTitle={shortTitle}
-								title={title}
+								title={subcategoryTitle}
 								types={types}
-								isOpen={title === openedSubcategory}
+								isOpen={subcategoryTitle === currentSubcategoryTitle}
 								index={index}
 							/>
 						))}

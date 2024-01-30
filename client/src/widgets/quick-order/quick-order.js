@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useResetForm } from '../../hooks';
 import { changeLoading, closeModal } from '../../store/reducers';
 import { sendQuickOrder } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -23,10 +22,11 @@ const QuickOrderContainer = ({ className }) => {
 	const [serverError, setServerError] = useState(null);
 	const [serverResponse, setServerResponse] = useState(null);
 	const [captchaToken, setCaptchaToken] = useState(null);
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const {
 		register,
-		reset,
+		reset: formReset,
 		handleSubmit,
 		formState: { errors, isValid },
 	} = useForm({
@@ -40,9 +40,10 @@ const QuickOrderContainer = ({ className }) => {
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FROM_SCHEMA),
 	});
 
-	const isSubmitted = serverError || serverResponse;
-
-	useResetForm(reset, isSubmitted);
+	if (isSubmitted) {
+		formReset();
+		setIsSubmitted(false);
+	}
 
 	const onSubmit = formData => {
 		dispatch(changeLoading(true));
@@ -50,6 +51,7 @@ const QuickOrderContainer = ({ className }) => {
 		sendQuickOrder(captchaToken, formData).then(res => {
 			setServerError(res.error);
 			setServerResponse(res.data);
+			setIsSubmitted(true);
 			dispatch(changeLoading(false));
 
 			setTimeout(() => {

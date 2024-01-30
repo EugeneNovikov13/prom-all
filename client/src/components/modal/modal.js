@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { closeModal } from '../../store/reducers';
 import { Button } from '../../features';
-import { ProductData, QuickOrder } from '../../widgets';
 import { Img } from '../img/img';
 import { ReactComponent as Close } from './assets/close.svg';
-import { animationVariants } from './constants/animation-variants';
+import { animationVariants, modalChildren } from './constants';
 import styled from 'styled-components';
 
 const ModalContainer = ({ className }) => {
@@ -14,18 +12,11 @@ const ModalContainer = ({ className }) => {
 	const backgroundColor = useSelector(state => state.appReducer.modal.backgroundColor);
 	const component = useSelector(state => state.appReducer.modal.component);
 
-	const [children, setChildren] = useState(<></>);
-
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (component === 'order') {
-			setChildren(<QuickOrder />);
-		}
-		if (component === 'product-data') {
-			setChildren(<ProductData />);
-		}
-	}, [component, isOpen]);
+	if (!isOpen) {
+		return null;
+	}
 
 	const onClose = () => {
 		dispatch(closeModal());
@@ -34,34 +25,34 @@ const ModalContainer = ({ className }) => {
 	return (
 		<>
 			<AnimatePresence>
-				{isOpen && (
-					<div className={className}>
-						<div className="modal-overlay" onClick={onClose}></div>
-						<motion.div
-							className="modal-container"
-							style={{ backgroundColor: backgroundColor }}
-							variants={animationVariants}
-							initial="hidden"
-							animate="visible"
-							exit="hidden"
-							transition={{ duration: 0.15, easy: 'easyOut' }}
-						>
-							{children}
-							<div className="close-button-container">
-								<Button
-									width="48px"
-									height="48px"
-									background={'var(--brand-orange)'}
-									hoverBoxShadow={true}
-									activeBackground={'var(--active-orange)'}
-									onClick={onClose}
-								>
-									<Img SvgIconComponent={Close} />
-								</Button>
-							</div>
-						</motion.div>
-					</div>
-				)}
+				<div className={className}>
+					<div className="modal-overlay" onClick={onClose}></div>
+					<motion.div
+						className="modal-container"
+						style={{ backgroundColor: backgroundColor }}
+						variants={animationVariants}
+						initial="hidden"
+						animate="visible"
+						exit="hidden"
+						transition={{ duration: 0.15, easy: 'easyOut' }}
+					>
+						{/*В зависимости от значения component рендерится нужный компонент*/}
+						{component && modalChildren[component]}
+
+						<div className="close-button-container">
+							<Button
+								width="48px"
+								height="48px"
+								background={'var(--brand-orange)'}
+								hoverBoxShadow={true}
+								activeBackground={'var(--active-orange)'}
+								onClick={onClose}
+							>
+								<Img SvgIconComponent={Close} />
+							</Button>
+						</div>
+					</motion.div>
+				</div>
 			</AnimatePresence>
 		</>
 	);

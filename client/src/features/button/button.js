@@ -1,12 +1,12 @@
 import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
 
-const ButtonContainer = ({ className, children, link, type, isDisable, onClick }) => {
+const ButtonContainer = ({ className, children, link, smooth, type, isDisable, onClick }) => {
 	return (
 		<>
 			{link ? (
 				//кнопка обёрнута ссылкой, принимающей адрес через пропсы
-				<HashLink  to={link}>
+				<HashLink smooth={smooth} to={link}>
 					<button
 						className={className}
 						type={type}

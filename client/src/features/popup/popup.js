@@ -1,7 +1,16 @@
+import { useSelector } from 'react-redux';
+import { getSubsectionsBySectionTitle } from '../../utils';
 import { PopupItemProducts, PopupItemSections } from './components';
 import styled from 'styled-components';
 
-const PopupContainer = ({ className, isProductSection, sectionItems }) => {
+const PopupContainer = ({ className, section }) => {
+	const { breadcrumbs } = useSelector(state => state.catalogReducer);
+
+	const sectionItems = getSubsectionsBySectionTitle(section, breadcrumbs);
+
+	//проверяем, является ли подраздел подразделом продуктов
+	const isProductSection = section === 'product';
+
 	const listVariants = {
 		visible: i => ({
 			height: '40px',
