@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../utils/get-products';
+import { asyncGetProducts } from '../utils/async-get-products';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { AnimatePresence, motion } from 'framer-motion';
-import { changeLoading, setCards } from '../../../store/reducers';
+import { changeLoading } from '../../../store/reducers';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { TypeSection } from './type-section';
@@ -18,7 +18,7 @@ const SubcategorySectionContainer = ({
 	shortTitle,
 	title,
 	types,
-	isOpen,
+	isActiveSubcategory,
 	index,
 }) => {
 	const currentTypeTitle = useSelector(
@@ -30,18 +30,10 @@ const SubcategorySectionContainer = ({
 	const { data } = useFetchProductBySectionQuery(id);
 
 	useEffect(() => {
-		if (isOpen && types) {
-			const payload = {
-				isProductCards: false,
-				data: types,
-			};
-			dispatch(setCards(payload));
-			return;
+		if (isActiveSubcategory && !types) {
+			asyncGetProducts(id, dispatch, changeLoading);
 		}
-		if (isOpen) {
-			getProducts(id, dispatch, changeLoading);
-		}
-	}, [currentTypeTitle, dispatch, id, isOpen, types]);
+	}, [dispatch, id, isActiveSubcategory, types]);
 
 	return (
 		<motion.li
@@ -54,7 +46,7 @@ const SubcategorySectionContainer = ({
 		>
 			<Button
 				{...buttonStyleProps}
-				background={isOpen ? '#FFD4BC' : 'transparent'}
+				background={isActiveSubcategory ? '#FFD4BC' : 'transparent'}
 				link={`/catalog/section/${id}#catalog-header`}
 				smooth={true}
 			>
@@ -70,14 +62,14 @@ const SubcategorySectionContainer = ({
 				</div>
 			</Button>
 			<AnimatePresence>
-				{isOpen && types && (
+				{isActiveSubcategory && types && (
 					<ul className="types-container">
 						{types.map(({ id: typeId, title: typeTitle }, typeIndex) => (
 							<TypeSection
 								key={typeId}
 								id={typeId}
 								title={typeTitle}
-								isOpen={typeTitle === currentTypeTitle}
+								isActiveType={typeTitle === currentTypeTitle}
 								index={typeIndex}
 							/>
 						))}

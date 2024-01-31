@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getProducts } from '../utils/get-products';
+import { asyncGetProducts } from '../utils/async-get-products';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { motion } from 'framer-motion';
 import { changeLoading } from '../../../store/reducers';
@@ -8,17 +8,17 @@ import { Img } from '../../../components';
 import { Button } from '../../../features';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
 import { animationVariants } from '../constants/animation-variants';
-import styled from 'styled-components';
 import { buttonStyleProps } from '../constants/button-style-props';
+import styled from 'styled-components';
 
-const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
+const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (isOpen) {
-			getProducts(id, dispatch, changeLoading);
+		if (isActiveType) {
+			asyncGetProducts(id, dispatch, changeLoading);
 		}
-	}, [dispatch, id, isOpen]);
+	}, [dispatch, id, isActiveType]);
 
 	const { data } = useFetchProductBySectionQuery(id);
 
@@ -33,7 +33,7 @@ const TypeSectionContainer = ({ className, id, title, isOpen, index }) => {
 		>
 			<Button
 				{...buttonStyleProps}
-				background={isOpen ? '#FFD4BC' : 'transparent'}
+				background={isActiveType ? '#FFD4BC' : 'transparent'}
 				padding={'6px 16px 6px 24px'}
 				link={`/catalog/section/${id}#catalog-header`}
 				smooth={true}

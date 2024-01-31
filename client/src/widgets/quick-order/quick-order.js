@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { changeLoading, closeModal } from '../../store/reducers';
-import { sendQuickOrder } from '../../utils';
+import { asyncSendQuickOrder } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
 import { FormFooter, FormHeader, FormInputs } from './components';
@@ -48,7 +48,7 @@ const QuickOrderContainer = ({ className }) => {
 	const onSubmit = formData => {
 		dispatch(changeLoading(true));
 
-		sendQuickOrder(captchaToken, formData).then(res => {
+		asyncSendQuickOrder(captchaToken, formData).then(res => {
 			setServerError(res.error);
 			setServerResponse(res.data);
 			setIsSubmitted(true);

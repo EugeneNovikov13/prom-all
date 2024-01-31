@@ -1,8 +1,9 @@
+import { brandSliderConfig } from './brand-slider-config';
+import { mapsSliderConfig } from './maps-slider-config';
+import { organizationData } from './organization-data';
+import { productSliderConfig } from './product-slider-config';
 import { promoSliderConfig } from './promo-slider-config';
 import { quickOrderFormSchema } from './quick-order-form-schema';
-import { brandSliderConfig } from './brand-slider-config';
-import { productSliderConfig } from './product-slider-config';
-import { organizationData } from './organization-data';
 
 export const SETTINGS = {
 	ORGANIZATION_DATA: organizationData,
@@ -10,8 +11,11 @@ export const SETTINGS = {
 	BREADCRUMBS_MENU_CLOSE_DELAY: 300,
 	OFFICE_MAP_SRC:
 		'https://yandex.ru/map-widget/v1/?um=constructor%3A8a9b50811b19fb9391d41d4c3a5d9ea59b21581b3430f479f4aece1be009e37c&amp;source=constructor',
+	STOCK_MAP_SRC:
+		'https://yandex.ru/map-widget/v1/?um=constructor%3A0cd3a50c5d9541db526c314763c3f3a5f6458ccf3211a767f70d46ff48f9a850&amp;source=constructor',
 	BRAND_SLIDER_CONFIG: brandSliderConfig,
-	PROMO_SLIDER_CONFIG: promoSliderConfig,
+	MAP_SLIDER_CONFIG: mapsSliderConfig,
 	PRODUCT_SLIDER_CONFIG: productSliderConfig,
+	PROMO_SLIDER_CONFIG: promoSliderConfig,
 	QUICK_ORDER_FROM_SCHEMA: quickOrderFormSchema,
 };

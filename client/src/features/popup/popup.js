@@ -6,10 +6,8 @@ import styled from 'styled-components';
 const PopupContainer = ({ className, section }) => {
 	const { breadcrumbs } = useSelector(state => state.catalogReducer);
 
+	// Если здесь undefined, значит это продуктовый crumb
 	const sectionItems = getSubsectionsBySectionTitle(section, breadcrumbs);
-
-	//проверяем, является ли подраздел подразделом продуктов
-	const isProductSection = section === 'product';
 
 	const listVariants = {
 		visible: i => ({
@@ -28,9 +26,7 @@ const PopupContainer = ({ className, section }) => {
 
 	return (
 		<div className={className}>
-			{isProductSection ? (
-				<PopupItemProducts listVariants={listVariants} />
-			) : (
+			{sectionItems ? (
 				sectionItems.map(({ id, title }, index) => (
 					<PopupItemSections
 						key={id}
@@ -40,6 +36,8 @@ const PopupContainer = ({ className, section }) => {
 						listVariants={listVariants}
 					/>
 				))
+			) : (
+				<PopupItemProducts listVariants={listVariants} />
 			)}
 		</div>
 	);

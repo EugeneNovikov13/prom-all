@@ -17,7 +17,7 @@ const ContactsDataContainer = ({ className }) => {
 				<div className="data-item">
 					<span>{`${SETTINGS.ORGANIZATION_DATA.phone} — многоканальный`}</span>
 					<Img
-						iconClassName="data-item-copy-icon"
+						iconClassName="data-item-icon"
 						SvgIconComponent={Copy}
 						maxWidth="16px"
 						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.phone)}
@@ -31,7 +31,7 @@ const ContactsDataContainer = ({ className }) => {
 					<div className="data-item" key={item}>
 						<span>{item}</span>
 						<Img
-							iconClassName="data-item-copy-icon"
+							iconClassName="data-item-icon"
 							SvgIconComponent={Copy}
 							maxWidth="16px"
 							onClick={() => onClick(item)}
@@ -40,12 +40,25 @@ const ContactsDataContainer = ({ className }) => {
 					</div>
 				))}
 			</div>
-			<div className="address-container">
+			<div className="office-address-container">
 				<H4>Адрес офиса</H4>
 				<div className="data-item">
-					<span>{SETTINGS.ORGANIZATION_DATA.address}</span>
+					<span>{SETTINGS.ORGANIZATION_DATA.officeAddress}</span>
 					<Img
-						iconClassName="data-item-copy-icon"
+						iconClassName="data-item-icon"
+						SvgIconComponent={Copy}
+						maxWidth="16px"
+						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.mailAddress)}
+						hoverStrokeColor="var(--brand-orange)"
+					/>
+				</div>
+			</div>
+			<div className="stock-address-container">
+				<H4>Адрес склада</H4>
+				<div className="data-item">
+					<span>{SETTINGS.ORGANIZATION_DATA.stockAddress}</span>
+					<Img
+						iconClassName="data-item-icon"
 						SvgIconComponent={Copy}
 						maxWidth="16px"
 						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.mailAddress)}
@@ -58,7 +71,7 @@ const ContactsDataContainer = ({ className }) => {
 				<div className="data-item">
 					<span>{SETTINGS.ORGANIZATION_DATA.mailAddress}</span>
 					<Img
-						iconClassName="data-item-copy-icon"
+						iconClassName="data-item-icon"
 						SvgIconComponent={Copy}
 						maxWidth="16px"
 						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.mailAddress)}
@@ -102,12 +115,12 @@ export const ContactsData = styled(ContactsDataContainer)`
 			gap: 20px;
 
 			&:hover {
-				& svg.data-item-copy-icon {
+				& svg.data-item-icon {
 					opacity: 1;
 				}
 			}
 
-			& svg.data-item-copy-icon {
+			& svg.data-item-icon {
 				opacity: 0;
 			}
 

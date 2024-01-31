@@ -73,6 +73,12 @@ export const Footer = styled(FooterContainer)`
 				@media (max-width: 450px) {
 					align-items: center;
 				}
+
+				& img.title {
+					@media (max-width: 450px) {
+						display: none;
+					}
+				}
 			}
 
 			& div.navigation {

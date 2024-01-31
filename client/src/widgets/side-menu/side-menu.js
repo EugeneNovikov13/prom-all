@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { Button } from '../../features';
@@ -10,9 +9,6 @@ import { buttonStyleProps } from './constants/button-style-props';
 import styled from 'styled-components';
 
 const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
-	const [openedCategory, setOpenedCategory] = useState('');
-	const [prevOpenedCategory, setPrevOpenedCategory] = useState('');
-
 	const currentCategoryTitle = useSelector(
 		state => state.catalogReducer.breadcrumbs.category.selectedTitle,
 	);
@@ -23,11 +19,6 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 		image: cat.image,
 		subcategories: cat.subcategories,
 	}));
-
-	if (prevOpenedCategory !== currentCategoryTitle) {
-		setPrevOpenedCategory(openedCategory);
-		setOpenedCategory(currentCategoryTitle);
-	}
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
@@ -49,8 +40,7 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 					id={id}
 					title={title}
 					subcategories={subcategories}
-					isOpen={title === openedCategory}
-					setOpenedCategory={setOpenedCategory}
+					isActiveCategory={title === currentCategoryTitle}
 				/>
 			))}
 		</motion.aside>

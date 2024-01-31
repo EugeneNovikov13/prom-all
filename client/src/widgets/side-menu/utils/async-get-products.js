@@ -1,16 +1,12 @@
-import { resetCards, setCards } from '../../../store/reducers';
+import { resetProductCards, setProductCards } from '../../../store/reducers';
 import { fetchProductsBySectionId } from '../../../utils';
 
-export const getProducts = (id, dispatch, setLoadingFunc) => {
-	dispatch(resetCards());
+export const asyncGetProducts = (id, dispatch, setLoadingFunc) => {
+	dispatch(resetProductCards());
 	dispatch(setLoadingFunc(true));
 	fetchProductsBySectionId(id)
 		.then(({ data }) => {
-			const payload = {
-				isProductCards: true,
-				data,
-			};
-			dispatch(setCards(payload));
+			dispatch(setProductCards(data));
 			dispatch(setLoadingFunc(false));
 		})
 		.catch(e => {

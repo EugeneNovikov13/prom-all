@@ -1,13 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getSubsectionsBySectionId } from '../../utils';
 import { ProductCard } from '../../features';
 import { Img } from '../../components';
 import { ProductCardContent } from '../../features/product-card/components/product-card-content';
 import styled from 'styled-components';
 
 const CardsContainer = ({ className }) => {
-	const cards = useSelector(state => state.catalogReducer.cards) || [];
-	const isProductCards = useSelector(state => state.catalogReducer.isProductCards);
+	const productCards = useSelector(state => state.catalogReducer.productCards);
+
+	const params = useParams();
+
+	const subsections = getSubsectionsBySectionId(params.id);
+
+	const cards = subsections ? subsections : productCards || [];
 
 	return (
 		<div className={className}>
@@ -15,7 +21,7 @@ const CardsContainer = ({ className }) => {
 				{cards.map(({ id, title, image }) => (
 					<Link
 						to={
-							isProductCards
+							!subsections
 								? `/catalog/product/${id}`
 								: `/catalog/section/${id}`
 						}
