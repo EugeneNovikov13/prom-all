@@ -30,7 +30,7 @@ export const Page = styled(PageContainer)`
 
 	&.header__fixed {
 		@media screen and (max-device-height: 1000px) {
-			padding: 313px 0 0;
+			padding: 216px 0 0;
 		}
 	}
 `;

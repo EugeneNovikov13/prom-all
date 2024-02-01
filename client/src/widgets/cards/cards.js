@@ -27,12 +27,7 @@ const CardsContainer = ({ className }) => {
 						}
 						key={id}
 					>
-						<ProductCard
-							id={id}
-							title={title}
-							image={image}
-							onClick={Function.prototype}
-						>
+						<ProductCard id={id} title={title} image={image}>
 							<Img
 								iconClassName="product-card-icon"
 								image={image}

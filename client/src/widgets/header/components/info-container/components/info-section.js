@@ -4,11 +4,13 @@ import styled from 'styled-components';
 const InfoSectionContainer = ({ className, name, text, title, iconURL, href }) => {
 	return (
 		<div className={className} title={title} data-name={name}>
-			<a className="icon-container" href={href}>
-				<div className="icon-wrapper">
-					<Icon width="24px" iconSrc={iconURL} isActive={true} />
-				</div>
-			</a>
+			<div className="icon-container">
+				<a href={href}>
+					<div className="icon-wrapper">
+						<Icon width="24px" iconSrc={iconURL} isActive={true} />
+					</div>
+				</a>
+			</div>
 			<span>{text}</span>
 		</div>
 	);
@@ -41,7 +43,7 @@ export const InfoSection = styled(InfoSectionContainer)`
 		padding: 0;
 	}
 
-	& a.icon-container {
+	& div.icon-container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -58,10 +60,6 @@ export const InfoSection = styled(InfoSectionContainer)`
 			justify-content: center;
 			align-items: center;
 		}
-	}
-
-	&:hover {
-		cursor: pointer;
 	}
 
 	&:hover div.icon-container {

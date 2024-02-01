@@ -32,11 +32,14 @@ export const ProductCard = styled(ProductCardContainer)`
 	border-radius: 8px;
 	background: var(--white);
 	transition:
+		height 0.3s,
 		max-width 0.3s,
 		box-shadow 0.3s;
 
 	@media (max-width: 500px) {
 		max-width: none;
+		min-width: ${({ openCardTitle, title }) =>
+			openCardTitle === title ? 340 : ''}px;
 		height: ${({ openCardTitle, title }) => (openCardTitle === title ? 340 : 240)}px;
 		flex: 1 1 150px;
 		margin-top: ${({ openCardTitle, title }) => (openCardTitle === title ? 70 : 0)}px;

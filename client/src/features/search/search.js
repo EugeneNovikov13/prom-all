@@ -1,20 +1,41 @@
-import { useState } from 'react';
-import { Icon } from '../../../../components';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Icon } from '../../components';
 import searchLoup from './assets/search-loup.svg';
 import styled from 'styled-components';
 
 const SearchContainer = ({ className }) => {
+	const inputRef = useRef(null);
+
+	const navigate = useNavigate();
+
 	const [value, setValue] = useState('');
+
+	const onKeyDown = (e, text) => {
+		if (e.key === 'Enter') {
+			onSearchHandler(e, text);
+		}
+	};
+
+	const onSearchHandler = (e, text) => {
+		if (text) {
+			navigate(`/catalog/search?title=${text}`);
+			setValue('');
+			inputRef.current.blur();
+		}
+	};
 
 	return (
 		<search className={className}>
 			<input
+				ref={inputRef}
 				type="search"
 				name="product_search"
 				placeholder="Поиск"
 				autoComplete="off"
 				value={value}
 				onChange={({ target }) => setValue(target.value)}
+				onKeyDown={e => onKeyDown(e, value)}
 			/>
 			<Icon width="24px" iconSrc={searchLoup}></Icon>
 		</search>
@@ -31,7 +52,9 @@ export const Search = styled(SearchContainer)`
 	justify-content: center;
 	border-bottom: 2px solid rgba(23, 23, 23, 0);
 	border-radius: 23px;
-	transition: flex 0.5s ease-out, width 0.5s ease-out;
+	transition:
+		flex 0.5s ease-out,
+		width 0.5s ease-out;
 
 	&:hover {
 		background: #2b2930;
@@ -68,14 +91,45 @@ export const Search = styled(SearchContainer)`
 			padding: 0 1vw 1px 50px;
 		}
 
-		&::-webkit-input-placeholder       {text-indent: 0;   transition: text-indent 0.5s ease;}
-		&::-moz-placeholder                {text-indent: 0;   transition: text-indent 0.5s ease;}
-		&:-moz-placeholder                 {text-indent: 0;   transition: text-indent 0.5s ease;}
-		&:-ms-input-placeholder            {text-indent: 0;   transition: text-indent 0.5s ease;}
-		&:focus::-webkit-input-placeholder {text-indent: -350px; transition: text-indent 0.5s ease;}
-		&:focus::-moz-placeholder          {text-indent: -350px; transition: text-indent 0.5s ease;}
-		&:focus:-moz-placeholder           {text-indent: -350px; transition: text-indent 0.5s ease;}
-		&:focus:-ms-input-placeholder      {text-indent: -350px; transition: text-indent 0.5s ease;}
+		&::-webkit-input-placeholder {
+			text-indent: 0;
+			transition: text-indent 0.5s ease;
+		}
+
+		&::-moz-placeholder {
+			text-indent: 0;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:-moz-placeholder {
+			text-indent: 0;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:-ms-input-placeholder {
+			text-indent: 0;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:focus::-webkit-input-placeholder {
+			text-indent: -350px;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:focus::-moz-placeholder {
+			text-indent: -350px;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:focus:-moz-placeholder {
+			text-indent: -350px;
+			transition: text-indent 0.5s ease;
+		}
+
+		&:focus:-ms-input-placeholder {
+			text-indent: -350px;
+			transition: text-indent 0.5s ease;
+		}
 
 		&:hover {
 			background: #2b2930;
@@ -95,6 +149,10 @@ export const Search = styled(SearchContainer)`
 			& ~ img {
 				left: 290px;
 			}
+		}
+
+		&::-webkit-search-cancel-button {
+			cursor: pointer;
 		}
 	}
 

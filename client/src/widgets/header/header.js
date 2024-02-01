@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setFixedHeader } from '../../store/reducers';
-import { InfoContainer, NavigationMenu, Search } from './components';
+import { InfoContainer, NavigationMenu } from './components';
+import { Search } from '../../features';
 import { Logo } from '../../components';
 import styled from 'styled-components';
 

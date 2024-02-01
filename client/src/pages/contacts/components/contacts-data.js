@@ -48,7 +48,7 @@ const ContactsDataContainer = ({ className }) => {
 						iconClassName="data-item-icon"
 						SvgIconComponent={Copy}
 						maxWidth="16px"
-						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.mailAddress)}
+						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.officeAddress)}
 						hoverStrokeColor="var(--brand-orange)"
 					/>
 				</div>
@@ -61,7 +61,7 @@ const ContactsDataContainer = ({ className }) => {
 						iconClassName="data-item-icon"
 						SvgIconComponent={Copy}
 						maxWidth="16px"
-						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.mailAddress)}
+						onClick={() => onClick(SETTINGS.ORGANIZATION_DATA.stockAddress)}
 						hoverStrokeColor="var(--brand-orange)"
 					/>
 				</div>
