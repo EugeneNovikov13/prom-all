@@ -41,7 +41,7 @@ export const AdvantagesBody = styled(AdvantagesBodyContainer)`
 	transition: 0.1s;
 	padding: ${({ openedCardId }) => (openedCardId ? '0' : '0 68px')};
 
-	@media (max-width: 530px) {
+	@media (max-width: 600px) {
 		padding: ${({ openedCardId }) => (openedCardId ? '0' : '0 10px')};
 	}
 

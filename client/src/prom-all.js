@@ -7,6 +7,7 @@ import {
 	Catalog,
 	Contacts,
 	Documents,
+	FoundProducts,
 	Main,
 	Product,
 	Registration,
@@ -43,6 +44,7 @@ export const PromAll = () => {
 					<Route path="/catalog" element={<Catalog />}>
 						<Route path="section/:id" element={<Sections />}></Route>
 						<Route path="product/:id" element={<Product />}></Route>
+						<Route path="search" element={<FoundProducts />}></Route>
 					</Route>
 					<Route path="/documents" element={<Documents />}></Route>
 					<Route path="/about" element={<About />}></Route>

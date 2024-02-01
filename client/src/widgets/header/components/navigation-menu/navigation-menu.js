@@ -41,5 +41,9 @@ export const NavigationMenu = styled(NavigationMenuContainer)`
 		margin: 0;
 		padding: 0;
 		overflow: hidden;
+
+		@media screen and (max-width: 630px) {
+			gap: 5px 10px;
+		}
 	}
 `;

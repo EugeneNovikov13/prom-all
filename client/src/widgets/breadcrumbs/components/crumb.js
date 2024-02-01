@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getSubsectionsBySectionTitle } from '../../../utils';
 import { ReactComponent as Select } from '../assets/down-arrow.svg';
 import { Img } from '../../../components';
 import { Button, Popup } from '../../../features';
@@ -16,17 +13,6 @@ const CrumbContainer = ({
 	onMouseEnter,
 	onMouseLeave,
 }) => {
-	//получаем перечень подразделов открытого раздела каталога
-	const [sectionItems, setSectionItems] = useState([]);
-	const { breadcrumbs } = useSelector(state => state.catalogReducer);
-
-	useEffect(() => {
-		if (isOpen) {
-			setSectionItems(getSubsectionsBySectionTitle(section, breadcrumbs));
-		}
-	}, [breadcrumbs, isOpen, section]);
-	////
-
 	//проверяем, является ли подраздел подразделом продуктов
 	const isProductSection = section === 'product';
 
@@ -62,7 +48,7 @@ const CrumbContainer = ({
 				{isOpen && (
 					<Popup
 						isProductSection={isProductSection}
-						sectionItems={sectionItems}
+						section={section}
 					/>
 				)}
 			</div>

@@ -1,21 +1,21 @@
 export const findWayToId = (catalog, id) => {
 	const way = [];
-	for (let cat of catalog) {
-		if (cat.id === id) {
-			way.push({ id: cat.id, title: cat.title });
+	for (let category of catalog) {
+		if (category.id === id) {
+			way.push({ id: category.id, title: category.title });
 			break;
 		}
-		for (let subcat of cat.subcategories) {
-			if (subcat.id === id) {
-				way.push({ id: cat.id, title: cat.title });
-				way.push({ id: subcat.id, title: subcat.title });
+		for (let subcategory of category.subcategories) {
+			if (subcategory.id === id) {
+				way.push({ id: category.id, title: category.title });
+				way.push({ id: subcategory.id, title: subcategory.title });
 				break;
 			}
-			if (subcat.types) {
-				for (let type of subcat.types) {
+			if (subcategory.types) {
+				for (let type of subcategory.types) {
 					if (type.id === id) {
-						way.push({ id: cat.id, title: cat.title });
-						way.push({ id: subcat.id, title: subcat.title });
+						way.push({ id: category.id, title: category.title });
+						way.push({ id: subcategory.id, title: subcategory.title });
 						way.push({ id: type.id, title: type.title });
 						break;
 					}

@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { Button } from '../../button/button';
-import { Loader } from '../../../components';
 import styled from 'styled-components';
 
 const PopupItemProductsContainer = ({ className, listVariants }) => {
@@ -15,9 +14,11 @@ const PopupItemProductsContainer = ({ className, listVariants }) => {
 	);
 	const selectedSectionId = selectedTypeId || selectedSubcategoryId;
 
-	const { data: products, isLoading } =
+	const { data: products } =
 		useFetchProductBySectionQuery(selectedSectionId);
 	////
+
+	if (!products) return null;
 
 	const buttonStyleProps = {
 		justifyContent: 'flex-start',
@@ -31,30 +32,20 @@ const PopupItemProductsContainer = ({ className, listVariants }) => {
 
 	return (
 		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<>
-					{products &&
-						products.map(({ id, title }, index) => (
-							<motion.div
-								className={className}
-								key={id}
-								variants={listVariants}
-								initial="hidden"
-								animate="visible"
-								custom={index}
-							>
-								<Button
-									{...buttonStyleProps}
-									link={`/catalog/product/${id}`}
-								>
-									<span>{title}</span>
-								</Button>
-							</motion.div>
-						))}
-				</>
-			)}
+			{products.map(({ id, title }, index) => (
+				<motion.div
+					className={className}
+					key={id}
+					variants={listVariants}
+					initial="hidden"
+					animate="visible"
+					custom={index}
+				>
+					<Button {...buttonStyleProps} link={`/catalog/product/${id}`}>
+						<span>{title}</span>
+					</Button>
+				</motion.div>
+			))}
 		</>
 	);
 };

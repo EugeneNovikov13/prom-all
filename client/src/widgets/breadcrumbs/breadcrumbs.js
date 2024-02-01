@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMatch, useParams } from 'react-router-dom';
 import { useDebounce } from '../../hooks';
-import { getCurrentBreadcrumbs, setBreadcrumbsById } from '../../utils';
+import { asyncSetBreadcrumbsById, getCurrentBreadcrumbs } from '../../utils';
 import { Crumb } from './components/crumb';
 import { BreadcrumbsFirstItem } from './components/breadcrumbs-first-item';
 import { SETTINGS } from '../../settings';
@@ -22,7 +22,7 @@ const BreadcrumbsContainer = ({ className }) => {
 	const needToResetBreadcrumbs = useMatch('/catalog');
 
 	useEffect(() => {
-		setBreadcrumbsById(
+		asyncSetBreadcrumbsById(
 			dispatch,
 			id,
 			isOtherSectionSelected,

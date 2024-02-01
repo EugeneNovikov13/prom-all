@@ -22,7 +22,7 @@ const InformationContainer = ({ className }) => {
 			</div>
 			<div className="address wrapper">
 				<Icon width="18px" iconSrc={location} />
-				<span>{SETTINGS.ORGANIZATION_DATA.address}</span>
+				<span>{SETTINGS.ORGANIZATION_DATA.officeAddress}</span>
 			</div>
 		</div>
 	);

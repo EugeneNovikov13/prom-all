@@ -1,7 +1,14 @@
+import { useSelector } from 'react-redux';
+import { getSubsectionsBySectionTitle } from '../../utils';
 import { PopupItemProducts, PopupItemSections } from './components';
 import styled from 'styled-components';
 
-const PopupContainer = ({ className, isProductSection, sectionItems }) => {
+const PopupContainer = ({ className, section }) => {
+	const { breadcrumbs } = useSelector(state => state.catalogReducer);
+
+	// Если здесь undefined, значит это продуктовый crumb
+	const sectionItems = getSubsectionsBySectionTitle(section, breadcrumbs);
+
 	const listVariants = {
 		visible: i => ({
 			height: '40px',
@@ -19,9 +26,7 @@ const PopupContainer = ({ className, isProductSection, sectionItems }) => {
 
 	return (
 		<div className={className}>
-			{isProductSection ? (
-				<PopupItemProducts listVariants={listVariants} />
-			) : (
+			{sectionItems ? (
 				sectionItems.map(({ id, title }, index) => (
 					<PopupItemSections
 						key={id}
@@ -31,6 +36,8 @@ const PopupContainer = ({ className, isProductSection, sectionItems }) => {
 						listVariants={listVariants}
 					/>
 				))
+			) : (
+				<PopupItemProducts listVariants={listVariants} />
 			)}
 		</div>
 	);

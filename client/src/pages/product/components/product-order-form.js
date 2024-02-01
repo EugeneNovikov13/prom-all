@@ -22,7 +22,9 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 	const options = kinds && kinds.map(kind => ({ value: kind.id, label: kind.title }));
 
 	const onClick = () => {
-		const orderData = `Требуется: ${title} \nМодель исполнения: ${selectValue} \nКоличество: ${counter}шт.`;
+		const orderData = `Требуется: ${title} ${
+			selectValue && `\nМодель исполнения: ${selectValue}`
+		}\nКоличество: ${counter}шт.`;
 
 		dispatch(setOrderData(orderData));
 		dispatch(
@@ -84,6 +86,11 @@ export const ProductOrderForm = styled(ProductOrderFormContainer)`
 
 		h1 {
 			font-size: 48px;
+			word-break: break-word;
+
+			@media (max-width: 700px) {
+				font-size: 7vw;
+			}
 		}
 	}
 

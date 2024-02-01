@@ -21,10 +21,4 @@ export const Logo = styled(LogoContainer)`
 	&:hover {
 		cursor: pointer;
 	}
-
-	& img.title {
-		@media (max-width: 450px) {
-			display: none;
-		}
-	}
 `;

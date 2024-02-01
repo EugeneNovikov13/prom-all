@@ -1,31 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setFixedHeader } from '../../store/reducers';
-import { InfoContainer, NavigationMenu, Search } from './components';
+import { InfoContainer, NavigationMenu } from './components';
+import { Search } from '../../features';
 import { Logo } from '../../components';
 import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
 	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
-	const containerRef = useRef(null);
+	const navigationMenuRef = useRef(null);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		const handleScroll = () => {
-			if (window.scrollY >= containerRef.current.offsetTop) {
-				dispatch(setFixedHeader(true));
-				return;
-			}
-			dispatch(setFixedHeader(false));
-		};
+	const handleScroll = () => {
+		if (window.scrollY >= navigationMenuRef.current.offsetTop) {
+			dispatch(setFixedHeader(true));
+			return;
+		}
+		dispatch(setFixedHeader(false));
+	};
 
-		window.addEventListener('scroll', handleScroll);
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, [dispatch]);
+	window.addEventListener('scroll', handleScroll);
 
 	return (
 		<header className={isFixed ? `${className} header__fixed` : className}>
@@ -39,7 +34,7 @@ const HeaderContainer = ({ className }) => {
 			</div>
 			<div className="second-line">
 				<div className="header-bottom-wrapper">
-					<NavigationMenu ref={containerRef}/>
+					<NavigationMenu ref={navigationMenuRef} />
 					<Search />
 				</div>
 			</div>
@@ -66,7 +61,7 @@ export const Header = styled(HeaderContainer)`
 	&.header__fixed {
 		@media screen and (max-device-height: 1000px) {
 			position: fixed;
-			top: -213px;
+			top: -113px;
 		}
 	}
 
@@ -85,6 +80,16 @@ export const Header = styled(HeaderContainer)`
 			justify-content: space-between;
 			align-items: center;
 			flex: 1 0 0;
+
+			@media screen and (max-width: 450px) {
+				padding: 0 10px;
+			}
+
+			& img.title {
+				@media (max-width: 600px) {
+					display: none;
+				}
+			}
 		}
 	}
 
@@ -104,13 +109,13 @@ export const Header = styled(HeaderContainer)`
 			gap: 5px;
 			flex: 1 0 0;
 
-			@media screen and (max-width: 530px) {
-				padding: 0 10px;
-			}
-
-			@media screen and (max-width: 880px) {
+			@media screen and (max-width: 950px) {
 				display: flex;
 				flex-direction: column-reverse;
+			}
+
+			@media screen and (max-width: 450px) {
+				padding: 0 10px;
 			}
 		}
 	}

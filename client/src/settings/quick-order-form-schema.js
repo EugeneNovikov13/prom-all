@@ -14,6 +14,7 @@ export const quickOrderFormSchema = yup.object().shape({
 	phone: yup
 		.string()
 		.required('Введите контактный номер телефона')
+		.matches(/^[0-9()\-+, ]+$/, 'Допускаются только цифры, пробел и знаки ( ) , - +')
 		.min(6, 'Минимум 6 символов')
 		.max(30, 'Максимум 30 символов'),
 	order: yup.string().required('Заполните текст заявки'),

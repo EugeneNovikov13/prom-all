@@ -1,13 +1,16 @@
+import { useMatch } from 'react-router-dom';
 import { H1 } from '../../../components';
 import { Breadcrumbs } from '../../../widgets';
 import styled from 'styled-components';
 
 const CatalogHeaderContainer = ({ className }) => {
+	const isSearch = useMatch('/catalog/search');
+
 	return (
 		<section className={className} id="catalog-header">
 			<div className="catalog-header-container">
 				<div className="catalog-header-title">
-					<H1 color={'var(--white)'}>Каталог</H1>
+					<H1 color={'var(--white)'}>{isSearch ? 'Поиск' : 'Каталог'}</H1>
 				</div>
 				<Breadcrumbs />
 			</div>

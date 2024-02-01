@@ -14,14 +14,14 @@ const PageContainer = ({ className, children }) => {
 export const Page = styled(PageContainer)`
 	width: 100%;
 	min-height: 60vh;
-	padding: 112px 0 0;
+	padding: 113px 0 0;
 
-	@media screen and (max-width: 1020px) {
-		padding: 209px 0 0;
+	@media screen and (max-width: 950px) {
+		padding: 164px 0 0;
 	}
 
-	@media screen and (max-width: 450px) {
-		padding: 261px 0 0;
+	@media screen and (max-width: 630px) {
+		padding: 216px 0 0;
 	}
 
 	@media screen and (max-device-height: 1000px) {
@@ -30,7 +30,7 @@ export const Page = styled(PageContainer)`
 
 	&.header__fixed {
 		@media screen and (max-device-height: 1000px) {
-			padding: 313px 0 0;
+			padding: 216px 0 0;
 		}
 	}
 `;

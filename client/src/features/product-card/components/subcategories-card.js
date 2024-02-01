@@ -14,6 +14,7 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 						<Button
 							link={`/catalog/section/${subId}#catalog-header`}
 							height="48px"
+							padding="0 12px"
 							fontSize="20px"
 							color="var(--white)"
 							background={'transparent'}
@@ -79,7 +80,6 @@ export const SubcategoriesCard = styled(SubcategoriesCardContainer)`
 			justify-content: center;
 			align-items: center;
 			border-radius: 100px;
-			padding: 0 12px;
 			z-index: 10;
 
 			&:hover {

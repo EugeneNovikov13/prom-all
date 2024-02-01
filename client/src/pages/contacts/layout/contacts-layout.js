@@ -1,6 +1,9 @@
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ContactsData } from '../components/contacts-data';
+import { H2 } from '../../../components';
 import { MapIFrame } from '../../../widgets';
 import { SETTINGS } from '../../../settings';
+import { mapsConfig } from '../constants/maps-config';
 import styled from 'styled-components';
 
 const ContactsLayoutContainer = ({ className }) => {
@@ -10,12 +13,22 @@ const ContactsLayoutContainer = ({ className }) => {
 				<div className="office-contacts">
 					<ContactsData />
 					<div className="office-map-container">
-						<MapIFrame
-							title={'Расположение офиса'}
-							width={'100%'}
-							height={462}
-							src={SETTINGS.OFFICE_MAP_SRC}
-						/>
+						<Splide
+							aria-label="Карта проезда"
+							options={SETTINGS.MAP_SLIDER_CONFIG}
+						>
+							{mapsConfig.map(({ title, width, height, src }) => (
+								<SplideSlide key={title}>
+									<H2>{title}</H2>
+									<MapIFrame
+										title={title}
+										width={width}
+										height={height}
+										src={src}
+									/>
+								</SplideSlide>
+							))}
+						</Splide>
 					</div>
 				</div>
 			</div>
@@ -56,8 +69,31 @@ export const ContactsLayout = styled(ContactsLayoutContainer)`
 			}
 
 			& div.office-map-container {
+				max-width: 514px;
 				width: 100%;
 				flex: 1 0 0;
+
+				& h2 {
+					text-align: center;
+					margin-bottom: 12px;
+					background: #f4f6fa;
+				}
+
+				& .splide__arrow {
+					transform: scale(1.4) translateY(-20px);
+				}
+
+				& .splide__arrow--prev {
+					@media (min-width: 460px) {
+						left: -40px;
+					}
+				}
+
+				& .splide__arrow--next {
+					@media (min-width: 460px) {
+						right: -40px;
+					}
+				}
 			}
 		}
 	}

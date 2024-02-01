@@ -2,7 +2,7 @@ import { fetchProductById } from './fetch-product-by-id';
 import { restoreSectionBreadcrumbs } from './restore-section-breadcrumbs';
 import { resetBreadcrumbs, setProduct } from '../store/reducers';
 
-export const setBreadcrumbsById = (
+export const asyncSetBreadcrumbsById = (
 	dispatch,
 	id,
 	isOtherSectionSelected,

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { closeModal } from './app-slice';
 
 const initialState = {
 	orderData: '',
@@ -11,6 +12,13 @@ export const orderSlice = createSlice({
 		setOrderData(state, action) {
 			state.orderData = action.payload;
 		},
+	},
+	extraReducers: builder => {
+		// Очищаем данные для заказа после закрытия модального окна
+		builder
+			.addCase(closeModal, () => {
+				return initialState;
+			})
 	},
 });
 
