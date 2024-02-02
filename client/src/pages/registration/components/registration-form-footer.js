@@ -1,7 +1,7 @@
 import { Button } from '../../../features';
 import styled from 'styled-components';
 
-const FormFooterContainer = ({ className, formError, captchaToken }) => {
+const RegistrationFormFooterContainer = ({ className, formError, captchaToken }) => {
 	return (
 		<div className={className}>
 			<Button
@@ -13,7 +13,7 @@ const FormFooterContainer = ({ className, formError, captchaToken }) => {
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
 			>
-				Отправить сообщение<sup>*</sup>
+				Отправить<sup>*</sup>
 			</Button>
 			<span>
 				* Нажимая на кнопку вы соглашаетесь с Пользовательским соглашением и
@@ -23,7 +23,7 @@ const FormFooterContainer = ({ className, formError, captchaToken }) => {
 	);
 };
 
-export const FormFooter = styled(FormFooterContainer)`
+export const RegistrationFormFooter = styled(RegistrationFormFooterContainer)`
 	display: flex;
 	flex-direction: column;
 	gap: 24px;

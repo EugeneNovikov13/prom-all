@@ -1,13 +1,40 @@
-import { Input, Textarea } from '../../../features';
+import { Input } from '../../../features';
 import styled from 'styled-components';
 
-const FormInputsContainer = ({ className, register, errors, onInputChange }) => {
+const RegistrationFormInputsContainer = ({ className, register, errors, onInputChange }) => {
 	return (
 		<div className={className}>
 			<div className="input-wrapper">
 				<Input
+					name="login"
+					placeholder="Логин"
+					type="text"
+					error={errors?.login?.message}
+					{...register('login', {
+						onChange: onInputChange,
+					})}
+				/>
+				<Input
+					name="password"
+					placeholder="Пароль"
+					type="password"
+					error={errors?.password?.message}
+					{...register('password', {
+						onChange: onInputChange,
+					})}
+				/>
+				<Input
+					name="password_confirm"
+					placeholder="Повторите пароль"
+					type="password"
+					error={errors?.passwordConfirm?.message}
+					{...register('passwordConfirm', {
+						onChange: onInputChange,
+					})}
+				/>
+				<Input
 					name="name"
-					placeholder="Ваше имя"
+					placeholder="ФИО"
 					type="text"
 					error={errors?.name?.message}
 					{...register('name', {
@@ -42,23 +69,13 @@ const FormInputsContainer = ({ className, register, errors, onInputChange }) => 
 					})}
 				/>
 			</div>
-			<Textarea
-				name="order"
-				placeholder="Здесь вы можете более подробно описать цель вашего обращения"
-				type="text"
-				error={errors?.order?.message}
-				{...register('order', {
-					onChange: onInputChange,
-				})}
-			/>
 		</div>
 	);
 };
 
-export const FormInputs = styled(FormInputsContainer)`
+export const RegistrationFormInputs = styled(RegistrationFormInputsContainer)`
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
 
 	& div.input-wrapper {
 		display: flex;

@@ -1,21 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const adminAPI = createApi({
-	reducerPath: 'adminAPI',
+export const userAPI = createApi({
+	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/',
+		baseUrl: '',
 	}),
 	tagTypes: ['User'],
 	endpoints: builder => ({
 		fetchUser: builder.query({
 			query: () => ({
-				url: 'users',
+				url: '/users',
 			})
 		}),
 		providesTags: () => ['User'],
 		fetchRegister: builder.mutation({
 			query: (userData) => ({
-				url: 'register',
+				url: '/register',
 				method: 'POST',
 				body: userData,
 			}),
@@ -23,7 +23,7 @@ export const adminAPI = createApi({
 		}),
 		fetchAuth: builder.mutation({
 			query: userData => ({
-				url: 'login',
+				url: '/login',
 				method: 'POST',
 				body: userData,
 			}),
@@ -31,7 +31,7 @@ export const adminAPI = createApi({
 		}),
 		fetchLogout: builder.mutation({
 			query: () => ({
-				url: `logout`,
+				url: `/logout`,
 				method: 'POST',
 			}),
 			invalidatesTags: ['User'],
@@ -39,4 +39,4 @@ export const adminAPI = createApi({
 	}),
 });
 
-export const {useFetchUserQuery, useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = adminAPI;
+export const {useFetchUserQuery, useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = userAPI;

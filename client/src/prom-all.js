@@ -49,7 +49,7 @@ export const PromAll = () => {
 					<Route path="/documents" element={<Documents />}></Route>
 					<Route path="/about" element={<About />}></Route>
 					<Route path="/contacts" element={<Contacts />}></Route>
-					<Route path="/registartion" element={<Registration />}></Route>
+					<Route path="/registration" element={<Registration />}></Route>
 					<Route path="/authorization" element={<Authorization />}></Route>
 					<Route path="/administration" element={<Administration />}></Route>
 					<Route

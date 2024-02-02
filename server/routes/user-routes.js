@@ -1,7 +1,7 @@
 const express = require('express');
 
-const { register, login } = require('../controllers/admin');
-const mapAdmin = require('../helpers/mapAdmin');
+const { register, login } = require('../controllers/user');
+const mapUser = require('../helpers/mapUser');
 const handleError = require('../helpers/handle-error');
 const authenticated = require('../middlewares/authenticated');
 
@@ -11,7 +11,7 @@ router.get('/users', authenticated, async (req, res) => {
 	try {
 		const user = req.user;
 
-		res.send(mapAdmin(user));
+		res.send(mapUser(user));
 	} catch (e) {
 		handleError(res, e);
 	}
@@ -19,10 +19,10 @@ router.get('/users', authenticated, async (req, res) => {
 
 router.post('/register', async (req, res) => {
 	try {
-		const { token, admin } = await register(req.body.login, req.body.password);
+		const { token, user } = await register(req.body.userData, req.body.captchaToken);
 
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
-			.send(mapAdmin(admin));
+			.send(mapUser(user));
 	} catch (e) {
 		handleError(res, e);
 	}
@@ -30,10 +30,10 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 	try {
-		const { token, admin } = await login(req.body.login, req.body.password);
+		const { token, user } = await login(req.body.login, req.body.password);
 
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
-			.send(mapAdmin(admin));
+			.send(mapUser(user));
 	} catch (e) {
 		handleError(res, e);
 	}

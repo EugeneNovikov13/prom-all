@@ -6,7 +6,7 @@ import { changeLoading, closeModal } from '../../store/reducers';
 import { asyncSendQuickOrder } from '../../utils';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
-import { FormFooter, FormHeader, FormInputs } from './components';
+import { OrderFormFooter, OrderFormHeader, OrderFormInputs } from './components';
 import { SETTINGS } from '../../settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import styled from 'styled-components';
@@ -37,7 +37,7 @@ const QuickOrderContainer = ({ className }) => {
 			phone: '',
 			order: orderData,
 		},
-		resolver: yupResolver(SETTINGS.QUICK_ORDER_FROM_SCHEMA),
+		resolver: yupResolver(SETTINGS.QUICK_ORDER_FORM_SCHEMA),
 	});
 
 	if (isSubmitted) {
@@ -83,8 +83,8 @@ const QuickOrderContainer = ({ className }) => {
 
 	return (
 		<form className={className} method="post" onSubmit={handleSubmit(onSubmit)}>
-			<FormHeader />
-			<FormInputs
+			<OrderFormHeader />
+			<OrderFormInputs
 				register={register}
 				errors={errors}
 				onInputChange={onInputChange}
@@ -101,7 +101,7 @@ const QuickOrderContainer = ({ className }) => {
 				<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
 			)}
 			{serverResponse && <ServerMessage>{serverResponse}</ServerMessage>}
-			<FormFooter formError={formError} captchaToken={captchaToken} />
+			<OrderFormFooter formError={formError} captchaToken={captchaToken} />
 		</form>
 	);
 };

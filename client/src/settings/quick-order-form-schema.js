@@ -5,8 +5,10 @@ export const quickOrderFormSchema = yup.object().shape({
 		.string()
 		.required('Заполните имя')
 		.matches(/^[A-Za-zА-Яа-я ]+$/, 'Допускаются только буквы и пробел')
-		.max(30, 'Максимум 50 символов'),
-	organization: yup.string().required('Заполните название организации'),
+		.max(50, 'Максимум 50 символов'),
+	organization: yup.string()
+		.required('Заполните название организации')
+		.max(50, 'Максимум 50 символов'),
 	email: yup
 		.string()
 		.required('Заполните адрес электронной почты')

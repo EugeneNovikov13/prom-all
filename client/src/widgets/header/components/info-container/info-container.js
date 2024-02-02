@@ -19,7 +19,7 @@ const InfoContainerContainer = ({ className }) => {
 				/>
 			))}
 			<Button
-				link="/authorization"
+				link="/registration"
 				width="130px"
 				height="48px"
 				justifyContent="space-evenly"
