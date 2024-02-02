@@ -1,3 +1,3 @@
-export * from './form-footer';
-export * from './form-header';
-export * from './form-inputs';
+export * from './order-form-footer';
+export * from './order-form-header';
+export * from './order-form-inputs';

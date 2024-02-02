@@ -1,7 +1,8 @@
+import { HashLink } from 'react-router-hash-link';
 import { Button } from '../../../features';
 import styled from 'styled-components';
 
-const FormFooterContainer = ({ className, formError, captchaToken }) => {
+const AuthorizationFormFooterContainer = ({ className, formError, captchaToken }) => {
 	return (
 		<div className={className}>
 			<Button
@@ -13,17 +14,14 @@ const FormFooterContainer = ({ className, formError, captchaToken }) => {
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
 			>
-				Отправить сообщение<sup>*</sup>
+				Отправить
 			</Button>
-			<span>
-				* Нажимая на кнопку вы соглашаетесь с Пользовательским соглашением и
-				Условиями обработки персональных данных.
-			</span>
+			<span>Если у вас нет аккаунта {<HashLink to={'/registration#top'}>зарегистрируйтесь</HashLink>}</span>
 		</div>
 	);
 };
 
-export const FormFooter = styled(FormFooterContainer)`
+export const AuthorizationFormFooter = styled(AuthorizationFormFooterContainer)`
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
@@ -34,5 +32,15 @@ export const FormFooter = styled(FormFooterContainer)`
 		font-family: Inter, sans-serif;
 		font-size: 16px;
 		opacity: 0.7;
+
+		& a {
+			opacity: 1;
+			text-decoration: underline;
+			cursor: pointer;
+
+			&:hover {
+				color: var(--brand-orange);
+			}
+		}
 	}
 `;

@@ -2,7 +2,7 @@ import { useMatch } from 'react-router-dom';
 import { H1, P } from '../../../components';
 import styled from 'styled-components';
 
-const FormHeaderContainer = ({ className }) => {
+const OrderFormHeaderContainer = ({ className }) => {
 	const isContactsPage = useMatch('/contacts');
 
 	return (
@@ -15,7 +15,7 @@ const FormHeaderContainer = ({ className }) => {
 	);
 };
 
-export const FormHeader = styled(FormHeaderContainer)`
+export const OrderFormHeader = styled(OrderFormHeaderContainer)`
 	display: flex;
 	flex-direction: column;
 	gap: 10px;

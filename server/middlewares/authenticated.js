@@ -1,13 +1,13 @@
 const { verify } = require('../helpers/token');
-const Admin = require('../models/Admin');
+const User = require('../models/User');
 const handleError = require('../helpers/handle-error');
 
 module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
 	if (req.url === '/users' && !token) {
-		res.send({ error: 'Авторизуйтесь для входа в роли администратора' });
-		next('route');
+		req.error = 'Авторизуйтесь для входа в роли администратора';
+		next();
 		return;
 	}
 
@@ -19,7 +19,7 @@ module.exports = async function(req, res, next) {
 
 	const tokenData = verify(req.cookies.token);
 
-	const user = await Admin.findOne({ _id: tokenData.id });
+	const user = await User.findOne({ _id: tokenData.id });
 
 	if (!user) {
 		handleError(res, {message: 'Ваш токен недействителен. Авторизуйтесь'}, 401);

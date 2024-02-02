@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import appReducer from './reducers/app-slice';
 import catalogReducer from './reducers/catalog-slice';
 import orderReducer from './reducers/order-slice';
-import { adminAPI, brandAPI, productAPI, promoAPI } from './services';
+import { userAPI, brandAPI, productAPI, promoAPI } from './services';
 
 const rootReducer = combineReducers({
 	appReducer,
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 	[promoAPI.reducerPath]: promoAPI.reducer,
 	[brandAPI.reducerPath]: brandAPI.reducer,
 	[productAPI.reducerPath]: productAPI.reducer,
-	[adminAPI.reducerPath]: adminAPI.reducer,
+	[userAPI.reducerPath]: userAPI.reducer,
 });
 
 export const setupStore = () => {
@@ -22,7 +22,7 @@ export const setupStore = () => {
 				promoAPI.middleware,
 				brandAPI.middleware,
 				productAPI.middleware,
-				adminAPI.middleware,
+				userAPI.middleware,
 			),
 	});
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AboutContainer = ({ className }) => {
-	return <></>;
+	return <main className={className}></main>;
 };
 
 export const About = styled(AboutContainer)``;

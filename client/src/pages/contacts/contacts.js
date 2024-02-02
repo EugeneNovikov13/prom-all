@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const ContactsContainer = ({ className }) => {
 	return (
-		<div className={className}>
+		<main className={className}>
 			<ContactsLayout />
 			<ContactsQuickOrderLayout />
-		</div>
+		</main>
 	);
 };
 

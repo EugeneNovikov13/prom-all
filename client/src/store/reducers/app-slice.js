@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	fixedHeader: false,
 	isLoading: false,
-	wasLogin: false,
 	modal: {
 		isOpen: false,
 		backgroundColor: '',
@@ -11,6 +10,7 @@ const initialState = {
 		title: '',
 		content: '',
 	},
+	user: null,
 };
 
 export const appSlice = createSlice({
@@ -30,9 +30,16 @@ export const appSlice = createSlice({
 		closeModal(state) {
 			state.modal.isOpen = false;
 		},
+		setUser(state, action) {
+			state.user = action.payload;
+		},
+		logout(state) {
+			state.user = initialState.user;
+		},
 	},
 });
 
-export const { changeLoading, closeModal, openModal, setFixedHeader } = appSlice.actions;
+export const { changeLoading, closeModal, openModal, setFixedHeader, setUser, logout } =
+	appSlice.actions;
 
 export default appSlice.reducer;

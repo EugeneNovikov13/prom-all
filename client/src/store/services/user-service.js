@@ -1,42 +1,56 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const adminAPI = createApi({
-	reducerPath: 'adminAPI',
+export const userAPI = createApi({
+	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/',
+		baseUrl: '',
 	}),
 	tagTypes: ['User'],
 	endpoints: builder => ({
 		fetchUser: builder.query({
 			query: () => ({
-				url: 'users',
+				url: '/users',
 			})
 		}),
 		providesTags: () => ['User'],
 		fetchRegister: builder.mutation({
-			query: (userData) => ({
-				url: 'register',
+			query: (data) => ({
+				url: '/register',
 				method: 'POST',
-				body: userData,
+				body: data,
 			}),
 			invalidatesTags: ['User'],
 		}),
 		fetchAuth: builder.mutation({
-			query: userData => ({
-				url: 'login',
+			query: data => ({
+				url: '/login',
 				method: 'POST',
-				body: userData,
+				body: data,
 			}),
 			invalidatesTags: ['User'],
 		}),
 		fetchLogout: builder.mutation({
 			query: () => ({
-				url: `logout`,
+				url: `/logout`,
 				method: 'POST',
+			}),
+			invalidatesTags: ['User'],
+		}),
+		upgradeUser: builder.mutation({
+			query: ({ id, ...data }) => ({
+				url: `users/${id}`,
+				method: 'PATCH',
+				body: data,
 			}),
 			invalidatesTags: ['User'],
 		}),
 	}),
 });
 
-export const {useFetchUserQuery, useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = adminAPI;
+export const {
+	useFetchUserQuery,
+	useFetchRegisterMutation,
+	useFetchAuthMutation,
+	useFetchLogoutMutation,
+	useUpgradeUserMutation,
+} = userAPI;
