@@ -17,7 +17,6 @@ async function register(userData, captchaToken) {
 	const passwordHash = await bcrypt.hash(userData.password, 10);
 
 	const existingUser = await User.findOne({ login: userData.login });
-
 	if (existingUser) {
 		throw new Error('Данный пользователь уже существует');
 	}
@@ -30,9 +29,7 @@ async function register(userData, captchaToken) {
 		email: userData.email,
 		phone: userData.phone,
 	};
-
 	const user = await User.create(dataForDataBase);
-
 	const token = generate({ id: user.id });
 
 	return { token, user };
@@ -40,14 +37,18 @@ async function register(userData, captchaToken) {
 
 // login
 
-async function login(login, password) {
-	const user = await User.findOne({ login });
+async function login(userData, captchaToken) {
+	const captchaTestResult = await reCaptchaTest(captchaToken, process.env.RECAPTCHA_SECRET_KEY);
+	if (!captchaTestResult) {
+		throw new Error('Проверка reCaptcha не пройдена');
+	}
 
+	const user = await User.findOne({ login: userData.login });
 	if (!user) {
 		throw new Error('Пользователь не найден');
 	}
 
-	const isPasswordMatch = await bcrypt.compare(password, user.password);
+	const isPasswordMatch = await bcrypt.compare(userData.password, user.password);
 
 	if (!isPasswordMatch) {
 		throw new Error('Неверный пароль');
@@ -58,7 +59,12 @@ async function login(login, password) {
 	return { token, user };
 }
 
+async function editUser(id, data) {
+	return User.findByIdAndUpdate(id, data, { returnDocument: 'after', runValidators: true });
+}
+
 module.exports = {
 	register,
 	login,
+	editUser,
 };

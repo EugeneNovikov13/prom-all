@@ -60,7 +60,6 @@ const RegistrationContainer = ({ className }) => {
 		};
 
 		fetchRegister(data).then(res => {
-			console.log(res);
 			dispatch(changeLoading(false));
 			if (!res.error) {
 				setIsSubmitted(true);
@@ -91,7 +90,7 @@ const RegistrationContainer = ({ className }) => {
 		errors?.email?.message ||
 		errors?.phone?.message;
 
-	// Проверяем все ли поля были заполнены хоть чем-то
+	// Проверяем все ли поля были изменены
 	const isAllFieldsDirty =
 		Object.values(dirtyFields).length === Object.values(inputCounter).length;
 

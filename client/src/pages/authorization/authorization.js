@@ -1,71 +1,146 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useFetchAuthMutation } from '../../store/services';
+import { changeLoading } from '../../store/reducers';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { RECAPTCHA_SECRET_KEY } from '../../config';
+import { ServerMessage } from '../../components';
 import {
-	useFetchAuthMutation,
-	useFetchLogoutMutation,
-	useFetchRegisterMutation,
-} from '../../store/services';
+	AuthorizationFormFooter,
+	AuthorizationFormHeader,
+	AuthorizationFormInputs,
+} from './components';
+import { SETTINGS } from '../../settings';
+import styled from 'styled-components';
 
 const AuthorizationContainer = ({ className }) => {
-	const [login, setLogin] = useState('');
-	const [password, setPassword] = useState('');
+	const recaptchaRef = React.createRef();
 
-	const [fetchRegister, { error: regError, isLoading, isError: isRegError }] = useFetchRegisterMutation();
-	const [fetchAuth, { error: authError, isError: isAuthError }] = useFetchAuthMutation();
-	const [fetchLogout] = useFetchLogoutMutation();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const registration = async () => {
-		await fetchRegister({ login, password });
+	const [serverError, setServerError] = useState(null);
+	const [captchaToken, setCaptchaToken] = useState(null);
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	const {
+		register,
+		reset: formReset,
+		handleSubmit,
+		formState: { errors, dirtyFields, defaultValues: inputCounter },
+	} = useForm({
+		defaultValues: {
+			login: '',
+			password: '',
+		},
+		resolver: yupResolver(SETTINGS.AUTHORIZATION_FORM_SCHEMA),
+	});
+
+	if (isSubmitted) {
+		formReset();
+		setIsSubmitted(false);
+	}
+
+	const [fetchAuth] = useFetchAuthMutation();
+
+	const onSubmit = formData => {
+		dispatch(changeLoading(true));
+
+		const data = {
+			userData: formData,
+			captchaToken,
+		};
+
+		fetchAuth(data).then(res => {
+			dispatch(changeLoading(false));
+			if (!res.error) {
+				setIsSubmitted(true);
+				navigate('/', { replace: true });
+				return;
+			}
+			setServerError(res.error.data);
+		});
+
+		setCaptchaToken(null);
+		recaptchaRef.current.reset();
 	};
 
-	const authorization = async () => {
-		await fetchAuth({ login, password });
+	const onCaptchaChange = value => {
+		setCaptchaToken(value);
 	};
 
-	const logout = () => {
-		fetchLogout();
+	const onInputChange = () => {
+		setServerError(null);
 	};
+
+	const formError =
+		errors?.login?.message ||
+		errors?.password?.message;
+
+	// Проверяем все ли поля были изменены
+	const isAllFieldsDirty =
+		Object.values(dirtyFields).length === Object.values(inputCounter).length;
 
 	return (
 		<div className={className}>
-			{isLoading ? <h2>Идёт запрос...</h2> :
-				<div>
-					<input
-						type="text"
-						id="login"
-						name="login"
-						placeholder="Введите логин..."
-						value={login}
-						onChange={({ target }) => setLogin(target.value)}
+			<section className="authorization-layout">
+				<form
+					className="authorization-form"
+					method="post"
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<AuthorizationFormHeader />
+					<AuthorizationFormInputs
+						register={register}
+						errors={errors}
+						onInputChange={onInputChange}
 					/>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						placeholder="Введите пароль..."
-						value={password}
-						onChange={({ target }) => setPassword(target.value)}
+					{isAllFieldsDirty && (
+						<ReCAPTCHA
+							ref={recaptchaRef}
+							sitekey={RECAPTCHA_SECRET_KEY}
+							onChange={onCaptchaChange}
+							hl="ru"
+						/>
+					)}
+					{serverError && (
+						<ServerMessage isError={serverError}>
+							! {serverError}
+						</ServerMessage>
+					)}
+					<AuthorizationFormFooter
+						formError={formError}
+						captchaToken={captchaToken}
 					/>
-					<button onClick={registration}>Регистрация</button>
-					<button onClick={authorization}>Авторизация</button>
-					<button onClick={logout}>Выйти</button>
-				</div>
-			}
-			{isRegError && <p>{regError.data}</p>}
-			{isAuthError && <p>{authError.data}</p>}
+				</form>
+			</section>
 		</div>
 	);
 };
 
 export const Authorization = styled(AuthorizationContainer)`
-	form {
-		width: 200px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 
-	h2 {
-		color: white;
+	& section.authorization-layout {
+		max-width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 40px 10px;
+		background: var(--dark);
+
+		& form.authorization-form {
+			max-width: 480px;
+			flex: 1 0 0;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+			padding: 0 32px;
+		}
 	}
 `;

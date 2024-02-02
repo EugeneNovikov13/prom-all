@@ -5,6 +5,8 @@ import { productSliderConfig } from './product-slider-config';
 import { promoSliderConfig } from './promo-slider-config';
 import { quickOrderFormSchema } from './quick-order-form-schema';
 import { registrationFormSchema } from './registration-form-schema';
+import { authorizationFormSchema } from './authorization-form-schema';
+import { accountFormSchema } from './account-form-schema';
 
 export const SETTINGS = {
 	ORGANIZATION_DATA: organizationData,
@@ -19,5 +21,7 @@ export const SETTINGS = {
 	PRODUCT_SLIDER_CONFIG: productSliderConfig,
 	PROMO_SLIDER_CONFIG: promoSliderConfig,
 	QUICK_ORDER_FORM_SCHEMA: quickOrderFormSchema,
+	AUTHORIZATION_FORM_SCHEMA: authorizationFormSchema,
 	REGISTRATION_FORM_SCHEMA: registrationFormSchema,
+	ACCOUNT_FORM_SCHEMA: accountFormSchema,
 };

@@ -1,4 +1,5 @@
 export * from './about/about';
+export * from './account/account';
 export * from './administration/administartion';
 export * from './authorization/authorization';
 export * from './catalog/catalog';

@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Page } from './page-component/page';
 import {
 	About,
+	Account,
 	Administration,
 	Authorization,
 	Catalog,
@@ -51,6 +52,7 @@ export const PromAll = () => {
 					<Route path="/contacts" element={<Contacts />}></Route>
 					<Route path="/registration" element={<Registration />}></Route>
 					<Route path="/authorization" element={<Authorization />}></Route>
+					<Route path="/account" element={<Account />}></Route>
 					<Route path="/administration" element={<Administration />}></Route>
 					<Route
 						path="*"

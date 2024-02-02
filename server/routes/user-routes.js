@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { register, login } = require('../controllers/user');
+const { register, login, editUser } = require('../controllers/user');
 const mapUser = require('../helpers/mapUser');
 const handleError = require('../helpers/handle-error');
 const authenticated = require('../middlewares/authenticated');
@@ -9,9 +9,12 @@ const router = express.Router();
 
 router.get('/users', authenticated, async (req, res) => {
 	try {
-		const user = req.user;
-
-		res.send(mapUser(user));
+		if (req.user) {
+			const user = req.user;
+			res.send({ data: mapUser(user), error: null });
+			return;
+		}
+		res.send({ data: null, error: req.error });
 	} catch (e) {
 		handleError(res, e);
 	}
@@ -30,7 +33,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 	try {
-		const { token, user } = await login(req.body.login, req.body.password);
+		const { token, user } = await login(req.body.userData, req.body.captchaToken);
 
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
 			.send(mapUser(user));
@@ -42,8 +45,19 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
 	try {
 		res.cookie('token', '', { httpOnly: true })
-			.send('Выход успешно выполнен');
+			.send({});
 	} catch (e) {
+		handleError(res, e);
+	}
+});
+
+router.patch('/users/:id', authenticated, async (req, res) => {
+	try {
+		const user = await editUser(req.params.id, req.body);
+
+		res.send(mapUser(user));
+	} catch (e) {
+		e.message = 'Ошибка! Не удалось изменить данные пользователя';
 		handleError(res, e);
 	}
 });

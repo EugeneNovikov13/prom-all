@@ -14,18 +14,18 @@ export const userAPI = createApi({
 		}),
 		providesTags: () => ['User'],
 		fetchRegister: builder.mutation({
-			query: (userData) => ({
+			query: (data) => ({
 				url: '/register',
 				method: 'POST',
-				body: userData,
+				body: data,
 			}),
 			invalidatesTags: ['User'],
 		}),
 		fetchAuth: builder.mutation({
-			query: userData => ({
+			query: data => ({
 				url: '/login',
 				method: 'POST',
-				body: userData,
+				body: data,
 			}),
 			invalidatesTags: ['User'],
 		}),
@@ -36,7 +36,21 @@ export const userAPI = createApi({
 			}),
 			invalidatesTags: ['User'],
 		}),
+		upgradeUser: builder.mutation({
+			query: ({ id, ...data }) => ({
+				url: `users/${id}`,
+				method: 'PATCH',
+				body: data,
+			}),
+			invalidatesTags: ['User'],
+		}),
 	}),
 });
 
-export const {useFetchUserQuery, useFetchRegisterMutation, useFetchAuthMutation, useFetchLogoutMutation} = userAPI;
+export const {
+	useFetchUserQuery,
+	useFetchRegisterMutation,
+	useFetchAuthMutation,
+	useFetchLogoutMutation,
+	useUpgradeUserMutation,
+} = userAPI;
