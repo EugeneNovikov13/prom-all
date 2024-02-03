@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export const fetchProductById = async id => {
+export const fetchProductByIdAsync = async id => {
 	return await axios.get(`/products/${id}`);
 };

@@ -1,8 +1,8 @@
-import { fetchProductById } from './fetch-product-by-id';
+import { fetchProductByIdAsync } from '../store/services';
 import { restoreSectionBreadcrumbs } from './restore-section-breadcrumbs';
 import { resetBreadcrumbs, setProduct } from '../store/reducers';
 
-export const asyncSetBreadcrumbsById = (
+export const setBreadcrumbsByIdAsync = (
 	dispatch,
 	id,
 	isOtherSectionSelected,
@@ -10,7 +10,7 @@ export const asyncSetBreadcrumbsById = (
 	needToResetBreadcrumbs,
 ) => {
 	if (isProductSectionSelected) {
-		fetchProductById(id).then(({ data }) => {
+		fetchProductByIdAsync(id).then(({ data }) => {
 			const sectionId = data.section;
 			const payload = {
 				selectedId: data.id,

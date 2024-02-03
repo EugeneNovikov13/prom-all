@@ -1,4 +1,4 @@
-import { Input } from '../../../features';
+import { Input } from '../../../../features';
 import styled from 'styled-components';
 
 const AccountFormInputsContainer = ({ className, register, errors, onInputChange }) => {

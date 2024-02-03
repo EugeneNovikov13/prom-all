@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const asyncSendQuickOrder = async (value, formData) => {
+export const sendQuickOrderAsync = async (value, formData) => {
 	try {
 		const response = await axios({
 			method: 'post',
