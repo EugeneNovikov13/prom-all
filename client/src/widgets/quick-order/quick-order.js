@@ -16,6 +16,7 @@ const QuickOrderContainer = ({ className }) => {
 
 	const recaptchaRef = React.createRef();
 
+	const user = useSelector(state => state.appReducer.user);
 	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
 	const dispatch = useDispatch();
 
@@ -31,10 +32,10 @@ const QuickOrderContainer = ({ className }) => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			name: '',
-			organization: '',
-			email: '',
-			phone: '',
+			name: user ? user.name : '',
+			organization: user ? user.organization : '',
+			email: user ? user.email : '',
+			phone: user ? user.phone : '',
 			order: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FORM_SCHEMA),
