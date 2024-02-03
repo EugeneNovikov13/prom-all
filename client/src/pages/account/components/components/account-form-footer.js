@@ -1,7 +1,7 @@
-import { Button } from '../../../features';
+import { Button } from '../../../../features';
 import styled from 'styled-components';
 
-const AuthorizationFormFooterContainer = ({ className, formError, isDirty, onCancel, onLogout }) => {
+const AccountFormFooterContainer = ({ className, formError, isDirty, onCancel, onLogout }) => {
 	return (
 		<div className={className}>
 			<Button
@@ -22,7 +22,7 @@ const AuthorizationFormFooterContainer = ({ className, formError, isDirty, onCan
 				isDisable={!isDirty}
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
-				onClick={(e) => onCancel(e)}
+				onClick={e => onCancel(e)}
 			>
 				Отменить
 			</Button>
@@ -42,7 +42,7 @@ const AuthorizationFormFooterContainer = ({ className, formError, isDirty, onCan
 				background={'var(--brand-orange)'}
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
-				onClick={(e) => onLogout(e)}
+				onClick={e => onLogout(e)}
 			>
 				Выйти из аккаунта
 			</Button>
@@ -50,7 +50,7 @@ const AuthorizationFormFooterContainer = ({ className, formError, isDirty, onCan
 	);
 };
 
-export const AccountFormFooter = styled(AuthorizationFormFooterContainer)`
+export const AccountFormFooter = styled(AccountFormFooterContainer)`
 	display: flex;
 	flex-direction: column;
 	gap: 24px;

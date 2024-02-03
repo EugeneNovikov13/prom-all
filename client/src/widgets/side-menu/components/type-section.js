@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { asyncGetProducts } from '../utils/async-get-products';
+import { getProductsAsync } from '../utils/get-products-async';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { motion } from 'framer-motion';
 import { changeLoading } from '../../../store/reducers';
@@ -16,7 +16,7 @@ const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => 
 
 	useEffect(() => {
 		if (isActiveType) {
-			asyncGetProducts(id, dispatch, changeLoading);
+			getProductsAsync(id, dispatch, changeLoading);
 		}
 	}, [dispatch, id, isActiveType]);
 

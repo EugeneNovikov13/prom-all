@@ -1,10 +1,10 @@
+import { fetchProductsBySectionIdAsync } from '../../../store/services';
 import { resetProductCards, setProductCards } from '../../../store/reducers';
-import { fetchProductsBySectionId } from '../../../utils';
 
-export const asyncGetProducts = (id, dispatch, setLoadingFunc) => {
+export const getProductsAsync = (id, dispatch, setLoadingFunc) => {
 	dispatch(resetProductCards());
 	dispatch(setLoadingFunc(true));
-	fetchProductsBySectionId(id)
+	fetchProductsBySectionIdAsync(id)
 		.then(({ data }) => {
 			dispatch(setProductCards(data));
 			dispatch(setLoadingFunc(false));

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncGetProducts } from '../utils/async-get-products';
+import { getProductsAsync } from '../utils/get-products-async';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { AnimatePresence, motion } from 'framer-motion';
 import { changeLoading } from '../../../store/reducers';
@@ -31,7 +31,7 @@ const SubcategorySectionContainer = ({
 
 	useEffect(() => {
 		if (isActiveSubcategory && !types) {
-			asyncGetProducts(id, dispatch, changeLoading);
+			getProductsAsync(id, dispatch, changeLoading);
 		}
 	}, [dispatch, id, isActiveSubcategory, types]);
 

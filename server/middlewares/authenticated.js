@@ -6,7 +6,6 @@ module.exports = async function(req, res, next) {
 	const token = req.cookies.token;
 
 	if (req.url === '/users' && !token) {
-		req.error = 'Авторизуйтесь для входа в роли администратора';
 		next();
 		return;
 	}

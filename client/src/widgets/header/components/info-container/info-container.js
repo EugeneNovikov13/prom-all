@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFetchUserQuery } from '../../../../store/services';
+import { fetchUserAsync } from '../../../../store/services';
 import { changeLoading, setUser } from '../../../../store/reducers';
 import { Button } from '../../../../features';
 import { InfoSection } from './components/info-section';
@@ -12,24 +12,22 @@ import styled from 'styled-components';
 const InfoContainerContainer = ({ className }) => {
 	const dispatch = useDispatch();
 
+	useLayoutEffect(() => {
+		dispatch(changeLoading(true));
+
+		fetchUserAsync()
+			.then(res => {
+				if (res.data) {
+					dispatch(setUser(res.data));
+				}
+				dispatch(changeLoading(false));
+			})
+			.catch(() => {
+				dispatch(changeLoading(false));
+			});
+	}, [dispatch]);
+
 	const currentUserData = useSelector(state => state.appReducer.user);
-
-	const { data: user, isLoading } = useFetchUserQuery();
-
-	useEffect(() => {
-		console.log('isLoading: ',isLoading);
-		if (isLoading) {
-			dispatch(changeLoading(true));
-			return;
-		}
-
-		console.log(user);
-		if (user && user?.data) {
-			dispatch(setUser(user.data));
-		}
-
-		dispatch(changeLoading(false));
-	}, [isLoading, dispatch, user]);
 
 	return (
 		<div className={className}>
@@ -44,7 +42,7 @@ const InfoContainerContainer = ({ className }) => {
 				/>
 			))}
 			<Button
-				link={currentUserData ? '/account' : '/authorization'}
+				link={currentUserData.id ? '/account' : '/authorization'}
 				width="130px"
 				height="48px"
 				justifyContent="space-evenly"
@@ -53,7 +51,7 @@ const InfoContainerContainer = ({ className }) => {
 				hoverBoxShadow={true}
 				activeBackground={'var(--active-orange)'}
 			>
-				{currentUserData ? (
+				{currentUserData.id ? (
 					<>
 						<Img SvgIconComponent={Account} maxWidth="20px" />
 						<span>Кабинет</span>

@@ -10,7 +10,14 @@ const initialState = {
 		title: '',
 		content: '',
 	},
-	user: null,
+	user: {
+		id: '',
+		login: '',
+		name: '',
+		organization: '',
+		email: '',
+		phone: '',
+	},
 };
 
 export const appSlice = createSlice({
@@ -33,13 +40,23 @@ export const appSlice = createSlice({
 		setUser(state, action) {
 			state.user = action.payload;
 		},
+		updateUser(state, action) {
+			state.user = { ...state.user, ...action.payload };
+		},
 		logout(state) {
 			state.user = initialState.user;
 		},
 	},
 });
 
-export const { changeLoading, closeModal, openModal, setFixedHeader, setUser, logout } =
-	appSlice.actions;
+export const {
+	changeLoading,
+	closeModal,
+	openModal,
+	setFixedHeader,
+	setUser,
+	updateUser,
+	logout,
+} = appSlice.actions;
 
 export default appSlice.reducer;

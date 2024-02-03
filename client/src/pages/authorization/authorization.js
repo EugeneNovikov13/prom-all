@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFetchAuthMutation } from '../../store/services';
-import { changeLoading } from '../../store/reducers';
+import { changeLoading, setUser } from '../../store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import { ServerMessage } from '../../components';
@@ -57,6 +57,7 @@ const AuthorizationContainer = ({ className }) => {
 		fetchAuth(data).then(res => {
 			dispatch(changeLoading(false));
 			if (!res.error) {
+				dispatch(setUser(res.data));
 				setIsSubmitted(true);
 				navigate('/', { replace: true });
 				return;
@@ -76,9 +77,7 @@ const AuthorizationContainer = ({ className }) => {
 		setServerError(null);
 	};
 
-	const formError =
-		errors?.login?.message ||
-		errors?.password?.message;
+	const formError = errors?.login?.message || errors?.password?.message;
 
 	// Проверяем все ли поля были изменены
 	const isAllFieldsDirty =

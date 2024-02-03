@@ -10,11 +10,10 @@ const router = express.Router();
 router.get('/users', authenticated, async (req, res) => {
 	try {
 		if (req.user) {
-			const user = req.user;
-			res.send({ data: mapUser(user), error: null });
+			res.send(mapUser(req.user));
 			return;
 		}
-		res.send({ data: null, error: req.error });
+		res.send(null);
 	} catch (e) {
 		handleError(res, e);
 	}

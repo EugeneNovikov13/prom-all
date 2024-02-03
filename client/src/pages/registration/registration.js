@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFetchRegisterMutation } from '../../store/services';
-import { changeLoading } from '../../store/reducers';
+import { changeLoading, setUser } from '../../store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import { ServerMessage } from '../../components';
@@ -62,6 +62,7 @@ const RegistrationContainer = ({ className }) => {
 		fetchRegister(data).then(res => {
 			dispatch(changeLoading(false));
 			if (!res.error) {
+				dispatch(setUser(res.data));
 				setIsSubmitted(true);
 				navigate('/', { replace: true });
 				return;
