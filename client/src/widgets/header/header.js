@@ -66,12 +66,26 @@ export const Header = styled(HeaderContainer)`
 	}
 
 	& div.first-line {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
 		background: rgba(23, 23, 23, 0.8);
+
+		//&:before {
+		//	content: ' ';
+		//	display: block;
+		//	position: absolute;
+		//	left: 0;
+		//	top: 0;
+		//	width: 100%;
+		//	height: 100%;
+		//	opacity: 0.8;
+		//	background: var(--main-background-color);
+		//	z-index: 100;
+		//}
 
 		& div.header-top-wrapper {
 			max-width: 1200px;
@@ -80,6 +94,7 @@ export const Header = styled(HeaderContainer)`
 			justify-content: space-between;
 			align-items: center;
 			flex: 1 0 0;
+			z-index: 101;
 
 			@media screen and (max-width: 450px) {
 				padding: 0 10px;
@@ -94,12 +109,26 @@ export const Header = styled(HeaderContainer)`
 	}
 
 	& div.second-line {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
 		background: rgba(23, 23, 23, 0.8);
+
+		//&:before {
+		//	content: ' ';
+		//	display: block;
+		//	position: absolute;
+		//	left: 0;
+		//	top: 0;
+		//	width: 100%;
+		//	height: 100%;
+		//	opacity: 0.8;
+		//	background: var(--main-background-color);
+		//	z-index: 100;
+		//}
 
 		& div.header-bottom-wrapper {
 			max-width: 1200px;
@@ -108,6 +137,7 @@ export const Header = styled(HeaderContainer)`
 			justify-content: center;
 			gap: 5px;
 			flex: 1 0 0;
+			z-index: 101;
 
 			@media screen and (max-width: 950px) {
 				display: flex;

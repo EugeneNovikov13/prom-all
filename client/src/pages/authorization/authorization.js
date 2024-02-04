@@ -131,7 +131,6 @@ export const Authorization = styled(AuthorizationContainer)`
 		justify-content: center;
 		align-items: center;
 		padding: 40px 10px;
-		background: var(--dark);
 
 		& form.authorization-form {
 			max-width: 480px;

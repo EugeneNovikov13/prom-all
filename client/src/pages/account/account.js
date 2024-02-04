@@ -27,6 +27,5 @@ export const Account = styled(AccountContainer)`
 		justify-content: center;
 		align-items: center;
 		padding: 40px 10px;
-		background: var(--dark);
 	}
 `;

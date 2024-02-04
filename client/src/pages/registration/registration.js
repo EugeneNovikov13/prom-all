@@ -143,7 +143,6 @@ export const Registration = styled(RegistrationContainer)`
 		justify-content: center;
 		align-items: center;
 		padding: 40px 10px;
-		background: var(--dark);
 
 		& form.registration-form {
 			max-width: 480px;

@@ -41,7 +41,6 @@ export const Footer = styled(FooterContainer)`
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
-	background: var(--dark);
 
 	& div.footer-body {
 		min-height: 240px;

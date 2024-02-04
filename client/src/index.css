@@ -29,4 +29,5 @@ a {
 	--beige: #E8E8E8;
 	--white: #FFFFFF;
 	--active-orange: linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), #FF7F00;
+	--main-background-color: #1a1d22;
 }
