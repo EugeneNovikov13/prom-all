@@ -6,15 +6,11 @@ const ClosedCardContainer = ({
 	className,
 	title,
 	image,
-	isHovered,
-	onMouseEnter,
-	onMouseLeave,
+	isHovered
 }) => {
 	return (
 		<div
 			className={className}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
 		>
 			<div className="closed-card-image">
 				<Img
