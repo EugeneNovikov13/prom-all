@@ -85,7 +85,7 @@ export const Crumb = styled(CrumbContainer)`
 				cursor: pointer;
 			}
 
-			@media screen and (max-device-height: 1000px) {
+			@media screen and (max-width: 1200px) {
 				display: none;
 			}
 		}

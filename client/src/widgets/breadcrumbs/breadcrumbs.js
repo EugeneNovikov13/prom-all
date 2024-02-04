@@ -102,33 +102,34 @@ export const Breadcrumbs = styled(BreadcrumbsContainer)`
 	padding: 0;
 	user-select: none;
 
-	@media screen and (max-device-height: 1000px) {
-		max-width: 340px;
-		overflow-x: scroll;
-	}
-
-	@media screen and (max-width: 1200px) and (min-device-height: 1000px) {
+	@media (max-width: 1200px) {
 		max-width: 86vw;
 		overflow-x: scroll;
-
-		&::-webkit-scrollbar {
-			height: 7px; /* высота полосы прокрутки */
-		}
-
-		&::-webkit-scrollbar-track {
-			background: #f1f1f1; /* Цвет фона трека */
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background: #888; /* Цвет полосы прокрутки */
-		}
-
-		&::-webkit-scrollbar-thumb:hover {
-			background: #555; /* Цвет полосы прокрутки при наведении */
-		}
 
 		& svg {
 			display: none;
 		}
+	}
+
+	@media (max-device-height: 720px), (max-device-width: 500px){
+		max-width: 94vw;
+		overflow-x: scroll;
+	}
+
+
+	&::-webkit-scrollbar {
+		height: 7px; /* высота полосы прокрутки */
+	}
+
+	&::-webkit-scrollbar-track {
+		background: #f1f1f1; /* Цвет фона трека */
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: #888; /* Цвет полосы прокрутки */
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background: #555; /* Цвет полосы прокрутки при наведении */
 	}
 `;
