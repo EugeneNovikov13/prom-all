@@ -9,11 +9,15 @@ import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
 	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
-	const navigationMenuRef = useRef(null);
+	const firstLineRef = useRef(null);
+	const searchRef = useRef(null);
 	const dispatch = useDispatch();
 
 	const handleScroll = () => {
-		if (window.scrollY >= navigationMenuRef.current.offsetTop) {
+		if (
+			window.scrollY >=
+			firstLineRef.current.offsetHeight + searchRef.current.offsetHeight
+		) {
 			dispatch(setFixedHeader(true));
 			return;
 		}
@@ -24,7 +28,7 @@ const HeaderContainer = ({ className }) => {
 
 	return (
 		<header className={isFixed ? `${className} header__fixed` : className}>
-			<div className="first-line">
+			<div className="first-line" ref={firstLineRef}>
 				<div className="header-top-wrapper">
 					<Link to="/">
 						<Logo />
@@ -34,8 +38,8 @@ const HeaderContainer = ({ className }) => {
 			</div>
 			<div className="second-line">
 				<div className="header-bottom-wrapper">
-					<NavigationMenu ref={navigationMenuRef} />
-					<Search />
+					<NavigationMenu />
+					<Search ref={searchRef} />
 				</div>
 			</div>
 		</header>
@@ -54,12 +58,12 @@ export const Header = styled(HeaderContainer)`
 	backdrop-filter: blur(2px);
 	z-index: 100;
 
-	@media screen and (max-device-height: 1000px) {
+	@media screen and (max-device-width: 599px) {
 		position: relative;
 	}
 
 	&.header__fixed {
-		@media screen and (max-device-height: 1000px) {
+		@media screen and (max-device-width: 599px) {
 			position: fixed;
 			top: -113px;
 		}

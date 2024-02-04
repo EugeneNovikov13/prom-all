@@ -111,7 +111,7 @@ export const Breadcrumbs = styled(BreadcrumbsContainer)`
 		}
 	}
 
-	@media (max-device-height: 720px), (max-device-width: 500px){
+	@media (max-device-height: 719px), (max-device-width: 500px) {
 		max-width: 94vw;
 		overflow-x: scroll;
 	}
