@@ -10,9 +10,9 @@ const ContactsLayoutContainer = ({ className }) => {
 	return (
 		<section className={className}>
 			<div className="contacts-container">
-				<div className="office-contacts">
+				<div className="organization-contacts">
 					<ContactsData />
-					<div className="office-map-container">
+					<div className="map-container">
 						<Splide
 							aria-label="Карта проезда"
 							options={SETTINGS.MAP_SLIDER_CONFIG}
@@ -57,7 +57,7 @@ export const ContactsLayout = styled(ContactsLayoutContainer)`
 			padding: 0;
 		}
 
-		& div.office-contacts {
+		& div.organization-contacts {
 			flex: 1 0 0;
 			display: flex;
 			max-width: 1128px;
@@ -68,7 +68,7 @@ export const ContactsLayout = styled(ContactsLayoutContainer)`
 				flex-direction: column;
 			}
 
-			& div.office-map-container {
+			& div.map-container {
 				max-width: 514px;
 				width: 100%;
 				flex: 1 0 0;
@@ -80,19 +80,7 @@ export const ContactsLayout = styled(ContactsLayoutContainer)`
 				}
 
 				& .splide__arrow {
-					transform: scale(1.4) translateY(-20px);
-				}
-
-				& .splide__arrow--prev {
-					@media (min-width: 460px) {
-						left: -40px;
-					}
-				}
-
-				& .splide__arrow--next {
-					@media (min-width: 460px) {
-						right: -40px;
-					}
+					transform: scale(1.4) translateY(-190px);
 				}
 			}
 		}
