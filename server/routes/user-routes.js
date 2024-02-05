@@ -1,8 +1,8 @@
 const express = require('express');
 
-const { register, login, editUser } = require('../controllers/user');
+const { register, login, editUser, activate } = require('../controllers/user');
 const mapUser = require('../helpers/mapUser');
-const handleError = require('../helpers/handle-error');
+const handleError = require('../services/handle-error');
 const authenticated = require('../middlewares/authenticated');
 
 const router = express.Router();
@@ -19,10 +19,23 @@ router.get('/users', authenticated, async (req, res) => {
 	}
 })
 
+router.get('/activate/:link', async (req, res) => {
+	try {
+		const activationLink = req.params.link;
+
+		await activate(activationLink);
+		return res.redirect(process.env.CLIENT_URL);
+	}
+	catch (e) {
+		handleError(res, e);
+	}
+});
+
 router.post('/register', async (req, res) => {
 	try {
 		const { token, user } = await register(req.body.userData, req.body.captchaToken);
 
+		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
 			.send(mapUser(user));
 	} catch (e) {
@@ -34,6 +47,7 @@ router.post('/login', async (req, res) => {
 	try {
 		const { token, user } = await login(req.body.userData, req.body.captchaToken);
 
+		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
 			.send(mapUser(user));
 	} catch (e) {

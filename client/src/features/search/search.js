@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../../components';
 import searchLoup from './assets/search-loup.svg';
 import styled from 'styled-components';
 
-const SearchContainer = ({ className }) => {
+const SearchContainer = forwardRef(({ className }, ref) => {
 	const inputRef = useRef(null);
 
 	const navigate = useNavigate();
@@ -26,7 +26,7 @@ const SearchContainer = ({ className }) => {
 	};
 
 	return (
-		<search className={className}>
+		<search className={className} ref={ref}>
 			<input
 				ref={inputRef}
 				type="search"
@@ -40,7 +40,7 @@ const SearchContainer = ({ className }) => {
 			<Icon width="24px" iconSrc={searchLoup}></Icon>
 		</search>
 	);
-};
+});
 
 export const Search = styled(SearchContainer)`
 	position: relative;

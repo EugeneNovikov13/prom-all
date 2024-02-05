@@ -1,6 +1,6 @@
-const { verify } = require('../helpers/token');
+const { verify } = require('../services/token');
 const User = require('../models/User');
-const handleError = require('../helpers/handle-error');
+const handleError = require('../services/handle-error');
 
 module.exports = async function(req, res, next) {
 	const token = req.cookies.token;

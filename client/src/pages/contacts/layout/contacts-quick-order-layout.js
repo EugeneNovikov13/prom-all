@@ -15,5 +15,4 @@ export const ContactsQuickOrderLayout = styled(ContactsQuickOrderLayoutContainer
 	justify-content: center;
 	align-items: center;
 	padding: 80px 10px;
-	background: var(--dark);
 `;

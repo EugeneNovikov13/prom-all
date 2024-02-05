@@ -1,11 +1,11 @@
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MenuLink } from './components/menu-link';
 import { getRouteFromFullLocation } from '../../../../utils';
 import { menuList } from '../../constants/menu-list';
 import styled from 'styled-components';
 
-const NavigationMenuContainer = forwardRef(({ className }, ref) => {
+const NavigationMenuContainer = ({ className }) => {
 	const location = useLocation();
 	const currentLocation = getRouteFromFullLocation(location.pathname);
 	const [currentRoute, setCurrentRoute] = useState(currentLocation);
@@ -15,7 +15,7 @@ const NavigationMenuContainer = forwardRef(({ className }, ref) => {
 	}
 
 	return (
-		<nav className={className} ref={ref}>
+		<nav className={className} >
 			<ul>
 				{menuList.map(({ title, link }) => (
 					<MenuLink
@@ -28,7 +28,7 @@ const NavigationMenuContainer = forwardRef(({ className }, ref) => {
 			</ul>
 		</nav>
 	);
-});
+};
 
 export const NavigationMenu = styled(NavigationMenuContainer)`
 	flex: 5 0 0;

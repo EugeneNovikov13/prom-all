@@ -17,6 +17,7 @@ const initialState = {
 		organization: '',
 		email: '',
 		phone: '',
+		isActivated: false,
 	},
 };
 

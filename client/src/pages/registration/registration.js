@@ -68,6 +68,7 @@ const RegistrationContainer = ({ className }) => {
 				return;
 			}
 			setServerError(res.error.data);
+			console.error(res.error);
 		});
 
 		setCaptchaToken(null);
@@ -143,7 +144,6 @@ export const Registration = styled(RegistrationContainer)`
 		justify-content: center;
 		align-items: center;
 		padding: 40px 10px;
-		background: var(--dark);
 
 		& form.registration-form {
 			max-width: 480px;

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const handleError = require('../helpers/handle-error');
+const handleError = require('../services/handle-error');
 const { sendOrder } = require('../controllers/order');
 
 const router = express.Router();

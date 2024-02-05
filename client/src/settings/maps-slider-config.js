@@ -9,8 +9,10 @@ export const mapsSliderConfig = {
 	dragMinThreshold: 50,
 	breakpoints: {
 		800: {
+			width: '80vw',
+		},
+		450: {
 			width: '90vw',
-			height: '436px',
 		},
 	},
 	classes: {

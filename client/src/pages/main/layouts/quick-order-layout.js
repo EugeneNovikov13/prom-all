@@ -15,5 +15,4 @@ export const QuickOrderLayout = styled(QuickOrderLayoutContainer)`
 	justify-content: center;
 	align-items: center;
 	padding: 160px 10px;
-	background: var(--dark);
 `;

@@ -9,11 +9,15 @@ import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
 	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
-	const navigationMenuRef = useRef(null);
+	const firstLineRef = useRef(null);
+	const searchRef = useRef(null);
 	const dispatch = useDispatch();
 
 	const handleScroll = () => {
-		if (window.scrollY >= navigationMenuRef.current.offsetTop) {
+		if (
+			window.scrollY >=
+			firstLineRef.current.offsetHeight + searchRef.current.offsetHeight
+		) {
 			dispatch(setFixedHeader(true));
 			return;
 		}
@@ -24,7 +28,7 @@ const HeaderContainer = ({ className }) => {
 
 	return (
 		<header className={isFixed ? `${className} header__fixed` : className}>
-			<div className="first-line">
+			<div className="first-line" ref={firstLineRef}>
 				<div className="header-top-wrapper">
 					<Link to="/">
 						<Logo />
@@ -34,8 +38,8 @@ const HeaderContainer = ({ className }) => {
 			</div>
 			<div className="second-line">
 				<div className="header-bottom-wrapper">
-					<NavigationMenu ref={navigationMenuRef} />
-					<Search />
+					<NavigationMenu />
+					<Search ref={searchRef} />
 				</div>
 			</div>
 		</header>
@@ -54,24 +58,38 @@ export const Header = styled(HeaderContainer)`
 	backdrop-filter: blur(2px);
 	z-index: 100;
 
-	@media screen and (max-device-height: 1000px) {
+	@media screen and (max-device-width: 599px) {
 		position: relative;
 	}
 
 	&.header__fixed {
-		@media screen and (max-device-height: 1000px) {
+		@media screen and (max-device-width: 599px) {
 			position: fixed;
 			top: -113px;
 		}
 	}
 
 	& div.first-line {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
 		background: rgba(23, 23, 23, 0.8);
+
+		//&:before {
+		//	content: ' ';
+		//	display: block;
+		//	position: absolute;
+		//	left: 0;
+		//	top: 0;
+		//	width: 100%;
+		//	height: 100%;
+		//	opacity: 0.8;
+		//	background: var(--main-background-color);
+		//	z-index: 100;
+		//}
 
 		& div.header-top-wrapper {
 			max-width: 1200px;
@@ -80,6 +98,7 @@ export const Header = styled(HeaderContainer)`
 			justify-content: space-between;
 			align-items: center;
 			flex: 1 0 0;
+			z-index: 101;
 
 			@media screen and (max-width: 450px) {
 				padding: 0 10px;
@@ -94,12 +113,26 @@ export const Header = styled(HeaderContainer)`
 	}
 
 	& div.second-line {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		align-self: stretch;
 		border-top: 1px solid #686868;
 		background: rgba(23, 23, 23, 0.8);
+
+		//&:before {
+		//	content: ' ';
+		//	display: block;
+		//	position: absolute;
+		//	left: 0;
+		//	top: 0;
+		//	width: 100%;
+		//	height: 100%;
+		//	opacity: 0.8;
+		//	background: var(--main-background-color);
+		//	z-index: 100;
+		//}
 
 		& div.header-bottom-wrapper {
 			max-width: 1200px;
@@ -108,6 +141,7 @@ export const Header = styled(HeaderContainer)`
 			justify-content: center;
 			gap: 5px;
 			flex: 1 0 0;
+			z-index: 101;
 
 			@media screen and (max-width: 950px) {
 				display: flex;

@@ -4,7 +4,7 @@ const { getProduct, getProducts, getProductsByTitle, addProduct } = require('../
 const authenticated = require('../middlewares/authenticated');
 const mapProduct = require('../helpers/mapProduct');
 const mapProducts = require('../helpers/mapProducts');
-const handleError = require('../helpers/handle-error');
+const handleError = require('../services/handle-error');
 
 const router = express.Router();
 

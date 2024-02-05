@@ -29,7 +29,7 @@ const AppColumn = styled.div`
 	align-items: center;
 	margin: 0 auto;
 	padding-bottom: 16px;
-	background-color: #1a1d22;
+	background-color: var(--main-background-color);
 	overflow: hidden;
 `;
 

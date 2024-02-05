@@ -25,7 +25,6 @@ export const CatalogHeader = styled(CatalogHeaderContainer)`
 	flex-direction: column;
 	align-items: center;
 	align-self: stretch;
-	background: var(--dark);
 
 	& div.catalog-header-container {
 		width: 100%;

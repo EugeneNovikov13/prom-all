@@ -14,7 +14,12 @@ const AdvantageCardContainer = ({
 	const onMouseLeave = () => setHoverCardId('');
 
 	return (
-		<div className={className} onClick={() => onClick(id)}>
+		<div
+			className={className}
+			onClick={() => onClick(id)}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+		>
 			{isOpen ? (
 				<OpenedCard
 					title={title}
@@ -28,8 +33,6 @@ const AdvantageCardContainer = ({
 					title={title}
 					image={image}
 					isHovered={hoverCardId === id}
-					onMouseEnter={onMouseEnter}
-					onMouseLeave={onMouseLeave}
 				/>
 			)}
 		</div>

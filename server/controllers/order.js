@@ -1,4 +1,4 @@
-const reCaptchaTest = require('../helpers/recaptcha-test');
+const reCaptchaTest = require('../services/recaptcha-test');
 const mailService = require('../services/mail-service');
 
 async function handleQuickOrder({ formData, captchaToken }) {
