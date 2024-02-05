@@ -68,6 +68,7 @@ const RegistrationContainer = ({ className }) => {
 				return;
 			}
 			setServerError(res.error.data);
+			console.error(res.error);
 		});
 
 		setCaptchaToken(null);

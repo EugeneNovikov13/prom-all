@@ -3,7 +3,7 @@ const express = require('express');
 const { getBrands, addBrand, deleteBrand } = require('../controllers/brand');
 const authenticated = require('../middlewares/authenticated');
 const mapBrand = require('../helpers/mapBrand');
-const handleError = require('../helpers/handle-error');
+const handleError = require('../services/handle-error');
 
 const router = express.Router();
 

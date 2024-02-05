@@ -12,13 +12,12 @@ const htmlRoutes = require('./routes/html-routes');
 
 const cookieParser = require('cookie-parser');
 
-const port = 3001;
 const app = express();
 
 app.use(express.static('../client/build'));
 
-app.use(cookieParser());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(userRoutes);
 app.use(orderRoutes);
@@ -29,9 +28,9 @@ app.use(htmlRoutes);
 
 mongoose.connect(
 	//получаем строку подключения к БД из поля environment (файл docker-compose)
-	process.env.DB_CONNECTION_STRING,
+	process.env.DB_CONNECTION_STRING
 ).then(() => {
-	app.listen(port, () => {
-		console.log(`Server has been started on port ${port}`);
+	app.listen(process.env.PORT, () => {
+		console.log(`Server has been started on port ${process.env.PORT}`);
 	});
 });

@@ -1,18 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { SETTINGS } from '../../settings';
 
 export const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '',
+		baseUrl: SETTINGS.API_URL,
 	}),
 	tagTypes: ['User'],
 	endpoints: builder => ({
-		fetchUser: builder.query({
-			query: () => ({
-				url: '/users',
-			})
-		}),
-		providesTags: () => ['User'],
 		fetchRegister: builder.mutation({
 			query: (data) => ({
 				url: '/register',
@@ -48,7 +43,6 @@ export const userAPI = createApi({
 });
 
 export const {
-	useFetchUserQuery,
 	useFetchRegisterMutation,
 	useFetchAuthMutation,
 	useFetchLogoutMutation,

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { SETTINGS } from '../../settings';
 
 export const sendQuickOrderAsync = async (value, formData) => {
 	try {
 		const response = await axios({
 			method: 'post',
-			url: '/quick-order',
+			url: `${SETTINGS.API_URL}/quick-order`,
 			data: {
 				formData,
 				captchaToken: value,

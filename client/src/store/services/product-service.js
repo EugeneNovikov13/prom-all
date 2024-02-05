@@ -1,33 +1,34 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { SETTINGS } from '../../settings';
 
 export const productAPI = createApi({
 	reducerPath: 'productAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/products',
+		baseUrl: SETTINGS.API_URL,
 	}),
 	tagTypes: ['Product'],
 	endpoints: builder => ({
 		fetchProduct: builder.query({
 			query: id => ({
-				url: `/${id}`,
+				url: `/products/${id}`,
 			}),
 			providesTags: ['Product'],
 		}),
 		fetchProductBySection: builder.query({
 			query: id => ({
-				url: `/section/${id}`,
+				url: `/products/section/${id}`,
 			}),
 			providesTags: ['Product'],
 		}),
 		fetchProductByTitle: builder.query({
 			query: title => ({
-				url: `/search/${title}`,
+				url: `/products/search/${title}`,
 			}),
 			providesTags: ['Product'],
 		}),
 		createProduct: builder.mutation({
 			query: product => ({
-				url: '',
+				url: '/products',
 				method: 'POST',
 				body: product,
 			}),

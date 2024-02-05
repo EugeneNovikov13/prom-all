@@ -1,21 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { SETTINGS } from '../../settings';
 
 export const promoAPI = createApi({
 	reducerPath: 'promoAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: '/promos',
+		baseUrl: SETTINGS.API_URL,
 	}),
 	tagTypes: ['Promo'],
 	endpoints: builder => ({
 		fetchAllPromo: builder.query({
 			query: () => ({
-				url: '',
+				url: '/promos',
 			}),
 			providesTags: () => ['Promo'],
 		}),
 		createPromo: builder.mutation({
 			query: promo => ({
-				url: '',
+				url: '/promos',
 				method: 'POST',
 				body: promo,
 			}),
@@ -23,7 +24,7 @@ export const promoAPI = createApi({
 		}),
 		upgradePromo: builder.mutation({
 			query: ({ id, ...promo }) => ({
-				url: `/${id}`,
+				url: `/promos/${id}`,
 				method: 'PATCH',
 				body: promo,
 			}),
@@ -31,7 +32,7 @@ export const promoAPI = createApi({
 		}),
 		removePromo: builder.mutation({
 			query: id => ({
-				url: `/${id}`,
+				url: `/promos/${id}`,
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['Promo'],

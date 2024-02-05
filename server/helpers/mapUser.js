@@ -6,5 +6,6 @@ module.exports = function (user) {
 		organization: user.organization,
 		email: user.email,
 		phone: user.phone,
+		isActivated: user.isActivated,
 	}
 }

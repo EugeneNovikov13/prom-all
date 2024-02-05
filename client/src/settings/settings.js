@@ -9,6 +9,7 @@ import { authorizationFormSchema } from './authorization-form-schema';
 import { accountFormSchema } from './account-form-schema';
 
 export const SETTINGS = {
+	API_URL: '',
 	ORGANIZATION_DATA: organizationData,
 	CATEGORY_CARD_CLOSE_DELAY: 500,
 	BREADCRUMBS_MENU_CLOSE_DELAY: 300,

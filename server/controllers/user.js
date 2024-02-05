@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
-const { generate } = require('../helpers/token');
-const reCaptchaTest = require('../helpers/recaptcha-test');
+const uuid = require('uuid');
+const { generate } = require('../services/token');
+const reCaptchaTest = require('../services/recaptcha-test');
+const mailService = require('../services/mail-service');
 const User = require('../models/User');
 
 // register
@@ -14,22 +16,29 @@ async function register(userData, captchaToken) {
 	if (!userData.password) {
 		throw new Error('Заполните пароль');
 	}
-	const passwordHash = await bcrypt.hash(userData.password, 10);
 
-	const existingUser = await User.findOne({ login: userData.login });
-	if (existingUser) {
-		throw new Error('Данный пользователь уже существует');
+	const existingLogin = await User.findOne({ login: userData.login });
+	if (existingLogin) {
+		throw new Error('Пользователь с таким логином уже существует');
 	}
 
+	const existingEmail = await User.findOne({ email: userData.email });
+	if (existingEmail) {
+		throw new Error('Пользователь с такой электронной почтой уже существует');
+	}
+
+	const passwordHash = await bcrypt.hash(userData.password, 10);
+
+	const activationLink = uuid.v4();
+
 	const dataForDataBase = {
-		login: userData.login,
+		...userData,
 		password: passwordHash,
-		name: userData.name,
-		organization: userData.organization,
-		email: userData.email,
-		phone: userData.phone,
+		activationLink,
 	};
 	const user = await User.create(dataForDataBase);
+	await mailService.sendActivationMail(userData.email, `${process.env.API_URL}/activate/${activationLink}`);
+
 	const token = generate({ id: user.id });
 
 	return { token, user };
@@ -63,8 +72,19 @@ async function editUser(id, data) {
 	return User.findByIdAndUpdate(id, data, { returnDocument: 'after', runValidators: true });
 }
 
+async function activate(activationLink) {
+	const user = await User.findOne({ activationLink });
+	if (!user) {
+		throw new Error('Некорректная ссылка активации');
+	}
+
+	user.isActivated = true;
+	await user.save();
+}
+
 module.exports = {
 	register,
 	login,
 	editUser,
+	activate,
 };
