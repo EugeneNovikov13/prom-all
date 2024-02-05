@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const ROLE_ID = require('../constants/role-id');
 
 const UserSchema = mongoose.Schema({
 	login: {
@@ -38,6 +39,11 @@ const UserSchema = mongoose.Schema({
 	},
 	activationLink: {
 		type: String,
+	},
+	roleId: {
+		type: String,
+		default: ROLE_ID.USER,
+		required: true,
 	}
 });
 

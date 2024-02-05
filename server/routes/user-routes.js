@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { register, login, editUser, activate } = require('../controllers/user');
+const { register, login, adminLogin, editUser, activate } = require('../controllers/user');
 const mapUser = require('../helpers/mapUser');
 const handleError = require('../services/handle-error');
 const authenticated = require('../middlewares/authenticated');
@@ -47,8 +47,26 @@ router.post('/login', async (req, res) => {
 	try {
 		const { token, user } = await login(req.body.userData, req.body.captchaToken);
 
+		if (user === 'admin') {
+			return res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+				.redirect(process.env.CLIENT_URL + '/authorization-second-step');
+		}
+
 		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+			.send(mapUser(user));
+	} catch (e) {
+		handleError(res, e);
+	}
+});
+
+router.post('/two-factor-auth', authenticated, async (req, res) => {
+	try {
+		const user = req.user;
+		const token = await adminLogin(req.body.code, user);
+
+		// TODO secure: true в опции куки добавить для https
+		res.cookie('token', token, { httpOnly: true, maxAge: 8 * 60 * 60 * 1000 })
 			.send(mapUser(user));
 	} catch (e) {
 		handleError(res, e);

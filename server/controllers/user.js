@@ -65,7 +65,32 @@ async function login(userData, captchaToken) {
 
 	const token = generate({ id: user.id });
 
+	if (user.roleId === process.env.ADMIN_ROLE_ID) {
+		await administratorConfirmation(user);
+		return ({ token, user: 'admin' });
+	}
+
 	return { token, user };
+}
+
+async function administratorConfirmation(user) {
+	//создание кода подтверждения
+	//сохранение его в activationLink пользователя в виде await bcrypt.hash(code, 10)
+	//функция отправления письма с кодом подтверждения
+}
+
+async function adminLogin(code, user) {
+	if (user.roleId !== process.env.ADMIN_ROLE_ID) {
+		throw new Error('Сначала Вы должны авторизоваться с помощью логина и пароля');
+	}
+	//функция проверки кода
+	//if (!code) {
+	// 	throw new Error('Код неверный. Попробуйте ещё раз.');
+	// }
+
+	const adminToken = generate({ id: user.id });
+
+	return adminToken;
 }
 
 async function editUser(id, data) {
@@ -85,6 +110,8 @@ async function activate(activationLink) {
 module.exports = {
 	register,
 	login,
+	administratorConfirmation,
+	adminLogin,
 	editUser,
 	activate,
 };
