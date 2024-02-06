@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-const checkSectionForTypes = require('../helpers/check-section-for-types');
+const checkSectionForTypes = require('../helpers/checkSectionForTypes');
 
 // add
 

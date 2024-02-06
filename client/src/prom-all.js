@@ -5,6 +5,7 @@ import {
 	Account,
 	Administration,
 	Authorization,
+	AuthorizationSecondStep,
 	Catalog,
 	Contacts,
 	Documents,
@@ -52,6 +53,10 @@ export const PromAll = () => {
 					<Route path="/contacts" element={<Contacts />}></Route>
 					<Route path="/registration" element={<Registration />}></Route>
 					<Route path="/authorization" element={<Authorization />}></Route>
+					<Route
+						path="/authorization-second-step"
+						element={<AuthorizationSecondStep />}
+					></Route>
 					<Route path="/account" element={<Account />}></Route>
 					<Route path="/administration" element={<Administration />}></Route>
 					<Route

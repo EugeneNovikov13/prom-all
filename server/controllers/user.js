@@ -2,8 +2,10 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const { generate } = require('../services/token');
 const reCaptchaTest = require('../services/recaptcha-test');
+const getRandomNumber = require('../helpers/getRandomNumber');
 const mailService = require('../services/mail-service');
 const User = require('../models/User');
+const ROLE_ID = require('../constants/role-id');
 
 // register
 
@@ -65,6 +67,45 @@ async function login(userData, captchaToken) {
 
 	const token = generate({ id: user.id });
 
+	if (user.roleId === ROLE_ID.ADMIN) {
+		user.isActivated = false;
+		await user.save();
+
+		await administratorConfirmation(user);
+		return ({ token, user: 'admin' });
+	}
+
+	return { token, user };
+}
+
+async function administratorConfirmation(user) {
+	//создание кода подтверждения
+	const randomNumber = getRandomNumber(6);
+
+	//сохранение его в activationLink пользователя bcrypt.hash
+	user.activationLink = await bcrypt.hash(randomNumber, 9);
+	await user.save();
+
+	//функция отправления письма с кодом подтверждения
+	await mailService.sendAuthorizationNumberMail(user.email, randomNumber);
+}
+
+async function adminLogin(code, user) {
+	if (user.roleId !== ROLE_ID.ADMIN) {
+		throw new Error('Сначала Вы должны авторизоваться с помощью логина и пароля');
+	}
+	//функция проверки кода
+	const isCodeMatch = await bcrypt.compare(code, user.activationLink);
+	if (!isCodeMatch) {
+		throw new Error('Код неверный. Попробуйте ещё раз.');
+	}
+
+	//возвращение новых данных для администратора,
+	user.isActivated = true;
+	await user.save();
+
+	const token = generate({ id: user.id });
+
 	return { token, user };
 }
 
@@ -85,6 +126,7 @@ async function activate(activationLink) {
 module.exports = {
 	register,
 	login,
+	adminLogin,
 	editUser,
 	activate,
 };

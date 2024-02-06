@@ -59,17 +59,22 @@ const RegistrationContainer = ({ className }) => {
 			captchaToken,
 		};
 
-		fetchRegister(data).then(res => {
-			dispatch(changeLoading(false));
-			if (!res.error) {
-				dispatch(setUser(res.data));
-				setIsSubmitted(true);
-				navigate('/', { replace: true });
-				return;
-			}
-			setServerError(res.error.data);
-			console.error(res.error);
-		});
+		fetchRegister(data)
+			.then(res => {
+				dispatch(changeLoading(false));
+				if (!res.error) {
+					dispatch(setUser(res.data));
+					setIsSubmitted(true);
+					navigate('/', { replace: true });
+					return;
+				}
+				setServerError(res.error.data);
+				console.error(res.error);
+			})
+			.catch(e => {
+				console.error(e);
+				dispatch(changeLoading(false));
+			});
 
 		setCaptchaToken(null);
 		recaptchaRef.current.reset();

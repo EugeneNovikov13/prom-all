@@ -7,5 +7,6 @@ module.exports = function (user) {
 		email: user.email,
 		phone: user.phone,
 		isActivated: user.isActivated,
+		roleId: user.roleId,
 	}
 }
