@@ -6,6 +6,7 @@ export * from './categories/categories';
 export * from './footer/footer';
 export * from './header/header';
 export * from './map-iframe/map-iframe';
+export * from './private-content/private-content';
 export * from './product-data/product-data';
 export * from './promotions/promotions';
 export * from './quick-order/quick-order';

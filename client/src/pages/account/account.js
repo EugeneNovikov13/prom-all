@@ -7,11 +7,9 @@ const AccountContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			{user.id && (
-				<section className="account-layout">
-					<AccountForm user={user} />
-				</section>
-			)}
+			<section className="account-layout">
+				<AccountForm user={user} />
+			</section>
 		</div>
 	);
 };

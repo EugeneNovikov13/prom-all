@@ -11,13 +11,13 @@ import {
 	Documents,
 	FoundProducts,
 	Main,
+	Page404,
 	Product,
 	Registration,
 	Sections,
 } from './pages';
-import { Error, Loader, Modal } from './components';
+import { Loader, Modal } from './components';
 import { Footer, Header } from './widgets';
-import { ERROR } from './constants';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
@@ -61,7 +61,7 @@ export const PromAll = () => {
 					<Route path="/administration" element={<Administration />}></Route>
 					<Route
 						path="*"
-						element={<Error error={ERROR.PAGE_NOT_EXIST} />}
+						element={<Page404 />}
 					></Route>
 				</Routes>
 			</Page>

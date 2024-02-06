@@ -1,6 +1,6 @@
 export * from './about/about';
 export * from './account/account';
-export * from './administration/administartion';
+export * from './administration/administration';
 export * from './authorization/authorization';
 export * from './authorization-second-step/authorization-second-step';
 export * from './catalog/catalog';
@@ -8,6 +8,7 @@ export * from './contacts/contacts';
 export * from './documents/documents';
 export * from './found-products/found-products';
 export * from './main/main';
+export * from './page404/page404';
 export * from './product/product';
 export * from './registration/registration';
 export * from './sections/sections';

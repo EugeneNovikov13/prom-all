@@ -56,8 +56,6 @@ const AuthorizationContainer = ({ className }) => {
 
 		fetchAuth(data)
 			.then(res => {
-				dispatch(changeLoading(false));
-
 				if (!res.error && res.data === 'admin') {
 					setIsSubmitted(true);
 					navigate('/authorization-second-step', { replace: true });
@@ -75,6 +73,8 @@ const AuthorizationContainer = ({ className }) => {
 			})
 			.catch(e => {
 				console.error(e);
+			})
+			.finally(() => {
 				dispatch(changeLoading(false));
 			});
 

@@ -1,6 +1,7 @@
 const express = require('express');
+const ROLE_ID = require('../constants/role-id');
 
-const { register, login, adminLogin, editUser, activate } = require('../controllers/user');
+const { register, login, administratorConfirmation, adminLogin, editUser, activate } = require('../controllers/user');
 const mapUser = require('../helpers/mapUser');
 const handleError = require('../services/handle-error');
 const authenticated = require('../middlewares/authenticated');
@@ -9,11 +10,18 @@ const router = express.Router();
 
 router.get('/users', authenticated, async (req, res) => {
 	try {
-		if (req.user) {
-			res.send(mapUser(req.user));
+		if (!req.user) {
+			res.send(null);
 			return;
 		}
-		res.send(null);
+
+		if (req.user.roleId === ROLE_ID.ADMIN && !req.user.isActivated) {
+			await administratorConfirmation(req.user);
+			res.json('admin');
+			return;
+		}
+
+		res.send(mapUser(req.user));
 	} catch (e) {
 		handleError(res, e);
 	}

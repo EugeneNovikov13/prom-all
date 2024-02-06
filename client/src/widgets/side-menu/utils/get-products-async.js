@@ -7,11 +7,9 @@ export const getProductsAsync = (id, dispatch, setLoadingFunc) => {
 	fetchProductsBySectionIdAsync(id)
 		.then(({ data }) => {
 			dispatch(setProductCards(data));
-			dispatch(setLoadingFunc(false));
 		})
 		.catch(e => {
-			//TODO обработать ошибку (с помощью setLoadingFunc можно передать и ошибку)
-			console.log(e.response.data);
-			dispatch(setLoadingFunc(false));
-		});
+			console.error(e.response.data);
+		})
+		.finally(dispatch(setLoadingFunc(false)));
 };

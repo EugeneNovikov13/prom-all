@@ -61,7 +61,6 @@ const RegistrationContainer = ({ className }) => {
 
 		fetchRegister(data)
 			.then(res => {
-				dispatch(changeLoading(false));
 				if (!res.error) {
 					dispatch(setUser(res.data));
 					setIsSubmitted(true);
@@ -73,6 +72,8 @@ const RegistrationContainer = ({ className }) => {
 			})
 			.catch(e => {
 				console.error(e);
+			})
+			.finally(() => {
 				dispatch(changeLoading(false));
 			});
 
