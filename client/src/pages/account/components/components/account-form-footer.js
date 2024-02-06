@@ -1,7 +1,19 @@
+import { useSelector } from 'react-redux';
 import { Button } from '../../../../features';
+import { ROLE_ID } from '../../../../constants';
 import styled from 'styled-components';
 
-const AccountFormFooterContainer = ({ className, formError, isDirty, onCancel, onLogout }) => {
+const AccountFormFooterContainer = ({
+	className,
+	formError,
+	isDirty,
+	onCancel,
+	onLogout,
+}) => {
+	const user = useSelector(state => state.appReducer.user);
+
+	const isAdminRightsConfirm = user.isActivated && user.roleId === ROLE_ID.ADMIN;
+
 	return (
 		<div className={className}>
 			<Button
@@ -26,16 +38,18 @@ const AccountFormFooterContainer = ({ className, formError, isDirty, onCancel, o
 			>
 				Отменить
 			</Button>
-			<Button
-				link={'/administration'}
-				width="100%"
-				height="60px"
-				background={'var(--brand-orange)'}
-				hoverBoxShadow={true}
-				activeBackground={'var(--active-orange)'}
-			>
-				Зайти в админ-панель
-			</Button>
+			{isAdminRightsConfirm && (
+				<Button
+					link={'/administration'}
+					width="100%"
+					height="60px"
+					background={'var(--brand-orange)'}
+					hoverBoxShadow={true}
+					activeBackground={'var(--active-orange)'}
+				>
+					Зайти в админ-панель
+				</Button>
+			)}
 			<Button
 				width="100%"
 				height="60px"

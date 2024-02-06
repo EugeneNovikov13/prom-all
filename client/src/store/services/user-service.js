@@ -9,7 +9,7 @@ export const userAPI = createApi({
 	tagTypes: ['User'],
 	endpoints: builder => ({
 		fetchRegister: builder.mutation({
-			query: (data) => ({
+			query: data => ({
 				url: '/register',
 				method: 'POST',
 				body: data,
@@ -19,6 +19,14 @@ export const userAPI = createApi({
 		fetchAuth: builder.mutation({
 			query: data => ({
 				url: '/login',
+				method: 'POST',
+				body: data,
+			}),
+			invalidatesTags: ['User'],
+		}),
+		fetchAuthSecondStep: builder.mutation({
+			query: data => ({
+				url: '/two-factor-auth',
 				method: 'POST',
 				body: data,
 			}),
@@ -45,6 +53,7 @@ export const userAPI = createApi({
 export const {
 	useFetchRegisterMutation,
 	useFetchAuthMutation,
+	useFetchAuthSecondStepMutation,
 	useFetchLogoutMutation,
 	useUpgradeUserMutation,
 } = userAPI;

@@ -2,6 +2,7 @@ export * from './about/about';
 export * from './account/account';
 export * from './administration/administartion';
 export * from './authorization/authorization';
+export * from './authorization-second-step/authorization-second-step';
 export * from './catalog/catalog';
 export * from './contacts/contacts';
 export * from './documents/documents';

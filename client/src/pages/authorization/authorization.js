@@ -54,16 +54,29 @@ const AuthorizationContainer = ({ className }) => {
 			captchaToken,
 		};
 
-		fetchAuth(data).then(res => {
-			dispatch(changeLoading(false));
-			if (!res.error) {
-				dispatch(setUser(res.data));
-				setIsSubmitted(true);
-				navigate('/', { replace: true });
-				return;
-			}
-			setServerError(res.error.data);
-		});
+		fetchAuth(data)
+			.then(res => {
+				dispatch(changeLoading(false));
+
+				if (!res.error && res.data === 'admin') {
+					setIsSubmitted(true);
+					navigate('/authorization-second-step', { replace: true });
+					return;
+				}
+
+				if (!res.error) {
+					dispatch(setUser(res.data));
+					setIsSubmitted(true);
+					navigate('/', { replace: true });
+					return;
+				}
+				setServerError(res.error.data);
+				console.error(res.error);
+			})
+			.catch(e => {
+				console.error(e);
+				dispatch(changeLoading(false));
+			});
 
 		setCaptchaToken(null);
 		recaptchaRef.current.reset();

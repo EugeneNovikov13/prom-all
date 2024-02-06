@@ -54,6 +54,22 @@ class MailService {
 				`,
 		});
 	}
+
+	async sendAuthorizationNumberMail(to, code) {
+		await this.transporter.sendMail({
+			from: process.env.SMTP_EMAIL_USER,
+			to,
+			subject: 'Подтверждение авторизации на ' + process.env.API_URL,
+			text: '',
+			html:
+				`
+					<div>
+						<h2>Для подтверждения авторизации в качестве администратора введите код:</h2>
+						<h1>${code}</h1>
+					</div>
+				`,
+		});
+	}
 }
 
 module.exports = new MailService();

@@ -22,7 +22,8 @@ const InfoContainerContainer = ({ className }) => {
 				}
 				dispatch(changeLoading(false));
 			})
-			.catch(() => {
+			.catch((e) => {
+				console.error(e);
 				dispatch(changeLoading(false));
 			});
 	}, [dispatch]);
