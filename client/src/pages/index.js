@@ -1,6 +1,6 @@
 export * from './about/about';
 export * from './account/account';
-export * from './administration/administartion';
+export * from './administration/administration';
 export * from './authorization/authorization';
 export * from './authorization-second-step/authorization-second-step';
 export * from './catalog/catalog';

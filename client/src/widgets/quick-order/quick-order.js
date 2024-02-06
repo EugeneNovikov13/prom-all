@@ -59,7 +59,7 @@ const QuickOrderContainer = ({ className }) => {
 				if (isOpen) {
 					dispatch(closeModal());
 				}
-			}, 2000);
+			}, SETTINGS.TIMEOUT_AFTER_QUICK_ORDER_SENDING);
 		});
 
 		setCaptchaToken(null);

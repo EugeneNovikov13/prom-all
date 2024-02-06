@@ -11,6 +11,7 @@ import { accountFormSchema } from './account-form-schema';
 export const SETTINGS = {
 	API_URL: '',
 	ORGANIZATION_DATA: organizationData,
+	TIMEOUT_AFTER_QUICK_ORDER_SENDING: 3000,
 	CATEGORY_CARD_CLOSE_DELAY: 500,
 	BREADCRUMBS_MENU_CLOSE_DELAY: 300,
 	OFFICE_MAP_SRC:

@@ -1,4 +1,5 @@
 import { useLayoutEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserAsync } from '../../../../store/services';
 import { changeLoading, setUser } from '../../../../store/reducers';
@@ -11,22 +12,30 @@ import styled from 'styled-components';
 
 const InfoContainerContainer = ({ className }) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useLayoutEffect(() => {
 		dispatch(changeLoading(true));
 
 		fetchUserAsync()
 			.then(res => {
+				if (res.data === 'admin') {
+					navigate('/authorization-second-step', { replace: true });
+					return;
+				}
+
 				if (res.data) {
 					dispatch(setUser(res.data));
 				}
-				dispatch(changeLoading(false));
 			})
-			.catch((e) => {
+			.catch(e => {
 				console.error(e);
+			})
+			.finally(() => {
 				dispatch(changeLoading(false));
 			});
-	}, [dispatch]);
+		// eslint-disable-next-line
+	}, []);
 
 	const currentUserData = useSelector(state => state.appReducer.user);
 

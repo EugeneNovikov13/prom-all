@@ -126,6 +126,7 @@ async function activate(activationLink) {
 module.exports = {
 	register,
 	login,
+	administratorConfirmation,
 	adminLogin,
 	editUser,
 	activate,

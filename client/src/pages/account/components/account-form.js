@@ -6,8 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useFetchLogoutMutation, useUpgradeUserMutation } from '../../../store/services';
 import { changeLoading, logout, updateUser } from '../../../store/reducers';
 import { AccountFormFooter, AccountFormHeader, AccountFormInputs } from './components';
-import { ServerMessage } from '../../../components';
+import { Error, H1, ServerMessage } from '../../../components';
 import { SETTINGS } from '../../../settings';
+import { ERROR } from '../../../constants';
 import styled from 'styled-components';
 
 const AccountFormContainer = ({ className, user }) => {
@@ -57,14 +58,18 @@ const AccountFormContainer = ({ className, user }) => {
 
 	const onLogout = e => {
 		e.preventDefault();
-		fetchLogout().then(() => {
-			if (!logoutError) {
-				dispatch(logout());
-				navigate('/');
-				return;
-			}
-			setMessage(logoutError);
-		});
+		fetchLogout()
+			.then(() => {
+				if (!logoutError) {
+					dispatch(logout());
+					navigate('/', { replace: true });
+					return;
+				}
+				setMessage(logoutError);
+			})
+			.catch(e => {
+				console.error(e);
+			});
 	};
 
 	const onCancel = e => {
@@ -83,25 +88,35 @@ const AccountFormContainer = ({ className, user }) => {
 		errors?.phone?.message;
 
 	return (
-		<form
-			className={className}
-			method="post"
-			onSubmit={handleSubmit(onUpgradeSubmit)}
-		>
-			<AccountFormHeader />
-			<AccountFormInputs
-				register={register}
-				errors={errors}
-				onInputChange={onInputChange}
-			/>
-			{message && <ServerMessage isError={message}>! {message}</ServerMessage>}
-			<AccountFormFooter
-				formError={formError}
-				isDirty={isDirty}
-				onCancel={onCancel}
-				onLogout={onLogout}
-			/>
-		</form>
+		<>
+			{user.id ? (
+				<form
+					className={className}
+					method="post"
+					onSubmit={handleSubmit(onUpgradeSubmit)}
+				>
+					<AccountFormHeader />
+					<AccountFormInputs
+						register={register}
+						errors={errors}
+						onInputChange={onInputChange}
+					/>
+					{message && (
+						<ServerMessage isError={message}>! {message}</ServerMessage>
+					)}
+					<AccountFormFooter
+						formError={formError}
+						isDirty={isDirty}
+						onCancel={onCancel}
+						onLogout={onLogout}
+					/>
+				</form>
+			) : (
+				<Error>
+					<H1 color={'var(--brand-orange)'}>{ERROR.SHOULD_LOGIN}</H1>
+				</Error>
+			)}
+		</>
 	);
 };
 

@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useFetchAuthSecondStepMutation } from '../../store/services';
-import { changeLoading, setUser } from '../../store/reducers';
+import {
+	useFetchAuthSecondStepMutation,
+	useFetchLogoutMutation,
+} from '../../store/services';
+import { changeLoading, logout, setUser } from '../../store/reducers';
 import { H1, ServerMessage } from '../../components';
 import { Button, Input } from '../../features';
 import styled from 'styled-components';
@@ -15,6 +18,7 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 	const [serverError, setServerError] = useState('');
 
 	const [fetchAuthSecondStep] = useFetchAuthSecondStepMutation();
+	const [fetchLogout, { error: logoutError }] = useFetchLogoutMutation();
 
 	const onSubmit = (e, value) => {
 		e.preventDefault();
@@ -27,7 +31,6 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 
 		fetchAuthSecondStep(data)
 			.then(res => {
-				dispatch(changeLoading(false));
 				if (!res.error) {
 					dispatch(setUser(res.data));
 					navigate('/account', { replace: true });
@@ -38,6 +41,8 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 			})
 			.catch(e => {
 				console.error(e);
+			})
+			.finally(() => {
 				dispatch(changeLoading(false));
 			});
 	};
@@ -45,6 +50,22 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 	const onInputChange = value => {
 		setInputValue(value);
 		setServerError('');
+	};
+
+	const onLogout = e => {
+		e.preventDefault();
+		fetchLogout()
+			.then(() => {
+				if (!logoutError) {
+					dispatch(logout());
+					navigate('/', { replace: true });
+					return;
+				}
+				setServerError(logoutError);
+			})
+			.catch(e => {
+				console.error(e);
+			});
 	};
 
 	return (
@@ -84,6 +105,16 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 							activeBackground={'var(--active-orange)'}
 						>
 							Войти
+						</Button>
+						<Button
+							width="100%"
+							height="60px"
+							background={'var(--brand-orange)'}
+							hoverBoxShadow={true}
+							activeBackground={'var(--active-orange)'}
+							onClick={e => onLogout(e)}
+						>
+							Отменить авторизацию
 						</Button>
 					</div>
 				</form>
