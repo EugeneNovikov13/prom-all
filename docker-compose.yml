@@ -15,8 +15,8 @@ services:
         - 'SMTP_EMAIL_USER=prom.all.project.sendler@gmail.com'
         - 'SMTP_APP_PASSWORD=kftr ohhq mcun xuui'
         - 'API_EMAIL=eugene.work.4940@gmail.com'
-        - 'API_URL=http://localhost:3001'
-        - 'CLIENT_URL=http://localhost:3000'
+        - 'API_URL=http://185.119.56.142'
+        - 'CLIENT_URL=http://185.119.56.142'
     ports:
       - '80:3001'
       - '443:3001'
