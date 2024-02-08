@@ -1,5 +1,5 @@
 # server
-FROM node:alpine as build
+FROM node:21
 
 WORKDIR /usr/src/app
 
@@ -12,8 +12,8 @@ RUN npm run build
 WORKDIR /usr/src/app/server
 RUN npm i
 
-COPY --from=build /usr/src/app/client/build /var/www/build
-COPY --from=build /usr/src/app/nginx.conf /etc/nginx/sites-enabled/default
+COPY /usr/src/app/client/build /var/www/build
+COPY /usr/src/app/nginx.conf /etc/nginx/sites-enabled/default
 
 EXPOSE 3001
 
