@@ -8,7 +8,7 @@ services:
     environment:
         - 'PORT=3001'
         - 'DB_CONNECTION_STRING=mongodb+srv://NovikovEugene:gfhjkm13@educationdb.nioilpj.mongodb.net/prom-all?retryWrites=true&w=majority'
-        - 'JWT_ACCESS_SECRET=nikolay-sanych-krasavcheg'
+        - 'JWT_ACCESS_SECRET=~CzJ9j{5QNw?8kt'
         - 'RECAPTCHA_SECRET_KEY=6LfJh1ApAAAAABxX4kso2jZZfvpXNX6BpOtYPETF'
         - 'SMTP_HOST=smtp.gmail.com'
         - 'SMTP_PORT=465'
@@ -18,6 +18,6 @@ services:
         - 'API_URL=http://185.119.56.142'
         - 'CLIENT_URL=http://185.119.56.142'
     ports:
-      - '80:3001'
-      - '443:3001'
+      - '80:80'
+      - '443:443'
     restart: unless-stopped
