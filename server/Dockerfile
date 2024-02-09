@@ -9,6 +9,4 @@ RUN npm install
 
 EXPOSE 3001
 
-USER node
-
 CMD ["node", "index.js"]
