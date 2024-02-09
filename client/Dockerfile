@@ -1,21 +1,14 @@
 # client
-FROM node:20 as builder
+FROM node:alpine as builder
 
 WORKDIR /app
 
-COPY package.json /app/package.json
+COPY . .
 
-RUN npm install --only=prod
-
-COPY . /app
-
+RUN npm install
 RUN npm run build
 
-FROM nginx:stable
-
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /var/www
+COPY --from=builder /app/nginx.conf /etc/nginx/sites-enabled/default
 
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-

@@ -1,13 +1,11 @@
 # server
-FROM node:20 as builder
+FROM node:alpine as builder
 
 WORKDIR /app
 
-COPY package.json /app/package.json
+COPY . .
 
 RUN npm install
-
-COPY . /app
 
 EXPOSE 3001
 
