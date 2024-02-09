@@ -110,6 +110,11 @@ async function adminLogin(code, user) {
 }
 
 async function editUser(id, data) {
+	const existingEmail = await User.findOne({ email: data?.email });
+	if (existingEmail) {
+		throw new Error('Пользователь с такой электронной почтой уже существует');
+	}
+
 	return User.findByIdAndUpdate(id, data, { returnDocument: 'after', runValidators: true });
 }
 
