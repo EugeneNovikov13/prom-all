@@ -31,7 +31,6 @@ router.post('/register', async (req, res) => {
 	try {
 		const { token, user } = await register(req.body.userData, req.body.captchaToken);
 
-		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, secure: true })
 			.send(mapUser(user));
 	} catch (e) {
@@ -50,7 +49,6 @@ router.post('/login', async (req, res) => {
 			return;
 		}
 
-		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, secure: true })
 			.send(mapUser(user));
 	} catch (e) {
@@ -75,7 +73,6 @@ router.post('/two-factor-auth', authenticated, async (req, res) => {
 		const userData = req.user;
 		const { token, user } = await adminLogin(req.body.code, userData);
 
-		// TODO secure: true в опции куки добавить для https
 		res.cookie('token', token, { httpOnly: true, maxAge: 8 * 60 * 60 * 1000, secure: true })
 			.send(mapUser(user));
 	} catch (e) {
@@ -98,7 +95,6 @@ router.patch('/users/:id', authenticated, async (req, res) => {
 
 		res.send(mapUser(user));
 	} catch (e) {
-		e.message = 'Ошибка! Не удалось изменить данные пользователя';
 		handleError(res, e);
 	}
 });
