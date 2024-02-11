@@ -14,6 +14,7 @@ export const sendQuickOrderAsync = async (value, formData) => {
 
 		return { data: response.data, error: null };
 	} catch (e) {
+		console.error(e);
 		return { data: null, error: e.response.data };
 	}
 };
