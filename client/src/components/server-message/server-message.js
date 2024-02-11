@@ -7,6 +7,6 @@ const ServerMessageContainer = ({ className, children }) => {
 export const ServerMessage = styled(ServerMessageContainer)`
 	margin: 0 40px;
 	font-size: 20px;
-	color: ${({ isError }) => (isError ? 'red' : 'var(--white)')};
+	color: ${({ isError }) => (isError ? 'red' : 'var(--brand-orange)')};
 	word-wrap: break-word;
 `;

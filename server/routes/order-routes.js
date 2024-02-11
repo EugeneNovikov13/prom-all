@@ -9,9 +9,8 @@ router.post('/quick-order', async (req, res) => {
 	try {
 		await sendOrder(req.body);
 
-		res.send('Заявка успешно отправлена. Ожидайте ответа.');
+		res.send('Запрос успешно отправлен. Ожидайте ответа.');
 	} catch (e) {
-		e.message = 'Не удалось отправить заявку. Попробуйте снова или свяжитесь с нами по телефону.'
 		handleError(res, e);
 	}
 });

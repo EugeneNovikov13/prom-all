@@ -9,6 +9,7 @@ import { ServerMessage } from '../../components';
 import { OrderFormFooter, OrderFormHeader, OrderFormInputs } from './components';
 import { SETTINGS } from '../../settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
+import { ERROR } from '../../constants';
 import styled from 'styled-components';
 
 const QuickOrderContainer = ({ className }) => {
@@ -17,7 +18,7 @@ const QuickOrderContainer = ({ className }) => {
 	const recaptchaRef = React.createRef();
 
 	const user = useSelector(state => state.appReducer.user);
-	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
+	const modalIsOpen = useSelector(state => state.appReducer.modal.isOpen);
 	const dispatch = useDispatch();
 
 	const [serverError, setServerError] = useState(null);
@@ -49,20 +50,23 @@ const QuickOrderContainer = ({ className }) => {
 	const onSubmit = formData => {
 		dispatch(changeLoading(true));
 
-		sendQuickOrderAsync(captchaToken, formData).then(res => {
-			setServerError(res.error);
-			setServerResponse(res.data);
-			setIsSubmitted(true);
-			dispatch(changeLoading(false));
+		sendQuickOrderAsync(captchaToken, formData)
+			.then(res => {
+				dispatch(changeLoading(false));
+				setServerError(ERROR.REQUEST_ERROR);
+				setServerResponse(res.data);
+				setIsSubmitted(true);
 
-			setTimeout(() => {
-				if (isOpen) {
-					dispatch(closeModal());
-				}
-			}, SETTINGS.TIMEOUT_AFTER_QUICK_ORDER_SENDING);
-		});
+				setTimeout(() => {
+					if (modalIsOpen) {
+						dispatch(closeModal());
+					}
+				}, SETTINGS.TIMEOUT_AFTER_QUICK_ORDER_SENDING);
+			})
+			.finally(() => {
+				setCaptchaToken(null);
+			});
 
-		setCaptchaToken(null);
 		recaptchaRef.current.reset();
 	};
 
@@ -101,7 +105,11 @@ const QuickOrderContainer = ({ className }) => {
 			{serverError && (
 				<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
 			)}
-			{serverResponse && <ServerMessage>{serverResponse}</ServerMessage>}
+			{serverResponse && (
+				<ServerMessage>
+					<mark>{serverResponse}</mark>
+				</ServerMessage>
+			)}
 			<OrderFormFooter formError={formError} captchaToken={captchaToken} />
 		</form>
 	);
@@ -114,4 +122,10 @@ export const QuickOrder = styled(QuickOrderContainer)`
 	flex-direction: column;
 	gap: 60px;
 	padding: 0 36px;
+
+	& mark {
+		background-color: var(--brand-orange);
+		text-transform: uppercase;
+		color: var(--white);
+	}
 `;
