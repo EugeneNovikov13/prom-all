@@ -15,11 +15,11 @@ const AccountFormContainer = ({ className, user }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [message, setMessage] = useState(null);
+	const [message, setMessage] = useState('');
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const [fetchLogout, { error: logoutError }] = useFetchLogoutMutation();
-	const [upgradeUser, { error: upgradeError }] = useUpgradeUserMutation();
+	const [upgradeUser] = useUpgradeUserMutation();
 
 	const {
 		register,
@@ -44,16 +44,23 @@ const AccountFormContainer = ({ className, user }) => {
 	const onUpgradeSubmit = formData => {
 		dispatch(changeLoading(true));
 
-		upgradeUser({ id: user.id, ...formData }).then(() => {
-			if (!upgradeError) {
-				dispatch(updateUser(formData));
-				navigate('/');
+		upgradeUser({ id: user.id, ...formData })
+			.then(res => {
+				if (!res.error) {
+					dispatch(updateUser(formData));
+					navigate('/');
+					return;
+				}
+				setMessage(res.error.data);
+				console.error(res.error);
+			})
+			.catch(e => {
+				console.error(e);
+				setMessage("Ошибка запроса. Не удалось обновить данные.");
+			})
+			.finally(() => {
 				dispatch(changeLoading(false));
-				return;
-			}
-			setMessage(upgradeError);
-			dispatch(changeLoading(false));
-		});
+			});
 	};
 
 	const onLogout = e => {
@@ -75,10 +82,11 @@ const AccountFormContainer = ({ className, user }) => {
 	const onCancel = e => {
 		e.preventDefault();
 		setIsSubmitted(true);
+		setMessage('');
 	};
 
 	const onInputChange = () => {
-		setMessage(null);
+		setMessage('');
 	};
 
 	const formError =
