@@ -27,6 +27,7 @@ const AccountFormInputsContainer = ({ className, register, errors, onInputChange
 					name="email"
 					placeholder="Электронная почта"
 					type="text"
+					disabled={true}
 					error={errors?.email?.message}
 					{...register('email', {
 						onChange: onInputChange,

@@ -41,13 +41,17 @@ export const Input = styled(InputContainer)`
 		line-height: 24px;
 		letter-spacing: 0.5px;
 
-		&:hover {
+		&:hover:not(:disabled) {
 			background: rgb(50, 50, 51);
 		}
 
 		&:focus {
 			background: rgb(50, 50, 51);
 			color: var(--light);
+		}
+
+		&:disabled {
+			color: #E6E0E980;
 		}
 	}
 
