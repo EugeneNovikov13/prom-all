@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { selectUser } from '../../../../store/reducers';
 import { Button } from '../../../../features';
 import { ROLE_ID } from '../../../../constants';
 import styled from 'styled-components';
@@ -10,7 +11,7 @@ const AccountFormFooterContainer = ({
 	onCancel,
 	onLogout,
 }) => {
-	const user = useSelector(state => state.appReducer.user);
+	const user = useSelector(selectUser);
 
 	const isAdminRightsConfirm = user.isActivated && user.roleId === ROLE_ID.ADMIN;
 

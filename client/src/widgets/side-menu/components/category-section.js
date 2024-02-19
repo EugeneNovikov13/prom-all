@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { selectBreadcrumbs } from '../../../store/reducers';
 import { AnimatePresence } from 'framer-motion';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
@@ -14,9 +15,8 @@ const CategoryButtonContainer = ({
 	subcategories,
 	isActiveCategory,
 }) => {
-	const currentSubcategoryTitle = useSelector(
-		state => state.catalogReducer.breadcrumbs.subcategory.selectedTitle,
-	);
+	const currentSubcategoryTitle =
+		useSelector(selectBreadcrumbs).subcategory.selectedTitle;
 
 	return (
 		<div className={className}>

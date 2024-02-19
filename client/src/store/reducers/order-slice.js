@@ -15,13 +15,17 @@ export const orderSlice = createSlice({
 	},
 	extraReducers: builder => {
 		// Очищаем данные для заказа после закрытия модального окна
-		builder
-			.addCase(closeModal, () => {
-				return initialState;
-			})
+		builder.addCase(closeModal, () => {
+			return initialState;
+		});
+	},
+	selectors: {
+		selectOrderData: state => state.orderData,
 	},
 });
 
 export const { setOrderData } = orderSlice.actions;
+
+export const { selectOrderData } = orderSlice.selectors;
 
 export default orderSlice.reducer;

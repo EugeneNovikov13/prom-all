@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
+import { selectBreadcrumbs } from '../../store/reducers';
 import { getSubsectionsBySectionTitle } from '../../utils';
 import { PopupItemProducts, PopupItemSections } from './components';
 import styled from 'styled-components';
 
 const PopupContainer = ({ className, section }) => {
-	const { breadcrumbs } = useSelector(state => state.catalogReducer);
+	const breadcrumbs = useSelector(selectBreadcrumbs);
 
 	// Если здесь undefined, значит это продуктовый crumb
 	const sectionItems = getSubsectionsBySectionTitle(section, breadcrumbs);

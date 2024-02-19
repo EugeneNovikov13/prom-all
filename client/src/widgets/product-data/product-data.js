@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
+import { selectModalContent, selectModalTitle } from '../../store/reducers';
 import { H1 } from '../../components';
 import styled from 'styled-components';
 
 const ProductDataContainer = ({ className }) => {
-	const title = useSelector(state => state.appReducer.modal.title);
-	const content = useSelector(state => state.appReducer.modal.content);
+	const title = useSelector(selectModalTitle);
+	const content = useSelector(selectModalContent);
 
 	return (
 		<div className={className}>

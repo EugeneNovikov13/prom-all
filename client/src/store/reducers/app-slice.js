@@ -48,6 +48,16 @@ export const appSlice = createSlice({
 			state.user = initialState.user;
 		},
 	},
+	selectors: {
+		selectFixedHeader: state => state.fixedHeader,
+		selectIsLoading: state => state.isLoading,
+		selectModalIsOpen: state => state.modal.isOpen,
+		selectModalComponent: state => state.modal.component,
+		selectModalBackgroundColor: state => state.modal.backgroundColor,
+		selectModalTitle: state => state.modal.title,
+		selectModalContent: state => state.modal.content,
+		selectUser: state => state.user,
+	},
 });
 
 export const {
@@ -59,5 +69,16 @@ export const {
 	updateUser,
 	logout,
 } = appSlice.actions;
+
+export const {
+	selectFixedHeader,
+	selectIsLoading,
+	selectModalIsOpen,
+	selectModalComponent,
+	selectModalBackgroundColor,
+	selectModalContent,
+	selectModalTitle,
+	selectUser,
+} = appSlice.selectors;
 
 export default appSlice.reducer;

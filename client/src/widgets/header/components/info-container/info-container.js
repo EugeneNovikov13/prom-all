@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserAsync } from '../../../../store/services';
-import { changeLoading, setUser } from '../../../../store/reducers';
+import { changeLoading, selectUser, setUser } from '../../../../store/reducers';
 import { Button } from '../../../../features';
 import { InfoSection } from './components/info-section';
 import { Img } from '../../../../components';
@@ -37,7 +37,7 @@ const InfoContainerContainer = ({ className }) => {
 		// eslint-disable-next-line
 	}, []);
 
-	const currentUserData = useSelector(state => state.appReducer.user);
+	const currentUserData = useSelector(selectUser);
 
 	return (
 		<div className={className}>

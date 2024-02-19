@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
+import { selectFixedHeader } from '../store/reducers';
 import styled from 'styled-components';
 
 const PageContainer = ({ className, children }) => {
-	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
+	const isFixed = useSelector(selectFixedHeader);
 
 	return (
 		<div className={isFixed ? `${className} header__fixed` : className}>
@@ -24,13 +25,17 @@ export const Page = styled(PageContainer)`
 		padding: 216px 0 0;
 	}
 
-	@media screen and (max-device-width: 599px) {
+	@media screen and (max-device-width: 599px), (max-device-height: 599px) {
 		padding: 0;
 	}
 
 	&.header__fixed {
 		@media screen and (max-device-width: 599px) {
 			padding: 216px 0 0;
+		}
+
+		@media screen and (max-device-height: 599px) {
+			padding: 164px 0 0;
 		}
 	}
 `;

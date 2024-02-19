@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMatch, useParams } from 'react-router-dom';
 import { useDebounce } from '../../hooks';
 import { getCurrentBreadcrumbs, setBreadcrumbsByIdAsync } from '../../utils';
+import { selectBreadcrumbs, selectCountSections } from '../../store/reducers';
 import { Crumb } from './components/crumb';
 import { BreadcrumbsFirstItem } from './components/breadcrumbs-first-item';
 import { SETTINGS } from '../../settings';
@@ -69,7 +70,8 @@ const BreadcrumbsContainer = ({ className }) => {
 	//
 
 	//получаем массив  выбранных breadcrumbs из объекта breadcrumbs в store
-	const { countSections, breadcrumbs } = useSelector(state => state.catalogReducer);
+	const countSections = useSelector(selectCountSections);
+	const breadcrumbs = useSelector(selectBreadcrumbs);
 
 	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs);
 	//

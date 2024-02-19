@@ -58,9 +58,17 @@ export const catalogSlice = createSlice({
 			state.productCards = initialState.productCards;
 		},
 	},
+	selectors: {
+		selectCountSections: state => state.countSections,
+		selectBreadcrumbs: state => state.breadcrumbs,
+		selectProductCards: state => state.productCards,
+	},
 });
 
 export const { resetBreadcrumbs, resetProductCards, setProduct, setProductCards } =
 	catalogSlice.actions;
+
+export const { selectCountSections, selectBreadcrumbs, selectProductCards } =
+	catalogSlice.selectors;
 
 export default catalogSlice.reducer;

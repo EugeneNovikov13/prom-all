@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/reducers';
 import { AccountForm } from './components/account-form';
 import styled from 'styled-components';
 
 const AccountContainer = ({ className }) => {
-	const user = useSelector(state => state.appReducer.user);
+	const user = useSelector(selectUser);
 
 	return (
 		<div className={className}>
