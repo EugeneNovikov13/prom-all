@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/reducers';
 import { ERROR, ROLE_ID } from '../../constants';
 import { Error, H1 } from '../../components';
 
 export const PrivateContent = ({ children, serverError = null }) => {
-	const user = useSelector(state => state.appReducer.user);
+	const user = useSelector(selectUser);
 
 	const isAdminRightsConfirm = user.isActivated && user.roleId === ROLE_ID.ADMIN;
 

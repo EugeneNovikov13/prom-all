@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import { closeModal } from '../../store/reducers';
+import { closeModal, selectModalBackgroundColor, selectModalComponent, selectModalIsOpen } from '../../store/reducers';
 import { Button } from '../../features';
 import { Img } from '../img/img';
 import { ReactComponent as Close } from './assets/close.svg';
@@ -8,9 +8,9 @@ import { animationVariants, modalChildren } from './constants';
 import styled from 'styled-components';
 
 const ModalContainer = ({ className }) => {
-	const isOpen = useSelector(state => state.appReducer.modal.isOpen);
-	const backgroundColor = useSelector(state => state.appReducer.modal.backgroundColor);
-	const component = useSelector(state => state.appReducer.modal.component);
+	const isOpen = useSelector(selectModalIsOpen);
+	const backgroundColor = useSelector(selectModalBackgroundColor);
+	const component = useSelector(selectModalComponent);
 
 	const dispatch = useDispatch();
 

@@ -4,10 +4,10 @@ import catalogReducer from './reducers/catalog-slice';
 import orderReducer from './reducers/order-slice';
 import { userAPI, brandAPI, productAPI, promoAPI } from './services';
 
-const rootReducer = combineReducers({
-	appReducer,
-	catalogReducer,
-	orderReducer,
+export const rootReducer = combineReducers({
+	app: appReducer,
+	catalog: catalogReducer,
+	order: orderReducer,
 	[promoAPI.reducerPath]: promoAPI.reducer,
 	[brandAPI.reducerPath]: brandAPI.reducer,
 	[productAPI.reducerPath]: productAPI.reducer,

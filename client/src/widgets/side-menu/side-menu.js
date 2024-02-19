@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { selectBreadcrumbs } from '../../store/reducers';
 import { motion } from 'framer-motion';
 import { Button } from '../../features';
 import { CategorySection } from './components/category-section';
@@ -9,9 +10,7 @@ import { buttonStyleProps } from './constants/button-style-props';
 import styled from 'styled-components';
 
 const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
-	const currentCategoryTitle = useSelector(
-		state => state.catalogReducer.breadcrumbs.category.selectedTitle,
-	);
+	const currentCategoryTitle = useSelector(selectBreadcrumbs).category.selectedTitle;
 
 	const categories = catalogList.map(cat => ({
 		id: cat.id,

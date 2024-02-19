@@ -1,14 +1,15 @@
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setFixedHeader } from '../../store/reducers';
+import { selectFixedHeader, setFixedHeader } from '../../store/reducers';
 import { InfoContainer, NavigationMenu } from './components';
 import { Search } from '../../features';
 import { Logo } from '../../components';
 import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
-	const { fixedHeader: isFixed } = useSelector(state => state.appReducer);
+	const isFixed = useSelector(selectFixedHeader);
+
 	const firstLineRef = useRef(null);
 	const searchRef = useRef(null);
 	const dispatch = useDispatch();
@@ -58,12 +59,12 @@ export const Header = styled(HeaderContainer)`
 	backdrop-filter: blur(2px);
 	z-index: 100;
 
-	@media screen and (max-device-width: 599px) {
+	@media screen and (max-device-width: 599px), (max-device-height: 599px) {
 		position: relative;
 	}
 
 	&.header__fixed {
-		@media screen and (max-device-width: 599px) {
+		@media screen and (max-device-width: 599px), (max-device-height: 599px) {
 			position: fixed;
 			top: -113px;
 		}

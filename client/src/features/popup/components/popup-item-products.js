@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { selectBreadcrumbs } from '../../../store/reducers';
 import { motion } from 'framer-motion';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { Button } from '../../button/button';
@@ -6,16 +7,11 @@ import styled from 'styled-components';
 
 const PopupItemProductsContainer = ({ className, listVariants }) => {
 	//ищем id последнего открытого раздела (подкатегория или тип), чтобы запустить поиск товаров по этому id
-	const selectedSubcategoryId = useSelector(
-		state => state.catalogReducer.breadcrumbs.subcategory.selectedId,
-	);
-	const selectedTypeId = useSelector(
-		state => state.catalogReducer.breadcrumbs.type.selectedId,
-	);
+	const selectedSubcategoryId = useSelector(selectBreadcrumbs).subcategory.selectedId;
+	const selectedTypeId = useSelector(selectBreadcrumbs).type.selectedId;
 	const selectedSectionId = selectedTypeId || selectedSubcategoryId;
 
-	const { data: products } =
-		useFetchProductBySectionQuery(selectedSectionId);
+	const { data: products } = useFetchProductBySectionQuery(selectedSectionId);
 	////
 
 	if (!products) return null;

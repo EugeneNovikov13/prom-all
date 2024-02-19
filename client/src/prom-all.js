@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from './store/reducers';
 import { Page } from './page-component/page';
 import {
 	About,
@@ -19,7 +21,6 @@ import {
 import { Loader, Modal } from './components';
 import { Footer, Header } from './widgets';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 const AppColumn = styled.div`
 	position: relative;
@@ -35,7 +36,7 @@ const AppColumn = styled.div`
 `;
 
 export const PromAll = () => {
-	const isLoading = useSelector(state => state.appReducer.isLoading);
+	const isLoading = useSelector(selectIsLoading);
 
 	return (
 		<AppColumn>

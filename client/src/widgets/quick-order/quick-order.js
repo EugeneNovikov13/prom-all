@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { sendQuickOrderAsync } from '../../store/services';
-import { changeLoading, closeModal } from '../../store/reducers';
+import { changeLoading, closeModal, selectModalIsOpen, selectOrderData, selectUser } from '../../store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
 import { OrderFormFooter, OrderFormHeader, OrderFormInputs } from './components';
@@ -13,12 +13,12 @@ import { ERROR } from '../../constants';
 import styled from 'styled-components';
 
 const QuickOrderContainer = ({ className }) => {
-	const orderData = useSelector(state => state.orderReducer.orderData);
+	const orderData = useSelector(selectOrderData);
 
 	const recaptchaRef = React.createRef();
 
-	const user = useSelector(state => state.appReducer.user);
-	const modalIsOpen = useSelector(state => state.appReducer.modal.isOpen);
+	const user = useSelector(selectUser);
+	const modalIsOpen = useSelector(selectModalIsOpen);
 	const dispatch = useDispatch();
 
 	const [serverError, setServerError] = useState(null);
@@ -53,7 +53,7 @@ const QuickOrderContainer = ({ className }) => {
 		sendQuickOrderAsync(captchaToken, formData)
 			.then(res => {
 				dispatch(changeLoading(false));
-				setServerError(ERROR.REQUEST_ERROR);
+				setServerError(res.error);
 				setServerResponse(res.data);
 				setIsSubmitted(true);
 
@@ -62,6 +62,10 @@ const QuickOrderContainer = ({ className }) => {
 						dispatch(closeModal());
 					}
 				}, SETTINGS.TIMEOUT_AFTER_QUICK_ORDER_SENDING);
+			})
+			.catch(e => {
+				setServerError(ERROR.REQUEST_ERROR);
+				console.error(e);
 			})
 			.finally(() => {
 				setCaptchaToken(null);

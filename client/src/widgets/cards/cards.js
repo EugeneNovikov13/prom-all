@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectProductCards } from '../../store/reducers';
 import { getSubsectionsBySectionId } from '../../utils';
 import { ProductCard } from '../../features';
 import { Img } from '../../components';
@@ -7,7 +8,7 @@ import { ProductCardContent } from '../../features/product-card/components/produ
 import styled from 'styled-components';
 
 const CardsContainer = ({ className }) => {
-	const productCards = useSelector(state => state.catalogReducer.productCards);
+	const productCards = useSelector(selectProductCards);
 
 	const params = useParams();
 
