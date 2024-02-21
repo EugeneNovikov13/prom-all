@@ -4,6 +4,7 @@ const { getBrands, addBrand, deleteBrand } = require('../controllers/brand');
 const authenticated = require('../middlewares/authenticated');
 const mapBrand = require('../helpers/mapBrand');
 const handleError = require('../services/handle-error');
+const adminRightsVerification = require('../middlewares/admin-rights-verification');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/brands', async (req, res) => {
 	}
 });
 
-router.post('/brands', authenticated, async (req, res) => {
+router.post('/brands', authenticated, adminRightsVerification, async (req, res) => {
 	try {
 		const newBrand = await addBrand({
 			title: req.body.title,
@@ -37,7 +38,7 @@ router.post('/brands', authenticated, async (req, res) => {
 	}
 });
 
-router.delete('/brands/:id', authenticated, async (req, res) => {
+router.delete('/brands/:id', authenticated, adminRightsVerification, async (req, res) => {
 	try {
 		await deleteBrand(req.params.id);
 

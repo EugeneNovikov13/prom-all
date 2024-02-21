@@ -4,6 +4,7 @@ const { getPromos, addPromo, editPromo, deletePromo } = require('../controllers/
 const authenticated = require('../middlewares/authenticated');
 const mapPromo = require('../helpers/mapPromo');
 const handleError = require('../services/handle-error');
+const adminRightsVerification = require('../middlewares/admin-rights-verification');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/promos', async (req, res) => {
 	}
 });
 
-router.post('/promos', authenticated, async (req, res) => {
+router.post('/promos', authenticated, adminRightsVerification, async (req, res) => {
 	try {
 		const newPromo = await addPromo({
 			title: req.body.title,
@@ -34,7 +35,7 @@ router.post('/promos', authenticated, async (req, res) => {
 	}
 });
 
-router.patch('/promos/:id', authenticated, async (req, res) => {
+router.patch('/promos/:id', authenticated, adminRightsVerification, async (req, res) => {
 	try {
 		const editedPromo = await editPromo(req.params.id, {
 			title: req.body.title,
@@ -48,7 +49,7 @@ router.patch('/promos/:id', authenticated, async (req, res) => {
 		handleError(res, e);
 	}
 });
-router.delete('/promos/:id', authenticated, async (req, res) => {
+router.delete('/promos/:id', authenticated, adminRightsVerification, async (req, res) => {
 	try {
 		await deletePromo(req.params.id);
 

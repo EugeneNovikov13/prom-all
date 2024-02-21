@@ -5,6 +5,8 @@ const authenticated = require('../middlewares/authenticated');
 const mapProduct = require('../helpers/mapProduct');
 const mapProducts = require('../helpers/mapProducts');
 const handleError = require('../services/handle-error');
+const adminRightsVerification = require('../middlewares/admin-rights-verification');
+const ROLE_ID = require('../constants/role-id');
 
 const router = express.Router();
 
@@ -46,8 +48,15 @@ router.get('/products/search/:title', async (req, res) => {
 	}
 });
 
-router.post('/products', authenticated, async (req, res) => {
+router.post('/products', authenticated, adminRightsVerification, async (req, res) => {
 	try {
+		const user = req.user;
+
+		if (user.roleId !== ROLE_ID.ADMIN) {
+			handleError(res, {message: 'Недостаточно прав доступа'}, 403);
+			return;
+		}
+
 		const newProduct = await addProduct({
 			title: req.body.title,
 			images: req.body.images,
