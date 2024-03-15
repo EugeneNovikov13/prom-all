@@ -8,8 +8,12 @@ import { ReactComponent as Nva } from './assets/nva.svg';
 import { ReactComponent as Pumps } from './assets/pumps.svg';
 import { ReactComponent as Gears } from './assets/reductors.svg';
 import { ReactComponent as Fans } from './assets/ventilators.svg';
+import { ICategory } from '../types';
 
-export const catalogList = [
+/**
+ * Каталог
+ */
+export const catalogList: ICategory[] = [
 	{
 		id: '658aa910cd634ef7ce80f1c6',
 		title: 'Электрощитовое оборудование',
