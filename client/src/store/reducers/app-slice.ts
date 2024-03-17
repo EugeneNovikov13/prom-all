@@ -1,6 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IModal, IUser } from 'types';
 
-const initialState = {
+interface IAppState {
+	fixedHeader: boolean,
+	isLoading: boolean,
+	modal: IModal,
+	user: IUser,
+}
+
+const initialState: IAppState = {
 	fixedHeader: false,
 	isLoading: false,
 	modal: {
@@ -25,23 +33,23 @@ export const appSlice = createSlice({
 	name: 'app',
 	initialState,
 	reducers: {
-		setFixedHeader(state, action) {
+		setFixedHeader(state, action: PayloadAction<boolean>) {
 			state.fixedHeader = action.payload;
 		},
-		changeLoading(state, action) {
+		changeLoading(state, action: PayloadAction<boolean>) {
 			state.isLoading = action.payload;
 		},
-		openModal(state, action) {
+		openModal(state, action: PayloadAction<Partial<IModal>>) {
 			state.modal = { ...state.modal, ...action.payload };
 			state.modal.isOpen = true;
 		},
 		closeModal(state) {
 			state.modal.isOpen = false;
 		},
-		setUser(state, action) {
+		setUser(state, action: PayloadAction<IUser>) {
 			state.user = action.payload;
 		},
-		updateUser(state, action) {
+		updateUser(state, action: PayloadAction<Partial<IUser>>) {
 			state.user = { ...state.user, ...action.payload };
 		},
 		logout(state) {

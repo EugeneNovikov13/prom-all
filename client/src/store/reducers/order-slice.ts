@@ -1,7 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { closeModal } from './app-slice';
 
-const initialState = {
+interface IOrderState {
+	orderData: string;
+}
+
+const initialState: IOrderState = {
 	orderData: '',
 };
 
@@ -9,7 +13,7 @@ export const orderSlice = createSlice({
 	name: 'order',
 	initialState,
 	reducers: {
-		setOrderData(state, action) {
+		setOrderData(state, action: PayloadAction<string>) {
 			state.orderData = action.payload;
 		},
 	},

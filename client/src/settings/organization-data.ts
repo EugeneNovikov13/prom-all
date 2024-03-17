@@ -1,4 +1,4 @@
-type OrganizationData = {
+export type OrganizationData = {
 	phone: string,
 	email: string[],
 	officeAddress: string,
