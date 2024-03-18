@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { closeModal } from './app-slice';
 
+/**
+ * Данные заказа
+ */
 interface IOrderState {
+	/**
+	 * Текст заказа
+	 */
 	orderData: string;
 }
 
@@ -28,8 +34,18 @@ export const orderSlice = createSlice({
 	},
 });
 
-export const { setOrderData } = orderSlice.actions;
+export const {
+	/**
+	 * Установить текст заказа
+	 */
+	setOrderData,
+} = orderSlice.actions;
 
-export const { selectOrderData } = orderSlice.selectors;
+export const {
+	/**
+	 * Текст заказа
+	 */
+	selectOrderData,
+} = orderSlice.selectors;
 
 export default orderSlice.reducer;

@@ -1,15 +1,17 @@
-import { fetchProductsBySectionIdAsync } from '../../../store/services';
-import { resetProductCards, setProductCards } from '../../../store/reducers';
+import { fetchProductsBySectionIdAsync } from 'http/services';
+import { changeLoading, resetProductList, setProductList } from '../../../store/reducers';
 
-export const getProductsAsync = (id, dispatch, setLoadingFunc) => {
-	dispatch(resetProductCards());
-	dispatch(setLoadingFunc(true));
+export const getProductsAsync = (id, dispatch) => {
+	dispatch(resetProductList());
+	dispatch(changeLoading(true));
 	fetchProductsBySectionIdAsync(id)
 		.then(({ data }) => {
-			dispatch(setProductCards(data));
+			if (!data.counter) {
+				dispatch(setProductList(data));
+			}
 		})
 		.catch(e => {
 			console.error(e.response.data);
 		})
-		.finally(dispatch(setLoadingFunc(false)));
+		.finally(dispatch(changeLoading(false)));
 };

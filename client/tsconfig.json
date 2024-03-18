@@ -23,6 +23,7 @@
 			"@constants/*": ["src/constants/*"],
 			"@features/*": ["src/features/*"],
 			"@hooks/*": ["src/hooks/*"],
+			"@http/*": ["src/http/*"],
 			"@pages/*": ["src/pages/*"],
 			"@settings/*": ["src/settings/*"],
 			"@store/*": ["src/store/*"],

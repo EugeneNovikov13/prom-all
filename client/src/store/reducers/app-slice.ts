@@ -2,9 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IModal, IUser } from 'types';
 
 interface IAppState {
+	/**
+	 * Состояние залипания "шапки"
+	 */
 	fixedHeader: boolean,
+	/**
+	 * Состояние лоадера
+	 */
 	isLoading: boolean,
+	/**
+	 * Состояние модального окна
+	 */
 	modal: IModal,
+	/**
+	 * Пользователь
+	 */
 	user: IUser,
 }
 
@@ -69,23 +81,68 @@ export const appSlice = createSlice({
 });
 
 export const {
+	/**
+	 * Изменить состояния лоадера
+	 */
 	changeLoading,
+	/**
+	 * Закрыть модальное окно
+	 */
 	closeModal,
+	/**
+	 * Открыть модальное окно
+	 */
 	openModal,
+	/**
+	 * Изменить состояние залипания "шапки"
+	 */
 	setFixedHeader,
+	/**
+	 * Установить данные пользователя
+	 */
 	setUser,
+	/**
+	 * Обновить данные пользователя
+	 */
 	updateUser,
+	/**
+	 * Логаут пользователя
+	 */
 	logout,
 } = appSlice.actions;
 
 export const {
+	/**
+	 * Состояние залипания "шапки"
+	 */
 	selectFixedHeader,
+	/**
+	 * Состояние лоадера
+	 */
 	selectIsLoading,
+	/**
+	 * Открыто или нет модальное окно
+	 */
 	selectModalIsOpen,
+	/**
+	 * Название компонента, который должен быть в модальном окне
+	 */
 	selectModalComponent,
+	/**
+	 * Фон модального окна
+	 */
 	selectModalBackgroundColor,
+	/**
+	 * Содержимое модального окна (HTML-разметка или текст)
+	 */
 	selectModalContent,
+	/**
+	 * Заголовок модального окна
+	 */
 	selectModalTitle,
+	/**
+	 * Данные текущего зарегистрированного пользователя
+	 */
 	selectUser,
 } = appSlice.selectors;
 
