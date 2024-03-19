@@ -1,13 +1,22 @@
 import { fetchProductByIdAsync } from 'http/services';
 import { restoreSectionBreadcrumbs } from './restore-section-breadcrumbs';
 import { resetBreadcrumbs, setProduct } from '../store/reducers';
+import { AppDispatch } from '../store/store';
 
+/**
+ * Установить текущую цепочку breadcrumbs
+ * @param dispatch - функция redux
+ * @param id - params.id
+ * @param isSectionSelected - выбраны ли какие-нибудь разделы
+ * @param isProductSectionSelected - выбран ли какой-то товар
+ * @param needToResetBreadcrumbs - требуется ли сброс breadcrumbs
+ */
 export const setBreadcrumbsByIdAsync = (
-	dispatch,
-	id,
-	isOtherSectionSelected,
-	isProductSectionSelected,
-	needToResetBreadcrumbs,
+	dispatch: AppDispatch,
+	id: string,
+	isSectionSelected: boolean,
+	isProductSectionSelected: boolean,
+	needToResetBreadcrumbs: boolean,
 ) => {
 	if (isProductSectionSelected) {
 		fetchProductByIdAsync(id)
@@ -25,7 +34,7 @@ export const setBreadcrumbsByIdAsync = (
 			});
 		return;
 	}
-	if (isOtherSectionSelected) {
+	if (isSectionSelected) {
 		restoreSectionBreadcrumbs(id, dispatch);
 		return;
 	}

@@ -1,19 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProduct } from '../../types';
-
-/**
- * Раздел каталога
- */
-interface ISection {
-	/**
-	 * id выбранного раздела
-	 */
-	selectedId: string;
-	/**
-	 * Название выбранного раздела
-	 */
-	selectedTitle: string;
-}
+import { Breadcrumbs, IProduct, ISection, SectionName } from 'types';
 
 interface ICatalogState {
 	/**
@@ -23,24 +9,7 @@ interface ICatalogState {
 	/**
 	 * "Крошки" (возможные значения)
 	 */
-	breadcrumbs: {
-		/**
-		 * Категории товаров
-		 */
-		category: ISection;
-		/**
-		 * Подкатегории категорий
-		 */
-		subcategory: ISection;
-		/**
-		 * Типы подкатегорий
-		 */
-		type: ISection;
-		/**
-		 * Виды товаров в разделе (подкатегории или типы)
-		 */
-		product: ISection;
-	};
+	breadcrumbs: Breadcrumbs;
 	/**
 	 * Список товаров
 	 */
@@ -50,19 +19,19 @@ interface ICatalogState {
 const initialState: ICatalogState = {
 	countSections: 1,
 	breadcrumbs: {
-		category: {
+		[SectionName.Category]: {
 			selectedId: '',
 			selectedTitle: 'Категория',
 		},
-		subcategory: {
+		[SectionName.Subcategory]: {
 			selectedId: '',
 			selectedTitle: 'Подкатегория',
 		},
-		type: {
+		[SectionName.Type]: {
 			selectedId: '',
 			selectedTitle: 'Тип',
 		},
-		product: {
+		[SectionName.Product]: {
 			selectedId: '',
 			selectedTitle: 'Товар',
 		},

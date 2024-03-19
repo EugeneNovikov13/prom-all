@@ -1,6 +1,16 @@
 import { catalogList } from '../constants';
+import { Breadcrumbs, ICategory, ISubcategory, IType } from '../types';
 
-export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
+/**
+ * Получить список разделов текущей "крошки"
+ * @param section - 'category' | 'subcategory' | 'type'
+ * @param breadcrumbs - объект breadcrumbs из состояния redux
+ * @returns {ICategory[] | ISubcategory[] | IType[] | undefined}
+ */
+export const getSubsectionsBySectionTitle = (
+	section: string,
+	breadcrumbs: Breadcrumbs,
+): (Omit<ICategory, 'subcategories'>[] | ISubcategory[] | IType[] | undefined) => {
 	const currentCategoryId = breadcrumbs.category.selectedId;
 	const currentSubcategoryId = breadcrumbs.subcategory.selectedId;
 
@@ -16,7 +26,7 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			const currentCategory = catalogList.find(
 				item => item.id === currentCategoryId,
 			);
-			return currentCategory.subcategories.map(item => ({
+			return currentCategory?.subcategories.map(item => ({
 				id: item.id,
 				title: item.title,
 				image: item.image,
@@ -26,10 +36,10 @@ export const getSubsectionsBySectionTitle = (section, breadcrumbs) => {
 			const currentCategory = catalogList.find(
 				item => item.id === currentCategoryId,
 			);
-			const currentSubcategory = currentCategory.subcategories.find(
+			const currentSubcategory = currentCategory?.subcategories.find(
 				item => item.id === currentSubcategoryId,
 			);
-			return currentSubcategory.types.map(item => ({
+			return currentSubcategory?.types?.map(item => ({
 				id: item.id,
 				title: item.title,
 				image: item.image,

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectFixedHeader, setFixedHeader } from '../../store/reducers';
-import { InfoContainer, NavigationMenu } from './components';
+import { InfoContainer, NavigationMenuHoc } from './components';
 import { Search } from '../../features';
 import { Logo } from '../../components';
 import styled from 'styled-components';
@@ -39,7 +39,7 @@ const HeaderContainer = ({ className }) => {
 			</div>
 			<div className="second-line">
 				<div className="header-bottom-wrapper">
-					<NavigationMenu />
+					<NavigationMenuHoc/>
 					<Search ref={searchRef} />
 				</div>
 			</div>

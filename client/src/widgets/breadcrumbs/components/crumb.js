@@ -13,9 +13,6 @@ const CrumbContainer = ({
 	onMouseEnter,
 	onMouseLeave,
 }) => {
-	//проверяем, является ли подраздел подразделом продуктов
-	const isProductSection = section === 'product';
-
 	const crumbButtonStyleProps = {
 		isDisable: !selectedId,
 		width: '100%',
@@ -47,7 +44,6 @@ const CrumbContainer = ({
 
 				{isOpen && (
 					<Popup
-						isProductSection={isProductSection}
 						section={section}
 					/>
 				)}

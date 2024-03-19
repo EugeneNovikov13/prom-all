@@ -1,4 +1,23 @@
-export const findWayToId = (catalog, id) => {
+import { ICategory } from '../types';
+
+interface ICrumb {
+	/**
+	 * id "крошки"
+	 */
+	id: string;
+	/**
+	 * Название "крошки"
+	 */
+	title: string;
+}
+
+/**
+ * Построить breadcrumbs по id товара или раздела
+ * @param catalog - Каталог
+ * @param id - id товара или раздела
+ * @returns - Список "крошек" в порядке от категории к товару
+ */
+export const findWayToId = (catalog: ICategory[], id: string): ICrumb[] => {
 	const way = [];
 	for (let category of catalog) {
 		if (category.id === id) {
