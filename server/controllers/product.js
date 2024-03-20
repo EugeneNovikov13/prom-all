@@ -40,7 +40,7 @@ async function getProductsByTitle(search) {
 	const products = await Product.find({ title: { $regex: search, $options: 'i' } });
 
 	if (!products.length) {
-		throw new Error('Ошибка! В каталоге нет товаров с таким названием')
+		throw new Error('В каталоге нет товаров с таким названием');
 	}
 
 	return products;

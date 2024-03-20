@@ -46,6 +46,7 @@ const QuickOrderContainer = ({ className }) => {
 			order: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FORM_SCHEMA),
+		mode: 'onBlur',
 	});
 
 	if (isSubmitted) {

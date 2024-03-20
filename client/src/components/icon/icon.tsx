@@ -1,6 +1,18 @@
 import styled from 'styled-components';
+import React, { FC } from 'react';
 
-const IconContainer = ({ className, iconSrc, onClick, setIsOpen }) => {
+interface IconProps {
+	className?: string;
+	iconSrc: string;
+	/**
+	 * Функция установки состояния открыто/закрыто (для Tooltips)
+	 */
+	setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+	width: string;
+	isActive?: boolean;
+}
+
+const IconContainer: FC<IconProps> = ({ className, iconSrc, setIsOpen }) => {
 	const onTooltipOpen = () => {
 		setIsOpen && setIsOpen(true);
 	};
@@ -12,7 +24,6 @@ const IconContainer = ({ className, iconSrc, onClick, setIsOpen }) => {
 	return (
 		<img
 			className={className}
-			onClick={onClick}
 			onMouseEnter={onTooltipOpen}
 			onMouseLeave={onTooltipClose}
 			onTouchStart={onTooltipOpen}

@@ -1,8 +1,14 @@
 import { useSelector } from 'react-redux';
 import { selectFixedHeader } from '../store/reducers';
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const PageContainer = ({ className, children }) => {
+interface PageProps {
+	className?: string;
+	children: ReactNode;
+}
+
+const PageContainer: FC<PageProps> = ({ className, children }) => {
 	const isFixed = useSelector(selectFixedHeader);
 
 	return (

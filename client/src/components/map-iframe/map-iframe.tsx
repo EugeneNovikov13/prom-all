@@ -1,6 +1,21 @@
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const MapIFrameContainer = ({ className, title, width, height, src }) => {
+interface MapIFrameProps {
+	className?: string;
+	title: string;
+	width: string;
+	height: string;
+	src: string;
+}
+
+const MapIFrameContainer: FC<MapIFrameProps> = ({
+	className,
+	title,
+	width,
+	height,
+	src,
+}) => {
 	return (
 		<div className={className}>
 			<iframe

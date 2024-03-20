@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const LoaderContainer = ({ className }) => {
+interface LoaderProps {
+	className?: string;
+}
+
+const LoaderContainer: FC<LoaderProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<svg viewBox="-2000 -1000 4000 2000">

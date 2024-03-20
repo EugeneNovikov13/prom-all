@@ -1,6 +1,13 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const H2Container = ({ className, children }) => (
+interface H2Props {
+	className?: string;
+	children: ReactNode;
+	color?: string;
+}
+
+const H2Container: FC<H2Props> = ({ className, children }) => (
 	<h2 className={className}>{children}</h2>
 );
 

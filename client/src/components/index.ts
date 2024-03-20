@@ -7,6 +7,7 @@ export * from './icon/icon';
 export * from './img/img';
 export * from './loader/loader';
 export * from './logo/logo';
+export * from './map-iframe/map-iframe';
 export * from './modal/modal';
 export * from './p/p';
 export * from './select/select';

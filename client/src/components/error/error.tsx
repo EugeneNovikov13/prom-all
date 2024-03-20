@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const ErrorContainer = ({ className, children }) => {
+interface ErrorProps {
+	className?: string;
+	children: ReactNode;
+}
+
+const ErrorContainer: FC<ErrorProps> = ({ className, children }) => {
 	return <div className={className}>{children}</div>;
 };
 

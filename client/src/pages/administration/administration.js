@@ -1,4 +1,4 @@
-import { PrivateContent } from '../../widgets';
+import { PrivateContent } from 'features';
 import styled from 'styled-components';
 
 const AdministrationContainer = ({ className }) => {

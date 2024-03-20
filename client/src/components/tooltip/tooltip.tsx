@@ -1,6 +1,19 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const TooltipContainer = ({ className, children }) => {
+interface TooltipProps {
+	className?: string;
+	children: ReactNode;
+	top?: string;
+	bottom?: string;
+	right?: string;
+	/**
+	 * Невидимая граница или нет
+	 */
+	isInvisible?: boolean;
+}
+
+const TooltipContainer: FC<TooltipProps> = ({ className, children }) => {
 	return <div className={className}>{children}</div>;
 };
 

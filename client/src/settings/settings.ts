@@ -10,21 +10,69 @@ import { accountFormSchema } from './account-form-schema';
 import { Options } from '@splidejs/react-splide';
 import { Schema } from 'yup';
 
+/**
+ * Настройки приложения
+ */
 interface ISettings {
+	/**
+	 * Базовый URL
+	 */
 	API_URL: string;
+	/**
+	 * Данные организации
+	 */
 	ORGANIZATION_DATA: OrganizationData;
+	/**
+	 * Таймаут после отправки быстрого заказа
+	 */
 	TIMEOUT_AFTER_QUICK_ORDER_SENDING: number;
+	/**
+	 * Таймаут закрытия карточки после наступления события mouseleave
+	 */
 	CATEGORY_CARD_CLOSE_DELAY: number;
+	/**
+	 * Таймаут закрытия popup-меню в breadcrumbs
+	 */
 	BREADCRUMBS_MENU_CLOSE_DELAY: number;
+	/**
+	 * URL карты местоположения офиса
+	 */
 	OFFICE_MAP_SRC: string;
+	/**
+	 * URL карты местоположения склада
+	 */
 	STOCK_MAP_SRC: string;
+	/**
+	 * Настройки слайдера партнёров
+	 */
 	BRAND_SLIDER_CONFIG: Options;
+	/**
+	 *	Настройки слайдера карт
+	 */
 	MAP_SLIDER_CONFIG: Options;
+	/**
+	 * Настройки слайдера фотографий товара
+	 */
 	PRODUCT_SLIDER_CONFIG: Options;
+	/**
+	 * Настройки слайдера промо-акций
+	 */
 	PROMO_SLIDER_CONFIG: Options;
+	/**
+	 * Схема формы быстрого заказа
+	 */
 	QUICK_ORDER_FORM_SCHEMA: Schema;
+	/**
+	 * Схема формы авторизации
+	 */
 	AUTHORIZATION_FORM_SCHEMA: Schema;
+	/**
+	 * Схема формы регистрации
+	 */
 	REGISTRATION_FORM_SCHEMA: Schema;
+	/**
+	 * Схема формы изменения данных аккаунта
+	 */
 	ACCOUNT_FORM_SCHEMA: Schema;
 }
 

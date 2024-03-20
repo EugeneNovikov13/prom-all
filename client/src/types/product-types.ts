@@ -13,11 +13,11 @@ export interface IProduct {
 	/**
 	 * Фотографии товара
 	 */
-	images: Image[];
+	images: IImage[];
 	/**
 	 * Разновидности товара
 	 */
-	kinds: Kind[];
+	kinds: IKind[];
 	/**
 	 * Описание товара (HTML-разметка или текст)
 	 */
@@ -43,11 +43,11 @@ export interface INewProduct {
 	/**
 	 * Фотографии товара
 	 */
-	images: Image[];
+	images: IImage[];
 	/**
 	 * Разновидности товара
 	 */
-	kinds: Omit<Kind, 'id'>[];
+	kinds: Omit<IKind, 'id'>[];
 	/**
 	 * Описание товара (HTML-разметка или текст)
 	 */
@@ -65,7 +65,7 @@ export interface INewProduct {
 /**
  * Фотография товара
  */
-interface Image {
+export interface IImage {
 	/**
 	 * id фотографии
 	 */
@@ -79,7 +79,7 @@ interface Image {
 /**
  * Разновидность товара
  */
-interface Kind {
+export interface IKind {
 	/**
 	 * id разновидности
 	 */

@@ -1,6 +1,15 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const H4Container = ({ className, children }) => (
+interface H4Props {
+	className?: string;
+	children: ReactNode;
+	color?: string;
+	fontSize?: string;
+	lineHeight?: string;
+}
+
+const H4Container: FC<H4Props> = ({ className, children }) => (
 	<h4 className={className}>{children}</h4>
 );
 

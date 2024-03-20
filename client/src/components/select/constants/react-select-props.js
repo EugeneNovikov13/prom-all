@@ -2,7 +2,6 @@ export const reactSelectProps = {
 	defaultValue: '',
 	blurInputOnSelect: true,
 	closeMenuOnScroll: true,
-	menuPlacement: 'auto',
 	isClearable: true,
 	maxMenuHeight: 500,
 	styles: {

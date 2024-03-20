@@ -1,6 +1,20 @@
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const CounterContainer = ({ className, counter, onCounterChange }) => {
+interface CounterProps {
+	className?: string;
+	/**
+	 * Значение счётчика
+	 */
+	counter: number;
+	/**
+	 * Функция изменения значения счётчика
+	 * @param dif - разница (+1 | -1)
+	 */
+	onCounterChange: (dif: number) => void;
+}
+
+const CounterContainer: FC<CounterProps> = ({ className, counter, onCounterChange }) => {
 	return (
 		<div className={className}>
 			<div className="counter-container">

@@ -1,8 +1,21 @@
-import ReactSelect from 'react-select';
+import ReactSelect, { GroupBase } from 'react-select';
 import { reactSelectProps } from './constants/react-select-props';
 import styled from 'styled-components';
+import React, { FC } from 'react';
 
-const SelectContainer = ({ className, options, setSelectValue }) => {
+type Option = {
+	value: string;
+	label: string;
+};
+
+interface SelectProps {
+	className?: string;
+	options: GroupBase<string>[];
+	setSelectValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SelectContainer: FC<SelectProps> = ({ className, options, setSelectValue }) => {
+	// @ts-ignore
 	const onChange = value => {
 		if (value) {
 			setSelectValue(value.label);

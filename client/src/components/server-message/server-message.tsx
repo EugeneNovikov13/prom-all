@@ -1,6 +1,16 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const ServerMessageContainer = ({ className, children }) => {
+interface ServerMessageProps {
+	className?: string;
+	children: ReactNode;
+	/**
+	 * Сообщение об ошибке или нет
+	 */
+	isError: boolean;
+}
+
+const ServerMessageContainer: FC<ServerMessageProps> = ({ className, children }) => {
 	return <div className={className}>{children}</div>;
 };
 

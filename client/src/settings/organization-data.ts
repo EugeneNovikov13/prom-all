@@ -1,12 +1,36 @@
+/**
+ * Данные организации
+ */
 export type OrganizationData = {
-	phone: string,
-	email: string[],
-	officeAddress: string,
-	stockAddress: string,
-	mailAddress: string,
-	workTime: string,
-	foundationYear: number,
-}
+	/**
+	 * Номер телефона
+	 */
+	phone: string;
+	/**
+	 * Адрес электронной почты
+	 */
+	email: string[];
+	/**
+	 * Адрес офиса
+	 */
+	officeAddress: string;
+	/**
+	 * Адрес склада
+	 */
+	stockAddress: string;
+	/**
+	 * Почтовый адрес
+	 */
+	mailAddress: string;
+	/**
+	 * Время работы
+	 */
+	workTime: string;
+	/**
+	 * Год основания
+	 */
+	foundationYear: number;
+};
 
 /**
  * Основные данные организации

@@ -1,6 +1,17 @@
 import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-const PContainer = ({ className, children }) => <p className={className}>{children}</p>;
+interface PProps {
+	className?: string;
+	children: ReactNode;
+	color?: string;
+	fontSize?: string;
+	lineHeight?: string;
+}
+
+const PContainer: FC<PProps> = ({ className, children }) => (
+	<p className={className}>{children}</p>
+);
 
 export const P = styled(PContainer)`
 	margin: 0;
