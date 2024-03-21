@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { openModal, setOrderData } from '../../../store/reducers';
 import { Counter, H1, Select } from '../../../components';
 import { Button } from '../../../features';
+import { productOrderSelectProps } from '../config/product-order-select-props';
 import styled from 'styled-components';
 
 const ProductOrderFormContainer = ({ className, title, kinds }) => {
@@ -35,6 +36,15 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 		);
 	};
 
+	// const onSelect = (value: SingleValue<Option>) => {
+	const onSelect = (value) => {
+		if (value) {
+			setSelectValue(value.label);
+			return;
+		}
+		setSelectValue('');
+	};
+
 	return (
 		<div className={className}>
 			<div className="product-order-title">
@@ -48,7 +58,7 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 				{!!kinds.length && (
 					<div className="product-order-kind">
 						<span className="product-order-span">Модель исполнения</span>
-						<Select options={options} setSelectValue={setSelectValue} />
+						<Select options={options} onSelect={onSelect} placeholder={options[0].label} selectProps={productOrderSelectProps} />
 					</div>
 				)}
 			</div>

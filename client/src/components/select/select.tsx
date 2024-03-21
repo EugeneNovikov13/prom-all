@@ -1,37 +1,25 @@
-import ReactSelect, { GroupBase } from 'react-select';
-import { reactSelectProps } from './constants/react-select-props';
-import styled from 'styled-components';
 import React, { FC } from 'react';
-
-type Option = {
-	value: string;
-	label: string;
-};
+import ReactSelect, { Props, SingleValue } from 'react-select';
+import styled from 'styled-components';
+import { Option } from './select-types';
 
 interface SelectProps {
 	className?: string;
-	options: GroupBase<string>[];
-	setSelectValue: React.Dispatch<React.SetStateAction<string>>;
+	options: Option[];
+	onSelect: (value: SingleValue<Option>) => void;
+	placeholder: string;
+	selectProps: Props<Option, false>
 }
 
-const SelectContainer: FC<SelectProps> = ({ className, options, setSelectValue }) => {
-	// @ts-ignore
-	const onChange = value => {
-		if (value) {
-			setSelectValue(value.label);
-			return;
-		}
-		setSelectValue('');
-	};
-
+const SelectContainer: FC<SelectProps> = ({ className, options, onSelect, placeholder, selectProps }) => {
 	return (
 		<div className={className}>
 			<div className="select-container">
 				<ReactSelect
+					{...selectProps}
 					options={options}
-					onChange={onChange}
-					placeholder={options[0].label}
-					{...reactSelectProps}
+					onChange={onSelect}
+					placeholder={placeholder}
 				/>
 			</div>
 		</div>

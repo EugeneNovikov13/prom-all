@@ -1,18 +1,21 @@
-export const reactSelectProps = {
-	defaultValue: '',
+import { CSSObjectWithLabel, OptionProps, Props } from 'react-select';
+import { Option} from 'components/select/select-types';
+
+export const productOrderSelectProps: Props<Option, false> = {
+	defaultValue: undefined,
 	blurInputOnSelect: true,
 	closeMenuOnScroll: true,
 	isClearable: true,
 	maxMenuHeight: 500,
 	styles: {
-		control: baseStyles => ({
+		control: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			border: 'none',
 			background: 'none',
 			borderColor: '',
 			boxShadow: 'none',
 		}),
-		singleValue: baseStyles => ({
+		singleValue: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			color: '#111111',
 			textAlign: 'center',
@@ -25,7 +28,7 @@ export const reactSelectProps = {
 			userSelect: 'none',
 			textOverflow: 'unset',
 		}),
-		clearIndicator: baseStyles => ({
+		clearIndicator: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			position: 'absolute',
 			left: '-32px',
@@ -34,18 +37,18 @@ export const reactSelectProps = {
 				cursor: 'pointer',
 			},
 		}),
-		indicatorSeparator: baseStyles => ({
+		indicatorSeparator: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			display: 'none',
 		}),
-		dropdownIndicator: baseStyles => ({
+		dropdownIndicator: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			'&:hover': {
 				color: '#FF7F00',
 				cursor: 'pointer',
 			},
 		}),
-		menu: baseStyles => ({
+		menu: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			minWidth: '144px',
 			border: 'none',
@@ -53,7 +56,7 @@ export const reactSelectProps = {
 			background: '#f4f6fa',
 			left: '-20px',
 		}),
-		option: (baseStyles, state) => ({
+		option: (baseStyles: CSSObjectWithLabel, state: OptionProps<Option>) => ({
 			...baseStyles,
 			backgroundColor: state.isSelected ? '#FF7F00' : '',
 			'&:hover': {
@@ -61,7 +64,7 @@ export const reactSelectProps = {
 				cursor: 'pointer',
 			},
 		}),
-		placeholder: baseStyles => ({
+		placeholder: (baseStyles: CSSObjectWithLabel) => ({
 			...baseStyles,
 			textAlign: 'center',
 			fontFamily: 'Inter, sans-serif',

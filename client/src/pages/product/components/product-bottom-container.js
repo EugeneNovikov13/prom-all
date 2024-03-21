@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '../../../features';
-import { bottomButtonStyle } from '../constants/bottom-button-style';
+import { bottomButtonStyle } from '../config/bottom-button-style';
 import { ReactComponent as ExpandMore } from '../assets/expand_more.svg';
 import { Img } from '../../../components';
 import { openModal } from '../../../store/reducers';
