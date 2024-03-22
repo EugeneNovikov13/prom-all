@@ -44,7 +44,7 @@ const AccountFormContainer = ({ className, user }) => {
 	const onUpgradeSubmit = formData => {
 		dispatch(changeLoading(true));
 
-		upgradeUser({ id: user.id, ...formData })
+		upgradeUser({ id: user.id, formData })
 			.then(res => {
 				if (!res.error) {
 					dispatch(updateUser(formData));

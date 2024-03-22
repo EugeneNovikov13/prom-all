@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserAsync } from '../../../../store/services';
+import { fetchUserAsync } from 'http/services';
 import { changeLoading, selectUser, setUser } from '../../../../store/reducers';
 import { Button } from '../../../../features';
 import { InfoSection } from './components/info-section';

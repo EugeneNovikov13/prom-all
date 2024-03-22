@@ -1,7 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ContactsData } from '../components/contacts-data';
-import { H2 } from '../../../components';
-import { MapIFrame } from '../../../widgets';
+import { H2, MapIFrame } from '../../../components';
 import { SETTINGS } from '../../../settings';
 import { mapsConfig } from '../constants/maps-config';
 import styled from 'styled-components';

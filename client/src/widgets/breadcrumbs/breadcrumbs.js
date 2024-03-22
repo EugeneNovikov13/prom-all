@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMatch, useParams } from 'react-router-dom';
 import { useDebounce } from '../../hooks';
-import { getCurrentBreadcrumbs, setBreadcrumbsByIdAsync } from '../../utils';
+import { sliceCurrentBreadcrumbs, setBreadcrumbsByIdAsync } from '../../utils';
 import { selectBreadcrumbs, selectCountSections } from '../../store/reducers';
 import { Crumb } from './components/crumb';
 import { BreadcrumbsFirstItem } from './components/breadcrumbs-first-item';
@@ -18,15 +18,15 @@ const BreadcrumbsContainer = ({ className }) => {
 	const params = useParams();
 	const id = params.id;
 
-	const isOtherSectionSelected = useMatch('catalog/section/:id');
-	const isProductSectionSelected = useMatch('catalog/product/:id');
-	const needToResetBreadcrumbs = useMatch('/catalog');
+	const isSectionSelected = !!useMatch('catalog/section/:id');
+	const isProductSectionSelected = !!useMatch('catalog/product/:id');
+	const needToResetBreadcrumbs = !!useMatch('/catalog');
 
 	useEffect(() => {
 		setBreadcrumbsByIdAsync(
 			dispatch,
 			id,
-			isOtherSectionSelected,
+			isSectionSelected,
 			isProductSectionSelected,
 			needToResetBreadcrumbs,
 		);
@@ -34,7 +34,7 @@ const BreadcrumbsContainer = ({ className }) => {
 	}, [
 		dispatch,
 		id,
-		isOtherSectionSelected,
+		isSectionSelected,
 		isProductSectionSelected,
 		needToResetBreadcrumbs,
 	]);
@@ -73,7 +73,7 @@ const BreadcrumbsContainer = ({ className }) => {
 	const countSections = useSelector(selectCountSections);
 	const breadcrumbs = useSelector(selectBreadcrumbs);
 
-	const currentBreadcrumbs = getCurrentBreadcrumbs(countSections, breadcrumbs);
+	const currentBreadcrumbs = sliceCurrentBreadcrumbs(countSections, breadcrumbs);
 	//
 
 	return (

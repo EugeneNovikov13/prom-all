@@ -1,19 +1,8 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { MenuLink } from './components/menu-link';
-import { getRouteFromFullLocation } from '../../../../utils';
 import { menuList } from '../../constants/menu-list';
 import styled from 'styled-components';
 
-const NavigationMenuContainer = ({ className }) => {
-	const location = useLocation();
-	const currentLocation = getRouteFromFullLocation(location.pathname);
-	const [currentRoute, setCurrentRoute] = useState(currentLocation);
-
-	if (currentLocation !== currentRoute) {
-		setCurrentRoute(currentLocation);
-	}
-
+const NavigationMenuContainer = ({ className, location }) => {
 	return (
 		<nav className={className} >
 			<ul>
@@ -22,7 +11,7 @@ const NavigationMenuContainer = ({ className }) => {
 						key={title}
 						title={title}
 						link={link}
-						isActive={link === currentRoute}
+						isActive={link === location}
 					/>
 				))}
 			</ul>

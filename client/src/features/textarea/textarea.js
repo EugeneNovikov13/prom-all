@@ -1,7 +1,6 @@
 import { forwardRef, useState } from 'react';
-import { Icon } from '../../components/icon/icon';
-import { Tooltip } from '../../components/tooltip/tooltip';
-import errorIcon from '../../assets/error.svg';
+import { Icon, Tooltip } from '../../components';
+import { ReactComponent as errorIcon } from 'assets/error.svg';
 import styled from 'styled-components';
 
 const TextareaContainer = forwardRef(({ className, error, ...props }, ref) => {

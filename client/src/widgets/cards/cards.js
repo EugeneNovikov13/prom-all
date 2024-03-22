@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectProductCards } from '../../store/reducers';
+import { selectProductList } from '../../store/reducers';
 import { getSubsectionsBySectionId } from '../../utils';
 import { ProductCard } from '../../features';
 import { Img } from '../../components';
@@ -8,13 +8,13 @@ import { ProductCardContent } from '../../features/product-card/components/produ
 import styled from 'styled-components';
 
 const CardsContainer = ({ className }) => {
-	const productCards = useSelector(selectProductCards);
+	const products = useSelector(selectProductList);
 
 	const params = useParams();
 
 	const subsections = getSubsectionsBySectionId(params.id);
 
-	const cards = subsections ? subsections : productCards || [];
+	const cards = subsections ? subsections : products || [];
 
 	return (
 		<div className={className}>

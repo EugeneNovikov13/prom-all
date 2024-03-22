@@ -9,7 +9,7 @@ import { catalogList } from '../../constants';
 import { buttonStyleProps } from './constants/button-style-props';
 import styled from 'styled-components';
 
-const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
+const SideMenuContainer = ({ className, setIsOpen }) => {
 	const currentCategoryTitle = useSelector(selectBreadcrumbs).category.selectedTitle;
 
 	const categories = catalogList.map(cat => ({
@@ -20,7 +20,7 @@ const SideMenuContainer = ({ className, isOpen, setIsOpen }) => {
 	}));
 
 	const toggleMenu = () => {
-		setIsOpen(!isOpen);
+		setIsOpen(prev => !prev);
 	};
 
 	return (

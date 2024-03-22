@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { sendQuickOrderAsync } from '../../store/services';
-import { changeLoading, closeModal, selectModalIsOpen, selectOrderData, selectUser } from '../../store/reducers';
+import { sendQuickOrderAsync } from 'http/services';
+import {
+	changeLoading,
+	closeModal,
+	selectModalIsOpen,
+	selectOrderData,
+	selectUser,
+} from '../../store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { ServerMessage } from '../../components';
 import { OrderFormFooter, OrderFormHeader, OrderFormInputs } from './components';
@@ -40,6 +46,7 @@ const QuickOrderContainer = ({ className }) => {
 			order: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FORM_SCHEMA),
+		mode: 'onBlur',
 	});
 
 	if (isSubmitted) {
@@ -52,8 +59,6 @@ const QuickOrderContainer = ({ className }) => {
 
 		sendQuickOrderAsync(captchaToken, formData)
 			.then(res => {
-				dispatch(changeLoading(false));
-				setServerError(res.error);
 				setServerResponse(res.data);
 				setIsSubmitted(true);
 
@@ -68,6 +73,7 @@ const QuickOrderContainer = ({ className }) => {
 				console.error(e);
 			})
 			.finally(() => {
+				dispatch(changeLoading(false));
 				setCaptchaToken(null);
 			});
 

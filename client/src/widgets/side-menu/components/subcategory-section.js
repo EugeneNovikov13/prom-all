@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductsAsync } from '../utils/get-products-async';
 import { useFetchProductBySectionQuery } from '../../../store/services';
 import { AnimatePresence, motion } from 'framer-motion';
-import { changeLoading, selectBreadcrumbs } from '../../../store/reducers';
+import { selectBreadcrumbs } from '../../../store/reducers';
 import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { TypeSection } from './type-section';
@@ -29,7 +29,7 @@ const SubcategorySectionContainer = ({
 
 	useEffect(() => {
 		if (isActiveSubcategory && !types) {
-			getProductsAsync(id, dispatch, changeLoading);
+			getProductsAsync(id, dispatch);
 		}
 	}, [dispatch, id, isActiveSubcategory, types]);
 
