@@ -1,18 +1,31 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { openModal, setOrderData } from '../../../store/reducers';
-import { Counter, H1, Select } from '../../../components';
-import { Button } from '../../../features';
+import { FC, useState } from 'react';
+import { Counter, H1, Modal, Select } from 'components';
+import { Button } from 'features';
+import { QuickOrder } from 'widgets';
 import { productOrderSelectProps } from '../config/product-order-select-props';
 import styled from 'styled-components';
+import { IKind } from 'types';
+import { SingleValue } from 'react-select';
+import { Option } from 'components/select/select-types';
+import { createPortal } from 'react-dom';
 
-const ProductOrderFormContainer = ({ className, title, kinds }) => {
+interface ProductOrderFormProps {
+	className?: string;
+	title: string;
+	kinds: IKind[];
+}
+
+const ProductOrderFormContainer: FC<ProductOrderFormProps> = ({
+	className,
+	title,
+	kinds,
+}) => {
 	const [counter, setCounter] = useState(1);
 	const [selectValue, setSelectValue] = useState('');
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [orderData, setOrderData] = useState('');
 
-	const dispatch = useDispatch();
-
-	const onCounterChange = dif => {
+	const onCounterChange = (dif: number) => {
 		if (counter + dif < 1) {
 			setCounter(1);
 			return;
@@ -27,17 +40,11 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 			selectValue && `\nМодель исполнения: ${selectValue}`
 		}\nКоличество: ${counter}шт.`;
 
-		dispatch(setOrderData(orderData));
-		dispatch(
-			openModal({
-				backgroundColor: 'var(--dark)',
-				component: 'order',
-			}),
-		);
+		setOrderData(orderData);
+		setIsModalOpen(true);
 	};
 
-	// const onSelect = (value: SingleValue<Option>) => {
-	const onSelect = (value) => {
+	const onSelect = (value: SingleValue<Option>) => {
 		if (value) {
 			setSelectValue(value.label);
 			return;
@@ -58,7 +65,12 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 				{!!kinds.length && (
 					<div className="product-order-kind">
 						<span className="product-order-span">Модель исполнения</span>
-						<Select options={options} onSelect={onSelect} placeholder={options[0].label} selectProps={productOrderSelectProps} />
+						<Select
+							options={options}
+							onSelect={onSelect}
+							placeholder={options[0].label}
+							selectProps={productOrderSelectProps}
+						/>
 					</div>
 				)}
 			</div>
@@ -74,6 +86,16 @@ const ProductOrderFormContainer = ({ className, title, kinds }) => {
 			>
 				Оформить заказ
 			</Button>
+			{isModalOpen &&
+				createPortal(
+					<Modal
+						backgroundColor={'var(--dark)'}
+						setIsModalOpen={setIsModalOpen}
+						//@ts-ignore
+						children={<QuickOrder orderData={orderData} />}
+					/>,
+					document.body,
+				)}
 		</div>
 	);
 };

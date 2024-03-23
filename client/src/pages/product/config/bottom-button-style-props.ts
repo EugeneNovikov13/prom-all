@@ -1,4 +1,4 @@
-export const bottomButtonStyle = {
+export const bottomButtonStyleProps = {
 	width: '100%',
 	height: '64px',
 	color: 'var(--dark)',

@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useFetchProductQuery } from '../../store/services';
-import { changeLoading } from '../../store/reducers';
-import { Loader } from '../../components';
+import { useFetchProductQuery } from 'store/services';
+import { changeLoading } from 'store/reducers';
+import { Loader, ServerMessage } from 'components';
 import {
 	ProductBottomContainer,
 	ProductOrderForm,
@@ -11,11 +11,15 @@ import {
 } from './components';
 import styled from 'styled-components';
 
-const ProductContainer = ({ className }) => {
+interface ProductProps {
+	className?: string,
+}
+
+const ProductContainer: FC<ProductProps> = ({ className }) => {
 	const params = useParams();
 	const dispatch = useDispatch();
 
-	const { data: product, isLoading } = useFetchProductQuery(params.id);
+	const { data: product, isLoading } = useFetchProductQuery(params.id as string);
 
 	useEffect(() => {
 		if (isLoading) {
@@ -25,7 +29,8 @@ const ProductContainer = ({ className }) => {
 		dispatch(changeLoading(false));
 	}, [isLoading, dispatch]);
 
-	if (!product) return null;
+	if (isLoading) return null;
+	if (!product) return <ServerMessage children={'Товара не существует'} isError={true}/>;
 
 	return (
 		<>

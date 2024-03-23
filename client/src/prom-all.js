@@ -18,7 +18,7 @@ import {
 	Registration,
 	Sections,
 } from './pages';
-import { Loader, Modal } from './components';
+import { Loader } from './components';
 import { Footer, Header } from './widgets';
 import styled from 'styled-components';
 
@@ -67,7 +67,6 @@ export const PromAll = () => {
 				</Routes>
 			</Page>
 			<Footer />
-			<Modal />
 			{isLoading && <Loader />}
 		</AppColumn>
 	);

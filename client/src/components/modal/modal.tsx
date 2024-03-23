@@ -1,25 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import { closeModal, selectModalBackgroundColor, selectModalComponent, selectModalIsOpen } from '../../store/reducers';
-import { Button } from '../../features';
+import { Button } from 'features';
 import { Img } from '../img/img';
 import { ReactComponent as Close } from './assets/close.svg';
-import { animationVariants, modalChildren } from './constants';
+import { animationVariants } from './config';
 import styled from 'styled-components';
+import React, { FC, ReactNode } from 'react';
 
-const ModalContainer = ({ className }) => {
-	const isOpen = useSelector(selectModalIsOpen);
-	const backgroundColor = useSelector(selectModalBackgroundColor);
-	const component = useSelector(selectModalComponent);
+interface ModalProps {
+	className?: string;
+	children: ReactNode;
+	backgroundColor?: string;
+	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-	const dispatch = useDispatch();
-
-	if (!isOpen) {
-		return null;
-	}
-
+const ModalContainer: FC<ModalProps> = ({
+	className,
+	children,
+	backgroundColor = 'var(--white)',
+	setIsModalOpen,
+}) => {
 	const onClose = () => {
-		dispatch(closeModal());
+		setIsModalOpen(false);
 	};
 
 	return (
@@ -36,8 +37,7 @@ const ModalContainer = ({ className }) => {
 						exit="hidden"
 						transition={{ duration: 0.15, easy: 'easyOut' }}
 					>
-						{/*В зависимости от значения component рендерится нужный компонент*/}
-						{component && modalChildren[component]}
+						{children}
 
 						<div className="close-button-container">
 							<Button

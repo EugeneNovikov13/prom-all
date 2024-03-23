@@ -1,7 +1,46 @@
 import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
+import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
 
-const ButtonContainer = ({ className, children, link, smooth, type, isDisable, onClick }) => {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	className?: string;
+	children?: ReactNode;
+	link?: string;
+	/**
+	 * Анимация скроллинга
+	 */
+	smooth?: boolean;
+	isDisable?: boolean;
+	padding?: string;
+	justifyContent?: string;
+	borderRadius?: string;
+	width?: string;
+	height?: string;
+	border?: string;
+	fontSize?: string;
+	background?: string;
+	/**
+	 * Тень при наведении
+	 */
+	hoverBoxShadow?: boolean;
+	/**
+	 * Фон при наведении
+	 */
+	hoverBackground?: string;
+	/**
+	 * Фон при фокусировке
+	 */
+	activeBackground?: string;
+}
+
+const ButtonContainer: FC<ButtonProps> = ({
+	className,
+	children,
+	link,
+	smooth,
+	isDisable,
+	...props
+}) => {
 	return (
 		<>
 			{link ? (
@@ -9,9 +48,9 @@ const ButtonContainer = ({ className, children, link, smooth, type, isDisable, o
 				<HashLink smooth={smooth} to={link}>
 					<button
 						className={className}
-						type={type}
+						type={props.type}
 						disabled={isDisable}
-						onClick={onClick}
+						onClick={props.onClick}
 					>
 						{children}
 					</button>
@@ -19,9 +58,9 @@ const ButtonContainer = ({ className, children, link, smooth, type, isDisable, o
 			) : (
 				<button
 					className={className}
-					type={type}
+					type={props.type}
 					disabled={isDisable}
-					onClick={onClick}
+					onClick={props.onClick}
 				>
 					{children}
 				</button>
@@ -67,7 +106,7 @@ export const Button = styled(ButtonContainer)`
 				? ''
 				: '6px 6px 20px 0 rgba(255, 214, 0, 0.25), -6px -6px 20px 0 rgba(255, 77, 0, 0.25), 0 0 10px 0 #FFAB58 inset'};
 		background: ${({ isDisable, hoverBackground }) =>
-			!isDisable && hoverBackground ? hoverBackground : ''};
+			!isDisable && !!hoverBackground ? hoverBackground : ''};
 	}
 
 	&:active {
@@ -76,6 +115,6 @@ export const Button = styled(ButtonContainer)`
 	}
 
 	@media (max-width: 380px) {
-		width: ${({ width }) => (parseInt(width, 10) > 300 ? '300px' : '')};
+		width: ${({ width }) => !!width && (parseInt(width, 10) > 300 ? '300px' : '')};
 	}
 `;
