@@ -5,9 +5,19 @@ import { Option } from './select-types';
 
 interface SelectProps {
 	className?: string;
+	/**
+	 * Доступные опции для выбора в React-Select
+	 */
 	options: Option[];
+	/**
+	 * Обработчик события смены значения в React-Select
+	 * @param value - объект нового значения типа Option
+	 */
 	onSelect: (value: SingleValue<Option>) => void;
 	placeholder: string;
+	/**
+	 * Настройки React-Select
+	 */
 	selectProps: Props<Option, false>
 }
 
