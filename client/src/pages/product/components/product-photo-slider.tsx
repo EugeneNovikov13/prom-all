@@ -1,9 +1,16 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { Img } from '../../../components';
-import { SETTINGS } from '../../../settings';
+import { Img } from 'components';
+import { SETTINGS } from 'settings';
 import styled from 'styled-components';
+import { FC } from 'react';
+import { IImage } from 'types';
 
-const ProductPhotoSliderContainer = ({ className, images }) => {
+interface ProductPhotoSliderProps {
+	className?: string,
+	images: IImage[];
+}
+
+const ProductPhotoSliderContainer: FC<ProductPhotoSliderProps> = ({ className, images }) => {
 	return (
 		<div className={className}>
 			<Splide aria-label="Фото товара" options={SETTINGS.PRODUCT_SLIDER_CONFIG}>

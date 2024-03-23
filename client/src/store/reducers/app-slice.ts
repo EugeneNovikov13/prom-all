@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IModal, IUser } from 'types';
+import { IUser } from 'types';
 
 interface IAppState {
 	/**
@@ -11,10 +11,6 @@ interface IAppState {
 	 */
 	isLoading: boolean,
 	/**
-	 * Состояние модального окна
-	 */
-	modal: IModal,
-	/**
 	 * Пользователь
 	 */
 	user: IUser,
@@ -23,13 +19,6 @@ interface IAppState {
 const initialState: IAppState = {
 	fixedHeader: false,
 	isLoading: false,
-	modal: {
-		isOpen: false,
-		backgroundColor: '',
-		component: '',
-		title: '',
-		content: '',
-	},
 	user: {
 		id: '',
 		login: '',
@@ -51,13 +40,6 @@ export const appSlice = createSlice({
 		changeLoading(state, action: PayloadAction<boolean>) {
 			state.isLoading = action.payload;
 		},
-		openModal(state, action: PayloadAction<Partial<IModal>>) {
-			state.modal = { ...state.modal, ...action.payload };
-			state.modal.isOpen = true;
-		},
-		closeModal(state) {
-			state.modal.isOpen = false;
-		},
 		setUser(state, action: PayloadAction<IUser>) {
 			state.user = action.payload;
 		},
@@ -71,11 +53,6 @@ export const appSlice = createSlice({
 	selectors: {
 		selectFixedHeader: state => state.fixedHeader,
 		selectIsLoading: state => state.isLoading,
-		selectModalIsOpen: state => state.modal.isOpen,
-		selectModalComponent: state => state.modal.component,
-		selectModalBackgroundColor: state => state.modal.backgroundColor,
-		selectModalTitle: state => state.modal.title,
-		selectModalContent: state => state.modal.content,
 		selectUser: state => state.user,
 	},
 });
@@ -85,14 +62,6 @@ export const {
 	 * Изменить состояния лоадера
 	 */
 	changeLoading,
-	/**
-	 * Закрыть модальное окно
-	 */
-	closeModal,
-	/**
-	 * Открыть модальное окно
-	 */
-	openModal,
 	/**
 	 * Изменить состояние залипания "шапки"
 	 */
@@ -120,26 +89,6 @@ export const {
 	 * Состояние лоадера
 	 */
 	selectIsLoading,
-	/**
-	 * Открыто или нет модальное окно
-	 */
-	selectModalIsOpen,
-	/**
-	 * Название компонента, который должен быть в модальном окне
-	 */
-	selectModalComponent,
-	/**
-	 * Фон модального окна
-	 */
-	selectModalBackgroundColor,
-	/**
-	 * Содержимое модального окна (HTML-разметка или текст)
-	 */
-	selectModalContent,
-	/**
-	 * Заголовок модального окна
-	 */
-	selectModalTitle,
 	/**
 	 * Данные текущего зарегистрированного пользователя
 	 */
