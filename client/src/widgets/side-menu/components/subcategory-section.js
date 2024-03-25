@@ -5,7 +5,7 @@ import { useFetchProductBySectionQuery } from '../../../store/services';
 import { AnimatePresence, motion } from 'framer-motion';
 import { selectBreadcrumbs } from '../../../store/reducers';
 import { Button } from '../../../features';
-import { Img } from '../../../components';
+import { Icon } from '../../../components';
 import { TypeSection } from './type-section';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
 import { animationVariants } from '../constants/animation-variants';
@@ -49,7 +49,7 @@ const SubcategorySectionContainer = ({
 				smooth={true}
 			>
 				<div className="subcategory-button-content">
-					<Img SvgIconComponent={BigCircle} maxWidth="24px" maxHeight="24px" />
+					<Icon iconSrc={BigCircle} width="24px" isActive={true} />
 					<span className="subcategory-title">{shortTitle || title}</span>
 					{/*бек-энд возвращает data.counter, если эта подкатегория содержит типы, а не товары*/}
 					{data && (

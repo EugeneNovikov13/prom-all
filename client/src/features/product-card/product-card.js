@@ -21,8 +21,8 @@ const ProductCardContainer = ({
 
 export const ProductCard = styled(ProductCardContainer)`
 	position: relative;
-	max-width: ${({ openCardTitle, title }) =>
-		openCardTitle === title ? 316 : openCardTitle ? 210 : 217}px;
+	max-width: ${({ isOpen, openCardTitle }) =>
+		isOpen ? 316 : openCardTitle ? 210 : 217}px;
 	height: 340px;
 	flex: 1 1 210px;
 	display: flex;
@@ -38,14 +38,15 @@ export const ProductCard = styled(ProductCardContainer)`
 
 	@media (max-width: 500px) {
 		max-width: none;
-		min-width: ${({ openCardTitle, title }) =>
-			openCardTitle === title ? 340 : ''}px;
-		height: ${({ openCardTitle, title }) => (openCardTitle === title ? 340 : 240)}px;
+		min-width: ${({ isOpen }) =>
+			isOpen ? 340 : ''}px;
+		height: ${({ isOpen }) => (isOpen ? 340 : 240)}px;
 		flex: 1 1 150px;
-		margin-top: ${({ openCardTitle, title }) => (openCardTitle === title ? 70 : 0)}px;
+		margin-top: ${({ isOpen }) => (isOpen ? 70 : 0)}px;
 	}
 
 	&:hover {
+		cursor: ${({ isOpen }) => (isOpen ? 'default' : 'pointer')};
 		box-shadow: 0 8px 14px 0 #16306b;
 
 		& svg.product-card-icon * {

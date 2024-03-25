@@ -34,6 +34,7 @@ const AccountFormContainer = ({ className, user }) => {
 			phone: user.phone,
 		},
 		resolver: yupResolver(SETTINGS.ACCOUNT_FORM_SCHEMA),
+		mode: 'onChange',
 	});
 
 	if (isSubmitted) {

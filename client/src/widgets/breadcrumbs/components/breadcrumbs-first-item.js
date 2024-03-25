@@ -24,6 +24,7 @@ const BreadcrumbsFieldContainer = ({ className }) => {
 						maxHeight="28px"
 						SvgIconComponent={Selected}
 						iconClassName="breadcrumbs-first-item-icon"
+						hoverStrokeColor='transparent'
 					/>
 					Каталог
 				</Button>

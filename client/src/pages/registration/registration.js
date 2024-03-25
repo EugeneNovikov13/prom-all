@@ -42,6 +42,7 @@ const RegistrationContainer = ({ className }) => {
 			phone: '',
 		},
 		resolver: yupResolver(SETTINGS.REGISTRATION_FORM_SCHEMA),
+		mode: 'onChange',
 	});
 
 	if (isSubmitted) {

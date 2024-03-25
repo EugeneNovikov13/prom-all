@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { Button } from 'features';
 import { bottomButtonStyleProps } from '../config/bottom-button-style-props';
 import { ReactComponent as ExpandMore } from '../assets/expand_more.svg';
-import { Img, Modal } from 'components';
+import { Icon, Modal } from 'components';
 import { ProductData } from 'widgets';
 import styled from 'styled-components';
 
@@ -41,7 +41,7 @@ const ProductBottomContainerContainer: FC<ProductBottomContainerProps> = ({
 		<div className={className}>
 			<Button {...bottomButtonStyleProps} onClick={() => onInfoBlockClick(description)}>
 				<span>Описание</span>
-				<Img SvgIconComponent={ExpandMore} maxWidth="32px"></Img>
+				<Icon iconSrc={ExpandMore} width="32px" isActive={true} ></Icon>
 			</Button>
 			<Button
 				{...bottomButtonStyleProps}
@@ -49,7 +49,7 @@ const ProductBottomContainerContainer: FC<ProductBottomContainerProps> = ({
 				isDisable={!specification}
 			>
 				<span>Технические характеристики</span>
-				<Img SvgIconComponent={ExpandMore} maxWidth="32px"></Img>
+				<Icon iconSrc={ExpandMore} width="32px" isActive={!!specification} ></Icon>
 			</Button>
 			{isModalOpen &&
 				createPortal(

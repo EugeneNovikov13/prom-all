@@ -7,7 +7,7 @@ interface ServerMessageProps {
 	/**
 	 * Сообщение об ошибке или нет
 	 */
-	isError: boolean;
+	isError?: boolean;
 }
 
 const ServerMessageContainer: FC<ServerMessageProps> = ({ className, children }) => {

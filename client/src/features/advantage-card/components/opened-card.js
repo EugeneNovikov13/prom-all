@@ -10,6 +10,7 @@ const OpenedCardContainer = ({ className, title, image, text, onTouchEnd }) => {
 					SvgIconComponent={image}
 					maxWidth="150px"
 					maxHeight="150px"
+					hoverStrokeColor='transparent'
 				/>
 			</div>
 			<div className="opened-card-content">

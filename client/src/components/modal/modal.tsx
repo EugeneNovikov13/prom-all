@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from 'features';
-import { Img } from '../img/img';
+import { Icon } from '../icon/icon';
 import { ReactComponent as Close } from './assets/close.svg';
 import { animationVariants } from './config';
 import styled from 'styled-components';
@@ -48,7 +48,7 @@ const ModalContainer: FC<ModalProps> = ({
 								activeBackground={'var(--active-orange)'}
 								onClick={onClose}
 							>
-								<Img SvgIconComponent={Close} />
+								<Icon iconSrc={Close} width={'32px'} isActive={true} />
 							</Button>
 						</div>
 					</motion.div>
