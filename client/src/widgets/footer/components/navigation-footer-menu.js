@@ -43,6 +43,10 @@ export const NavigationFooterMenu = styled(NavigationFooterMenuContainer)`
 				font-weight: 500;
 				line-height: 28px;
 				letter-spacing: 0.1px;
+
+				& span {
+					height: 24px;
+				}
 			}
 
 			&:hover {

@@ -44,6 +44,7 @@ const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => 
 						maxWidth="16px"
 						maxHeight="16px"
 						fill={'#FF7F00'}
+						hoverStrokeColor={'transparent'}
 					/>
 					<span className="type-title">{title}</span>
 					<span className="subcategory-product-counter">

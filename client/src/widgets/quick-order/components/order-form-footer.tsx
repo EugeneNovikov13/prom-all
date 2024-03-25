@@ -1,7 +1,18 @@
-import { Button } from '../../../features';
+import { Button } from 'features';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const OrderFormFooterContainer = ({ className, formError, captchaToken }) => {
+interface OrderFormFooterProps {
+	className?: string;
+	formError: string | undefined;
+	captchaToken: string;
+}
+
+const OrderFormFooterContainer: FC<OrderFormFooterProps> = ({
+	className,
+	formError,
+	captchaToken,
+}) => {
 	return (
 		<div className={className}>
 			<Button

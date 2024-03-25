@@ -34,6 +34,7 @@ const CardsContainer = ({ className }) => {
 								image={image}
 								maxWidth="217px"
 								maxHeight="150px"
+								hoverStrokeColor='transparent'
 							/>
 							<ProductCardContent title={title} />
 						</ProductCard>

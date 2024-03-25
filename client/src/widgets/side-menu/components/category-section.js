@@ -28,6 +28,7 @@ const CategoryButtonContainer = ({
 						maxWidth="24px"
 						maxHeight="24px"
 						iconClassName={isActiveCategory ? 'active-category-icon' : ''}
+						hoverStrokeColor='#141414'
 					/>
 				</div>
 			</Button>

@@ -43,7 +43,6 @@ const CategoriesContainer = ({ className }) => {
 					onMouseEnter={() => onMouseEnter(refDebounceTimeout, title)}
 					onMouseLeave={() => debouncedOnMouseLeave(title)}
 					isOpen={openCardTitle === title}
-					title={title}
 					openCardTitle={openCardTitle}
 				>
 					<Img

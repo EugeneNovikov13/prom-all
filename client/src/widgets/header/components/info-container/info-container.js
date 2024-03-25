@@ -5,7 +5,7 @@ import { fetchUserAsync } from 'http/services';
 import { changeLoading, selectUser, setUser } from '../../../../store/reducers';
 import { Button } from '../../../../features';
 import { InfoSection } from './components/info-section';
-import { Img } from '../../../../components';
+import { Icon } from '../../../../components';
 import { ReactComponent as Account } from '../../assets/account.svg';
 import { informationMenu } from '../../constants/information-menu';
 import styled from 'styled-components';
@@ -63,7 +63,7 @@ const InfoContainerContainer = ({ className }) => {
 			>
 				{currentUserData.id ? (
 					<>
-						<Img SvgIconComponent={Account} maxWidth="20px" />
+						<Icon iconSrc={Account} width="20px" isActive={true} />
 						<span>Кабинет</span>
 					</>
 				) : (

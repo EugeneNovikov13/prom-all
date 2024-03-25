@@ -1,8 +1,13 @@
 import { useMatch } from 'react-router-dom';
-import { H1, P } from '../../../components';
+import { H1, P } from 'components';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const OrderFormHeaderContainer = ({ className }) => {
+interface OrderFormHeaderProps {
+	className?: string;
+}
+
+const OrderFormHeaderContainer: FC<OrderFormHeaderProps> = ({ className }) => {
 	const isContactsPage = useMatch('/contacts');
 
 	return (

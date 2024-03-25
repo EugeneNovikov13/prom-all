@@ -1,12 +1,26 @@
-import { Input, Textarea } from '../../../features';
+import { Input, Textarea } from 'features';
 import styled from 'styled-components';
+import { FC } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { IQuickOrderForm } from 'types';
 
-const OrderFormInputsContainer = ({ className, register, errors, onInputChange }) => {
+interface OrderFormInputsProps {
+	className?: string;
+	register: UseFormRegister<IQuickOrderForm>;
+	errors: FieldErrors<IQuickOrderForm>;
+	onInputChange: () => void;
+}
+
+const OrderFormInputsContainer: FC<OrderFormInputsProps> = ({
+	className,
+	register,
+	errors,
+	onInputChange,
+}) => {
 	return (
 		<div className={className}>
 			<div className="input-wrapper">
 				<Input
-					name="name"
 					placeholder="ФИО"
 					type="text"
 					error={errors?.name?.message}
@@ -15,7 +29,6 @@ const OrderFormInputsContainer = ({ className, register, errors, onInputChange }
 					})}
 				/>
 				<Input
-					name="organization"
 					placeholder="Название организации"
 					type="text"
 					error={errors?.organization?.message}
@@ -24,7 +37,6 @@ const OrderFormInputsContainer = ({ className, register, errors, onInputChange }
 					})}
 				/>
 				<Input
-					name="email"
 					placeholder="Электронная почта"
 					type="text"
 					error={errors?.email?.message}
@@ -33,7 +45,6 @@ const OrderFormInputsContainer = ({ className, register, errors, onInputChange }
 					})}
 				/>
 				<Input
-					name="phone"
 					placeholder="Контактный телефон"
 					type="text"
 					error={errors?.phone?.message}
@@ -43,7 +54,6 @@ const OrderFormInputsContainer = ({ className, register, errors, onInputChange }
 				/>
 			</div>
 			<Textarea
-				name="order"
 				placeholder="Здесь вы можете более подробно описать цель вашего обращения"
 				type="text"
 				error={errors?.order?.message}

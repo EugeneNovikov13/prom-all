@@ -11,8 +11,8 @@ interface LogoProps {
 const LogoContainer: FC<LogoProps> = ({ className }) => {
 	return (
 		<div className={className}>
-			<Img SvgIconComponent={icon} />
-			<Img SvgIconComponent={title} />
+			<Img SvgIconComponent={icon} hoverStrokeColor={'transparent'} />
+			<Img SvgIconComponent={title} hoverStrokeColor={'transparent'} />
 		</div>
 	);
 };

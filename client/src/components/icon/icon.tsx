@@ -3,7 +3,10 @@ import React, { FC } from 'react';
 
 interface IconProps {
 	className?: string;
-	iconSrc: string;
+	/**
+	 * URL иконки или SVG-иконка
+	 */
+	iconSrc: FC<React.SVGAttributes<SVGElement>> | string;
 	/**
 	 * Функция установки состояния открыто/закрыто (для Tooltips)
 	 */
@@ -12,7 +15,11 @@ interface IconProps {
 	isActive?: boolean;
 }
 
-const IconContainer: FC<IconProps> = ({ className, iconSrc, setIsOpen }) => {
+const IconContainer: FC<IconProps> = ({
+	className,
+	iconSrc,
+	setIsOpen,
+}) => {
 	const onTooltipOpen = () => {
 		setIsOpen && setIsOpen(true);
 	};
@@ -21,24 +28,39 @@ const IconContainer: FC<IconProps> = ({ className, iconSrc, setIsOpen }) => {
 		setIsOpen && setIsOpen(false);
 	};
 
+	const SvgIconComponent = typeof iconSrc !== 'string' ? iconSrc : null;
+
 	return (
-		<img
+		<span
 			className={className}
 			onMouseEnter={onTooltipOpen}
 			onMouseLeave={onTooltipClose}
 			onTouchStart={onTooltipOpen}
 			onTouchEnd={onTooltipClose}
-			src={iconSrc}
-			alt="icon"
-		/>
+		>
+			{SvgIconComponent ? (
+				<SvgIconComponent />
+			) : (
+				<img
+					src={iconSrc as string}
+					alt="icon"
+				/>
+			)}
+		</span>
 	);
 };
 
 export const Icon = styled(IconContainer)`
 	width: ${({ width }) => width};
+	height: ${({ width }) => width};
 	vertical-align: top;
 
 	&:hover {
 		cursor: ${({ isActive }) => (isActive ? 'pointer' : 'default')};
+	}
+
+	& svg, img {
+		width: ${({ width }) => width};
+		height: ${({ width }) => width};
 	}
 `;

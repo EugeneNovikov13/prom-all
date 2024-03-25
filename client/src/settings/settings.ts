@@ -8,7 +8,8 @@ import { registrationFormSchema } from './registration-form-schema';
 import { authorizationFormSchema } from './authorization-form-schema';
 import { accountFormSchema } from './account-form-schema';
 import { Options } from '@splidejs/react-splide';
-import { Schema } from 'yup';
+import { ObjectSchema } from 'yup';
+import { IAccountForm, IAuthorizationForm, IQuickOrderForm, IRegistrationForm } from '../types';
 
 /**
  * Настройки приложения
@@ -57,19 +58,19 @@ interface ISettings {
 	/**
 	 * Схема формы быстрого заказа
 	 */
-	QUICK_ORDER_FORM_SCHEMA: Schema;
+	QUICK_ORDER_FORM_SCHEMA: ObjectSchema<IQuickOrderForm>;
 	/**
 	 * Схема формы авторизации
 	 */
-	AUTHORIZATION_FORM_SCHEMA: Schema;
+	AUTHORIZATION_FORM_SCHEMA: ObjectSchema<IAuthorizationForm>;
 	/**
 	 * Схема формы регистрации
 	 */
-	REGISTRATION_FORM_SCHEMA: Schema;
+	REGISTRATION_FORM_SCHEMA: ObjectSchema<IRegistrationForm>;
 	/**
 	 * Схема формы изменения данных аккаунта
 	 */
-	ACCOUNT_FORM_SCHEMA: Schema;
+	ACCOUNT_FORM_SCHEMA: ObjectSchema<IAccountForm>;
 }
 
 export const SETTINGS: ISettings = {

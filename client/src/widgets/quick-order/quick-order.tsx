@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FC, useRef, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { sendQuickOrderAsync } from 'http/services';
-import { changeLoading, selectUser } from '../../store/reducers';
+import { changeLoading, selectUser } from 'store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { ServerMessage } from '../../components';
+import { ServerMessage } from 'components';
 import { OrderFormFooter, OrderFormHeader, OrderFormInputs } from './components';
-import { SETTINGS } from '../../settings';
+import { SETTINGS } from 'settings';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import { ERROR } from '../../constants';
 import styled from 'styled-components';
+import { AppDispatch } from 'store/store';
+import { IQuickOrderForm } from 'types';
 
-const QuickOrderContainer = ({ className, orderData = '' }) => {
-	const recaptchaRef = React.createRef();
+interface QuickOrderProps {
+	className?: string;
+	orderData: string;
+}
+
+const QuickOrderContainer: FC<QuickOrderProps> = ({ className, orderData = '' }) => {
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
 	const user = useSelector(selectUser);
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 
-	const [serverError, setServerError] = useState(null);
-	const [serverResponse, setServerResponse] = useState(null);
-	const [captchaToken, setCaptchaToken] = useState(null);
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [serverError, setServerError] = useState<string>('');
+	const [serverResponse, setServerResponse] = useState<string>('');
+	const [captchaToken, setCaptchaToken] = useState<string>('');
+	const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
 	const {
 		register,
 		reset: formReset,
 		handleSubmit,
 		formState: { errors, isValid },
-	} = useForm({
+	} = useForm<IQuickOrderForm>({
 		defaultValues: {
 			name: user ? user.name : '',
 			organization: user ? user.organization : '',
@@ -37,7 +44,7 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 			order: orderData,
 		},
 		resolver: yupResolver(SETTINGS.QUICK_ORDER_FORM_SCHEMA),
-		mode: 'onBlur',
+		mode: 'onChange',
 	});
 
 	if (isSubmitted) {
@@ -45,7 +52,7 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 		setIsSubmitted(false);
 	}
 
-	const onSubmit = formData => {
+	const onSubmit: SubmitHandler<IQuickOrderForm> = formData => {
 		dispatch(changeLoading(true));
 
 		sendQuickOrderAsync(captchaToken, formData)
@@ -59,19 +66,19 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 			})
 			.finally(() => {
 				dispatch(changeLoading(false));
-				setCaptchaToken(null);
+				setCaptchaToken('');
 			});
 
-		recaptchaRef.current.reset();
+		recaptchaRef.current?.reset();
 	};
 
-	const onCaptchaChange = value => {
-		setCaptchaToken(value);
+	const onCaptchaChange = (value: string | null) => {
+		value && setCaptchaToken(value);
 	};
 
 	const onInputChange = () => {
-		setServerError(null);
-		setServerResponse(null);
+		setServerError('');
+		setServerResponse('');
 	};
 
 	const formError =
@@ -98,7 +105,7 @@ const QuickOrderContainer = ({ className, orderData = '' }) => {
 				/>
 			)}
 			{serverError && (
-				<ServerMessage isError={serverError}>! {serverError}</ServerMessage>
+				<ServerMessage isError={!!serverError}>! {serverError}</ServerMessage>
 			)}
 			{serverResponse && (
 				<ServerMessage>

@@ -3,7 +3,7 @@ import { selectBreadcrumbs } from '../../store/reducers';
 import { motion } from 'framer-motion';
 import { Button } from '../../features';
 import { CategorySection } from './components/category-section';
-import { Img } from '../../components';
+import { Icon } from '../../components';
 import { ReactComponent as Burger } from './assets/burger.svg';
 import { catalogList } from '../../constants';
 import { buttonStyleProps } from './constants/button-style-props';
@@ -31,7 +31,7 @@ const SideMenuContainer = ({ className, setIsOpen }) => {
 				onClick={toggleMenu}
 			>
 				<span>Каталог</span>
-				<Img SvgIconComponent={Burger} maxWidth="34px" maxHeight="34px" />
+				<Icon iconSrc={Burger} width="34px" isActive={true} />
 			</Button>
 			{categories.map(({ id, title, subcategories }) => (
 				<CategorySection

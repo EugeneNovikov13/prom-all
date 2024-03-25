@@ -19,6 +19,7 @@ const ClosedCardContainer = ({
 					maxWidth="100px"
 					maxHeight="100px"
 					transition={'0.1s'}
+					hoverStrokeColor='transparent'
 				/>
 			</div>
 			<div className="closed-card-title">

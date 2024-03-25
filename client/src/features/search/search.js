@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Img } from '../../components';
+import { Icon } from '../../components';
 import { ReactComponent as searchLoup } from './assets/search-loup.svg';
 import styled from 'styled-components';
 
@@ -37,7 +37,7 @@ const SearchContainer = forwardRef(({ className }, ref) => {
 				onChange={({ target }) => setValue(target.value)}
 				onKeyDown={e => onKeyDown(e, value)}
 			/>
-			<Img SvgIconComponent={searchLoup} />
+			<Icon iconSrc={searchLoup} width='24px' />
 		</search>
 	);
 });
@@ -146,7 +146,8 @@ export const Search = styled(SearchContainer)`
 			padding: 0 50px 1px 30px;
 			background: #2b2930;
 
-			& ~ div > svg {
+			//иконка лупы при фокусировке
+			& ~ span {
 				position: absolute;
 				left: 290px;
 				transition: left 0.5s ease-out;
@@ -158,7 +159,8 @@ export const Search = styled(SearchContainer)`
 		}
 	}
 
-	& svg {
+	//иконка лупы
+	& span {
 		position: absolute;
 		left: 25px;
 		transition: left 0.5s ease-out;

@@ -37,6 +37,7 @@ const AuthorizationContainer = ({ className }) => {
 			password: '',
 		},
 		resolver: yupResolver(SETTINGS.AUTHORIZATION_FORM_SCHEMA),
+		mode: 'onChange',
 	});
 
 	if (isSubmitted) {
