@@ -27,6 +27,7 @@ const initialState: IAppState = {
 		email: '',
 		phone: '',
 		isActivated: false,
+		roleId: '2',
 	},
 };
 

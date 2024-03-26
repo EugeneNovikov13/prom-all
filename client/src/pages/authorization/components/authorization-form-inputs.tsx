@@ -1,12 +1,21 @@
-import { Input } from '../../../features';
+import { Input } from 'features';
 import styled from 'styled-components';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { IAuthorizationForm } from 'types';
+import { FC } from 'react';
 
-const AuthorizationFormFooterContainer = ({ className, register, errors, onInputChange }) => {
+interface AuthorizationFormInputsProps {
+	className?: string;
+	register: UseFormRegister<IAuthorizationForm>;
+	errors: FieldErrors<IAuthorizationForm>;
+	onInputChange: () => void;
+}
+
+const AuthorizationFormFooterContainer: FC<AuthorizationFormInputsProps> = ({ className, register, errors, onInputChange }) => {
 	return (
 		<div className={className}>
 			<div className="input-wrapper">
 				<Input
-					name="login"
 					placeholder="Логин"
 					type="text"
 					error={errors?.login?.message}
@@ -15,7 +24,6 @@ const AuthorizationFormFooterContainer = ({ className, register, errors, onInput
 					})}
 				/>
 				<Input
-					name="password"
 					placeholder="Пароль"
 					type="password"
 					error={errors?.password?.message}

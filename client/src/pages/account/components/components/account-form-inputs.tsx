@@ -1,12 +1,26 @@
-import { Input } from '../../../../features';
+import { Input } from 'features';
 import styled from 'styled-components';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { IAccountForm } from 'types';
+import { FC } from 'react';
 
-const AccountFormInputsContainer = ({ className, register, errors, onInputChange }) => {
+interface AccountFormInputsProps {
+	className?: string;
+	register: UseFormRegister<IAccountForm>;
+	errors: FieldErrors<IAccountForm>;
+	onInputChange: () => void;
+}
+
+const AccountFormInputsContainer: FC<AccountFormInputsProps> = ({
+	className,
+	register,
+	errors,
+	onInputChange,
+}) => {
 	return (
 		<div className={className}>
 			<div className="input-wrapper">
 				<Input
-					name="name"
 					placeholder="ФИО"
 					type="text"
 					error={errors?.name?.message}
@@ -15,7 +29,6 @@ const AccountFormInputsContainer = ({ className, register, errors, onInputChange
 					})}
 				/>
 				<Input
-					name="organization"
 					placeholder="Название организации"
 					type="text"
 					error={errors?.organization?.message}
@@ -24,7 +37,6 @@ const AccountFormInputsContainer = ({ className, register, errors, onInputChange
 					})}
 				/>
 				<Input
-					name="email"
 					placeholder="Электронная почта"
 					type="text"
 					disabled={true}
@@ -34,7 +46,6 @@ const AccountFormInputsContainer = ({ className, register, errors, onInputChange
 					})}
 				/>
 				<Input
-					name="phone"
 					placeholder="Контактный телефон"
 					type="text"
 					error={errors?.phone?.message}

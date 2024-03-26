@@ -1,19 +1,24 @@
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../store/reducers';
-import { Button } from '../../../../features';
-import { ROLE_ID } from '../../../../constants';
+import { useCheckAdminAccessRights } from 'hooks';
+import { Button } from 'features';
 import styled from 'styled-components';
+import { FC, MouseEventHandler } from 'react';
 
-const AccountFormFooterContainer = ({
+interface AccountFormFooterProps {
+	className?: string;
+	formError: string | undefined;
+	isDirty: boolean,
+	onCancel: MouseEventHandler<HTMLButtonElement>,
+	onLogout: MouseEventHandler<HTMLButtonElement>,
+}
+
+const AccountFormFooterContainer: FC<AccountFormFooterProps> = ({
 	className,
 	formError,
 	isDirty,
 	onCancel,
 	onLogout,
 }) => {
-	const user = useSelector(selectUser);
-
-	const isAdminRightsConfirm = user.isActivated && user.roleId === ROLE_ID.ADMIN;
+	const isAdminRightsConfirm = useCheckAdminAccessRights();
 
 	return (
 		<div className={className}>
