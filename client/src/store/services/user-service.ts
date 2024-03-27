@@ -15,9 +15,6 @@ export const userAPI = createApi({
 	}),
 	tagTypes: ['User'],
 	endpoints: builder => ({
-		/**
-		 * Регистрация пользователя
-		 */
 		fetchRegister: builder.mutation<IUser, IRegistrationRequest>({
 			query: data => ({
 				url: '/register',
@@ -26,9 +23,6 @@ export const userAPI = createApi({
 			}),
 			invalidatesTags: ['User'],
 		}),
-		/**
-		 * Авторизация пользователя
-		 */
 		fetchAuth: builder.mutation<'admin' | IUser, IAuthorizationRequest>({
 			query: data => ({
 				url: '/login',
@@ -37,9 +31,6 @@ export const userAPI = createApi({
 			}),
 			invalidatesTags: ['User'],
 		}),
-		/**
-		 * Второй шаг авторизации пользователя
-		 */
 		fetchAuthSecondStep: builder.mutation<IUser, IAuthorizationSecondRequest>({
 			query: data => ({
 				url: '/two-factor-auth',
@@ -48,9 +39,6 @@ export const userAPI = createApi({
 			}),
 			invalidatesTags: ['User'],
 		}),
-		/**
-		 * Логаут пользователя
-		 */
 		fetchLogout: builder.mutation<{}, ''>({
 			query: () => ({
 				url: `/logout`,
@@ -58,9 +46,6 @@ export const userAPI = createApi({
 			}),
 			invalidatesTags: ['User'],
 		}),
-		/**
-		 * Изменение данных пользователя
-		 */
 		updateUser: builder.mutation<IUser, IUpdateUserRequest>({
 			query: ({ id, formData }) => ({
 				url: `users/${id}`,

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { serverErrorHandler } from 'utils';
 import { useFetchLogoutMutation } from 'store/services';
 import { changeLoading, logout } from 'store/reducers';
-import { ERROR } from '../../../../constants';
+import { ERROR } from '../constants';
 import { AppDispatch } from 'store/store';
 
 export const useSubmitLogout = (

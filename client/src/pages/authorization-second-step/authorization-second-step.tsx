@@ -1,71 +1,40 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import {
-	useFetchAuthSecondStepMutation,
-	useFetchLogoutMutation,
-} from '../../store/services';
-import { changeLoading, logout, setUser } from '../../store/reducers';
+import { FC, FormEvent, MouseEventHandler, useState } from 'react';
 import { H1, ServerMessage } from '../../components';
 import { Button, Input } from '../../features';
 import styled from 'styled-components';
+import { useSubmitLogout } from '../../hooks';
+import { useSubmitAuthSecondStep } from './hooks';
 
-const AuthorizationSecondStepContainer = ({ className }) => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+interface AuthorizationSecondStepProps {
+	className?: string;
+}
 
+const AuthorizationSecondStepContainer: FC<AuthorizationSecondStepProps> = ({
+	className,
+}) => {
 	const [inputValue, setInputValue] = useState('');
 	const [serverError, setServerError] = useState('');
 
-	const [fetchAuthSecondStep] = useFetchAuthSecondStepMutation();
-	const [fetchLogout, { error: logoutError }] = useFetchLogoutMutation();
+	const { submitAuthSecondStep } = useSubmitAuthSecondStep(setServerError);
+	const { submitSubmitLogout } = useSubmitLogout(setServerError);
 
-	const onSubmit = (e, value) => {
+	const onSubmit = async (e: FormEvent<HTMLFormElement>, value: string) => {
 		e.preventDefault();
-		dispatch(changeLoading(true));
 		if (!value) return;
 
-		const data = {
-			code: value,
-		};
+		const data = { code: value };
 
-		fetchAuthSecondStep(data)
-			.then(res => {
-				if (!res.error) {
-					dispatch(setUser(res.data));
-					navigate('/account', { replace: true });
-					return;
-				}
-				setServerError(res.error.data);
-				console.error(res.error);
-			})
-			.catch(e => {
-				console.error(e);
-			})
-			.finally(() => {
-				dispatch(changeLoading(false));
-			});
+		await submitAuthSecondStep(data);
 	};
 
-	const onInputChange = value => {
+	const onInputChange = (value: string) => {
 		setInputValue(value);
 		setServerError('');
 	};
 
-	const onLogout = e => {
+	const onLogout: MouseEventHandler<HTMLButtonElement> = async e => {
 		e.preventDefault();
-		fetchLogout()
-			.then(() => {
-				if (!logoutError) {
-					dispatch(logout());
-					navigate('/', { replace: true });
-					return;
-				}
-				setServerError(logoutError);
-			})
-			.catch(e => {
-				console.error(e);
-			});
+		await submitSubmitLogout();
 	};
 
 	return (
@@ -86,11 +55,12 @@ const AuthorizationSecondStepContainer = ({ className }) => {
 								placeholder="Код авторизации"
 								type="text"
 								onChange={({ target }) => onInputChange(target.value)}
+								error={undefined}
 							/>
 						</div>
 					</div>
 					{serverError && (
-						<ServerMessage isError={serverError}>
+						<ServerMessage isError={!!serverError}>
 							! {serverError}
 						</ServerMessage>
 					)}

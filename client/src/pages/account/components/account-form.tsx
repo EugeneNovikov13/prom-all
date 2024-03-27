@@ -1,7 +1,8 @@
 import { FC, MouseEventHandler, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSubmitLogout, useSubmitUpdateUser } from './hooks';
+import { useSubmitUpdateUser } from './hooks';
+import { useSubmitLogout } from 'hooks';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'store/reducers';
 import { AccountFormFooter, AccountFormHeader, AccountFormInputs } from './components';
