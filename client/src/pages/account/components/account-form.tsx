@@ -1,18 +1,15 @@
 import { FC, MouseEventHandler, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { isErrorWithMessage, isFetchBaseQueryError } from 'http/helpers';
-import { useFetchLogoutMutation, useUpgradeUserMutation } from 'store/services';
-import { changeLoading, logout, selectUser, updateUser } from 'store/reducers';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useSubmitLogout, useSubmitUpdateUser } from './hooks';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'store/reducers';
 import { AccountFormFooter, AccountFormHeader, AccountFormInputs } from './components';
 import { Error, H1, ServerMessage } from 'components';
 import { SETTINGS } from 'settings';
 import { ERROR } from '../../../constants';
-import styled from 'styled-components';
-import { AppDispatch } from 'store/store';
 import { IAccountForm } from 'types';
+import styled from 'styled-components';
 
 interface AccountFormProps {
 	className?: string;
@@ -21,14 +18,10 @@ interface AccountFormProps {
 const AccountFormContainer: FC<AccountFormProps> = ({ className }) => {
 	const user = useSelector(selectUser);
 
-	const dispatch: AppDispatch = useDispatch();
-	const navigate = useNavigate();
-
 	const [message, setMessage] = useState<string>('');
-	const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-	const [fetchLogout] = useFetchLogoutMutation();
-	const [upgradeUser] = useUpgradeUserMutation();
+	const { submitUpdateUser } = useSubmitUpdateUser(setMessage);
+	const { submitSubmitLogout } = useSubmitLogout(setMessage);
 
 	const {
 		register,
@@ -46,51 +39,18 @@ const AccountFormContainer: FC<AccountFormProps> = ({ className }) => {
 		mode: 'onChange',
 	});
 
-	if (isSubmitted) {
-		formReset();
-		setIsSubmitted(false);
-	}
-
-	const onUpgradeSubmit: SubmitHandler<IAccountForm> = async (formData) => {
-		dispatch(changeLoading(true));
-
-		try {
-			await upgradeUser({ id: user.id, formData });
-			dispatch(updateUser(formData));
-			navigate('/');
-		} catch (err) {
-			console.log('ERROR: ',err);
-			if (isFetchBaseQueryError(err)) {
-				setMessage("Ошибка запроса. Не удалось обновить данные.");
-			} else if (isErrorWithMessage(err)) {
-				setMessage(err.message);
-			}
-			console.error(err);
-		} finally {
-			dispatch(changeLoading(false));
-		}
+	const onUpdateSubmit: SubmitHandler<IAccountForm> = async formData => {
+		await submitUpdateUser(user.id, formData);
 	};
 
-	const onLogout: MouseEventHandler<HTMLButtonElement> = async (e) => {
+	const onLogout: MouseEventHandler<HTMLButtonElement> = async e => {
 		e.preventDefault();
-
-		try {
-			await fetchLogout('');
-			dispatch(logout());
-			navigate('/', { replace: true });
-		} catch (err) {
-			if (isFetchBaseQueryError(err)) {
-				setMessage("Не удалось выйти из профиля.");
-			} else if (isErrorWithMessage(err)) {
-				setMessage(err.message);
-			}
-			console.error(err);
-		}
+		await submitSubmitLogout();
 	};
 
 	const onCancel: MouseEventHandler<HTMLButtonElement> = e => {
 		e.preventDefault();
-		setIsSubmitted(true);
+		formReset();
 		setMessage('');
 	};
 
@@ -110,7 +70,7 @@ const AccountFormContainer: FC<AccountFormProps> = ({ className }) => {
 				<form
 					className={className}
 					method="post"
-					onSubmit={handleSubmit(onUpgradeSubmit)}
+					onSubmit={handleSubmit(onUpdateSubmit)}
 				>
 					<AccountFormHeader />
 					<AccountFormInputs

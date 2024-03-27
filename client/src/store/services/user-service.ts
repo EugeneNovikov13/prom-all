@@ -4,7 +4,7 @@ import {
 	IAuthorizationRequest,
 	IAuthorizationSecondRequest,
 	IRegistrationRequest,
-	IUpgradeUserRequest,
+	IUpdateUserRequest,
 } from 'http/models/request';
 import { IUser } from 'types';
 
@@ -61,7 +61,7 @@ export const userAPI = createApi({
 		/**
 		 * Изменение данных пользователя
 		 */
-		upgradeUser: builder.mutation<IUser, IUpgradeUserRequest>({
+		updateUser: builder.mutation<IUser, IUpdateUserRequest>({
 			query: ({ id, formData }) => ({
 				url: `users/${id}`,
 				method: 'PATCH',
@@ -92,5 +92,5 @@ export const {
 	/**
 	 * Изменение данных пользователя
 	 */
-	useUpgradeUserMutation,
+	useUpdateUserMutation,
 } = userAPI;

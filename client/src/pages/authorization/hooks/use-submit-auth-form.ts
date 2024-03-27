@@ -1,10 +1,12 @@
-import { useFetchAuthMutation } from '../../../store/services';
-import { AppDispatch } from '../../../store/store';
-import { useDispatch } from 'react-redux';
-import { changeLoading, setUser } from '../../../store/reducers';
-import { IAuthorizationRequest } from '../../../http/models/request';
-import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { serverErrorHandler } from 'utils';
+import { useFetchAuthMutation } from 'store/services';
+import { changeLoading, setUser } from 'store/reducers';
+import { AppDispatch } from 'store/store';
+import { ERROR } from '../../../constants';
+import { IAuthorizationRequest } from 'http/models/request';
 
 export const useSubmitAuthForm = (
 	setServerError: React.Dispatch<React.SetStateAction<string>>,
@@ -13,39 +15,24 @@ export const useSubmitAuthForm = (
 	const dispatch: AppDispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const submitAuthForm = (data: IAuthorizationRequest) => {
+	const submitAuthForm = async (data: IAuthorizationRequest) => {
 		dispatch(changeLoading(true));
 
-		fetchAuth(data)
-			.then(res => {
-				if ('data' in res) {
-					if (res.data === 'admin') {
-						navigate('/authorization-second-step', { replace: true });
-						return;
-					}
+		try {
+			const res = await fetchAuth(data).unwrap();
+			if (res === 'admin') {
+				navigate('/authorization-second-step', { replace: true });
+				return;
+			}
 
-					dispatch(setUser(res.data));
-					navigate('/', { replace: true });
-				} else if ('error' in res) {
-					if ('status' in res.error) {
-						const errMsg = JSON.stringify(res.error.data);
-						setServerError(errMsg);
-					} else {
-						setServerError(
-							res.error.message || 'Ошибка. Не удалось авторизоваться.',
-						);
-					}
-					console.error('ERROR: ', res.error);
-				}
-			})
-			.catch(e => {
-				setServerError('Неизвестная ошибка. Не удалось авторизоваться.');
-				console.error(e);
-			})
-			.finally(() => {
-				dispatch(changeLoading(false));
-			});
+			dispatch(setUser(res));
+			navigate('/', { replace: true });
+		} catch (err) {
+			serverErrorHandler(err, setServerError, ERROR.UNKNOWN_AUTH_ERROR);
+		} finally {
+			dispatch(changeLoading(false));
+		}
 	};
 
-	return { submitAuthForm }
+	return { submitAuthForm };
 };

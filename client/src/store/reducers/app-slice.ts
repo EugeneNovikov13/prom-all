@@ -44,7 +44,7 @@ export const appSlice = createSlice({
 		setUser(state, action: PayloadAction<IUser>) {
 			state.user = action.payload;
 		},
-		updateUser(state, action: PayloadAction<Partial<IUser>>) {
+		editUser(state, action: PayloadAction<Partial<IUser>>) {
 			state.user = { ...state.user, ...action.payload };
 		},
 		logout(state) {
@@ -74,7 +74,7 @@ export const {
 	/**
 	 * Обновить данные пользователя
 	 */
-	updateUser,
+	editUser,
 	/**
 	 * Логаут пользователя
 	 */

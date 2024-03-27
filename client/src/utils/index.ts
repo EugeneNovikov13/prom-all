@@ -5,5 +5,6 @@ export * from './get-route-from-full-location';
 export * from './get-subsections-by-section-id';
 export * from './get-subsections-by-section-title';
 export * from './is-touch-device';
+export * from './server-error-handler';
 export * from './set-breadcrumbs-by-id-async';
 export * from './slice-current-breadcrumbs';
