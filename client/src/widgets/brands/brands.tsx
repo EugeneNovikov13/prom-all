@@ -1,12 +1,19 @@
-import { useFetchAllBrandsQuery } from '../../store/services';
+import { FC } from 'react';
+import { useFetchAllBrandsQuery } from 'store/services';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { H1, Loader } from '../../components';
-import { BrandCard, Button } from '../../features';
-import { SETTINGS } from '../../settings';
+import { H1, Loader } from 'components';
+import { BrandCard, Button } from 'features';
+import { SETTINGS } from 'settings';
 import styled from 'styled-components';
 
-const BrandsContainer = ({ className }) => {
-	const { data: brands, isLoading } = useFetchAllBrandsQuery();
+interface BrandsProps {
+	className?: string;
+}
+
+const BrandsContainer: FC<BrandsProps> = ({ className }) => {
+	const { data: brands, isLoading } = useFetchAllBrandsQuery('');
+
+	if (!brands) return null;
 
 	return (
 		<section className={className}>

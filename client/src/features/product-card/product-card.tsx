@@ -1,6 +1,17 @@
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
-const ProductCardContainer = ({
+interface ProductCardProps {
+	className?: string;
+	children: ReactNode;
+	onClick?: () => void;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
+	isOpen?: boolean,
+	openCardTitle?: string,
+}
+
+const ProductCardContainer: FC<ProductCardProps> = ({
 	className,
 	children,
 	onClick,

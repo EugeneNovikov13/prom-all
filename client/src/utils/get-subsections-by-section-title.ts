@@ -1,5 +1,5 @@
 import { catalogList } from '../constants';
-import { Breadcrumbs, ICategory, ISubcategory, IType } from '../types';
+import { Breadcrumbs, ISubsection } from 'types';
 
 /**
  * Получить список разделов текущей "крошки"
@@ -10,7 +10,7 @@ import { Breadcrumbs, ICategory, ISubcategory, IType } from '../types';
 export const getSubsectionsBySectionTitle = (
 	section: string,
 	breadcrumbs: Breadcrumbs,
-): (Omit<ICategory, 'subcategories'>[] | ISubcategory[] | IType[] | undefined) => {
+): ISubsection[] | undefined => {
 	const currentCategoryId = breadcrumbs.category.selectedId;
 	const currentSubcategoryId = breadcrumbs.subcategory.selectedId;
 
@@ -19,7 +19,6 @@ export const getSubsectionsBySectionTitle = (
 			return catalogList.map(item => ({
 				id: item.id,
 				title: item.title,
-				image: item.image,
 			}));
 		}
 		case 'subcategory': {
@@ -28,8 +27,7 @@ export const getSubsectionsBySectionTitle = (
 			);
 			return currentCategory?.subcategories.map(item => ({
 				id: item.id,
-				title: item.title,
-				image: item.image,
+				title: item.shortTitle || item.title,
 			}));
 		}
 		case 'type': {
@@ -42,7 +40,6 @@ export const getSubsectionsBySectionTitle = (
 			return currentSubcategory?.types?.map(item => ({
 				id: item.id,
 				title: item.title,
-				image: item.image,
 			}));
 		}
 		default: {

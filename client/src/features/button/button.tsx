@@ -1,8 +1,9 @@
 import { HashLink } from 'react-router-hash-link';
 import styled from 'styled-components';
 import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { IButtonStyleTypes } from './button-style-types';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, IButtonStyleTypes {
 	className?: string;
 	children?: ReactNode;
 	link?: string;
@@ -11,26 +12,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	 */
 	smooth?: boolean;
 	isDisable?: boolean;
-	padding?: string;
-	justifyContent?: string;
-	borderRadius?: string;
-	width?: string;
-	height?: string;
-	border?: string;
-	fontSize?: string;
-	background?: string;
-	/**
-	 * Тень при наведении
-	 */
-	hoverBoxShadow?: boolean;
-	/**
-	 * Фон при наведении
-	 */
-	hoverBackground?: string;
-	/**
-	 * Фон при фокусировке
-	 */
-	activeBackground?: string;
 }
 
 const ButtonContainer: FC<ButtonProps> = ({

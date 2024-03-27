@@ -26,7 +26,7 @@ const FoundProductsContainer = ({ className }) => {
 						) : (
 							products.map(({ id, title, image }) => (
 								<Link to={`/catalog/product/${id}`} key={id}>
-									<ProductCard id={id} title={title} image={image}>
+									<ProductCard >
 										<Img
 											iconClassName="product-card-icon"
 											image={image}

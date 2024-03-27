@@ -1,44 +1,35 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from '../../store/reducers';
-import { getSubsectionsBySectionTitle } from '../../utils';
+import { selectBreadcrumbs } from 'store/reducers';
+import { getSubsectionsBySectionTitle } from 'utils';
 import { PopupItemProducts, PopupItemSections } from './components';
 import styled from 'styled-components';
 
-const PopupContainer = ({ className, section }) => {
+interface PopupProps {
+	className?: string;
+	section: 'category' | 'subcategory' | 'type';
+}
+
+const PopupContainer: FC<PopupProps> = ({ className, section }) => {
 	const breadcrumbs = useSelector(selectBreadcrumbs);
 
-	// Если здесь undefined, значит это продуктовый crumb
 	const sectionItems = getSubsectionsBySectionTitle(section, breadcrumbs);
-
-	const listVariants = {
-		visible: i => ({
-			height: '40px',
-			opacity: 1,
-			transition: {
-				ease: 'linear',
-				delay: i * 0.025,
-			},
-		}),
-		hidden: {
-			height: '0',
-			opacity: 0,
-		},
-	};
+	// Если здесь true, значит это не продуктовый crumb
+	const isNotProductCrumb = !!sectionItems;
 
 	return (
 		<div className={className}>
-			{sectionItems ? (
+			{isNotProductCrumb ? (
 				sectionItems.map(({ id, title }, index) => (
 					<PopupItemSections
 						key={id}
 						id={id}
 						title={title}
 						index={index}
-						listVariants={listVariants}
 					/>
 				))
 			) : (
-				<PopupItemProducts listVariants={listVariants} />
+				<PopupItemProducts />
 			)}
 		</div>
 	);

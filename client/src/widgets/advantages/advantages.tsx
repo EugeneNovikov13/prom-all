@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { AdvantagesBody } from './components/advantages-body';
-import { H1 } from '../../components';
+import { H1 } from 'components';
 import styled from 'styled-components';
 
-const AdvantagesContainer = ({ className }) => {
-	const [openedCardId, setOpenedCardId] = useState('');
+interface AdvantagesProps {
+	className?: string;
+}
+
+const AdvantagesContainer: FC<AdvantagesProps> = ({ className }) => {
+	const [openedCardId, setOpenedCardId] = useState<string>('');
 
 	return (
 		<section className={className}>

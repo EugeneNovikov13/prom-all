@@ -65,3 +65,17 @@ export interface IType {
 	 */
 	image: string;
 }
+
+/**
+ * Подраздел любого раздела
+ */
+export interface ISubsection {
+	/**
+	 * id подраздела
+	 */
+	id: string;
+	/**
+	 * Название подраздела
+	 */
+	title: string;
+}

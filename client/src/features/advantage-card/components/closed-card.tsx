@@ -1,8 +1,15 @@
+import React from 'react';
 import { ReactComponent as Arrow } from '../assets/east.svg';
-import { H4, Img } from '../../../components';
+import { H4, Img } from 'components';
 import styled from 'styled-components';
+import { IAdvantage } from 'types/advantage-types';
 
-const ClosedCardContainer = ({
+interface ClosedCardProps extends Pick<IAdvantage, 'title' | 'image'>{
+	className?: string;
+	isHovered: boolean;
+}
+
+const ClosedCardContainer: React.FC<ClosedCardProps> = ({
 	className,
 	title,
 	image,
@@ -23,7 +30,7 @@ const ClosedCardContainer = ({
 				/>
 			</div>
 			<div className="closed-card-title">
-				<H4 fontSize={18} color={isHovered ? 'var(--white)' : ''}>
+				<H4 fontSize={'18'} color={isHovered ? 'var(--white)' : ''}>
 					{title}
 				</H4>
 				<Arrow className="advantage-title-arrow" />

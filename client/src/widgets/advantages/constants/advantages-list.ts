@@ -4,8 +4,9 @@ import { ReactComponent as Speed } from '../assets/speed.svg';
 import { ReactComponent as Approach } from '../assets/approach.svg';
 import { ReactComponent as Consultation } from '../assets/consultation.svg';
 import { ReactComponent as Discount } from '../assets/discount.svg';
+import { IAdvantage } from 'types/advantage-types';
 
-export const advantagesList = [
+export const advantagesList: IAdvantage[] = [
 	{
 		id: '1',
 		title: 'Доставка',

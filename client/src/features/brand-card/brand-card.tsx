@@ -1,7 +1,13 @@
-import { H4, Img } from '../../components';
+import { FC } from 'react';
+import { H4, Img } from 'components';
 import styled from 'styled-components';
+import { IBrand } from 'types';
 
-const BrandCardContainer = ({ className, title, logo, isOfficial }) => {
+interface BrandCardProps extends Omit<IBrand, 'id'> {
+	className?: string;
+}
+
+const BrandCardContainer: FC<BrandCardProps> = ({ className, title, logo, isOfficial }) => {
 	return (
 		<div className={className}>
 			<div className="brand-card-logo">
