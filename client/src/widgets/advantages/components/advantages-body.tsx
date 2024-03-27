@@ -1,12 +1,22 @@
+import React, { useState } from 'react';
 import { advantagesList } from '../constants/advantages-list';
-import { AdvantageCard } from '../../../features';
+import { AdvantageCard } from 'features';
 import styled from 'styled-components';
-import { useState } from 'react';
 
-const AdvantagesBodyContainer = ({ className, openedCardId, setOpenedCardId }) => {
-	const [hoverCardId, setHoverCardId] = useState('');
+interface AdvantagesBodyProps {
+	className?: string;
+	openedCardId: string;
+	setOpenedCardId: React.Dispatch<React.SetStateAction<string>>;
+}
 
-	const onClick = id => {
+const AdvantagesBodyContainer: React.FC<AdvantagesBodyProps> = ({
+	className,
+	openedCardId,
+	setOpenedCardId,
+}) => {
+	const [hoverCardId, setHoverCardId] = useState<string>('');
+
+	const onClick = (id: string) => {
 		if (id === openedCardId) {
 			setHoverCardId('');
 			setOpenedCardId('');

@@ -1,7 +1,22 @@
+import React from 'react';
 import { H4, Img, P } from '../../../components';
 import styled from 'styled-components';
 
-const OpenedCardContainer = ({ className, title, image, text, onTouchEnd }) => {
+interface OpenedCardProps {
+	className?: string;
+	title: string;
+	image: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+	text: string;
+	onTouchEnd: () => void;
+}
+
+const OpenedCardContainer: React.FC<OpenedCardProps> = ({
+	className,
+	title,
+	image,
+	text,
+	onTouchEnd,
+}) => {
 	return (
 		<div className={className} onTouchEnd={onTouchEnd}>
 			<div className="opened-card-image">
@@ -14,7 +29,7 @@ const OpenedCardContainer = ({ className, title, image, text, onTouchEnd }) => {
 				/>
 			</div>
 			<div className="opened-card-content">
-				<H4 fontSize={24} color="var(--white)">
+				<H4 fontSize='24' color="var(--white)">
 					{title}
 				</H4>
 				<P color={'#FFFFFFB3'} fontSize={'16px'}>

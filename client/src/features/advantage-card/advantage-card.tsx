@@ -1,8 +1,19 @@
+import React from 'react';
 import { OpenedCard } from './components/opened-card';
 import { ClosedCard } from './components/closed-card';
 import styled from 'styled-components';
+import { IAdvantage } from 'types/advantage-types';
 
-const AdvantageCardContainer = ({
+interface AdvantageCardProps {
+	className?: string;
+	advantage: IAdvantage;
+	isOpen: boolean;
+	onClick: (id: string) => void;
+	hoverCardId: string;
+	setHoverCardId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const AdvantageCardContainer: React.FC<AdvantageCardProps> = ({
 	className,
 	advantage: { id, title, image, text },
 	isOpen,
@@ -29,7 +40,6 @@ const AdvantageCardContainer = ({
 				/>
 			) : (
 				<ClosedCard
-					id={id}
 					title={title}
 					image={image}
 					isHovered={hoverCardId === id}
