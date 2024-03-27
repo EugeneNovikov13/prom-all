@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
 		res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, secure: true })
 			.send(mapUser(user));
 	} catch (e) {
-		handleError(res, e);
+		handleError(res, e,  401);
 	}
 });
 

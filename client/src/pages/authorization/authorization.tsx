@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FC, useRef, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useFetchAuthMutation } from '../../store/services';
-import { changeLoading, setUser } from '../../store/reducers';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_SECRET_KEY } from '../../config';
 import { ServerMessage } from '../../components';
@@ -15,23 +11,27 @@ import {
 } from './components';
 import { SETTINGS } from '../../settings';
 import styled from 'styled-components';
+import { IAuthorizationForm } from '../../types';
+import { checkFormFieldsIsDirty } from '../../utils';
+import { useSubmitAuthForm } from './hooks/use-submit-auth-form';
 
-const AuthorizationContainer = ({ className }) => {
-	const recaptchaRef = React.createRef();
+interface AuthorizationProps {
+	className?: string;
+}
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+const AuthorizationContainer: FC<AuthorizationProps> = ({ className }) => {
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-	const [serverError, setServerError] = useState(null);
-	const [captchaToken, setCaptchaToken] = useState(null);
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [captchaToken, setCaptchaToken] = useState<string>('');
+	const [serverError, setServerError] = useState<string>('');
+
+	const { submitAuthForm } = useSubmitAuthForm(setServerError);
 
 	const {
 		register,
-		reset: formReset,
 		handleSubmit,
-		formState: { errors, dirtyFields, defaultValues: inputCounter },
-	} = useForm({
+		formState: { errors, dirtyFields, defaultValues },
+	} = useForm<IAuthorizationForm>({
 		defaultValues: {
 			login: '',
 			password: '',
@@ -40,62 +40,33 @@ const AuthorizationContainer = ({ className }) => {
 		mode: 'onChange',
 	});
 
-	if (isSubmitted) {
-		formReset();
-		setIsSubmitted(false);
-	}
-
-	const [fetchAuth] = useFetchAuthMutation();
-
-	const onSubmit = formData => {
-		dispatch(changeLoading(true));
-
+	const onSubmit: SubmitHandler<IAuthorizationForm> = formData => {
 		const data = {
 			userData: formData,
 			captchaToken,
 		};
 
-		fetchAuth(data)
-			.then(res => {
-				if (!res.error && res.data === 'admin') {
-					setIsSubmitted(true);
-					navigate('/authorization-second-step', { replace: true });
-					return;
-				}
+		submitAuthForm(data);
 
-				if (!res.error) {
-					dispatch(setUser(res.data));
-					setIsSubmitted(true);
-					navigate('/', { replace: true });
-					return;
-				}
-				setServerError(res.error.data);
-				console.error(res.error);
-			})
-			.catch(e => {
-				console.error(e);
-			})
-			.finally(() => {
-				dispatch(changeLoading(false));
-			});
-
-		setCaptchaToken(null);
-		recaptchaRef.current.reset();
+		setCaptchaToken('');
+		recaptchaRef.current?.reset();
 	};
 
-	const onCaptchaChange = value => {
-		setCaptchaToken(value);
+	const onCaptchaChange = (value: string | null) => {
+		value && setCaptchaToken(value);
 	};
 
 	const onInputChange = () => {
-		setServerError(null);
+		setServerError('');
 	};
 
 	const formError = errors?.login?.message || errors?.password?.message;
 
 	// Проверяем все ли поля были изменены
-	const isAllFieldsDirty =
-		Object.values(dirtyFields).length === Object.values(inputCounter).length;
+	const isAllFieldsDirty = checkFormFieldsIsDirty<IAuthorizationForm>(
+		dirtyFields,
+		defaultValues,
+	);
 
 	return (
 		<div className={className}>
@@ -120,7 +91,7 @@ const AuthorizationContainer = ({ className }) => {
 						/>
 					)}
 					{serverError && (
-						<ServerMessage isError={serverError}>
+						<ServerMessage isError={!!serverError}>
 							! {serverError}
 						</ServerMessage>
 					)}

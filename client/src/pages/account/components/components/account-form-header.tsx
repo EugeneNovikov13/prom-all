@@ -1,9 +1,14 @@
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../store/reducers';
-import { H1, P } from '../../../../components';
+import { selectUser } from 'store/reducers';
+import { H1, P } from 'components';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const AccountFormHeaderContainer = ({ className }) => {
+interface AccountFormHeaderProps {
+	className?: string;
+}
+
+const AccountFormHeaderContainer: FC<AccountFormHeaderProps> = ({ className }) => {
 	const userEmailIsActivated = useSelector(selectUser).isActivated;
 
 	return (

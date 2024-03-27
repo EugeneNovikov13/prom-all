@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FC, useRef, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useFetchRegisterMutation } from '../../store/services';
-import { changeLoading, setUser } from '../../store/reducers';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { RECAPTCHA_SECRET_KEY } from '../../config';
-import { ServerMessage } from '../../components';
+import { checkFormFieldsIsDirty } from 'utils';
+import { useSubmitRegForm } from './hooks/use-submit-reg-form';
+import { ServerMessage } from 'components';
 import {
 	RegistrationFormFooter,
 	RegistrationFormHeader,
 	RegistrationFormInputs,
 } from './components';
-import { SETTINGS } from '../../settings';
+import { RECAPTCHA_SECRET_KEY } from 'config';
+import { SETTINGS } from 'settings';
 import styled from 'styled-components';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { IRegistrationForm } from 'types';
 
-const RegistrationContainer = ({ className }) => {
-	const recaptchaRef = React.createRef();
+interface RegistrationProps {
+	className?: string;
+}
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+const RegistrationContainer: FC<RegistrationProps> = ({ className }) => {
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-	const [serverError, setServerError] = useState(null);
-	const [captchaToken, setCaptchaToken] = useState(null);
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [serverError, setServerError] = useState<string>('');
+	const [captchaToken, setCaptchaToken] = useState<string>('');
 
 	const {
 		register,
-		reset: formReset,
 		handleSubmit,
-		formState: { errors, dirtyFields, defaultValues: inputCounter },
-	} = useForm({
+		formState: { errors, dirtyFields, defaultValues },
+	} = useForm<IRegistrationForm>({
 		defaultValues: {
 			login: '',
 			password: '',
@@ -45,49 +43,26 @@ const RegistrationContainer = ({ className }) => {
 		mode: 'onChange',
 	});
 
-	if (isSubmitted) {
-		formReset();
-		setIsSubmitted(false);
-	}
+	const { submitRegForm } = useSubmitRegForm(setServerError);
 
-	const [fetchRegister] = useFetchRegisterMutation();
-
-	const onSubmit = formData => {
-		dispatch(changeLoading(true));
-
+	const onSubmit: SubmitHandler<IRegistrationForm> = formData => {
 		const data = {
 			userData: formData,
 			captchaToken,
 		};
 
-		fetchRegister(data)
-			.then(res => {
-				if (!res.error) {
-					dispatch(setUser(res.data));
-					setIsSubmitted(true);
-					navigate('/', { replace: true });
-					return;
-				}
-				setServerError(res.error.data);
-				console.error(res.error);
-			})
-			.catch(e => {
-				console.error(e);
-			})
-			.finally(() => {
-				dispatch(changeLoading(false));
-			});
+		submitRegForm(data);
 
-		setCaptchaToken(null);
-		recaptchaRef.current.reset();
+		setCaptchaToken('');
+		recaptchaRef.current?.reset();
 	};
 
-	const onCaptchaChange = value => {
-		setCaptchaToken(value);
+	const onCaptchaChange = (value: string | null) => {
+		value && setCaptchaToken(value);
 	};
 
 	const onInputChange = () => {
-		setServerError(null);
+		setServerError('');
 	};
 
 	const formError =
@@ -100,8 +75,10 @@ const RegistrationContainer = ({ className }) => {
 		errors?.phone?.message;
 
 	// Проверяем все ли поля были изменены
-	const isAllFieldsDirty =
-		Object.values(dirtyFields).length === Object.values(inputCounter).length;
+	const isAllFieldsDirty = checkFormFieldsIsDirty<IRegistrationForm>(
+		dirtyFields,
+		defaultValues,
+	);
 
 	return (
 		<div className={className}>
@@ -126,7 +103,7 @@ const RegistrationContainer = ({ className }) => {
 						/>
 					)}
 					{serverError && (
-						<ServerMessage isError={serverError}>
+						<ServerMessage isError={!!serverError}>
 							! {serverError}
 						</ServerMessage>
 					)}

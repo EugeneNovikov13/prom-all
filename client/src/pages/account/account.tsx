@@ -1,15 +1,16 @@
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../store/reducers';
 import { AccountForm } from './components/account-form';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const AccountContainer = ({ className }) => {
-	const user = useSelector(selectUser);
+interface AccountProps {
+	className?: string;
+}
 
+const AccountContainer: FC<AccountProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<section className="account-layout">
-				<AccountForm user={user} />
+				<AccountForm />
 			</section>
 		</div>
 	);

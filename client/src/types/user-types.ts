@@ -5,29 +5,33 @@ export interface IUser {
 	/**
 	 * id пользователя
 	 */
-	id: string,
+	id: string;
 	/**
 	 * Логин пользователя
 	 */
-	login: string,
+	login: string;
 	/**
 	 * ФИО пользователя
 	 */
-	name: string,
+	name: string;
 	/**
 	 * Название организации пользователя
 	 */
-	organization: string,
+	organization: string;
 	/**
 	 * Электронная почта пользователя
 	 */
-	email: string,
+	email: string;
 	/**
 	 * Номер телефона пользователя
 	 */
-	phone: string,
+	phone: string;
 	/**
 	 * Подтверждена почта или нет
 	 */
-	isActivated: boolean,
+	isActivated: boolean;
+	/**
+	 * Роль пользователя
+	 */
+	roleId: '2' | '1' | '0';
 }

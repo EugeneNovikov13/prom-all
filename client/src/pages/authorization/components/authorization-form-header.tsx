@@ -1,7 +1,12 @@
-import { H1 } from '../../../components';
+import { H1 } from 'components';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const AuthorizationFormFooterContainer = ({ className }) => {
+interface AuthorizationFormHeaderProps {
+	className?: string;
+}
+
+const AuthorizationFormFooterContainer: FC<AuthorizationFormHeaderProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<H1 color="var(--white)">

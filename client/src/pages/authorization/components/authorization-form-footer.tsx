@@ -1,8 +1,15 @@
 import { HashLink } from 'react-router-hash-link';
-import { Button } from '../../../features';
+import { Button } from 'features';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const AuthorizationFormFooterContainer = ({ className, formError, captchaToken }) => {
+interface AuthorizationFormFooterProps {
+	className?: string;
+	formError: string | undefined;
+	captchaToken: string;
+}
+
+const AuthorizationFormFooterContainer: FC<AuthorizationFormFooterProps> = ({ className, formError, captchaToken }) => {
 	return (
 		<div className={className}>
 			<Button

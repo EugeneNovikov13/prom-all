@@ -3,7 +3,7 @@ import { IAccountForm } from 'types';
 /**
  * Редактирование пользователя
  */
-export interface IUpgradeUserRequest {
+export interface IUpdateUserRequest {
 	/**
 	 * id пользователя
 	 */
