@@ -1,12 +1,10 @@
 import React from 'react';
-import { H4, Img, P } from '../../../components';
+import { H4, Img, P } from 'components';
 import styled from 'styled-components';
+import { IAdvantage } from 'types/advantage-types';
 
-interface OpenedCardProps {
+interface OpenedCardProps extends Omit<IAdvantage, 'id'> {
 	className?: string;
-	title: string;
-	image: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
-	text: string;
 	onTouchEnd: () => void;
 }
 

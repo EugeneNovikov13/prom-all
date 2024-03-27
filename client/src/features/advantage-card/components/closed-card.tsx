@@ -2,11 +2,10 @@ import React from 'react';
 import { ReactComponent as Arrow } from '../assets/east.svg';
 import { H4, Img } from 'components';
 import styled from 'styled-components';
+import { IAdvantage } from 'types/advantage-types';
 
-interface ClosedCardProps {
+interface ClosedCardProps extends Pick<IAdvantage, 'title' | 'image'>{
 	className?: string;
-	title: string;
-	image: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 	isHovered: boolean;
 }
 

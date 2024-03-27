@@ -1,8 +1,21 @@
+import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../../button/button';
+import { listVariants } from '../config';
 import styled from 'styled-components';
+import { ISubsection } from '../../../types';
 
-const PopupItemSectionsContainer = ({ className, id, title, index, listVariants }) => {
+interface PopupItemSectionsProps extends ISubsection {
+	className?: string;
+	index: number;
+}
+
+const PopupItemSectionsContainer: FC<PopupItemSectionsProps> = ({
+	className,
+	id,
+	title,
+	index,
+}) => {
 	const buttonStyleProps = {
 		justifyContent: 'flex-start',
 		width: '100%',

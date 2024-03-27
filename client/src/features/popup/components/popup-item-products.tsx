@@ -1,30 +1,26 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from '../../../store/reducers';
 import { motion } from 'framer-motion';
-import { useFetchProductBySectionQuery } from '../../../store/services';
+import { selectBreadcrumbs } from 'store/reducers';
+import { useFetchProductBySectionQuery } from 'store/services';
 import { Button } from '../../button/button';
 import styled from 'styled-components';
+import { buttonStyleProps, listVariants } from '../config';
 
-const PopupItemProductsContainer = ({ className, listVariants }) => {
+interface PopupItemProductsProps {
+	className?: string;
+}
+
+const PopupItemProductsContainer: FC<PopupItemProductsProps> = ({ className }) => {
 	//ищем id последнего открытого раздела (подкатегория или тип), чтобы запустить поиск товаров по этому id
 	const selectedSubcategoryId = useSelector(selectBreadcrumbs).subcategory.selectedId;
 	const selectedTypeId = useSelector(selectBreadcrumbs).type.selectedId;
-	const selectedSectionId = selectedTypeId || selectedSubcategoryId;
+	const lastSelectedSectionId = selectedTypeId || selectedSubcategoryId;
 
-	const { data: products } = useFetchProductBySectionQuery(selectedSectionId);
-	////
+	//может возвращать количество товаров в разделе
+	const { data: products } = useFetchProductBySectionQuery(lastSelectedSectionId);
 
-	if (!products) return null;
-
-	const buttonStyleProps = {
-		justifyContent: 'flex-start',
-		width: '100%',
-		height: '40px',
-		borderRadius: '0',
-		fontSize: '14px',
-		color: '#E6E0E9',
-		background: 'transparent',
-	};
+	if (!products || 'counter' in products) return null;
 
 	return (
 		<>
