@@ -1,7 +1,12 @@
+import { FC } from 'react';
 import { PrivateContent } from 'features';
 import styled from 'styled-components';
 
-const AdministrationContainer = ({ className }) => {
+interface AdministrationProps {
+	className?: string;
+}
+
+const AdministrationContainer: FC<AdministrationProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="administration-layout">

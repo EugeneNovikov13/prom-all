@@ -25,6 +25,8 @@ const AuthorizationContainer: FC<AuthorizationProps> = ({ className }) => {
 	const [captchaToken, setCaptchaToken] = useState<string>('');
 	const [serverError, setServerError] = useState<string>('');
 
+	const { submitAuthForm } = useSubmitAuthForm(setServerError);
+
 	const {
 		register,
 		handleSubmit,
@@ -37,8 +39,6 @@ const AuthorizationContainer: FC<AuthorizationProps> = ({ className }) => {
 		resolver: yupResolver(SETTINGS.AUTHORIZATION_FORM_SCHEMA),
 		mode: 'onChange',
 	});
-
-	const { submitAuthForm } = useSubmitAuthForm(setServerError);
 
 	const onSubmit: SubmitHandler<IAuthorizationForm> = formData => {
 		const data = {

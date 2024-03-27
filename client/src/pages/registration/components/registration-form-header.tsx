@@ -1,7 +1,12 @@
-import { H1 } from '../../../components';
+import { FC } from 'react';
+import { H1 } from 'components';
 import styled from 'styled-components';
 
-const RegistrationFormHeaderContainer = ({ className }) => {
+interface RegistrationFormHeaderProps {
+	className?: string;
+}
+
+const RegistrationFormHeaderContainer: FC<RegistrationFormHeaderProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<H1 color="var(--white)">

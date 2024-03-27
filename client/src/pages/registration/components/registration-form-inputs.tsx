@@ -1,12 +1,21 @@
-import { Input } from '../../../features';
+import { FC } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { Input } from 'features';
 import styled from 'styled-components';
+import { IRegistrationForm } from 'types';
 
-const RegistrationFormInputsContainer = ({ className, register, errors, onInputChange }) => {
+interface RegistrationFormInputsProps {
+	className?: string;
+	register: UseFormRegister<IRegistrationForm>;
+	errors: FieldErrors<IRegistrationForm>;
+	onInputChange: () => void;
+}
+
+const RegistrationFormInputsContainer: FC<RegistrationFormInputsProps> = ({ className, register, errors, onInputChange }) => {
 	return (
 		<div className={className}>
 			<div className="input-wrapper">
 				<Input
-					name="login"
 					placeholder="Логин"
 					type="text"
 					error={errors?.login?.message}
@@ -15,7 +24,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="password"
 					placeholder="Пароль"
 					type="password"
 					error={errors?.password?.message}
@@ -24,7 +32,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="password_confirm"
 					placeholder="Повторите пароль"
 					type="password"
 					error={errors?.passwordConfirm?.message}
@@ -33,7 +40,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="name"
 					placeholder="ФИО"
 					type="text"
 					error={errors?.name?.message}
@@ -42,7 +48,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="organization"
 					placeholder="Название организации"
 					type="text"
 					error={errors?.organization?.message}
@@ -51,7 +56,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="email"
 					placeholder="Электронная почта"
 					type="text"
 					error={errors?.email?.message}
@@ -60,7 +64,6 @@ const RegistrationFormInputsContainer = ({ className, register, errors, onInputC
 					})}
 				/>
 				<Input
-					name="phone"
 					placeholder="Контактный телефон"
 					type="text"
 					error={errors?.phone?.message}
