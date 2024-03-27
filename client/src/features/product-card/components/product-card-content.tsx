@@ -1,7 +1,13 @@
-import { H4 } from '../../../components';
+import { FC } from 'react';
+import { H4 } from 'components';
 import styled from 'styled-components';
 
-const ProductCardContentContainer = ({ className, title }) => {
+interface ProductCardContentProps {
+	className?: string;
+	title: string;
+}
+
+const ProductCardContentContainer: FC<ProductCardContentProps> = ({ className, title }) => {
 	return (
 		<div className={className}>
 			<div className="product-card-title">

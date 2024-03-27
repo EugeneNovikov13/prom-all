@@ -12,7 +12,7 @@ const CatalogHeaderContainer = ({ className }) => {
 				<div className="catalog-header-title">
 					<H1 color={'var(--white)'}>{isSearch ? 'Поиск' : 'Каталог'}</H1>
 				</div>
-				<Breadcrumbs />
+				{!isSearch && <Breadcrumbs />}
 			</div>
 		</section>
 	);

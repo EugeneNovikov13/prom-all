@@ -1,26 +1,30 @@
-import { useRef, useState } from 'react';
-import { useDebounce } from '../../hooks';
-import { ProductCard } from '../../features';
-import { Img } from '../../components';
-import { SubcategoriesCard } from '../../features/product-card/components/subcategories-card';
-import { ProductCardContent } from '../../features/product-card/components/product-card-content';
-import { SETTINGS } from '../../settings';
+import { FC, useRef, useState } from 'react';
+import { useDebounce } from 'hooks';
+import { ProductCard } from 'features';
+import { Img } from 'components';
+import { SubcategoriesCard } from 'features/product-card/components/subcategories-card';
+import { ProductCardContent } from 'features/product-card/components/product-card-content';
+import { SETTINGS } from 'settings';
 import { catalogList } from '../../constants';
 import styled from 'styled-components';
 
-const CategoriesContainer = ({ className }) => {
-	const [openCardTitle, setOpenCardTitle] = useState('');
+interface CategoriesProps {
+	className?: string;
+}
 
-	let refDebounceTimeout = useRef(null);
+const CategoriesContainer: FC<CategoriesProps> = ({ className }) => {
+	const [openCardTitle, setOpenCardTitle] = useState<string>('');
 
-	const onClick = (ref, title) => {
-		clearTimeout(ref.current);
+	let refDebounceTimeout = useRef<NodeJS.Timeout>();
+
+	const onClick = (title: string) => {
+		clearTimeout(refDebounceTimeout.current);
 		setOpenCardTitle(title);
 	};
 
-	const onMouseEnter = (ref, title) => {
+	const onMouseEnter = (title: string) => {
 		if (openCardTitle === title) {
-			clearTimeout(ref.current);
+			clearTimeout(refDebounceTimeout.current);
 		}
 	};
 
@@ -39,16 +43,15 @@ const CategoriesContainer = ({ className }) => {
 			{catalogList.map(({ id, title, image, subcategories }) => (
 				<ProductCard
 					key={id}
-					onClick={() => onClick(refDebounceTimeout, title)}
-					onMouseEnter={() => onMouseEnter(refDebounceTimeout, title)}
-					onMouseLeave={() => debouncedOnMouseLeave(title)}
+					onClick={() => onClick(title)}
+					onMouseEnter={() => onMouseEnter(title)}
+					onMouseLeave={debouncedOnMouseLeave}
 					isOpen={openCardTitle === title}
 					openCardTitle={openCardTitle}
 				>
 					<Img
 						iconClassName="product-card-icon"
 						SvgIconComponent={image}
-						image={image}
 						maxWidth="217px"
 						maxHeight="150px"
 						position={openCardTitle === title ? 'absolute' : 'relative'}
@@ -80,11 +83,6 @@ export const Categories = styled(CategoriesContainer)`
 	}
 
 	& svg.product-card-icon * {
-		stroke: ${({ strokeColor }) => strokeColor};
-		transition: ${({ transition }) => (transition ? transition : '0.3s')};
-	}
-
-	& svg.product-card-icon:hover * {
-		stroke: ${({ hoverStrokeColor }) => hoverStrokeColor};
+		transition: 0.3s;
 	}
 `;

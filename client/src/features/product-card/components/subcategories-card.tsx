@@ -1,9 +1,21 @@
+import { FC } from 'react';
 import { HashLink } from 'react-router-hash-link';
+import { Button } from 'features';
 import { ReactComponent as Arrow } from '../assets/north_east.svg';
-import { Button } from '../../../features';
 import styled from 'styled-components';
+import { ISubcategory } from 'types';
 
-const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
+interface SubcategoriesCardProps {
+	className?: string;
+	subcategories: ISubcategory[];
+	id: string;
+}
+
+const SubcategoriesCardContainer: FC<SubcategoriesCardProps> = ({
+	className,
+	subcategories,
+	id,
+}) => {
 	const firstFiveSubcategories = subcategories.slice(0, 5);
 
 	return (
@@ -36,13 +48,7 @@ const SubcategoriesCardContainer = ({ className, subcategories, id }) => {
 						background={'transparent'}
 						activeBackground="rgba(208, 188, 255, 0.08)"
 					>
-						<Arrow
-							style={{
-								position: 'relative',
-								top: '2px',
-								marginRight: '8px',
-							}}
-						/>
+						<Arrow style={{ marginRight: '8px' }} />
 						Все товары
 					</Button>
 				</HashLink>

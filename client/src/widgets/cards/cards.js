@@ -28,7 +28,7 @@ const CardsContainer = ({ className }) => {
 						}
 						key={id}
 					>
-						<ProductCard id={id} title={title} image={image}>
+						<ProductCard >
 							<Img
 								iconClassName="product-card-icon"
 								image={image}
