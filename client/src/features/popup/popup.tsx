@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 interface PopupProps {
 	className?: string;
-	section: 'category' | 'subcategory' | 'type';
+	section: string;
 }
 
 const PopupContainer: FC<PopupProps> = ({ className, section }) => {

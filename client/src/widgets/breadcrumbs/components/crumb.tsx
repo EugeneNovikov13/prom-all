@@ -2,8 +2,21 @@ import { ReactComponent as Select } from '../assets/down-arrow.svg';
 import { Img } from '../../../components';
 import { Button, Popup } from '../../../features';
 import styled from 'styled-components';
+import { crumbButtonStyleProps } from '../config/crumb-button-style-props';
+import { FC } from 'react';
 
-const CrumbContainer = ({
+interface CrumbProps {
+	className?: string;
+	section: string;
+	selectedId: string;
+	selectedTitle: string;
+	isOpen: boolean;
+	onPopupToggle: (section: string) => void;
+	onMouseEnter: (isOpenedCrumb: boolean) => void;
+	onMouseLeave: () => void;
+}
+
+const CrumbContainer: FC<CrumbProps> = ({
 	className,
 	section,
 	selectedId,
@@ -13,23 +26,10 @@ const CrumbContainer = ({
 	onMouseEnter,
 	onMouseLeave,
 }) => {
-	const crumbButtonStyleProps = {
-		isDisable: !selectedId,
-		width: '100%',
-		height: '32px',
-		padding: '0 10px',
-		borderRadius: '100px',
-		fontSize: '14px',
-		color: '#E6E0E9',
-		background: 'transparent',
-		hoverBackground: 'rgba(232, 222, 248, 0.08)',
-		activeBackground: 'rgba(232, 222, 248, 0.12)',
-	};
-
 	return (
 		<li
 			className={className}
-			onMouseEnter={onMouseEnter}
+			onMouseEnter={() => onMouseEnter(isOpen)}
 			onMouseLeave={onMouseLeave}
 		>
 			<div className="crumb-container">
@@ -37,6 +37,7 @@ const CrumbContainer = ({
 
 				<Button
 					{...crumbButtonStyleProps}
+					isDisable={!selectedId}
 					link={selectedId ? `/catalog/section/${selectedId}` : ''}
 				>
 					{selectedTitle}

@@ -2,8 +2,13 @@ import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { ReactComponent as Selected } from '../assets/selected.svg';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const BreadcrumbsFieldContainer = ({ className }) => {
+interface BreadcrumbsFirstItemProps {
+	className?: string;
+}
+
+const BreadcrumbsFieldContainer: FC<BreadcrumbsFirstItemProps> = ({ className }) => {
 	return (
 		<li className={className}>
 			<div className="breadcrumbs-first-item-container">

@@ -1,65 +1,54 @@
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useMatch, useParams } from 'react-router-dom';
-import { useDebounce } from '../../hooks';
-import { sliceCurrentBreadcrumbs, setBreadcrumbsByIdAsync } from '../../utils';
-import { selectBreadcrumbs, selectCountSections } from '../../store/reducers';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDebounce } from 'hooks';
+import { useSetBreadcrumbsById } from './hooks';
+import { sliceCurrentBreadcrumbs } from 'utils';
+import { useSelector } from 'react-redux';
+import { selectBreadcrumbs, selectCountSections } from 'store/reducers';
 import { Crumb } from './components/crumb';
 import { BreadcrumbsFirstItem } from './components/breadcrumbs-first-item';
-import { SETTINGS } from '../../settings';
+import { SETTINGS } from 'settings';
 import styled from 'styled-components';
 
-const BreadcrumbsContainer = ({ className }) => {
-	//устанавливаем Breadcrumbs в соответствии с id в адресной строке
-	const [openedCrumb, setOpenedCrumb] = useState('');
+interface BreadcrumbsProps {
+	className?: string;
+}
 
-	const dispatch = useDispatch();
+const BreadcrumbsContainer: FC<BreadcrumbsProps> = ({ className }) => {
+	//устанавливаем Breadcrumbs в соответствии с id в адресной строке
+	const [openedCrumb, setOpenedCrumb] = useState<string>('');
 
 	const params = useParams();
 	const id = params.id;
 
-	const isSectionSelected = !!useMatch('catalog/section/:id');
-	const isProductSectionSelected = !!useMatch('catalog/product/:id');
-	const needToResetBreadcrumbs = !!useMatch('/catalog');
+	const { setBreadcrumbsById } = useSetBreadcrumbsById();
 
 	useEffect(() => {
-		setBreadcrumbsByIdAsync(
-			dispatch,
-			id,
-			isSectionSelected,
-			isProductSectionSelected,
-			needToResetBreadcrumbs,
-		);
+		setBreadcrumbsById(id);
 		setOpenedCrumb('');
-	}, [
-		dispatch,
-		id,
-		isSectionSelected,
-		isProductSectionSelected,
-		needToResetBreadcrumbs,
-	]);
+	}, [id, setBreadcrumbsById]);
 	////
 
 	//обработчики открытия-закрытия меню breadcrumbs
-	let refCrumbsLeaveDebounceTimeout = useRef(null);
+	let refCrumbsLeaveDebounceTimeout = useRef<NodeJS.Timeout>();
 
-	const onMouseEnter = isOpenedCrumb => {
+	const onMouseEnter = (isOpenedCrumb: boolean) => {
 		if (isOpenedCrumb) {
 			clearTimeout(refCrumbsLeaveDebounceTimeout.current);
 		}
 	};
 
-	const onCrumbMouseLeave = () => {
+	const onMouseLeave = () => {
 		setOpenedCrumb('');
 	};
 
 	const debouncedOnMouseLeave = useDebounce(
 		refCrumbsLeaveDebounceTimeout,
-		onCrumbMouseLeave,
+		onMouseLeave,
 		SETTINGS.BREADCRUMBS_MENU_CLOSE_DELAY,
 	);
 
-	const onPopupToggle = section => {
+	const onPopupToggle = (section: string) => {
 		clearTimeout(refCrumbsLeaveDebounceTimeout.current);
 		if (section === openedCrumb) {
 			setOpenedCrumb('');
