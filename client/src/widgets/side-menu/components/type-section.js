@@ -7,8 +7,8 @@ import { changeLoading } from '../../../store/reducers';
 import { Img } from '../../../components';
 import { Button } from '../../../features';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
-import { animationVariants } from '../constants/animation-variants';
-import { buttonStyleProps } from '../constants/button-style-props';
+import { animationVariants } from '../config/animation-variants';
+import { buttonStyleProps } from '../config/button-style-props';
 import styled from 'styled-components';
 
 const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => {

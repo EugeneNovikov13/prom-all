@@ -8,8 +8,8 @@ import { Button } from '../../../features';
 import { Icon } from '../../../components';
 import { TypeSection } from './type-section';
 import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
-import { animationVariants } from '../constants/animation-variants';
-import { buttonStyleProps } from '../constants/button-style-props';
+import { animationVariants } from '../config/animation-variants';
+import { buttonStyleProps } from '../config/button-style-props';
 import styled from 'styled-components';
 
 const SubcategorySectionContainer = ({

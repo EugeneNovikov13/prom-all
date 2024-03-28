@@ -1,9 +1,17 @@
+import { FC } from 'react';
 import { HashLink } from 'react-router-hash-link';
-import { H2 } from '../../../components';
-import { Button } from '../../../features';
+import { H2 } from 'components';
+import { Button } from 'features';
 import styled from 'styled-components';
 
-const PromoContainer = ({ className, title, content }) => {
+interface PromoProps {
+	className?: string;
+	title: string;
+	content: string;
+	background: string;
+}
+
+const PromoContainer: FC<PromoProps> = ({ className, title, content }) => {
 	return (
 		<div className={className}>
 			<div className="promo-body">

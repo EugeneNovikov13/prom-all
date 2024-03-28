@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectProductList } from 'store/reducers';
@@ -6,8 +7,7 @@ import { ProductCard } from 'features';
 import { Img } from 'components';
 import { ProductCardContent } from 'features/product-card/components/product-card-content';
 import styled from 'styled-components';
-import { FC } from 'react';
-import { IProductItem, ISubcategory, IType } from '../../types';
+import { IProductItem, ISubcategory, IType } from 'types';
 
 interface CardsProps {
 	className?: string;

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useFetchProductQuery } from 'store/services';
 import { changeLoading } from 'store/reducers';
-import { Loader, ServerMessage } from 'components';
+import { ServerMessage } from 'components';
 import {
 	ProductBottomContainer,
 	ProductOrderForm,
@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 
 interface ProductProps {
-	className?: string,
+	className?: string;
 }
 
 const ProductContainer: FC<ProductProps> = ({ className }) => {
@@ -33,23 +33,17 @@ const ProductContainer: FC<ProductProps> = ({ className }) => {
 	if (!product) return <ServerMessage children={'Товара не существует'} isError={true}/>;
 
 	return (
-		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<div className={className}>
-					<div className="product-top-container">
-						<ProductPhotoSlider images={product.images} />
-						<ProductOrderForm title={product.title} kinds={product.kinds} />
-					</div>
-					<ProductBottomContainer
-						title={product.title}
-						description={product.description}
-						specification={product.specification}
-					/>
-				</div>
-			)}
-		</>
+		<div className={className}>
+			<div className="product-top-container">
+				<ProductPhotoSlider images={product.images} />
+				<ProductOrderForm title={product.title} kinds={product.kinds} />
+			</div>
+			<ProductBottomContainer
+				title={product.title}
+				description={product.description}
+				specification={product.specification}
+			/>
+		</div>
 	);
 };
 

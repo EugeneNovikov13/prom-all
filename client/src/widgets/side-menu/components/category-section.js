@@ -5,7 +5,7 @@ import { Button } from '../../../features';
 import { Img } from '../../../components';
 import { SubcategorySection } from './subcategory-section';
 import { ReactComponent as Closed } from '../assets/closed.svg';
-import { buttonStyleProps } from '../constants/button-style-props';
+import { buttonStyleProps } from '../config/button-style-props';
 import styled from 'styled-components';
 
 const CategoryButtonContainer = ({

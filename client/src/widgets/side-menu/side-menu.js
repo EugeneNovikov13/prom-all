@@ -6,7 +6,7 @@ import { CategorySection } from './components/category-section';
 import { Icon } from '../../components';
 import { ReactComponent as Burger } from './assets/burger.svg';
 import { catalogList } from '../../constants';
-import { buttonStyleProps } from './constants/button-style-props';
+import { buttonStyleProps } from './config/button-style-props';
 import styled from 'styled-components';
 
 const SideMenuContainer = ({ className, setIsOpen }) => {

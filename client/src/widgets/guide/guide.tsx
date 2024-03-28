@@ -1,10 +1,15 @@
+import { FC } from 'react';
 import { ReactComponent as Step1 } from './assets/step1.svg';
 import { ReactComponent as Step2 } from './assets/step2.svg';
 import { ReactComponent as Step3 } from './assets/step3.svg';
-import { H1, P } from '../../components';
+import { H1, P } from 'components';
 import styled from 'styled-components';
 
-const GuideContainer = ({ className }) => {
+interface GuideProps {
+	className?: string;
+}
+
+const GuideContainer: FC<GuideProps> = ({ className }) => {
 	return (
 		<section className={className}>
 			<div className="guide-container">
