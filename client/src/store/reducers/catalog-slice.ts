@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Breadcrumbs, IProduct, ISection, SectionName } from 'types';
+import { Breadcrumbs, IProductItem, ISection, SectionName } from 'types';
 
 interface ICatalogState {
 	/**
@@ -13,7 +13,7 @@ interface ICatalogState {
 	/**
 	 * Список товаров
 	 */
-	productList: IProduct[];
+	productList: IProductItem[];
 }
 
 const initialState: ICatalogState = {
@@ -67,7 +67,7 @@ export const catalogSlice = createSlice({
 		resetBreadcrumbs() {
 			return initialState;
 		},
-		setProductList(state, action: PayloadAction<IProduct[]>) {
+		setProductList(state, action: PayloadAction<IProductItem[]>) {
 			state.productList = action.payload;
 		},
 		resetProductList(state) {

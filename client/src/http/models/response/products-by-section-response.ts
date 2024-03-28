@@ -1,3 +1,3 @@
-import { IProduct } from 'types';
+import { IProductItem } from 'types';
 
-export type ProductsBySectionResponse = {counter: number} | IProduct[]
+export type ProductsBySectionResponse = {counter: number} | IProductItem[]

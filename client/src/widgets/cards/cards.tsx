@@ -1,20 +1,29 @@
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectProductList } from '../../store/reducers';
-import { getSubsectionsBySectionId } from '../../utils';
-import { ProductCard } from '../../features';
-import { Img } from '../../components';
-import { ProductCardContent } from '../../features/product-card/components/product-card-content';
+import { selectProductList } from 'store/reducers';
+import { getSubsectionsBySectionId } from 'utils';
+import { ProductCard } from 'features';
+import { Img } from 'components';
+import { ProductCardContent } from 'features/product-card/components/product-card-content';
 import styled from 'styled-components';
+import { FC } from 'react';
+import { IProductItem, ISubcategory, IType } from '../../types';
 
-const CardsContainer = ({ className }) => {
+interface CardsProps {
+	className?: string;
+}
+
+type SubsectionsType = ISubcategory[] | IType[] | null;
+type CardsType = IProductItem[] | ISubcategory[] | IType[];
+
+const CardsContainer: FC<CardsProps> = ({ className }) => {
 	const products = useSelector(selectProductList);
 
 	const params = useParams();
 
-	const subsections = getSubsectionsBySectionId(params.id);
+	const subsections: SubsectionsType = params.id ? getSubsectionsBySectionId(params.id) : null;
 
-	const cards = subsections ? subsections : products || [];
+	const cards: CardsType = subsections ? subsections : products;
 
 	return (
 		<div className={className}>

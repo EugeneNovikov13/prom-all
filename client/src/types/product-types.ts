@@ -33,6 +33,15 @@ export interface IProduct {
 }
 
 /**
+ * Единица товара в списке товаров
+ */
+export interface IProductItem {
+	id: string,
+	title: string,
+	image: string,
+}
+
+/**
  * Новый товар
  */
 export interface INewProduct {
