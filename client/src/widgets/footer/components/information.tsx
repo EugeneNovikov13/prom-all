@@ -1,11 +1,16 @@
 import { Icon } from '../../../components';
-import cell from '../assets/cell.svg';
-import email from '../assets/email.svg';
-import location from '../assets/location.svg';
+import { ReactComponent as cell } from '../assets/cell.svg';
+import { ReactComponent as email } from '../assets/email.svg';
+import { ReactComponent as location } from '../assets/location.svg';
 import { SETTINGS } from '../../../settings';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const InformationContainer = ({ className }) => {
+interface InformationProps {
+	className?: string;
+}
+
+const InformationContainer: FC<InformationProps> = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="phone wrapper">

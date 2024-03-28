@@ -1,9 +1,14 @@
 import { HashLink } from 'react-router-hash-link';
-import { Icon } from '../../../components';
+import { Icon } from 'components';
 import { menuList } from '../constants/menu-list';
 import styled from 'styled-components';
+import { FC } from 'react';
 
-const NavigationFooterMenuContainer = ({ className }) => {
+interface NavigationFooterMenuProps {
+	className?: string;
+}
+
+const NavigationFooterMenuContainer: FC<NavigationFooterMenuProps> = ({ className }) => {
 	return (
 		<nav className={className}>
 			<ul>

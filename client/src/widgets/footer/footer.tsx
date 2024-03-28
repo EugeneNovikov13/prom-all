@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { NavigationFooterMenu } from './components/navigation-footer-menu';
 import { Information } from './components/information';
@@ -5,7 +6,11 @@ import { Logo } from '../../components';
 import { SETTINGS } from '../../settings';
 import styled from 'styled-components';
 
-const FooterContainer = ({ className }) => {
+interface FooterProps {
+	className?: string;
+}
+
+const FooterContainer: FC<FooterProps> = ({ className }) => {
 	return (
 		<footer className={className}>
 			<div className="footer-body">
