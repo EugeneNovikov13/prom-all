@@ -15,7 +15,7 @@ const InputContainer: FC<InputProps> = forwardRef(
 		return (
 			<div className={className}>
 				<input {...props} ref={ref} />
-				{/*ошибка ввода отображается иконкой справа в инпуте*/}
+				{/*ошибка ввода отображается иконкой справа в поле ввода*/}
 				{error && isOpen && (
 					<Tooltip bottom="54" right="0">
 						{error}

@@ -1,27 +1,31 @@
-import { forwardRef, useRef, useState } from 'react';
+import { FC, ForwardedRef, forwardRef, KeyboardEventHandler, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Icon } from '../../components';
+import { Icon } from 'components';
 import { ReactComponent as searchLoup } from './assets/search-loup.svg';
 import styled from 'styled-components';
 
-const SearchContainer = forwardRef(({ className }, ref) => {
-	const inputRef = useRef(null);
+interface SearchProps {
+	className?: string;
+}
+
+const SearchContainer: FC<SearchProps> = forwardRef(({ className }, ref: ForwardedRef<HTMLElement>) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const navigate = useNavigate();
 
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState<string>('');
 
-	const onKeyDown = (e, text) => {
+	const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
 		if (e.key === 'Enter') {
-			onSearchHandler(text);
+			onSearchHandler(value);
 		}
 	};
 
-	const onSearchHandler = text => {
+	const onSearchHandler = (text: string) => {
 		if (text) {
 			navigate(`/catalog/search?title=${text}`);
 			setValue('');
-			inputRef.current.blur();
+			inputRef.current?.blur();
 		}
 	};
 
@@ -35,7 +39,7 @@ const SearchContainer = forwardRef(({ className }, ref) => {
 				autoComplete="off"
 				value={value}
 				onChange={({ target }) => setValue(target.value)}
-				onKeyDown={e => onKeyDown(e, value)}
+				onKeyDown={onKeyDown}
 			/>
 			<Icon iconSrc={searchLoup} width='24px' />
 		</search>
