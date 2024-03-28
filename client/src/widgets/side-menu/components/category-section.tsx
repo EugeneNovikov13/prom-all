@@ -1,14 +1,24 @@
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from '../../../store/reducers';
+import { selectBreadcrumbs } from 'store/reducers';
 import { AnimatePresence } from 'framer-motion';
-import { Button } from '../../../features';
-import { Img } from '../../../components';
+import { Button } from 'features';
+import { Img } from 'components';
 import { SubcategorySection } from './subcategory-section';
-import { ReactComponent as Closed } from '../assets/closed.svg';
 import { buttonStyleProps } from '../config/button-style-props';
+import { ReactComponent as Closed } from '../assets/closed.svg';
 import styled from 'styled-components';
+import { ISubcategory } from 'types';
 
-const CategoryButtonContainer = ({
+interface CategorySectionProps {
+	className?: string;
+	id: string,
+	title: string,
+	subcategories: ISubcategory[],
+	isActiveCategory: boolean,
+}
+
+const CategoryButtonContainer: FC<CategorySectionProps> = ({
 	className,
 	id,
 	title,
@@ -48,8 +58,7 @@ const CategoryButtonContainer = ({
 								<SubcategorySection
 									key={subcategoryId}
 									id={subcategoryId}
-									shortTitle={shortTitle}
-									title={subcategoryTitle}
+									title={shortTitle || subcategoryTitle}
 									types={types}
 									isActiveSubcategory={
 										subcategoryTitle === currentSubcategoryTitle

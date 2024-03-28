@@ -1,21 +1,30 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProductsAsync } from '../utils/get-products-async';
-import { useFetchProductBySectionQuery } from '../../../store/services';
+import { FC, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useGetProductsAsync } from '../hooks';
+import { useFetchProductBySectionQuery } from 'store/services';
 import { AnimatePresence, motion } from 'framer-motion';
-import { selectBreadcrumbs } from '../../../store/reducers';
-import { Button } from '../../../features';
-import { Icon } from '../../../components';
+import { selectBreadcrumbs } from 'store/reducers';
+import { Button } from 'features';
+import { Icon } from 'components';
 import { TypeSection } from './type-section';
-import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
 import { animationVariants } from '../config/animation-variants';
 import { buttonStyleProps } from '../config/button-style-props';
+import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
 import styled from 'styled-components';
+import { IType } from 'types';
 
-const SubcategorySectionContainer = ({
+interface SubcategorySectionProps {
+	className?: string;
+	id: string,
+	title: string,
+	types: IType[] | undefined,
+	isActiveSubcategory: boolean,
+	index: number,
+}
+
+const SubcategorySectionContainer: FC<SubcategorySectionProps> = ({
 	className,
 	id,
-	shortTitle,
 	title,
 	types,
 	isActiveSubcategory,
@@ -23,15 +32,14 @@ const SubcategorySectionContainer = ({
 }) => {
 	const currentTypeTitle = useSelector(selectBreadcrumbs).type.selectedTitle;
 
-	const dispatch = useDispatch();
-
 	const { data } = useFetchProductBySectionQuery(id);
+	const { getProducts } = useGetProductsAsync();
 
 	useEffect(() => {
 		if (isActiveSubcategory && !types) {
-			getProductsAsync(id, dispatch);
+			getProducts(id);
 		}
-	}, [dispatch, id, isActiveSubcategory, types]);
+	}, [id, isActiveSubcategory, types]);
 
 	return (
 		<motion.li
@@ -50,11 +58,11 @@ const SubcategorySectionContainer = ({
 			>
 				<div className="subcategory-button-content">
 					<Icon iconSrc={BigCircle} width="24px" isActive={true} />
-					<span className="subcategory-title">{shortTitle || title}</span>
+					<span className="subcategory-title">{title}</span>
 					{/*бек-энд возвращает data.counter, если эта подкатегория содержит типы, а не товары*/}
 					{data && (
 						<span className="subcategory-product-counter">
-							{data.counter ? data.counter : data.length}
+							{'counter' in data ? data.counter : data.length}
 						</span>
 					)}
 				</div>

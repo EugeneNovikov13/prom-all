@@ -1,26 +1,38 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getProductsAsync } from '../utils/get-products-async';
-import { useFetchProductBySectionQuery } from '../../../store/services';
+import { FC, useEffect } from 'react';
+import { useGetProductsAsync } from '../hooks';
+import { useFetchProductBySectionQuery } from 'store/services';
 import { motion } from 'framer-motion';
-import { changeLoading } from '../../../store/reducers';
-import { Img } from '../../../components';
-import { Button } from '../../../features';
-import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
+import { Img } from 'components';
+import { Button } from 'features';
 import { animationVariants } from '../config/animation-variants';
 import { buttonStyleProps } from '../config/button-style-props';
+import { ReactComponent as BigCircle } from '../assets/big-circle.svg';
 import styled from 'styled-components';
 
-const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => {
-	const dispatch = useDispatch();
+interface TypeSectionProps {
+	className?: string;
+	id: string;
+	title: string;
+	isActiveType: boolean;
+	index: number;
+}
+
+const TypeSectionContainer: FC<TypeSectionProps> = ({
+	className,
+	id,
+	title,
+	isActiveType,
+	index,
+}) => {
+	const { data } = useFetchProductBySectionQuery(id);
+	const { getProducts } = useGetProductsAsync();
 
 	useEffect(() => {
 		if (isActiveType) {
-			getProductsAsync(id, dispatch, changeLoading);
+			getProducts(id);
 		}
-	}, [dispatch, id, isActiveType]);
+	}, [id, isActiveType]);
 
-	const { data } = useFetchProductBySectionQuery(id);
 
 	return (
 		<motion.li
@@ -48,7 +60,7 @@ const TypeSectionContainer = ({ className, id, title, isActiveType, index }) => 
 					/>
 					<span className="type-title">{title}</span>
 					<span className="subcategory-product-counter">
-						{data && data.length}
+						{data && !('counter' in data) && data.length}
 					</span>
 				</div>
 			</Button>

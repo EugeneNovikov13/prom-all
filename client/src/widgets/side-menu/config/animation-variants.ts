@@ -1,4 +1,6 @@
-export const animationVariants = {
+import { Variants } from 'framer-motion';
+
+export const animationVariants: Variants = {
 	visible: i => ({
 		height: 'auto',
 		opacity: 1,

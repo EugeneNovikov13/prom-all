@@ -1,23 +1,26 @@
+import { Dispatch, FC, SetStateAction } from 'react';
+import { mapCategoryList } from './utils';
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from '../../store/reducers';
+import { selectBreadcrumbs } from 'store/reducers';
 import { motion } from 'framer-motion';
-import { Button } from '../../features';
+import { Button } from 'features';
 import { CategorySection } from './components/category-section';
-import { Icon } from '../../components';
-import { ReactComponent as Burger } from './assets/burger.svg';
+import { Icon } from 'components';
 import { catalogList } from '../../constants';
 import { buttonStyleProps } from './config/button-style-props';
+import { ReactComponent as Burger } from './assets/burger.svg';
 import styled from 'styled-components';
 
-const SideMenuContainer = ({ className, setIsOpen }) => {
+interface SideMenuProps {
+	className?: string;
+	isOpen: boolean;
+	setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const SideMenuContainer: FC<SideMenuProps> = ({ className, setIsOpen }) => {
 	const currentCategoryTitle = useSelector(selectBreadcrumbs).category.selectedTitle;
 
-	const categories = catalogList.map(cat => ({
-		id: cat.id,
-		title: cat.title,
-		image: cat.image,
-		subcategories: cat.subcategories,
-	}));
+	const categories = catalogList.map(mapCategoryList);
 
 	const toggleMenu = () => {
 		setIsOpen(prev => !prev);

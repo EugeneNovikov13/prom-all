@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Cards, SideMenu } from '../../widgets';
 import styled from 'styled-components';
 
-const SectionsContainer = ({ className }) => {
-	const [isMenuOpen, setIsMenuOpen] = useState(window.innerWidth > 600);
+interface SectionsProps {
+	className?: string;
+}
+
+const SectionsContainer: FC<SectionsProps> = ({ className }) => {
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(window.innerWidth > 600);
 
 	return (
 		<div className={isMenuOpen ? className : `${className} side-menu__closed`}>

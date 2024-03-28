@@ -1,4 +1,6 @@
-export const buttonStyleProps = {
+import { IButtonStyleTypes } from '../../../features/button/button-style-types';
+
+export const buttonStyleProps: IButtonStyleTypes = {
 	width: '100%',
 	height: '56px',
 	color: '#49454F',
